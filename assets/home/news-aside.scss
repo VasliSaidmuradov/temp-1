@@ -1,0 +1,36 @@
+.newsAside {
+    border: 1px solid #E6E6E6;
+    border-radius: 8px;
+    margin: 20px 0;
+    padding: 20px 15px;
+    &__titleWrp {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        a {
+            @include em(12px);
+            font-weight: 600;
+            color: #8F8F8F;
+        }
+    }
+    &__title {
+        @include em(14px);
+        font-weight: 600;
+        color: #000;
+    }
+    &__date {
+        @include em(12px);
+        font-weight: 500;
+        color: #8F8F8F;
+    }
+    &__link {
+        display: inline-block;
+        margin-top: 20px;
+    }
+    &__heading {
+        @include em(12px);
+        font-weight: 500;
+        color: #000;
+        margin-top: 5px;
+    }
+}

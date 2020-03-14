@@ -1,0 +1,9 @@
+@function calcEm($font-size) {
+    $emSize: $font-size / 16px;
+    @return #{$emSize}em;
+}
+
+@mixin em($font-size) {
+    font-size: $font-size; //Fallback in px
+    font-size: calcEm($font-size);
+}

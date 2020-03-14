@@ -1,0 +1,15 @@
+.container {
+    max-width: 1110px;
+    margin: auto;
+}
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.left-col {
+    width: 255px;
+}
+.right-col {
+    width: 825px;
+}

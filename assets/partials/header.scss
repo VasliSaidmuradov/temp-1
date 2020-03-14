@@ -1,0 +1,173 @@
+.header {
+    margin-bottom: 20px;
+    &__top {
+        background: var(--bg-base);
+    }
+    &__topRow {
+        justify-content: space-between;
+    }
+    &__topLink {
+        margin-right: 30px;
+    }
+    &__phone a,
+    &__topLink {
+        display: inline-block;
+        line-height: 40px;
+        @include em(12px);
+        font-weight: 500;
+        color: #000;
+    }
+    &__phone {
+        position: relative;
+        padding-left: 22px;
+        &:before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            background: url('/icons/phone-icon.svg') center no-repeat;
+            background-size: cover;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+    &__mid {
+        padding: 15px 0;
+    }
+    &__cityWrp {
+        position: relative;
+        padding-left: 25px;
+        margin: 0 30px;
+        span {
+            @include em(14px);
+            font-weight: 500;
+            color: #000;
+            display: inline-block;
+            position: relative;
+            padding-right: 15px;
+        }
+        span:after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+            background: url('/icons/nav-arrow-icon.svg') center no-repeat;
+            background-size: cover;
+        }
+        &:before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: url('/icons/city-icon.svg') center no-repeat;
+            background-size: cover;
+        }
+    }
+    &__searchWrp {
+        position: relative;
+        width: 650px;
+        margin-right: 40px;
+        input {
+            display: block;
+            width: 100%;
+            background: var(--bg-base);
+            border-radius: 30px;
+            padding: 15px 20px;
+            padding-right: 50px;
+            @include em(14px);
+            color: #000;
+            font-weight: 400;
+            border: none;
+        }
+        button {
+            border: none;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            background: url('/icons/search-icon.svg') center no-repeat;
+            background-size: cover;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+            cursor: pointer;
+        }
+    }
+    &__profile,
+    &__favorites,
+    &__cart {
+        width: 24px;
+        height: 24px;
+        background-size: cover;
+        cursor: pointer;
+        margin-right: 40px;
+    }
+    &__profile {
+        background: url('/icons/profile-icon.svg') center no-repeat;
+    }
+    &__favorites {
+        background: url('/icons/fav-icon.svg') center no-repeat;
+    }
+    &__cart {
+        margin-right: 0;
+        background: url('/icons/cart-icon.svg') center no-repeat;
+    }
+    &__btn {
+        position: relative;
+        display: block;
+        width: 255px;
+        padding: 0 20px;
+        padding-left: 55px;
+        @include em(12px);
+        font-weight: 600;
+        color: #000;
+        margin-right: 30px;
+        &:before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: url('/icons/burger-icon.svg') center no-repeat;
+            background-size: cover;
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        &:after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: url('/icons/nav-arrow-icon.svg') center no-repeat;
+            background-size: cover;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+    &__bot {
+        border-top: 1px solid #E6E6E6;
+        padding: 12px 0;
+        box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.06);
+        .row {
+            justify-content: flex-start;
+        }
+    }
+    &__botLink {
+        @include em(14px);
+        font-weight: 600;
+        color: #000;
+        display: inline-block;
+        &:last-child {
+            margin-left: 150px;
+        }
+    }
+}

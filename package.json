@@ -1,0 +1,22 @@
+{
+  "name": "skiny-shop",
+  "version": "1.0.0",
+  "description": "Skiny shop",
+  "author": "Tamerlan",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
+    "node-sass": "^4.13.1",
+    "nuxt": "^2.0.0",
+    "sass-loader": "^8.0.2",
+    "vue-awesome-swiper": "^3.1.3",
+    "vue-svg-loader": "^0.16.0"
+  },
+  "devDependencies": {}
+}

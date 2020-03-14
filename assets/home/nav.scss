@@ -1,0 +1,29 @@
+.homeNav {
+    border: 1px solid #E6E6E6;
+    border-radius: 8px;
+    padding: 10px 0;
+    &__link {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        position: relative;
+        &:after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: url('/icons/nav-arrow-icon.svg') center no-repeat;
+            background-size: cover;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+        }
+        span {
+            @include em(12px);
+            font-weight: 500;
+            color: #000;
+            display: inline-block;
+            margin-left: 15px;
+        }
+    }
+}

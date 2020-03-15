@@ -13,6 +13,7 @@
                     <Slider></Slider>
                 </div>
             </div>
+            <Brands />
         </div>
     </div>
 </template>
@@ -21,11 +22,13 @@
 import Slider from '@/components/home/slider'
 import Nav from '@/components/home/nav'
 import NewsAside from '@/components/home/news-aside'
+import Brands from '@/components/home/brands'
 export default {
     components: {
         Slider,
         Nav,
-        NewsAside
+        NewsAside,
+        Brands
     }
 }
 </script>

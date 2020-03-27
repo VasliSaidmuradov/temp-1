@@ -1,0 +1,18 @@
+.category-page {
+	&-subcat-title {
+		@include em(14px);
+		font-weight: 700;
+		color: #000;
+		margin-top: 10px;
+	}
+	&-subcat-link {
+		display: block;
+		margin-top: 10px;
+		@include em(14px);
+		font-weight: 500;
+		color: #000;
+		&.nuxt-link-exact-active {
+			color: var(--color-base);
+		}
+	}
+}

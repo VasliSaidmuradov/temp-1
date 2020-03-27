@@ -1,7 +1,6 @@
-.link {
+.button {
     display: inline-block;
     padding: 17px 25px;
-    background: #000;
     color: #fff;
     @include em(12px);
     font-weight: 500;
@@ -9,7 +8,19 @@
     text-transform: uppercase;
     position: relative;
     letter-spacing: 1.4px;
-    &.-arrow {
+    border: none;
+    cursor: pointer;
+    &.--black {
+        background: #000;        
+    }
+    &.--main-color {
+        background: var(--color-base);
+    }
+    &.--white {
+        background: #fff;
+        color: var(--color-base);
+    }
+    &.--arrow {
         padding-right: 60px;
         &:after {
             content: '';
@@ -23,5 +34,32 @@
             top: 50%;
             transform: translateY(-50%);
         }
+    }
+}
+.product-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    button {
+        width: 50px;
+        height: 40px;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+    span {
+        @include em(14px);
+        font-weight: 500;
+        color: #000;
+        display: inline-block;
+        margin: 0 20px;
+    }
+    &-increase {
+        background: url('/icons/increase-icon.svg') center no-repeat;
+        background-size: cover;
+    }
+    &-decrease {
+        background: url('/icons/decrease-icon.svg') center no-repeat;
+        background-size: cover;
     }
 }

@@ -1,42 +1,26 @@
 <template>
-    <nav class="homeNav">
-        <nuxt-link class="homeNav__link" to="">
+    <nav class="home-nav">
+        <nuxt-link class="home-nav-link" to="">
             <img src="/icons/city-icon.svg" alt="Skiny icon">
             <span>Макияж</span>
         </nuxt-link>
-        <nuxt-link class="homeNav__link" to="">
+        <nuxt-link class="home-nav-link" to="">
             <img src="/icons/city-icon.svg" alt="Skiny icon">
             <span>Макияж</span>
         </nuxt-link>
-        <nuxt-link class="homeNav__link" to="">
+        <nuxt-link class="home-nav-link" to="">
             <img src="/icons/city-icon.svg" alt="Skiny icon">
             <span>Макияж</span>
         </nuxt-link>
-        <nuxt-link class="homeNav__link" to="">
+        <nuxt-link class="home-nav-link" to="">
             <img src="/icons/city-icon.svg" alt="Skiny icon">
             <span>Макияж</span>
         </nuxt-link>
-        <nuxt-link class="homeNav__link" to="">
+        <nuxt-link class="home-nav-link" to="">
             <img src="/icons/city-icon.svg" alt="Skiny icon">
             <span>Макияж</span>
         </nuxt-link>
-        <nuxt-link class="homeNav__link" to="">
-            <img src="/icons/city-icon.svg" alt="Skiny icon">
-            <span>Макияж</span>
-        </nuxt-link>
-        <nuxt-link class="homeNav__link" to="">
-            <img src="/icons/city-icon.svg" alt="Skiny icon">
-            <span>Макияж</span>
-        </nuxt-link>
-        <nuxt-link class="homeNav__link" to="">
-            <img src="/icons/city-icon.svg" alt="Skiny icon">
-            <span>Макияж</span>
-        </nuxt-link>
-        <nuxt-link class="homeNav__link" to="">
-            <img src="/icons/city-icon.svg" alt="Skiny icon">
-            <span>Макияж</span>
-        </nuxt-link>
-        <nuxt-link class="homeNav__link" to="">
+        <nuxt-link class="home-nav-link" to="">
             <img src="/icons/city-icon.svg" alt="Skiny icon">
             <span>Макияж</span>
         </nuxt-link>

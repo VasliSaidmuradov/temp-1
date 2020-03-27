@@ -1,0 +1,30 @@
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&-link {
+		@include em(14px);
+		font-weight: 500;
+		color: #000;
+		display: inline-block;
+		margin: 0 10px;
+		&.--active {
+			color: var(--color-base);
+		}
+	}
+	&-prev,
+	&-next {
+		width: 10px;
+		height: 10px;
+		display: inline-block;
+	}
+	&-prev {
+		background: url('/icons/nav-arrow-icon.svg') center no-repeat;
+		background-size: cover;
+		transform: rotate(-180deg);
+	}
+	&-next {
+		background: url('/icons/nav-arrow-icon.svg') center no-repeat;
+		background-size: cover;
+	}
+}

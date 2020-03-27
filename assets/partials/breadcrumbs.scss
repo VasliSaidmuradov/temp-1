@@ -1,0 +1,10 @@
+.breadcrumbs {
+	a {
+		@include em(12px);
+		font-weight: 500;
+		color: var(--gray-base);
+		&:last-child {
+			color: #000;
+		}
+	}
+}

@@ -1,12 +1,12 @@
 <template>
-    <div class="newsAside">
-        <div class="newsAside__titleWrp">
-            <span class="newsAside__title">Новости</span>
+    <div class="news-aside">
+        <div class="news-aside-title-wrp">
+            <span class="news-aside-title">Новости</span>
             <nuxt-link to="">Все статьи</nuxt-link>
         </div>
-        <nuxt-link to="" v-for="article in news" :key="article.id" class="newsAside__link">
-            <span class="newsAside__date">{{article.date}}</span>
-            <p class="newsAside__heading">{{article.heading}}</p>
+        <nuxt-link to="" v-for="article in news" :key="article.id" class="news-aside-link">
+            <span class="news-aside-date">{{article.date}}</span>
+            <p class="news-aside-heading">{{article.heading}}</p>
         </nuxt-link>
     </div>
 </template>

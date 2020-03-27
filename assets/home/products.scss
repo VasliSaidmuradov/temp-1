@@ -1,0 +1,12 @@
+.home-products {
+	&-row {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.product {
+		margin-right: 30px;
+		&:nth-child(3n) {
+			margin-right: 0;
+		}
+	}
+}

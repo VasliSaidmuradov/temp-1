@@ -1,23 +1,22 @@
 .header {
-    margin-bottom: 20px;
-    &__top {
+    &-top {
         background: var(--bg-base);
     }
-    &__topRow {
+    &-top-row {
         justify-content: space-between;
     }
-    &__topLink {
+    &-top-link {
         margin-right: 30px;
     }
-    &__phone a,
-    &__topLink {
+    &-phone a,
+    &-top-link {
         display: inline-block;
         line-height: 40px;
         @include em(12px);
         font-weight: 500;
         color: #000;
     }
-    &__phone {
+    &-phone {
         position: relative;
         padding-left: 22px;
         &:before {
@@ -32,10 +31,10 @@
             transform: translateY(-50%);
         }
     }
-    &__mid {
+    &-mid {
         padding: 15px 0;
     }
-    &__cityWrp {
+    &-city-wrp {
         position: relative;
         padding-left: 25px;
         margin: 0 30px;
@@ -70,7 +69,7 @@
             background-size: cover;
         }
     }
-    &__searchWrp {
+    &-search-wrp {
         position: relative;
         width: 650px;
         margin-right: 40px;
@@ -101,26 +100,26 @@
             cursor: pointer;
         }
     }
-    &__profile,
-    &__favorites,
-    &__cart {
+    &-profile,
+    &-favorites,
+    &-cart {
         width: 24px;
         height: 24px;
         background-size: cover;
         cursor: pointer;
         margin-right: 40px;
     }
-    &__profile {
+    &-profile {
         background: url('/icons/profile-icon.svg') center no-repeat;
     }
-    &__favorites {
+    &-favorites {
         background: url('/icons/fav-icon.svg') center no-repeat;
     }
-    &__cart {
+    &-cart {
         margin-right: 0;
         background: url('/icons/cart-icon.svg') center no-repeat;
     }
-    &__btn {
+    &-btn {
         position: relative;
         display: block;
         width: 255px;
@@ -153,15 +152,15 @@
             transform: translateY(-50%);
         }
     }
-    &__bot {
-        border-top: 1px solid #E6E6E6;
+    &-bot {
+        border-top: 1px solid var(--line-base);
         padding: 12px 0;
         box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.06);
         .row {
             justify-content: flex-start;
         }
     }
-    &__botLink {
+    &-bot-link {
         @include em(14px);
         font-weight: 600;
         color: #000;

@@ -1,9 +1,9 @@
-.newsAside {
+.news-aside {
     border: 1px solid #E6E6E6;
     border-radius: 8px;
     margin: 20px 0;
     padding: 20px 15px;
-    &__titleWrp {
+    &-title-wrp {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -13,21 +13,21 @@
             color: #8F8F8F;
         }
     }
-    &__title {
+    &-title {
         @include em(14px);
         font-weight: 600;
         color: #000;
     }
-    &__date {
+    &-date {
         @include em(12px);
         font-weight: 500;
         color: #8F8F8F;
     }
-    &__link {
+    &-link {
         display: inline-block;
         margin-top: 20px;
     }
-    &__heading {
+    &-heading {
         @include em(12px);
         font-weight: 500;
         color: #000;

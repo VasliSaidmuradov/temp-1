@@ -1,0 +1,98 @@
+.filter {
+	margin-top: 60px;
+	&-title {
+		@include em(14px);
+		font-weight: 700;
+		color: #000;
+		margin-bottom: 10px;
+	}
+	&-clear {
+		cursor: pointer;
+		width: 100%;
+		border-radius: 30px;
+		padding: 16px 0;
+		background: var(--bg-base);
+		border: none;
+		@include em(12px);
+		font-weight: 700;
+		text-transform: uppercase;
+		color: var(--gray-base);
+	}
+	&-block {
+		margin-top: 30px;
+	}
+	&-range-top {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 10px;
+		.filter-title {
+			margin-bottom: 0;
+		}
+		button {
+			cursor: pointer;
+			padding: 0;
+			background: none;
+			border: none;
+			@include em(12px);
+			font-weight: 500;
+			color: var(--color-base);
+		}
+	}
+	&-range-bot {
+		display: flex;
+		justify-content: space-between;
+	}
+	&-input-wrp {
+		position: relative;
+		label {
+			@include em(12px);
+			font-weight: 500;
+			color: var(--gray-base);
+			position: absolute;
+			top: 50%;
+			left: 10px;
+			transform: translateY(-50%);
+		}
+	}
+	&-input {
+		width: 120px;
+		height: 48px;
+		border: 1px solid var(--line-base);
+		border-radius: 6px;
+		padding-left: 32px;
+		padding-right: 13px;
+		@include em(14px);
+		font-weight: 500;
+		color: var(--gray-base);
+	}
+	&-checkbox {
+		display: flex;
+		align-items: center;
+		margin-bottom: 5px;
+		cursor: pointer;
+		input {
+			display: none;
+			&:checked {
+				& ~ .filter-checkmark {
+					background: url('/icons/checkmark-icon.svg') center no-repeat;
+					background-size: contain;
+					border-color: var(--color-base);
+				}
+			}
+		}
+		p {
+			@include em(14px);
+			font-weight: 500;
+			color: #000;
+			user-select: none;
+		}
+	}
+	&-checkmark {
+		width: 20px;
+		height: 20px;
+		border-radius: 6px;
+		border: 1px solid var(--line-base);
+		margin-right: 10px;
+	}
+}

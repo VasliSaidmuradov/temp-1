@@ -1,9 +1,9 @@
 <template>
-	<div class="brandsSlider">
-		<h3 class="brandsSlider__title">Бренды</h3>
-		<div class="brandsSlider__btnWrp">
-			<button class="brandsSlider__prev"></button>
-			<button class="brandsSlider__next"></button>
+	<div class="brands-slider">
+		<h3 class="brands-slider-title">Бренды</h3>
+		<div class="brands-slider-btn-wrp">
+			<button class="brands-slider-prev"></button>
+			<button class="brands-slider-next"></button>
 		</div>
 		<div v-swiper:brandsSlider="options">
 			<div class="swiper-wrapper">
@@ -25,8 +25,8 @@ export default {
 			options: {
 				slidesPerView: 5,
 				navigation: {
-					nextEl: '.brandsSlider__next',
-					prevEl: '.brandsSlider__prev'
+					nextEl: '.brands-slider-next',
+					prevEl: '.brands-slider-prev'
 				}
 			}
 		}

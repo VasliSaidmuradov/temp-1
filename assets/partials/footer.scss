@@ -1,35 +1,35 @@
 .footer {
 	padding-top: 60px;
 	padding-bottom: 90px;
-	border-top: 1px solid #E6E6E6;
+	border-top: 1px solid var(--line-base);
 	.row {
 		align-items: flex-start;
 	}
-	&__copyright {
+	&-copyright {
 		@include em(14px);
 		font-weight: 500;
-		color: #8F8F8F;
+		color: var(--gray-base);
 		width: 255px;
 		margin-bottom: 20px;
 	}
-	&__heading {
+	&-heading {
 		@include em(14px);
 		font-weight: 700;
 		color: #000;
 		text-transform: uppercase;
 		margin-bottom: 20px;
 	}
-	&__link,
-	&__phone {
+	&-link,
+	&-phone {
 		@include em(14px);
 		font-weight: 500;
 		color: #000;
 		display: block;
 	}
-	&__link {
+	&-link {
 		margin-top: 10px;
 	}
-	&__phoneWrp {
+	&-phone-wrp {
 		position: relative;
 		padding-left: 35px;
 		&:before {

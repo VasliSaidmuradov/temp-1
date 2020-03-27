@@ -6,6 +6,10 @@
 
 @import './partials/header';
 @import './partials/footer';
+@import './partials/product';
+@import './partials/breadcrumbs';
+@import './partials/filter';
+@import './partials/pagination';
 
 @import './home/index';
 @import './home/nav';
@@ -13,9 +17,13 @@
 @import './home/news-aside';
 @import './home/banner-aside';
 @import './home/brands';
+@import './home/tabs';
+@import './home/products';
 
+@import './catalog/index';
 
-
+@import './category/index';
+@import './category/subcategories';
 
 @import './layout';
 

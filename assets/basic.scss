@@ -42,7 +42,7 @@ body {
   line-height: 1.5;
   overflow-x: hidden !important;
   color: #000;
-  &.-hidden {
+  &.--hidden {
     overflow-x: hidden;
     overflow-y: hidden;
   }
@@ -75,6 +75,7 @@ textarea,
 select,
 a {
   outline: none;
+  font: inherit;
   &:focus {
     outline: none;
   }

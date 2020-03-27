@@ -1,15 +1,15 @@
-.brandsSlider {
+.brands-slider {
 	position: relative;
 	margin-top: 100px;
 	margin-bottom: 60px;
-	&__title {
+	&-title {
 		@include em(32px);
 		font-weight: 600;
 		color: #000;
 		text-align: center;
 		margin-bottom: 50px;
 	}
-	&__btnWrp {
+	&-btn-wrp {
 		position: absolute;
 		right: 0;
 		top: 15px;
@@ -23,7 +23,7 @@
 			height: 20px;
 		}
 	}
-	&__prev {
+	&-prev {
 		margin-right: 20px;
 		transform: rotate(-180deg);
 	}

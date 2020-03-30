@@ -1,0 +1,34 @@
+.product-info {
+	padding-top: 50px;
+	&-title {
+		@include em(16px);
+		font-weight: 700;
+		color: #000;
+		margin-bottom: 10px;
+	}
+	&-text {
+		@include em(14px);
+		font-weight: 500;
+		color: #000;
+		margin-bottom: 30px;
+	}
+	&-row {
+		display: flex;
+		align-items: center;
+		margin-bottom: 15px;
+	}
+	&-delivery-icon {
+		width: 30px;
+		height: 30px;
+		object-fit: contain;
+		margin-right: 15px;
+	}
+	&-delivery-text {
+		@include em(14px);
+		font-weight: 500;
+		color: #000;
+		span {
+			color: var(--gray-base);
+		}
+	}
+}

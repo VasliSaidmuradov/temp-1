@@ -7,7 +7,7 @@
 		<button class="product-add-favorites">
 			<favorites-icon />
 		</button>
-		<nuxt-link to="">
+		<nuxt-link to="/product">
 			<div class="product-img">
 				<img src="/images/product.png" alt="Skiny image">
 			</div>

@@ -10,6 +10,8 @@
 @import './partials/breadcrumbs';
 @import './partials/filter';
 @import './partials/pagination';
+@import './partials/product-slider';
+@import './partials/favorites-page';
 
 @import './home/index';
 @import './home/nav';
@@ -24,6 +26,15 @@
 
 @import './category/index';
 @import './category/subcategories';
+
+@import './product-inner/index';
+@import './product-inner/images';
+@import './product-inner/info';
+@import './product-inner/aside';
+
+@import './cart/index';
+@import './cart/list';
+@import './cart/aside';
 
 @import './layout';
 

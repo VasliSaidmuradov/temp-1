@@ -30,8 +30,8 @@
                         <button class="header-search-btn"></button>
                     </div>
                     <nuxt-link class="header-profile" to=""></nuxt-link>
-                    <nuxt-link class="header-favorites" to=""></nuxt-link>
-                    <nuxt-link class="header-cart" to=""></nuxt-link>
+                    <nuxt-link class="header-favorites" to="/favorites"></nuxt-link>
+                    <nuxt-link class="header-cart" to="/cart"></nuxt-link>
                 </div>
             </div>
         </div>

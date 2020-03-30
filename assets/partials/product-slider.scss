@@ -1,0 +1,32 @@
+.product-slider {
+	position: relative;
+	.section-title {
+		text-align: center;
+		margin-bottom: 50px;
+		margin-top: 60px;
+	}
+	&-prev,
+	&-next {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		border: none;
+		background: url('/icons/arrow-icon.svg') center no-repeat;
+		background-size: 50%;
+		width: 40px;
+		height: 40px;
+		padding: 0;
+		z-index: 3;
+		cursor: pointer;
+	}
+	&-prev {
+		left: -20px;
+		transform: translateY(-50%) rotate(-180deg);
+	}
+	&-next {
+		right: -20px;
+	}
+	.swiper-slide {
+		padding: 10px;
+	}
+}

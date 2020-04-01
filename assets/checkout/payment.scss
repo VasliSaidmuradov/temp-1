@@ -1,0 +1,51 @@
+.checkout-payment {
+	&-radio {
+		display: flex;
+		align-items: flex-start;
+		margin-bottom: 15px;
+		cursor: pointer;
+		user-select: none;
+		input {
+			display: none;
+			&:checked {
+				& ~ .checkout-payment-checkmark {
+					border-color: var(--color-base);
+					&:after {
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+	&-checkmark {
+		width: 20px;
+		height: 20px;
+		border-radius: 100%;
+		border: 2px solid var(--line-base);
+		margin-right: 10px;
+		position: relative;
+		&:after {
+			content: '';
+			width: 10px;
+			height: 10px;
+			border-radius: 100%;
+			background: var(--color-base);
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			opacity: 0;
+		}
+	}
+	&-radio-title {
+		@include em(14px);
+		font-weight: 600;
+		color: #000;
+		display: block;
+	}
+	&-radio-text {
+		@include em(12px);
+		font-weight: 600;
+		color: var(--gray-base);
+	}
+}

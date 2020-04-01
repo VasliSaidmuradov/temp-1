@@ -30,7 +30,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    {src: '~/plugins/swiper.js', ssr: false}
+    {src: '~/plugins/swiper.js', ssr: false},
+    {src: '~/plugins/vue-the-mask.js', ssr: false},
   ],
   /*
   ** Nuxt.js dev-modules

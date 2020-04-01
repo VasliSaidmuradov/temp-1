@@ -12,6 +12,7 @@
 @import './partials/pagination';
 @import './partials/product-slider';
 @import './partials/favorites-page';
+@import './partials/aside';
 
 @import './home/index';
 @import './home/nav';
@@ -34,7 +35,11 @@
 
 @import './cart/index';
 @import './cart/list';
-@import './cart/aside';
+
+@import './checkout/index';
+@import './checkout/contacts';
+@import './checkout/getting';
+@import './checkout/payment';
 
 @import './layout';
 

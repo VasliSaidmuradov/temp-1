@@ -1,36 +1,36 @@
 <template>
-	<div class="cart-aside">
-		<div class="cart-aside-bonus-wrp">
-			<img src="/icons/bonus-icon.svg" alt="Skiny icon" class="cart-aside-icon">
-			<p class="cart-aside-text" v-if="isAuth">
+	<div class="order-aside">
+		<div class="order-aside-bonus-wrp">
+			<img src="/icons/bonus-icon.svg" alt="Skiny icon" class="order-aside-icon">
+			<p class="order-aside-text" v-if="isAuth">
 				У вас есть <span>150 бонусов</span>
 			</p>
-			<p class="cart-aside-text" v-else>
+			<p class="order-aside-text" v-else>
 				<span>150 бонусов</span> для зарегестрированного покупателя
 			</p>
 		</div>
-		<div class="cart-aside-input-wrp" v-if="isAuth">
-			<input type="number" class="cart-aside-input">
-			<button class="cart-aside-apply">Применить</button>
+		<div class="order-aside-input-wrp" v-if="isAuth">
+			<input type="number" class="order-aside-input">
+			<button class="order-aside-apply">Применить</button>
 		</div>
-		<div class="cart-aside-list">
-			<div class="cart-aside-row">
-				<p class="cart-aside-title">Товары (3)</p>
-				<p class="cart-aside-list-price">4 590 ₸</p>
+		<div class="order-aside-list">
+			<div class="order-aside-row">
+				<p class="order-aside-title">Товары (3)</p>
+				<p class="order-aside-list-price">4 590 ₸</p>
 			</div>
-			<div class="cart-aside-row">
-				<p class="cart-aside-title">Скидка</p>
-				<p class="cart-aside-list-price --red">-590 ₸</p>
-			</div>
-		</div>
-		<div class="cart-aside-total">
-			<div class="cart-aside-row">
-				<p class="cart-aside-total-title">Итого</p>
-				<p class="cart-aside-total-text">4 590 ₸</p>
+			<div class="order-aside-row">
+				<p class="order-aside-title">Скидка</p>
+				<p class="order-aside-list-price --red">-590 ₸</p>
 			</div>
 		</div>
-		<div class="cart-aside-link-wrp">
-			<nuxt-link class="button --white" to="">Перейти к оформлению</nuxt-link>
+		<div class="order-aside-total">
+			<div class="order-aside-row">
+				<p class="order-aside-total-title">Итого</p>
+				<p class="order-aside-total-text">4 590 ₸</p>
+			</div>
+		</div>
+		<div class="order-aside-link-wrp">
+			<nuxt-link class="button --white" to="/checkout">Перейти к оформлению</nuxt-link>
 		</div>
 	</div>
 </template>

@@ -1,0 +1,87 @@
+.checkout-page {
+	padding-top: 20px;
+	padding-bottom: 60px;
+	&-row {
+		display: flex;
+		justify-content: space-between;
+	}
+	.section-title {
+		margin-top: 60px;
+		margin-bottom: 30px;
+	}
+	&-col:first-child {
+		width: 540px;
+	}
+	textarea {
+		resize: none;
+		height: 110px;
+	}
+	&-input {
+		display: block;
+		width: 100%;
+		border: 1px solid var(--line-base);
+		border-radius: 6px;
+		padding: 14px 20px;
+		@include em(14px);
+		font-weight: 500;
+		color: #000;
+		margin-top: 20px;
+		&:first-of-type {
+			margin-top: 0;
+		}
+	}
+	&-radio-wrp {
+		display: flex;
+		justify-content: space-between;
+	}
+	&-radio {
+		width: 255px;
+		border: 1px solid var(--line-base);
+		border-radius: 6px;
+		padding: 20px;
+		cursor: pointer;
+		user-select: none;
+		margin-bottom: 30px;
+		&.--active {
+			border-color: var(--color-base);
+		}
+		input {
+			display: none;
+		}
+	}
+	&-subtitle {
+		@include em(16px);
+		font-weight: 700;
+		color: #000;
+		margin-bottom: 5px;
+		display: block;
+	}
+	&-radio-text {
+		@include em(14px);
+		font-weight: 600;
+		color: var(--gray-base);
+	}
+	&-select {
+		width: 100%;
+		border: 1px solid var(--line-base);
+		border-radius: 6px;
+		padding: 14px 20px;
+		@include em(14px);
+		font-weight: 600;
+		color: #000;
+		margin-top: 10px;
+		cursor: pointer;
+		option {
+			@include em(14px);
+			font-weight: 600;
+			color: #000;
+		}
+	}
+	&-input-wrp {
+		display: flex;
+		justify-content: space-between;
+		input {
+			width: 170px;
+		}
+	}
+}

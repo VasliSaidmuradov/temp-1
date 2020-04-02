@@ -4,9 +4,9 @@
 	&-row {
 		display: flex;
 		justify-content: space-between;
+		margin-top: 60px;
 	}
 	.section-title {
-		margin-top: 60px;
 		margin-bottom: 30px;
 	}
 	&-col:first-child {
@@ -26,9 +26,6 @@
 		font-weight: 500;
 		color: #000;
 		margin-top: 20px;
-		&:first-of-type {
-			margin-top: 0;
-		}
 	}
 	&-radio-wrp {
 		display: flex;

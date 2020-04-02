@@ -87,3 +87,27 @@
 		margin-top: 10px;
 	}
 }
+
+@media screen and (max-width: 1025px) {
+	.product-aside {
+		&-inner {
+			width: 310px;
+		}
+	}
+}
+
+@media screen and (max-width: 769px) {
+	.product-aside {
+		padding-top: 30px;
+		padding-left: 0;
+		.button {
+			display: none;
+		}
+		&-inner {
+			padding: 0;
+			margin-bottom: 0;
+			width: 100%;
+			box-shadow: none;
+		}
+	}
+}

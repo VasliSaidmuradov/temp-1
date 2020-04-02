@@ -24,6 +24,17 @@ export default {
 				navigation: {
 					nextEl: '.similar-next',
 					prevEl: '.similar-prev'
+				},
+				breakpoints: {
+					769: {
+						slidesPerView: 3
+					},
+					426: {
+						slidesPerView: 2
+					},
+					321: {
+						slidesPerView: 1
+					}
 				}
 			}
 		}

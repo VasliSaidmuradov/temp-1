@@ -72,3 +72,38 @@
 		}
 	}
 }
+
+@media screen and (max-width: 1025px) {
+	.catalog-page {
+		&-nav-btn {
+			width: 220px;
+		}
+	}
+}
+
+@media screen and (max-width: 769px) {
+	.catalog-page {
+		&-nav {
+			margin-bottom: 30px;
+		}
+		&-nav-btn {
+			width: 48%;
+			margin-right: 4%;
+			padding: 18px 10px;
+			&:nth-child(even) {
+				margin-right: 0;
+			}
+			p {
+				@include em(12px);
+				margin-left: 10px;
+			}
+		}
+		&-row {
+			flex-wrap: wrap;
+		}
+		&-col {
+			width: 100%;
+			margin-right: 0;
+		}
+	}
+}

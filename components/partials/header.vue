@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="row header-top-row">
                     <nav class="header-top-nav">
-                        <nuxt-link to="" class="header-top-link">Контакты</nuxt-link>
+                        <nuxt-link to="/contacts" class="header-top-link">Контакты</nuxt-link>
                         <nuxt-link to="" class="header-top-link">Доставка</nuxt-link>
                         <nuxt-link to="" class="header-top-link">Оплата</nuxt-link>
                         <nuxt-link to="" class="header-top-link">Помощь</nuxt-link>
@@ -29,7 +29,7 @@
                         <input type="text" placeholder="Хочу купить...">
                         <button class="header-search-btn"></button>
                     </div>
-                    <nuxt-link class="header-profile" to=""></nuxt-link>
+                    <button class="header-profile" @click="openAuth"></button>
                     <nuxt-link class="header-favorites" to="/favorites"></nuxt-link>
                     <nuxt-link class="header-cart" to="/cart"></nuxt-link>
                 </div>
@@ -49,6 +49,11 @@
 
 <script>
 export default {
-
+    methods: {
+        openAuth() {
+            document.body.classList.add('--hidden'),
+            this.$store.commit('auth/SET_MODAL_STATE', true)
+        }
+    }
 }
 </script>

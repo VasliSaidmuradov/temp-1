@@ -13,6 +13,21 @@
 					<subcategories />
 					<category-filter />
 				</div>
+				<div class="category-page-mob">
+					<p class="category-page-total">23 товара</p>
+					<nuxt-link class="category-page-back" to="">Все категории</nuxt-link>
+					<div class="category-page-row">
+						<div class="category-page-sort">
+							<p>Сортировать:</p>
+							<select>
+								<option value="">По умолчанию</option>
+								<option value="">По возрастанию</option>
+								<option value="">По убыванию</option>
+							</select>
+						</div>
+						<button class="category-page-filter">Фильтр</button>
+					</div>
+				</div>
 				<div class="right-col">
 					<div class="category-page-sort-wrp">
 						<p class="category-page-total">23 товара</p>

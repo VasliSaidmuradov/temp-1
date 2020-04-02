@@ -10,3 +10,24 @@
 		}
 	}
 }
+
+@media screen and (max-width: 426px) {
+	.home-products {
+		.product {
+			max-width: 48%;
+			margin-right: 10px;
+			&:nth-child(3n) {
+				margin-right: 10px;
+			}
+			&:nth-child(even) {
+				margin-right: 0;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 376px) {
+	.home-products {
+		
+	}	
+}

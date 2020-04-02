@@ -10,6 +10,7 @@
 				<list />
 				<cart-aside />
 			</div>
+			<slider />
 		</div>
 	</div>
 </template>
@@ -17,10 +18,12 @@
 <script>
 import list from '@/components/cart/list'
 import cartAside from '@/components/cart/aside'
+import slider from '@/components/cart/slider'
 
 export default {
 	components: {
 		list,
+		slider,
 		cartAside
 	}
 }

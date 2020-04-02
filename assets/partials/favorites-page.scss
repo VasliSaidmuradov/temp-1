@@ -15,3 +15,39 @@
 		}
 	}
 }
+
+@media screen and (max-width: 1025px) {
+	.favorites-page {
+		.product {
+			max-width: 220px;
+		}
+	}
+}
+
+@media screen and (max-width: 769px) {
+	.favorites-page {
+		.product {
+			&:nth-child(4n) {
+				margin-right: 30px;
+			}
+			&:nth-child(3n) {
+				margin-right: 0;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 426px) {
+	.favorites-page {
+		.product {
+			max-width: 48%;
+			margin-right: 4%;
+			&:nth-child(4n) {
+				margin-right: 0;
+			}
+			&:nth-child(even) {
+				margin-right: 0;
+			}
+		}
+	}
+}

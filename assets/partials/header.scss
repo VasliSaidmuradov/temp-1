@@ -91,7 +91,7 @@
             width: 20px;
             height: 20px;
             background: url('/icons/search-icon.svg') center no-repeat;
-            background-size: cover;
+            background-size: contain;
             position: absolute;
             right: 20px;
             top: 50%;
@@ -108,16 +108,21 @@
         background-size: cover;
         cursor: pointer;
         margin-right: 40px;
+        padding: 0;
+        border: none;
     }
     &-profile {
         background: url('/icons/profile-icon.svg') center no-repeat;
+        background-size: contain;
     }
     &-favorites {
         background: url('/icons/fav-icon.svg') center no-repeat;
+        background-size: contain;
     }
     &-cart {
         margin-right: 0;
         background: url('/icons/cart-icon.svg') center no-repeat;
+        background-size: contain;
     }
     &-btn {
         position: relative;
@@ -167,6 +172,57 @@
         display: inline-block;
         &:last-child {
             margin-left: 150px;
+        }
+    }
+}
+
+.mobile-header { display: none; }
+
+@media screen and (max-width: 769px) {
+    .header {
+        display: none;
+    }
+    .mobile-header {
+        display: block;
+        background: #fff;
+        padding: 13px 20px;
+        box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.06);
+        &-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        &-burger,
+        &-search,
+        &-profile,
+        &-cart {
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+        &-burger {
+            border: none;
+            background: url('/icons/burger-icon.svg') center no-repeat;
+            background-size: contain;
+            padding: 0;
+        }
+        &-search {
+            border: none;
+            background: url('/icons/search-icon.svg') center no-repeat;
+            background-size: contain;
+            padding: 0;
+        }
+        &-profile {
+            background: url('/icons/profile-icon.svg') center no-repeat;
+            background-size: contain;
+        }
+        &-cart {
+            background: url('/icons/cart-icon.svg') center no-repeat;
+            background-size: contain;
+        }
+        &-logo {
+            max-width: 90px;
+            display: block;
         }
     }
 }

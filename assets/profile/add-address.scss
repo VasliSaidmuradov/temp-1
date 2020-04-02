@@ -1,0 +1,28 @@
+.profile-add-address {
+	.profile-page-input {
+		width: 540px;
+		margin-top: 20px;
+	}
+	.profile-page-select {
+		width: 540px;
+		border: 1px solid var(--line-base);
+		border-radius: 6px;
+		padding: 14px 20px;
+		@include em(14px);
+		font-weight: 500;
+		color: #000;
+		option {
+			@include em(14px);
+			font-weight: 500;
+			color: #000;
+		}
+	}
+	.profile-page-input-wrp {
+		display: flex;
+		justify-content: space-between;
+		width: 540px;
+		input {
+			width: 170px;
+		}
+	}
+}

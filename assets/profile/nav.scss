@@ -1,0 +1,22 @@
+.profile-nav {
+	margin-right: 170px;
+	&-link {
+		display: block;
+		@include em(14px);
+		font-weight: 500;
+		color: #000;
+		margin-bottom: 15px;
+		&.nuxt-link-exact-active {
+			color: var(--color-base);
+		}
+		&.--red {
+			color: #F13D3D;
+		}
+	}
+}
+
+@media screen and (max-width: 1025px) {
+	.profile-nav {
+		margin-right: 80px;
+	}
+}

@@ -12,6 +12,9 @@
                 <div class="right-col">
                     <Slider></Slider>
                     <tabs />
+                    <div class="home-mobile-news">
+                        <NewsAside />
+                    </div>
                 </div>
             </div>
             <Brands />

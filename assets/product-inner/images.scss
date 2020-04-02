@@ -56,3 +56,27 @@
 		margin: auto;
 	}
 }
+
+@media screen and (max-width: 769px) {
+	.product-images {
+		width: 50%;
+		margin: auto;
+	}
+}
+
+@media screen and (max-width: 426px) {
+	.product-images {
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 321px) {
+	.product-images {
+		&-prev {
+			left: 0;
+		}
+		&-next {
+			right: 0;
+		}
+	}
+}

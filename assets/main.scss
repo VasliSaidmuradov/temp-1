@@ -3,6 +3,7 @@
 @import './basic';
 @import './mixins';
 @import './common';
+@import './transitions';
 
 @import './partials/header';
 @import './partials/footer';
@@ -12,6 +13,7 @@
 @import './partials/pagination';
 @import './partials/product-slider';
 @import './partials/favorites-page';
+@import './partials/contacts-page';
 @import './partials/aside';
 
 @import './home/index';
@@ -40,6 +42,17 @@
 @import './checkout/contacts';
 @import './checkout/getting';
 @import './checkout/payment';
+
+@import './profile/index';
+@import './profile/nav';
+@import './profile/info';
+@import './profile/subscribes';
+@import './profile/bonuses';
+@import './profile/add-address';
+@import './profile/address-list';
+@import './profile/history';
+
+@import './auth-modal/index';
 
 @import './layout';
 

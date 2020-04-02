@@ -61,10 +61,22 @@
     }
     &-increase {
         background: url('/icons/increase-icon.svg') center no-repeat;
-        background-size: cover;
+        background-size: contain;
     }
     &-decrease {
         background: url('/icons/decrease-icon.svg') center no-repeat;
-        background-size: cover;
+        background-size: contain;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .product-counter {
+        span {
+            white-space: nowrap;
+            margin: 0 10px;
+        }
+    }
+    .section-title {
+        @include em(24px);
     }
 }

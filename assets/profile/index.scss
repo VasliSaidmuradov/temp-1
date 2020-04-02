@@ -1,0 +1,122 @@
+.profile-page {
+	padding-top: 20px;
+	padding-bottom: 60px;
+	&-row {
+		padding-top: 60px;
+		margin-top: 30px;
+		border-top: 1px solid var(--line-base);
+		display: flex;
+		align-items: flex-start;
+	}
+	&-right {
+		flex: 1;
+	}
+	&-title {
+		@include em(24px);
+		font-weight: 400;
+		color: #000;
+		margin-bottom: 20px;
+	}
+	&-subtitle {
+		@include em(18px);
+		font-weight: 700;
+		color: #000;
+		margin-bottom: 20px;
+	}
+	&-text {
+		@include em(14px);
+		font-weight: 500;
+		color: #000;
+	}
+	&-label {
+		@include em(12px);
+		font-weight: 500;
+		color: var(--gray-base);
+		display: block;
+	}
+	&-link {
+		@include em(14px);
+		font-weight: 600;
+		color: var(--color-base);
+	}
+	&-edit {
+		@extend .profile-page-link;
+		background: none;
+		padding: 0;
+		border: none;
+		cursor: pointer;
+		user-select: none;
+	}
+	&-input-wrp {
+		width: 350px;
+		position: relative;
+		margin-bottom: 30px;
+		.profile-page-edit {
+			position: absolute;
+			right: 20px;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
+	&-input {
+		border: 1px solid var(--line-base);
+		border-radius: 6px;
+		padding: 14px 20px;
+		@include em(14px);
+		font-weight: 500;
+		color: #000;
+		display: block;
+		width: 100%;
+		background: #fff;
+		&:disabled {
+			padding: 0;
+			border: none;
+		}
+	}
+	&-checkbox {
+		display: flex;
+		align-items: center;
+		margin-bottom: 10px;
+		user-select: none;
+		cursor: pointer;
+		input {
+			display: none;
+			&:checked {
+				& ~ .profile-page-checkmark {
+					background: url('/icons/checkmark-icon.svg') center no-repeat;
+					background-size: contain;
+					border-color: var(--color-base);
+				}
+			}
+		}
+	}
+	&-checkmark {
+		width: 20px;
+		height: 20px;
+		border: 1px solid var(--line-base);
+		border-radius: 6px;
+		margin-right: 10px;
+	}
+	&-table {
+		width: 100%;
+	}
+	&-table-row {
+		display: flex;
+		border-bottom: 1px solid var(--line-base);
+		padding: 20px 0;
+	}
+	&-table-col {
+		&:first-child {
+			width: 30%;
+		}
+		&:nth-child(2) {
+			flex-grow: 1;
+		}
+	}
+	&-table-heading {
+		@include em(12px);
+		font-weight: 400;
+		color: var(--gray-base);
+		text-transform: uppercase;
+	}
+}

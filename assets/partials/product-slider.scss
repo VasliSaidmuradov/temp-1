@@ -30,3 +30,25 @@
 		padding: 10px;
 	}
 }
+
+@media screen and (max-width: 1025px) {
+	.product-slider {
+		.product {
+			max-width: 100%;
+		}
+		&-prev {
+			left: 0;
+		}
+		&-next {
+			right: 0;
+		}
+	}
+}
+@media screen and (max-width: 426px) {
+	.product-slider {
+		.product {
+			width: 100%;
+			margin-right: 0;
+		}
+	}
+}

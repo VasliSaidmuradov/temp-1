@@ -3,4 +3,13 @@
     .row {
         align-items: flex-start;
     }
+    &-mobile-news {
+    	display: none;
+    }
+}
+
+@media screen and (max-width: 769px) {
+	.home-mobile-news {
+		display: block;
+	}
 }

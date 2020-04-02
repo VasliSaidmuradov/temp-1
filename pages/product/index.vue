@@ -24,6 +24,15 @@
 			<other />
 			<similar />
 		</div>
+		<div class="product-page-mobile-btn">
+			<!-- <button class="button --main-color">Добавить в корзину</button> -->
+			<div class="product-counter">
+				<button class="product-counter-decrease"></button>
+				<span>1 шт</span>
+				<button class="product-counter-increase"></button>
+			</div>
+			<button class="product-page-add-favorites"></button>
+		</div>
 	</div>
 </template>
 

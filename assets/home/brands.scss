@@ -32,3 +32,21 @@
 		max-height: 45px;
 	}
 }
+
+@media screen and (max-width: 426px) {
+	.brands-slider {
+		margin-top: 60px;
+		&-title {
+			@include em(20px);
+		}
+		&-btn-wrp {
+			top: 5px;
+		}
+	}
+}
+
+@media screen and (max-width: 321px) {
+	.brands-slider {
+		margin: 30px 0;
+	}
+}

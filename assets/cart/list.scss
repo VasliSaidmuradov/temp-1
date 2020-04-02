@@ -80,3 +80,14 @@
 		margin-right: 20px;
 	}
 }
+
+@media screen and (max-width: 1025px) {
+	.cart-list {
+		&-row {
+			width: 640px;
+		}
+		&-name-wrp {
+			width: 245px;
+		}
+	}
+}

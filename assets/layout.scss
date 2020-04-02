@@ -14,3 +14,24 @@
 .right-col {
     width: 825px;
 }
+
+@media screen and (max-width: 1025px) {
+	.container {
+		padding: 0 20px;
+	}
+	.right-col {
+		width: 700px;
+	}
+}
+
+@media screen and (max-width: 769px) {
+    .row {
+        flex-wrap: wrap;
+    }
+    .right-col {
+        width: 100%;
+    }
+    .left-col {
+        display: none;
+    }
+}

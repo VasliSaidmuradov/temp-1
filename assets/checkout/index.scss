@@ -82,3 +82,31 @@
 		}
 	}
 }
+
+@media screen and (max-width: 769px) {
+	.checkout-page {
+		&-row {
+			flex-wrap: wrap;
+		}
+		&-col {
+			width: 100%;
+			&:first-child {
+				width: 100%;
+			}
+		}
+		&-radio {
+			width: 48%;
+		}
+	}
+}
+
+@media screen and (max-width: 426px) {
+	.checkout-page {
+		&-radio-wrp {
+			flex-wrap: wrap;
+		}
+		&-radio {
+			width: 100%;
+		}
+	}
+}

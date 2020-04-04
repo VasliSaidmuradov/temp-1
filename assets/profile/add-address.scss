@@ -26,3 +26,19 @@
 		}
 	}
 }
+
+@media screen and (max-width: 426px) {
+	.profile-add-address {
+		.profile-page-select,
+		.profile-page-input {
+			width: 100%;
+		}
+		.profile-page-input-wrp {
+			width: 100%;
+			flex-wrap: wrap;
+			input {
+				width: 100%;
+			}
+		}
+	}
+}

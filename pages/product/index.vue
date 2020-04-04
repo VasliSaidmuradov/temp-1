@@ -13,6 +13,10 @@
 			<div class="product-page-row">
 				<div class="product-page-col">
 					<images />
+					<div class="product-page-mob-name">
+						<p class="product-page-brand">JM Solution</p>
+						<p class="product-page-name">Derma care centella repair capsule mask</p>
+					</div>
 				</div>
 				<div class="product-page-col">
 					<info />

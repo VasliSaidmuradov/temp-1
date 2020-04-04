@@ -24,6 +24,17 @@ export default {
 				navigation: {
 					nextEl: '.cart-slider-next',
 					prevEl: '.cart-slider-prev'
+				},
+				breakpoints: {
+					769: {
+						slidesPerView: 3
+					},
+					426: {
+						slidesPerView: 2
+					},
+					321: {
+						slidesPerView: 1
+					}
 				}
 			}
 		}

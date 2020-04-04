@@ -9,3 +9,17 @@
 		align-items: flex-start;
 	}
 }
+
+@media screen and (max-width: 769px) {
+	.cart-page {
+		&-row {
+			flex-wrap: wrap;
+		}
+	}	
+}
+
+@media screen and (max-width: 426px) {
+	.cart-page {
+		
+	}	
+}

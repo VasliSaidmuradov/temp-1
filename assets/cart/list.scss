@@ -91,3 +91,45 @@
 		}
 	}
 }
+
+@media screen and (max-width: 769px) {
+	.cart-list {
+		width: 100%;
+		&-row {
+			width: 100%;
+		}
+		&-name-wrp {
+			width: 45%;
+		}
+	}
+}
+
+@media screen and (max-width: 426px) {
+	.cart-list {
+		&-row {
+			flex-wrap: wrap;
+			&:last-child {
+				padding-bottom: 0;
+				margin-bottom: 0;
+			}
+		}
+		&-name-wrp {
+			width: 65%;
+			padding-right: 0;
+		}
+		&-btn-wrp {
+			margin-left: auto;
+		}
+	}
+}
+
+@media screen and (max-width: 321px) {
+	.cart-list {
+		&-img {
+			img {
+				width: 60px;
+				height: 60px;
+			}
+		}
+	}
+}

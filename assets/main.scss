@@ -15,6 +15,7 @@
 @import './partials/favorites-page';
 @import './partials/contacts-page';
 @import './partials/aside';
+@import './partials/mobile-menu';
 
 @import './home/index';
 @import './home/nav';
@@ -29,6 +30,7 @@
 
 @import './category/index';
 @import './category/subcategories';
+@import './category/brand';
 
 @import './product-inner/index';
 @import './product-inner/images';
@@ -53,6 +55,14 @@
 @import './profile/history';
 
 @import './auth-modal/index';
+
+@import './help/index';
+@import './help/nav';
+
+@import './news/index';
+@import './news/inner';
+@import './news/item';
+@import './news/similar';
 
 @import './layout';
 

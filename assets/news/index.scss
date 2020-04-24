@@ -1,0 +1,15 @@
+.news-page {
+    padding-top: 30px;
+    padding-bottom: 40px;
+    &-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 40px;
+        .news-item {
+            margin-right: 30px;
+        }
+        .news-item:nth-child(4n) {
+            margin-right: 0;
+        }
+    }
+}

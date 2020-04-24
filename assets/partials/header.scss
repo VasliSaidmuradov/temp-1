@@ -178,7 +178,7 @@
 
 .mobile-header { display: none; }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 815px) {
     .header {
         display: none;
     }
@@ -187,6 +187,8 @@
         background: #fff;
         padding: 13px 20px;
         box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.06);
+        z-index: 10;
+        position: relative;
         &-row {
             display: flex;
             justify-content: space-between;
@@ -199,6 +201,8 @@
             width: 20px;
             height: 20px;
             display: block;
+            padding: 0;
+            border: none;
         }
         &-burger {
             border: none;

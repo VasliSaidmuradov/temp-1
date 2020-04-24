@@ -5,10 +5,9 @@
                 <div class="row header-top-row">
                     <nav class="header-top-nav">
                         <nuxt-link to="/contacts" class="header-top-link">Контакты</nuxt-link>
-                        <nuxt-link to="" class="header-top-link">Доставка</nuxt-link>
-                        <nuxt-link to="" class="header-top-link">Оплата</nuxt-link>
-                        <nuxt-link to="" class="header-top-link">Помощь</nuxt-link>
-                        <nuxt-link to="" class="header-top-link">Магазины</nuxt-link>
+                        <nuxt-link to="/help/payment" class="header-top-link">Оплата</nuxt-link>
+                        <nuxt-link to="/help/delivery" class="header-top-link">Доставка</nuxt-link>
+                        <nuxt-link to="/help/how-to-order" class="header-top-link">Как сделать заказ</nuxt-link>
                     </nav>
                     <div class="header-phone">
                         <a href="">8 (727) 396-18-34</a>
@@ -40,7 +39,7 @@
                 <div class="row">
                     <nuxt-link class="header-btn" to="/catalog">Все категории</nuxt-link>
                     <nuxt-link class="header-bot-link" to="">Акции</nuxt-link>
-                    <nuxt-link class="header-bot-link" to="">Бонусы</nuxt-link>
+                    <nuxt-link class="header-bot-link" to="/help/bonuses">Бонусы</nuxt-link>
                 </div>
             </div>
         </div>

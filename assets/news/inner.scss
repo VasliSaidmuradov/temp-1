@@ -1,0 +1,45 @@
+.news-inner {
+    padding-top: 30px;
+    &-container {
+        width: 100%;
+        margin: auto;
+        margin-top: 40px;
+        max-width: 730px;
+    }
+    &-date {
+        text-align: center;
+        @include em(14px);
+        font-weight: 500;
+        color: var(--gray-base);
+    }
+    &-heading {
+        text-align: center;
+        @include em(32px);
+        font-weight: 600;
+        color: #000;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    &-content {
+        margin: 40px 0;
+        p {
+            max-width: 540px;
+            margin: auto;
+        }
+        img {
+            margin: 40px 0;
+        }
+    }
+    img {
+        width: 100%;
+        border-radius: 8px;
+    }
+}
+
+@media screen and(max-width: 769px) {
+    .news-inner {
+        &-heading {
+            @include em(24px);
+        }
+    }
+}

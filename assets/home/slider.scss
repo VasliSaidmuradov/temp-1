@@ -48,7 +48,7 @@
         }
     }
 }
-@media screen and (max-width: 426px) {
+@media screen and (max-width: 815px) {
     .home-slider {
         .swiper-container {
             height: 200px;
@@ -58,6 +58,7 @@
         }
         &-inner {
             padding: 30px 20px;
+            justify-content: flex-start;
         }
         &-title {
             @include em(20px);

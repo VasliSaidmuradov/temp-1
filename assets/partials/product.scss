@@ -104,23 +104,18 @@
 	}
 }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 815px) {
 	.product {
-		max-width: 220px;
-		.button {
-			width: 100%;
-			text-align: center;
-			padding: 10px 15px;
-		}
-	}
-}
-
-@media screen and (max-width: 426px) {
-	.product {
+		max-width: 235px;
 		width: 48%;
 		margin-right: 4%;
 		&:nth-child(even) {
 			margin-right: 0;
+		}
+		.button {
+			width: 100%;
+			text-align: center;
+			padding: 10px 15px;
 		}
 		&-img {
 			margin-bottom: 10px;

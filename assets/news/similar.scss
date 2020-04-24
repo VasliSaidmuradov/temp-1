@@ -1,0 +1,23 @@
+.news-similar {
+    border-top: 1px solid var(--line-base);
+    padding-top: 40px;
+    margin-bottom: 40px;
+    &-row {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
+    &-title {
+        @include em(24px);
+        font-weight: 600;
+        color: #000;
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .news-similar {
+        &-row {
+            flex-wrap: wrap;
+        }
+    }
+}

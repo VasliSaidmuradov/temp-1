@@ -1,19 +1,24 @@
 <template>
-    <div class="news-similar">
-        <div class="container">
-            <h4 class="news-similar-title">Другие публикации</h4>
-            <div class="news-similar-row">
-                <item v-for="(item,index) in 4" :key="index" />
-            </div>
-        </div>
+  <div class="news-similar">
+    <div class="container">
+      <h4 class="news-similar-title">Другие публикации</h4>
+      <div class="news-similar-row">
+        <item v-for="post in posts" :key="post.id" :post="post" />
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-import item from '@/components/news/item'
+import item from "@/components/news/item";
+import { mapGetters } from "vuex";
+
 export default {
-    components: {
-        item
-    }
-}
+  components: {
+    item
+  },
+  props: {
+    posts: Array
+  }
+};
 </script>

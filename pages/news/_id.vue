@@ -1,40 +1,39 @@
 <template>
-    <div class="news-inner">
-        <div class="container">
-            <div class="breadcrumbs">
-                <nuxt-link to="/">Главная / </nuxt-link>
-                <nuxt-link to="/news">Новости / </nuxt-link>
-                <nuxt-link to="">Цвет моей мечты</nuxt-link>
-            </div>
-            <div class="news-inner-container">
-                <p class="news-inner-date">17 марта 2020</p>
-                <h1 class="news-inner-heading">Цвет моей мечты</h1>
-                <img src="/images/news.png" alt="Skiny post image" class="news-inner-image">
-                <div class="news-inner-content">
-                    <p>
-                        Весна – пора перемен. Именно в это время у многих возникает желание сменить или освежить образ. Если и вы на это решились, то самое время выбрать краску! В нашей статье расскажем о том, на что стоит обратить внимание.
-                    </p>
-                    <p><b>Стойкий интенсивный цвет</b></p>
-                    <p>
-                        Если вы предпочитаете стойкий насыщенный цвет, мечтаете кардинально сменить образ или просто хотите закрасить седину, то справиться с этими задачами под силу только стойкой краске с высокоинтенсивными пигментами. Цвет после окрашивания стойкой крем-краской долго не тускнеет даже под воздействием внешних факторов: солнца, соленой воды, сушки. Если ваш образ жизни можно назвать активным – смело отдавайте предпочтение такому продукту, как Palette «Интенсивный цвет». Формула с пигментами проникает глубоко в структуру волоса, защищая цвет от вымывания, а ухаживающие ингредиенты обеспечивают бережную заботу о волосах, делая их не только яркими, но и гладкими. Платиновый блонд, роскошный медный, благородный каштановый или марсала – найдите «свой» цвет из всего многообразия оттенков.
-                    </p>
-                    <img src="/images/news.png" alt="">
-                    <p><b>Естественные оттенки</b></p>
-                    <p>
-                        Если вы предпочитаете натуральные оттенки или хотите подчеркнуть красоту вашего натурального цвета, придав волосам красивые многогранные переливы и дополнительный блеск, присмотритесь к линейке крем-красок с натуральными ингредиентами и интенсивным уходом, такой как Palette «Фитолиния». В «Фитолинии» для каждого направления цвета есть свой специальный ингредиент: мед — для светлых оттенков, масло какао —для насыщенных каштановых, морошка — для красных оттенков. Кондиционер-уход с маслом арганы обеспечит глубокое питание после процедуры окрашивания. Несмотря на натуральные ингредиенты в составе, краска обеспечивает стойкое окрашивание и до 100% закрашивания седины (в зависимости от оттенка)
-                    </p>
-                </div>
-            </div>
-        </div>
-        <similar />
+  <div class="news-inner">
+    <div class="container">
+      <div class="breadcrumbs">
+        <nuxt-link to="/">Главная /</nuxt-link>
+        <nuxt-link to="/news">Новости /</nuxt-link>
+        <nuxt-link to>{{ post.name }}</nuxt-link>
+      </div>
+      <div class="news-inner-container">
+        <p class="news-inner-date">{{ $formatDate(post.created_at) }}</p>
+        <h1 class="news-inner-heading">{{ post.name }}</h1>
+        <img :src="post.image" alt="Skiny post image" class="news-inner-image" />
+        <div class="news-inner-content" v-html="post.content"></div>
+      </div>
     </div>
+    <similar :posts="posts" />
+  </div>
 </template>
 
 <script>
-import similar from '@/components/news/similar'
+import similar from "@/components/news/similar";
+import { mapGetters } from "vuex";
+
 export default {
-    components: {
-        similar
-    }
-}
+  components: {
+    similar
+  },
+  middleware: ["post"],
+  computed: {
+    ...mapGetters({
+      post: "content/GET_POST",
+      posts: "content/GET_POSTS"
+    })
+  },
+  async fetch({ store, route }) {
+    await store.dispatch("content/fetchPosts", { per_page: 4 });
+  }
+};
 </script>

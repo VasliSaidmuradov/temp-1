@@ -1,30 +1,51 @@
 <template>
-	<div class="catalog-page">
-		<div class="container">
-			<div class="breadcrumbs">
-				<nuxt-link to="">Главная / </nuxt-link>
-				<nuxt-link to="">Каталог</nuxt-link>
-			</div>
-			<nav class="catalog-page-nav">
-				<nuxt-link v-for="(btn,index) in 10" :key="index" class="catalog-page-nav-btn" to="">
-					<img src="/icons/Makeup.png" alt="Skiny icon" class="catalog-page-icon">
-					<p>Детские товары</p>
-				</nuxt-link>
-			</nav>
-			<div class="catalog-page-category-wrp">
-				<nuxt-link to="" class="catalog-page-category">Товары для дома</nuxt-link>
-				<div class="catalog-page-row">
-					<div class="catalog-page-col" v-for="(subcat, index) in 6" :key="index">
-						<nuxt-link class="catalog-page-subcategory" to="">Хранение продуктов</nuxt-link>
-						<nuxt-link class="catalog-page-link" to="">Холодильники</nuxt-link>
-						<nuxt-link class="catalog-page-link" to="">Холодильники для вина</nuxt-link>
-						<nuxt-link class="catalog-page-link" to="">Холодильники для ферментации мяса</nuxt-link>
-						<nuxt-link class="catalog-page-link" to="">Морозильные камеры</nuxt-link>
-						<nuxt-link class="catalog-page-link" to="">Аксессуары для холодильника</nuxt-link>
-						<nuxt-link class="catalog-page-link" to="">Медицинские холодильники</nuxt-link>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="catalog-page">
+    <div class="container">
+      <div class="breadcrumbs">
+        <nuxt-link to>Главная /</nuxt-link>
+        <nuxt-link to>Каталог</nuxt-link>
+      </div>
+      <nav class="catalog-page-nav">
+        <a
+          v-for="btn in categories"
+          :key="btn.id"
+          class="catalog-page-nav-btn"
+          :href="`#${btn.id}`"
+        >
+          <img :src="btn.icon" alt="Skiny icon" class="catalog-page-icon" />
+          <p>{{ btn.name }}</p>
+        </a>
+      </nav>
+      <div
+        v-for="category in categories"
+        :key="category.id"
+        :id="category.id"
+        class="catalog-page-category-wrp"
+      >
+        <nuxt-link to class="catalog-page-category">{{ category.name }}</nuxt-link>
+        <div class="catalog-page-row">
+          <div class="catalog-page-col" v-for="subcat in category.subcategories" :key="subcat.id">
+            <nuxt-link class="catalog-page-subcategory" to>{{ subcat.name }}</nuxt-link>
+            <nuxt-link
+              v-for="tag in subcat.tags"
+              :key="tag.id"
+              class="catalog-page-link"
+              to
+            >{{ tag.name }}</nuxt-link>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
+<script>
+import { mapGetters } from "vuex";
+
+export default {
+  computed: {
+    ...mapGetters({
+      categories: "menu/GET_CATEGORIES"
+    })
+  }
+};
+</script>

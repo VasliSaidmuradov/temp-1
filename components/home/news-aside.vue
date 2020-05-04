@@ -1,38 +1,28 @@
 <template>
-    <div class="news-aside">
-        <div class="news-aside-title-wrp">
-            <span class="news-aside-title">Новости</span>
-            <nuxt-link to="">Все статьи</nuxt-link>
-        </div>
-        <nuxt-link to="" v-for="article in news" :key="article.id" class="news-aside-link">
-            <span class="news-aside-date">{{article.date}}</span>
-            <p class="news-aside-heading">{{article.heading}}</p>
-        </nuxt-link>
+  <div class="news-aside">
+    <div class="news-aside-title-wrp">
+      <span class="news-aside-title">Новости</span>
+      <nuxt-link to="/news">Все статьи</nuxt-link>
     </div>
+    <nuxt-link to v-for="(article, index) in news" :key="index" class="news-aside-link">
+      <span class="news-aside-date">{{ $formatDate(article.created_at) }}</span>
+      <p class="news-aside-heading">{{ article.name }}</p>
+      <!-- {{ article }} -->
+    </nuxt-link>
+  </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-    data() {
-        return {
-            news: [
-                {
-                    id: 0,
-                    date: '20 февраля 2020',
-                    heading: 'При покупке любых двух средств Men Expert в подарок губная помада'
-                },
-                {
-                    id: 1,
-                    date: '20 февраля 2021',
-                    heading: 'При покупке любых двух средств Men Expert в подарок губная помада'
-                },
-                {
-                    id: 2,
-                    date: '20 февраля 2022',
-                    heading: 'При покупке любых двух средств Men Expert в подарок губная помада'
-                },
-            ]
-        }
-    }
-}
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapGetters({
+      news: "content/GET_POSTS"
+    })
+  }
+};
 </script>

@@ -1,51 +1,47 @@
 <template>
-    <div class="home-slider">
-        <div v-swiper:homeSlider="options">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <nuxt-link to="">
-                        <img src="/images/home-slider.png" alt="Skiny image" class="home-slider-img">
-                        <div class="home-slider-inner">
-                            <div>
-                                <h3 class="home-slider-title">Erborian до –25%</h3>
-                                <h4 class="home-slider-text">подарки при покупке 17 и 18 февраля в интернет-магазине</h4>
-                                <button class="button --black --arrow" to="">Перейти к покупкам</button>
-                            </div>
-                        </div>
-                    </nuxt-link>
-                </div>
-                <div class="swiper-slide">
-                    <nuxt-link to="">
-                        <img src="/images/home-slider.png" alt="Skiny image" class="home-slider-img">
-                        <div class="home-slider-inner">
-                            <div>
-                                <h3 class="home-slider-title">Erborian до –25%</h3>
-                                <h4 class="home-slider-text">подарки при покупке 17 и 18 февраля в интернет-магазине</h4>
-                                <button class="button --black --arrow" to="">Перейти к покупкам</button>
-                            </div>
-                        </div>
-                    </nuxt-link>
-                </div>
+  <div class="home-slider">
+    <div v-swiper:homeSlider="options">
+      <div class="swiper-wrapper">
+        <div v-for="slide in slides" :key="slide.id" class="swiper-slide">
+					<!-- slides: {{ slide }} -->
+          <nuxt-link to>
+            <img :src="slide.image" alt="Skiny image" class="home-slider-img" />
+            <div class="home-slider-inner">
+              <div>
+                <h3 class="home-slider-title">{{ slide.name }}</h3>
+                <h4 class="home-slider-text" v-html="slide.description"></h4>
+                <button class="button --black --arrow" to>Перейти к покупкам</button>
+              </div>
             </div>
-            <div class="swiper-pagination"></div>
+          </nuxt-link>
         </div>
+      </div>
+      <div class="swiper-pagination"></div>
     </div>
+  </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-    data() {
-        return {
-            options: {
-                slidesPerView: 1,
-                spaceBetween: 10,
-                pagination: {
-                    el: '.swiper-pagination',
-                    type: 'bullets',
-                    clickable: true
-                }
-            }
+  data() {
+    return {
+      options: {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        pagination: {
+          el: ".swiper-pagination",
+          type: "bullets",
+          clickable: true
         }
-    }
-}
+      }
+    };
+  },
+  computed: {
+    ...mapGetters({
+      slides: "content/GET_SLIDES"
+    })
+  }
+};
 </script>

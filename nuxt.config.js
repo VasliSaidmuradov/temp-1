@@ -30,8 +30,13 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    {src: '~/plugins/swiper.js', ssr: false},
-    {src: '~/plugins/vue-the-mask.js', ssr: false},
+    { src: '~/plugins/swiper.js', ssr: false },
+    { src: '~/plugins/vue-the-mask.js', ssr: false },
+    { src: '~/plugins/smooth-scroll', ssr: false },
+    { src: '~/plugins/api' },
+    { src: '~/plugins/error' },
+    { src: '~/plugins/auth' },
+    { src: '~/plugins/helpers' },
   ],
   /*
   ** Nuxt.js dev-modules
@@ -50,6 +55,9 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    baseURL: 'http://demo-13.brandstudio.kz/api',
+    proxyHeaders: false,
+    credentials: false
   },
   /*
   ** Build configuration
@@ -58,15 +66,19 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
-        const svgRule = config.module.rules.find(rule => rule.test.test('.svg'));
+    extend(config, { ctx, isClient }) {
+      const svgRule = config.module.rules.find(rule => rule.test.test('.svg'));
 
-        svgRule.test = /\.(png|jpe?g|gif|webp)$/;
+      svgRule.test = /\.(png|jpe?g|gif|webp)$/;
 
-        config.module.rules.push({
-            test: /\.svg$/,
-            use: ['babel-loader', 'vue-svg-loader'],
-        });
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: ['babel-loader', 'vue-svg-loader'],
+      });
+      if (isClient) {
+        console.log('Mode: ', process.env.NODE_ENV)
+        config.devtool = process.env.NODE_ENV === 'development' ? '#source-map' : '';
+      }
     }
   }
 }

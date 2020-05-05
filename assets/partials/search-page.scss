@@ -1,0 +1,64 @@
+.search-page {
+    padding-top: 20px;
+    &-title {
+        margin-top: 32px;
+        @include em(32px);
+        font-weight: 600;
+        color: #000;
+        margin-bottom: 50px;
+    }
+    &-row {
+        display: flex;
+        flex-wrap: wrap;
+        .product {
+            margin-right: 30px;
+            &:nth-child(4n) {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1025px) {
+    .search-page {
+        .product {
+            max-width: 219px;
+        }
+    }
+}
+
+@media screen and (max-width: 769px) {
+    .search-page {
+        .category-page-sort-wrp {
+            display: flex;
+        }
+        .product {
+            max-width: 47%;
+            margin-right: 3%;
+        }
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .search-page {
+        &-title {
+            @include em(14px);
+        }
+    }
+}
+
+@media screen and (max-width: 321px) {
+    .search-page {
+        .category-page-sort-wrp {
+            display: block;
+            .category-page-sort {
+                margin-top: 10px;
+            }
+        }
+        .product {
+            max-width: 100%;
+            width: 100%;
+            margin-right: 0;
+        }
+    }
+}

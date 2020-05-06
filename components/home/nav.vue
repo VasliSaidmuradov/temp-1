@@ -1,5 +1,5 @@
 <template>
-  <nav class="home-nav">
+  <nav class="home-nav" @mouseleave="closeSubCategory">
     <nuxt-link
       v-for="category in categories"
       :key="category.id"
@@ -11,17 +11,19 @@
       <span>{{ category.name }}</span>
     </nuxt-link>
     <!-- cat: {{ categories }} -->
-    <div class="home-nav-subcategory-wrp" v-if="hoveredCategory">
-      <div class="home-nav-subcategory-item"
-        v-for="subcategories in getSubCategoryChunks" 
-        :key="subcategories.id">
-        <nuxt-link class="home-nav-subcategory" to=""
-          v-for="subcategory in subcategories"
-          :key="subcategory.id">
-          {{subcategory.name}}
-        </nuxt-link>
+    <transition name="fade">
+      <div class="home-nav-subcategory-wrp" v-if="hoveredCategory">
+        <div class="home-nav-subcategory-item"
+          v-for="subcategories in getSubCategoryChunks" 
+          :key="subcategories.id">
+          <nuxt-link class="home-nav-subcategory" to=""
+            v-for="subcategory in subcategories"
+            :key="subcategory.id">
+            {{subcategory.name}}
+          </nuxt-link>
+        </div>
       </div>
-    </div>
+    </transition>
   </nav>
 </template>
 

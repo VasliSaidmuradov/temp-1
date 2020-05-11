@@ -5,13 +5,13 @@
         <img src="/icons/hit-icon.svg" alt="Skiny icon" />
         <img src="/icons/new-icon.svg" alt="Skiny icon" />
       </div>
-      <img src="/images/product.png" alt="Skiny image" />
+      <img :src="product.image" :alt="product.name" />
     </div>
     <div class="product-images-slider-wrp">
       <div v-swiper:productImages="options">
         <div class="swiper-wrapper">
-          <div class="swiper-slide" v-for="(image,index) in images" :key="index">
-            <img :src="image" alt="Skiny image" class="product-images-slide-img" />
+          <div class="swiper-slide" v-for="(image,index) in product.images" :key="index">
+            <img :src="image" :alt="product.name" class="product-images-slide-img" />
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@
 <script>
 export default {
   props: {
-    images: Array
+    product: Object
   },
   data() {
     return {

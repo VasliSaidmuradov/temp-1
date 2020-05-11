@@ -76,4 +76,33 @@ export const actions = {
 		}
 		await store.dispatch('setAuthFields', cookies)
 	},
+	async signin(store, payload) {
+		// const res = this.$axios.post('http://demo-13.brandstudio.kz/auth/register/auth/login', payload, 'signin')
+
+		await store.dispatch('setAuthFields', await this.$axios.post('http://demo-13.brandstudio.kz/auth/login', payload, 'signin'))
+	},
+
+	async signup(store, payload) {
+		await this.$axios.post('http://demo-13.brandstudio.kz/auth/register', { raw: payload }, 'signup')
+	},
+
+	async logout(store, payload) {
+		console.log('logout')
+		store.dispatch('setAuthFields', {})
+		if (process.client) {
+			window.location.reload(true)
+		}
+	},
+
+	async reset(store, payload) {
+		await this.$api.post('/auth/password', payload, 'resetPassword')
+	},
+
+	async validateCode(store, payload) {
+		return await this.$api.get('/auth/verify', payload, 'validateCode')
+	},
+
+	async resendCode(store, payload) {
+		return await this.$api.put('/user', { phone: payload }, 'updateProfile')
+	},
 }

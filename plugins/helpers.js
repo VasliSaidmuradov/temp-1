@@ -14,11 +14,11 @@ export default function ({ app, store, req, route }, inject) {
   })
 
   inject('chunk', function (array, chunkSize) {
-    let R = [], i = 0
+    let arr = [], i = 0
     for (; i < array.length; i += chunkSize) {
-      R.push(array.slice(i, i + chunkSize))
+      arr.push(array.slice(i, i + chunkSize))
     }
-    return R
+    return arr
   })
 
   inject('isMobile', () => store.getters['GET_IS_MOBILE'])
@@ -62,7 +62,7 @@ export default function ({ app, store, req, route }, inject) {
   })
 
   inject('addParam', (query, filter, value, multiple, toggle) => {
-    console.log(query, filter, value)
+    // console.log(query, filter, value)
     filter = filter.toString()
     if (value) {
       value = value.toString()

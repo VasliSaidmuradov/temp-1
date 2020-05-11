@@ -4,7 +4,7 @@
       <span class="news-aside-title">Новости</span>
       <nuxt-link to="/news">Все статьи</nuxt-link>
     </div>
-    <nuxt-link to v-for="(article, index) in news" :key="index" class="news-aside-link">
+    <nuxt-link v-for="article in news.data" :key="article.id" class="news-aside-link" :to="`/news/${article.slug}`">
       <span class="news-aside-date">{{ $formatDate(article.created_at) }}</span>
       <p class="news-aside-heading">{{ article.name }}</p>
       <!-- {{ article }} -->

@@ -30,9 +30,9 @@ export default {
 	},
 	computed: {
 		tomorrow() {
-			const msInDay = 60 * 60 * 24 * 1000
+			const msInADay = 60 * 60 * 24 * 1000
 			const today = Date.now()
-			return today + msInDay
+			return today + msInADay
 		}
 	}
 };

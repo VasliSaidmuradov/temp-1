@@ -6,7 +6,7 @@ export default async function ({ route, store }) {
   }
 
   if (!store.getters['content/GET_POSTS']) {
-    queue.push(store.dispatch('content/fetchPosts', { per_page: 3 }))
+    queue.push(store.dispatch('content/fetchPosts', { per_page: 4 }))
   }
 
   if (!store.getters['menu/GET_CATEGORIES']) {

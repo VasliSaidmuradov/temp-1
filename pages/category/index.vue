@@ -57,6 +57,7 @@ import categoryFilter from '@/components/category/filter'
 import brand from '@/components/category/brand'
 import product from '@/components/partials/product'
 import pagination from '@/components/partials/pagination'
+import { mapGetters } from 'vuex'
 
 export default {
 	data: () => ({
@@ -68,6 +69,9 @@ export default {
 		product,
 		brand,
 		pagination
+	},
+	computed: {
+		...mapGetters({  })
 	}
 }
 </script>

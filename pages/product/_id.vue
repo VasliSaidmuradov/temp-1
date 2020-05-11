@@ -1,33 +1,33 @@
 <template>
   <div class="product-page">
-		<!-- prod: {{brandProducts}} -->
+    <!-- prod: {{brandProducts}} -->
     <div class="container">
       <div class="breadcrumbs">
-        <nuxt-link to>Главная /</nuxt-link>
-        <nuxt-link to>Красота и здоровье /</nuxt-link>
-        <nuxt-link to>Макияж</nuxt-link>
+        <nuxt-link to="/">Главная /</nuxt-link>
+        <nuxt-link :to="product.tag.subcategory.slug">{{ product.tag.subcategory.name }} /</nuxt-link>
+        <nuxt-link :to="product.tag.slug">{{ product.tag.name }}</nuxt-link>
       </div>
-			<!-- similars: {{ similars }} -->
+      <!-- similars: {{ similars }} -->
       <div class="product-page-name-wrp">
-        <p class="product-page-brand">JM Solution</p>
+        <p class="product-page-brand">{{ product.brand.name }}</p>
         <p class="product-page-name">{{ product.name }}</p>
       </div>
       <div class="product-page-row">
         <div class="product-page-col">
-          <images :images="product.images"/>
+          <images :product="product" />
           <div class="product-page-mob-name">
-            <p class="product-page-brand">JM Solution</p>
+            <p class="product-page-brand">{{ product.brand.name }}</p>
             <p class="product-page-name">{{ product.name }}</p>
           </div>
         </div>
         <div class="product-page-col">
-          <info :info="product"/>
+          <info :info="product" />
         </div>
         <div class="product-page-col">
-          <product-aside :info="product"/>
+          <product-aside :info="product" />
         </div>
       </div>
-      <other :brandProducts="brandProducts"/>
+      <other :brandProducts="brandProducts" />
       <similar :similars="similars" />
     </div>
     <div class="product-page-mobile-btn">
@@ -61,9 +61,9 @@ export default {
   middleware: ["product"],
   computed: {
     ...mapGetters({
-			product: "product/GET_PRODUCT",
-			similars: "product/GET_SIMILARS",
-			brandProducts: 'brand/GET_BRAND_PRODUCTS'
+      product: "product/GET_PRODUCT",
+      similars: "product/GET_SIMILARS",
+      brandProducts: "brand/GET_BRAND_PRODUCTS"
     })
   }
 };

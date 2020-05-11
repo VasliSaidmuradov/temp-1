@@ -1,9 +1,4 @@
 export default function ({ $axios, store, app }, inject) {
-  // console.log('API inject: ', inject)
-  // console.log('API app: ', app)
-  // console.log('API store: ', store)
-  // console.log('API: ', )
-  // console.log('API: ', )
   inject('api', {
     cache: {},
     baseUrl: process.env.NODE_ENV == 'development' ? 'http://demo-13.brandstudio.kz/api' : 'http://demo-13.brandstudio.kz/api',

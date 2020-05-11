@@ -16,8 +16,8 @@
 			<button class="button --main-color">Добавить в корзину</button>
 			<button class="button --white">В избранное</button>
 		</div>
-		<nuxt-link class="product-page-link" to="">Перейти к производителю</nuxt-link>
-		<img src="/images/brand.png" alt="Skiny image" class="product-aside-brand">
+		<nuxt-link class="product-page-link" :to="info.brand.slug">Перейти к производителю</nuxt-link>
+		<img :src="info.brand.image" :alt="`/catalog/${info.brand.name}`" class="product-aside-brand">
 	</div>
 </template>
 <script>

@@ -6,9 +6,9 @@
         <nuxt-link to>Новости</nuxt-link>
       </div>
       <div class="news-page-row">
-        <item v-for="post in posts" :key="post.id" :post="post"/>
+        <item v-for="post in posts.data" :key="post.id" :post="post" />
       </div>
-      <pagination />
+      <pagination :paginator="posts" />
     </div>
   </div>
 </template>

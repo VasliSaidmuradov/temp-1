@@ -3,7 +3,7 @@
     <div class="container">
       <h4 class="news-similar-title">Другие публикации</h4>
       <div class="news-similar-row">
-        <item v-for="post in posts" :key="post.id" :post="post" />
+        <item v-for="post in posts.data" :key="post.id" :post="post" />
       </div>
     </div>
   </div>
@@ -18,7 +18,7 @@ export default {
     item
   },
   props: {
-    posts: Array
+    posts: Object
   }
 };
 </script>

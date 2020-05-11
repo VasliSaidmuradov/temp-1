@@ -21,12 +21,12 @@ export const actions = {
   async fetchPosts(store, payload = {}) {
     const res = await this.$api.get('/posts', payload)
     // console.log('Posts: ', res.data)
-    store.commit('SET_POSTS', res.data)
+    store.commit('SET_POSTS', res)
   },
   async fetchAllPosts(store) {
     const res = await this.$api.get('/posts')
     // console.log('All posts: ', res.data)
-    store.commit('SET_ALL_POSTS', res.data)
+    store.commit('SET_ALL_POSTS', res)
   },
   async fetchPost(store, payload) {
     // console.log('Post payload: ', payload)

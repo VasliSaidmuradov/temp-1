@@ -11,7 +11,7 @@
 								<h3 class="auth-modal-title">Вход</h3>
 								<input type="text" placeholder="Email или мобильный телефон" class="auth-modal-input">
 								<input type="password" placeholder="Пароль" class="auth-modal-input">
-								<button class="auth-modal-forgot">Забыли пароль?</button>
+								<button class="auth-modal-forgot" @click="currentTab = 'restore'">Забыли пароль?</button>
 								<div class="auth-modal-btn-wrp">
 									<button class="button --black">Войти</button>
 									<button @click="currentTab = 'register'" class="button --white">зарегистрироваться</button>
@@ -33,6 +33,31 @@
 								<div class="auth-modal-btn-wrp">
 									<button class="button --black">зарегистрироваться</button>
 									<button @click="currentTab = 'signin'" class="button --white">Назад</button>
+								</div>
+							</div>
+						</div>
+					</transition>
+					<transition name="fade">
+						<div v-if="currentTab === 'restore'" class="auth-modal-content">
+							<div class="auth-modal-restore">
+								<h3 class="auth-modal-title">Восстановление пароля</h3>
+								<p class="auth-modal-text">Введите свой e-mail и мы вышлем вам пароль</p>
+								<input type="text" placeholder="Email" class="auth-modal-input">
+								<div class="auth-modal-btn-wrp">
+									<button class="button --black" @click="currentTab = 'restoreSuccess'">Отправить</button>
+									<button @click="currentTab = 'signin'" class="button --white">я вспомнил пароль</button>
+								</div>
+							</div>
+						</div>
+					</transition>
+					<transition name="fade">
+						<div v-if="currentTab === 'restoreSuccess'" class="auth-modal-content">
+							<div class="auth-modal-restore">
+								<h3 class="auth-modal-title">Восстановление пароля</h3>
+								<p class="auth-modal-text">Письмо с восстановлением пароля успешно отправлено</p>
+								<img src="/icons/email-success.svg" alt="Skiny icon" class="auth-modal-img">
+								<div class="auth-modal-btn-wrp">
+									<button class="button --black" @click="closeModal">Вернуться на главную</button>
 								</div>
 							</div>
 						</div>

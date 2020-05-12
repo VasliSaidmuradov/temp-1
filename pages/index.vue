@@ -28,6 +28,7 @@ import Nav from "@/components/home/nav";
 import NewsAside from "@/components/home/news-aside";
 import Brands from "@/components/home/brands";
 import tabs from "@/components/home/tabs";
+
 export default {
   components: {
     tabs,

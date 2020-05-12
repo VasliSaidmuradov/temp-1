@@ -116,6 +116,7 @@
         background-size: contain;
     }
     &-favorites {
+        position: relative;
         background: url('/icons/fav-icon.svg') center no-repeat;
         background-size: contain;
     }
@@ -173,6 +174,23 @@
         &:last-child {
             margin-left: 150px;
         }
+    }
+    &-icon-badge {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: .75em;
+      line-height: 14px;
+      color: #fff;
+      background: var(--color-base);
+      font-weight: 400;
+      border-radius: 30px;
+      padding: 0 6px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 18px;
+      transform: translate(70%,-50%);
     }
 }
 

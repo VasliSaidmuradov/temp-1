@@ -7,7 +7,7 @@
       :to="`/catalog/${category.slug}`"
       @mouseover.native="onHoverCategory(category)"
     >
-      <img src="/icons/city-icon.svg" alt="Skiny icon" />
+      <img class="home-nav-link-icon" :src="category.icon" :alt="category.name" />
       <span>{{ category.name }}</span>
       <transition name="fade" v-if="hoveredCategory">
         <div class="home-nav-subcategory-wrp" v-if="hoveredCategory.id === category.id">
@@ -30,22 +30,6 @@
         </div>
       </transition>
     </nuxt-link>
-    <!-- <transition name="fade">
-      <div class="home-nav-subcategory-wrp" v-if="hoveredCategory">
-        <div
-          class="home-nav-subcategory-item"
-          v-for="subcategories in getSubCategoryChunks"
-          :key="subcategories.id"
-        >
-          <nuxt-link
-            class="home-nav-subcategory"
-            :to="`/catalog/${hoveredCategory.slug}/${subcategory.slug}`"
-            v-for="subcategory in subcategories"
-            :key="subcategory.id"
-          >{{subcategory.name}}</nuxt-link>
-        </div>
-      </div>
-    </transition>-->
   </nav>
 </template>
 

@@ -1,5 +1,6 @@
 <template>
   <div class="home-products">
+    <!-- Tabs {{ tabs }} -->
 		<div>
       <div class="tabs-nav">
 				<button

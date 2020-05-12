@@ -77,13 +77,11 @@ export const actions = {
 		await store.dispatch('setAuthFields', cookies)
 	},
 	async signin(store, payload) {
-		// const res = this.$axios.post('http://demo-13.brandstudio.kz/auth/register/auth/login', payload, 'signin')
-
-		await store.dispatch('setAuthFields', await this.$axios.post('http://demo-13.brandstudio.kz/auth/login', payload, 'signin'))
+		await store.dispatch('setAuthFields', await this.$api.post('/login', payload, 'signin'))
 	},
 
 	async signup(store, payload) {
-		await this.$axios.post('http://demo-13.brandstudio.kz/auth/register', { raw: payload }, 'signup')
+		await this.$api.post('/register', payload, 'signup')
 	},
 
 	async logout(store, payload) {
@@ -95,11 +93,11 @@ export const actions = {
 	},
 
 	async reset(store, payload) {
-		await this.$api.post('/auth/password', payload, 'resetPassword')
+		await this.$api.post('/password', payload, 'resetPassword')
 	},
 
 	async validateCode(store, payload) {
-		return await this.$api.get('/auth/verify', payload, 'validateCode')
+		return await this.$api.get('/verify', payload, 'validateCode')
 	},
 
 	async resendCode(store, payload) {

@@ -147,7 +147,11 @@ export default {
         password: null,
         passwordc: null
       };
-    }
+    },
+    openVerify(user) {
+			document.body.classList.add('--hidden'),
+			this.$store.commit('SET_VERIFY_MODAL', user)
+		},
   }
 };
 </script>

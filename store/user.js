@@ -19,8 +19,8 @@ export const mutations = {
   },
   REMOVE_PRODUCT_FROM_PRODUCTS: (state, payload) => {
     let ids = state.product_ids, products = state.products
-    ids = state.product_ids.filter(id => id != payload.id)
-    products.data = state.products.data.filter(product => product.id != payload.id)
+    ids = state.product_ids.filter(id => id !== payload.id)
+    products.data = state.products.data.filter(product => product.id !== payload.id)
     state.product_ids = ids
     state.products = products
   },

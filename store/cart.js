@@ -4,6 +4,7 @@ export const state = () => ({
   product_ids: {},
   products: {data: []},
   bonuses: 0,
+  discount: 200
 })
 
 export const getters = {
@@ -14,8 +15,9 @@ export const getters = {
   IS_PRODUCT_IN_CART: (state) => (payload) => state.product_ids[`${payload.id}`] > 0,
   GET_CART_QUANTITY: (state) => (payload) => state.product_ids[`${payload.id}`] ? state.product_ids[`${payload.id}`] : 0,
   GET_TOTAL: (state) => Object.keys(state.product_ids).length > 0 ? state.products.data.reduce((sum, product) => {
-    return Math.max(0, sum -state.bonuses + product.price * (state.product_ids[`${product.id}`] ? state.product_ids[`${product.id}`] : 0))
-  }, 0) : 0
+    return Math.max(0, sum - state.bonuses + product.price * (state.product_ids[`${product.id}`] ? state.product_ids[`${product.id}`] : 0))
+  }, 0) : 0,
+  GET_DISCOUNT: state => state.discount
 }
 
 export const mutations = {
@@ -30,8 +32,8 @@ export const mutations = {
     }
   },
   UPDATE_PRODUCTS_COOKIES: (state, payload) => {
-      state.product_ids = {...state.product_ids}
-      Cookies.set('cart', state.product_ids)
+    state.product_ids = {...state.product_ids}
+    Cookies.set('cart', state.product_ids)
   },
 }
 
@@ -50,13 +52,13 @@ export const actions = {
     store.commit('UPDATE_PRODUCTS_COOKIES')
   },
   async increase(store, payload) {
-      if (payload.limit && store.state.product_ids[`${payload.id}`] && payload.limit <= store.state.product_ids[`${payload.id}`]) {
-            this.$alert({
-                message: `На данный продукт установлен лимит ${payload.limit * payload.amount} ${payload.tag.unit}`,
-                type: 'error'
-            })
-            return
-      }
+    if (payload.limit && store.state.product_ids[`${payload.id}`] && payload.limit <= store.state.product_ids[`${payload.id}`]) {
+      this.$alert({
+        message: `На данный продукт установлен лимит ${payload.limit * payload.amount} ${payload.tag.unit}`,
+        type: 'error'
+      })
+      return
+    }
     store.commit('INCREASE', payload)
     store.commit('UPDATE_PRODUCTS_COOKIES')
   },
@@ -71,27 +73,27 @@ export const actions = {
     })
 
     if (resp) {
-        store.commit('SET_PRODUCT_IDS', {})
-        store.commit('UPDATE_PRODUCTS_COOKIES')
+      store.commit('SET_PRODUCT_IDS', {})
+      store.commit('UPDATE_PRODUCTS_COOKIES')
     }
     console.log(resp)
   },
   async useBonuses(store, payload) {
-      if (!this.$checkAuth()) {
-          return
-      }
+    if (!this.$checkAuth()) {
+      return
+    }
 
-      if (this.$getUser().bonus >= payload) {
-          store.commit('SET_BONUSES', payload)
-          this.$alert({
-              message: 'Бонусы успешно применены',
-              type: 'success'
-          })
-      } else {
-          this.$alert({
-              message: 'У вас недостаточно бонусов',
-              type: 'error',
-          })
-      }
+    if (this.$getUser().bonus >= payload) {
+      store.commit('SET_BONUSES', payload)
+      this.$alert({
+        message: 'Бонусы успешно применены',
+        type: 'success'
+      })
+    } else {
+      this.$alert({
+        message: 'У вас недостаточно бонусов',
+        type: 'error',
+      })
+    }
   }
 }

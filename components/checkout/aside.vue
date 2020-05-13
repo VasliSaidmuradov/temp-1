@@ -1,27 +1,28 @@
 <template>
 	<div class="order-aside">
+    <!-- {{ !!products }} -->
 		<div class="order-aside-products">
-			<div class="order-aside-product" v-for="(item,index) in 3" :key="index">
+			<div class="order-aside-product" v-for="product in products.data" :key="product.id">
 				<div class="order-aside-product-img">
-					<img src="/images/product.png" alt="Skiny image">
-				</div>
-				<p class="order-aside-product-name">Сыворотка Timeless Matrixyl</p>
+					<img :src="product.image" :alt="product.name">
+				</div>  
+				<p class="order-aside-product-name">{{ product.name }}</p>
 			</div>
 		</div>
 		<div class="order-aside-list">
 			<div class="order-aside-row">
-				<p class="order-aside-title">Товары (3)</p>
-				<p class="order-aside-list-price">4 590 ₸</p>
+				<p class="order-aside-title">Товары ({{ products.data.length }})</p>
+				<p class="order-aside-list-price">{{ $formatMoney(sum) }} ₸</p>
 			</div>
 			<div class="order-aside-row">
 				<p class="order-aside-title">Скидка</p>
-				<p class="order-aside-list-price --red">-590 ₸</p>
+				<p class="order-aside-list-price --red">-{{ $formatMoney(discount) }} ₸</p>
 			</div>
 		</div>
 		<div class="order-aside-total">
 			<div class="order-aside-row">
 				<p class="order-aside-total-title">Итого</p>
-				<p class="order-aside-total-text">4 590 ₸</p>
+				<p class="order-aside-total-text">{{ $formatMoney(sum - discount) }} ₸</p>
 			</div>
 		</div>
 		<div class="order-aside-link-wrp">
@@ -31,7 +32,22 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
 export default {
+  // props: {
+  //   products: Object,
+  //   sum: Number,
+  //   total: Number
+  // },
+  computed: {
+    ...mapGetters({
+      products: 'cart/GET_PRODUCTS',
+      sum: 'cart/GET_TOTAL',
+      bonuses: 'cart/GET_BONUSES',
+      discount: 'cart/GET_DISCOUNT'
+    })
+  }
 
 }
 </script>

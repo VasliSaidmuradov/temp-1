@@ -6,6 +6,7 @@
 				<nuxt-link to="">Оформление заказа</nuxt-link>
 			</div>
 			<div class="checkout-page-row">
+        <!-- prod: {{ products }} -->
 				<div class="checkout-page-col">
 					<contacts />
 					<getting />
@@ -34,6 +35,7 @@ export default {
 		getting,
 		payment,
 		extra
-	}
+  },
+  middleware: ['cart'],
 }
 </script>

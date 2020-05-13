@@ -25,7 +25,7 @@
       <span>1 {{product.tag.unit}}</span>
       <button class="product-counter-increase"></button>
     </div>
-    <button v-else @click="isAdded = true" class="button --black">В корзину</button>
+    <button v-else @click="addToCart" class="button --black">В корзину</button>
   </div>
 </template>
 
@@ -45,13 +45,14 @@ export default {
     return {
       isAdded: false,
       count: 1,
+      isAvailable: false
     };
   },
-  // mounted() {
-  //   this.count = this.isInCart(this.product)
-  //     ? this.getCartQuantity(this.product)
-  //     : 1;
-  // },
+  mounted() {
+    this.count = this.isInCart(this.product)
+      ? this.getCartQuantity(this.product)
+      : 1;
+  },
   computed: {
     ...mapGetters({
       isFavorite: "user/IS_FAVORITE",
@@ -65,6 +66,10 @@ export default {
       increase: "cart/increase",
       decrease: "cart/decrease"
     }),
+    decreaseCount() {
+      this.count > 1 ? this.count - 1 : 1;
+      if(this.count === 1) this.isAdded  = false;
+    },
     increaseCount() {
       if (this.product.limit && this.product.limit <= this.count) {
         this.$alert({
@@ -75,6 +80,7 @@ export default {
         return;
       }
       this.count++;
+      this.isAdded = true;
     },
     addToCart() {
       this.$alert({
@@ -91,6 +97,7 @@ export default {
           this.decrease(this.product);
         }
       }
+      this.isAdded = true;
     }
   }
 };

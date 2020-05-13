@@ -10,7 +10,8 @@
 				<list />
 				<cart-aside />
 			</div>
-			<slider />
+			<slider v-if="hints" :products="hints" />
+      <slider v-else :products="hits" />
 		</div>
 	</div>
 </template>
@@ -19,12 +20,20 @@
 import list from '@/components/cart/list'
 import cartAside from '@/components/cart/aside'
 import slider from '@/components/cart/slider'
+import { mapGetters } from 'vuex'
 
 export default {
 	components: {
 		list,
 		slider,
 		cartAside
-	}
+  },
+  middleware: ['cart'],
+  computed: {
+    ...mapGetters({
+      hits: 'product/GET_HITS',
+      hints: 'product/GET_HINTS',
+    })
+  }
 }
 </script>

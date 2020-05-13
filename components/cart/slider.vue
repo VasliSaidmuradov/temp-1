@@ -5,8 +5,8 @@
 		<button class="product-slider-next cart-slider-next"></button>
 		<div v-swiper:cartSlider="options" >
 			<div class="swiper-wrapper">
-				<div class="swiper-slide" v-for="(item, index) in 6">
-					<product />
+				<div class="swiper-slide" v-for="product in products.data" :key="product.id">
+					<product :product="product" />
 				</div>
 			</div>
 		</div>
@@ -17,6 +17,10 @@
 import product from '@/components/partials/product'
 
 export default {
+  props: {
+    products: Object
+  },
+  middleware: ['cart'],
 	data() {
 		return {
 			options: {

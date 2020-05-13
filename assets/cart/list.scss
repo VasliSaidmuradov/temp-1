@@ -66,9 +66,19 @@
 		cursor: pointer;
 	}
 	&-favorites {
-		top: 0;
-		background: url('/icons/favorites-icon.svg') center no-repeat;
-		background-size: contain;
+		border: none;
+    background: none;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 1;
+    &.-added {
+      path {
+          fill: var(--color-base);
+          stroke: var(--color-base);
+      }
+  }
 	}
 	&-remove {
 		top: 40px;

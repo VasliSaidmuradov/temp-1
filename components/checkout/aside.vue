@@ -1,6 +1,5 @@
 <template>
 	<div class="order-aside">
-    <!-- {{ !!products }} -->
 		<div class="order-aside-products">
 			<div class="order-aside-product" v-for="product in products.data" :key="product.id">
 				<div class="order-aside-product-img">
@@ -11,7 +10,7 @@
 		</div>
 		<div class="order-aside-list">
 			<div class="order-aside-row">
-				<p class="order-aside-title">Товары ({{ products.data.length }})</p>
+				<p class="order-aside-title">Товары ({{ cartQuantity }})</p>
 				<p class="order-aside-list-price">{{ $formatMoney(sum) }} ₸</p>
 			</div>
 			<div class="order-aside-row">
@@ -35,17 +34,13 @@
 import { mapGetters } from "vuex"
 
 export default {
-  // props: {
-  //   products: Object,
-  //   sum: Number,
-  //   total: Number
-  // },
   computed: {
     ...mapGetters({
       products: 'cart/GET_PRODUCTS',
       sum: 'cart/GET_TOTAL',
       bonuses: 'cart/GET_BONUSES',
-      discount: 'cart/GET_DISCOUNT'
+      discount: 'cart/GET_DISCOUNT',
+      cartQuantity: "cart/GET_QUANTITY"
     })
   }
 

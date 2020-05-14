@@ -4,7 +4,6 @@ export default function ({ $axios, store, app }, inject) {
     baseUrl: process.env.NODE_ENV == 'development' ? 'http://demo-13.brandstudio.kz/api' : 'http://demo-13.brandstudio.kz/api',
 
     async get(url, data = {}, error = 'default') {
-      // console.log('URL: ', url)
       app.$setError(error, null)
 
       let key = this.getCacheKey(url, data)

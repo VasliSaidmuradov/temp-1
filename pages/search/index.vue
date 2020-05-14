@@ -7,10 +7,10 @@
       </div>
       <h1 class="search-page-title">
         По запросу «крем» найдено
-        <b>{{ products }}</b> товара
+        <b>{{ products ? products.total : 0 }}</b> товара
       </h1>
       <div class="category-page-sort-wrp">
-        <p class="category-page-total">23 товара</p>
+        <p class="category-page-total"><b>{{ products ? products.total : 0 }}</b> товара</p>
         <div class="category-page-sort">
           <p>Сортировать:</p>
           <select v-model="sort">
@@ -22,7 +22,7 @@
       </div>
       <div class="search-page-row" v-if="searchQuery">
         <div v-for="product in $chunk(products ? products.data : [], 4)" :key="product.id">
-          <product v-for="item in items" :key="item.id" :product="item" />
+          <product v-for="item in product" :key="item.id" :product="item" />
         </div>
       </div>
     </div>

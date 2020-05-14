@@ -26,7 +26,9 @@
             :subcat="subcategory"
             :tag="tag"
           />
+          <!-- brand filter: {{ brandFilterResult }} -->
           <category-filter
+            @brand-filter="filterBrand"
             :cats="tag ? null : subcategory ? subcategory.tags : category ? category.subcategories : categories"
           />
         </div>
@@ -59,7 +61,8 @@
             </div>
           </div>
           <div class="category-page-product-wrp">
-            <product v-for="product in products.data" :key="product.id" :product="product" />
+            <!-- {{ productList }} -->
+            <product v-for="product in productList.length ? productList : products.data " :key="product.id" :product="product" />
           </div>
         </div>
       </div>
@@ -81,7 +84,8 @@ export default {
   data: () => ({
     isBrand: false,
     sort: "default",
-    delay: null
+    delay: null,
+    productList: []
   }),
   components: {
     subcategories,
@@ -93,7 +97,9 @@ export default {
   computed: {
     ...mapGetters({
       products: "product/GET_PRODUCTS",
-      categories: "menu/GET_CATEGORIES"
+      allProducts: "product/GET_ALL_PRODUCTS",
+      categories: "menu/GET_CATEGORIES",
+      brandFilterResult: 'brand/GET_FILTER_RESULT'
     }),
     category() {
       for (let i = 0; i < this.categories.length; ++i) {
@@ -168,6 +174,18 @@ export default {
   methods: {
     showFilter() {
       this.$store.commit("SET_MOBILE_FILTER", true);
+    },
+    filterBrand(e) {
+      if (e.checked) {
+        const res = this.allProducts.data.filter(el => el.brand.id == e.value)
+        console.log(res)
+        this.productList.push(...res)
+        console.log(e.value + ' checked!', this.productList)
+      }
+      else {
+        this.productList = this.productList.filter(el => el.brand.id != e.value)
+        console.log(e.value + ' unchecked!', this.productList )
+      }
     }
   }
 };

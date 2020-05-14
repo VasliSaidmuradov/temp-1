@@ -4,8 +4,9 @@
     <div class="filter-block">
       <div class="filter-range-top">
         <p class="filter-title">Цена</p>
-        <button>Сбросить</button>
+        <button @click="clearPrice">Сбросить</button>
       </div>
+      <!-- ppp: {{ ppp }} -->
       <div class="filter-range-bot">
         <div class="filter-input-wrp">
           <label>от</label>
@@ -17,14 +18,13 @@
         </div>
       </div>
     </div>
-    <div class="filter-block">
+    <div v-if="getBrands.length" class="filter-block">
       <p class="filter-title">Бренд</p>
-      <label class="filter-checkbox" v-for="brand in brands" :key="brand.id">
+      <label class="filter-checkbox" v-for="brand in getBrands" :key="brand.id">
         <input
           type="checkbox"
-          :value="brand.slug"
-          @change="onFilterChange(brand, $event.target.value)"
-					
+          :value="brand.id"
+          @change="onFilterChange"
         />
         <div class="filter-checkmark"></div>
         <p>{{ brand.name }}</p>
@@ -43,7 +43,6 @@
         <p>Товары с подарками</p>
       </label>
     </div>
-    <!-- brands: {{ brands }} -->
   </div>
 </template>
 <script>
@@ -59,15 +58,30 @@ export default {
       price: [0, 0],
       isDropdownOpen: true,
       priceTimeout: null,
-      showPrice: true
+      showPrice: true,
     };
   },
   computed: {
     ...mapGetters({
       products: "product/GET_PRODUCTS",
+      allProducts: "product/GET_ALL_PRODUCTS",
       brands: "brand/GET_BRANDS",
-      filters: "product/GET_FILTERS"
-    })
+      filters: "product/GET_FILTERS",
+      brandFilter: 'product/GET_BRAND_FILTER'
+    }),
+    getBrands() {
+      const products = this.allProducts.data
+      const brands = products.map(el => el.brand)
+      const res = brands.reduce((acc, current) => {
+        const x = acc.find(item => item.id === current.id);
+        if (!x) {
+          return acc.concat([current]);
+        } else {
+          return acc;
+        }
+      }, []);
+      return res
+    }
   },
   mounted() {
     if (this.products) {
@@ -116,7 +130,7 @@ export default {
           false,
           false
         );
-      }, 1000);
+      }, 500);
     }
   },
   methods: {
@@ -130,16 +144,21 @@ export default {
 
       return this.$route.query[filter] === value;
     },
-    onFilterChange(filter, value) {
-			console.log('filter', filter)
-			console.log('value', value)
-
-      this.$toggleQuery({
-        [filter]: value
-      });
+    onFilterChange(event) {
+      this.$emit("brand-filter", event.target)
     },
     clearFilters() {
       this.$clearQuery();
+    },
+    clearPrice() {
+      this.$addQuery(
+        {
+          min_price: this.products.min_price,
+          max_price: this.products.max_price
+        },
+        false,
+        false
+      )
     }
   }
 };

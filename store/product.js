@@ -1,5 +1,6 @@
 export const state = () => ({
   products: null,
+  allProducts: null,
   product: null,
   hits: null,
   sales: null,
@@ -9,10 +10,12 @@ export const state = () => ({
   hints: null,
   search_query: null,
   filters: null,
+  brandFilter: null
 })
 
 export const getters = {
   GET_PRODUCTS: state => state.products,
+  GET_ALL_PRODUCTS: state => state.allProducts,
   GET_HITS: state => state.hits,
   GET_SALES: state => state.sales,
   GET_NEWS: state => state.news,
@@ -22,10 +25,12 @@ export const getters = {
   GET_HINTS: state => state.hints,
   GET_SEARCH_QUERY: state => state.search_query,
   GET_FILTERS: state => state.filters,
+  GET_BRAND_FILTER: state => id => state.products.data.filter(el => el.brand.id == id)
 }
 
 export const mutations = {
   SET_PRODUCTS: (state, payload) => state.products = payload,
+  SET_ALL_PRODUCTS: (state, payload) => state.allProducts = payload,
   SET_HITS: (state, payload) => state.hits = payload,
   SET_SALES: (state, payload) => state.sales = payload,
   SET_NEWS: (state, payload) => state.news = payload,
@@ -62,6 +67,14 @@ export const actions = {
     }
     payload += 'per_page=9'
     store.commit('SET_PRODUCTS', await this.$api.get(payload, {}, 'products'))
+  },
+  async fetchAllProducts(store, payload = '') {
+    if (payload.indexOf('?') != -1) {
+      payload += '&'
+    } else {
+      payload += '?'
+    }
+    store.commit('SET_ALL_PRODUCTS', await this.$api.get(payload, {}, 'products'))
   },
   async fetchHits(store, payload) {
     store.commit('SET_HITS', await this.$api.get('/catalog', payload))

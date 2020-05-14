@@ -5,7 +5,7 @@ export default async function({ route, store, error, from }) {
   }
 
   queue.push(store.dispatch('product/fetchFilters', route.path.replace('/catalog', '')))
-
+  queue.push(store.dispatch('product/fetchAllProducts', route.fullPath))
   await Promise.all(queue)
 
   if (store.getters['error/GET_ERROR']('products')) {

@@ -16,7 +16,7 @@
 		</div>
 		<div class="order-aside-list">
 			<div class="order-aside-row">
-				<p class="order-aside-title">Товары ({{ products.data.length }})</p>
+				<p class="order-aside-title">Товары ({{ cartQuantity }})</p>
 				<p class="order-aside-list-price">{{ $formatMoney(sum) }} ₸</p>
 			</div>
 			<div class="order-aside-row">
@@ -51,7 +51,8 @@ export default {
       sum: 'cart/GET_TOTAL',
       bonuses: 'cart/GET_BONUSES',
       products: 'cart/GET_PRODUCTS',
-      discount: 'cart/GET_DISCOUNT'
+      discount: 'cart/GET_DISCOUNT',
+      cartQuantity: "cart/GET_QUANTITY"
     }),
     // delivery() {
 		// 	return this.sum >= 10000 ? 0 : 500

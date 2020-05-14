@@ -85,7 +85,8 @@
 			@include em(14px);
 			font-weight: 500;
 			color: #000;
-			user-select: none;
+      user-select: none;
+      width: calc(100% - 30px);
 		}
 	}
 	&-checkmark {

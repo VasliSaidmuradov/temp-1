@@ -22,12 +22,19 @@
 import profileNav from '@/components/profile/nav'
 import info from '@/components/profile/info'
 import subscribes from '@/components/profile/subscribes'
+import { mapActions } from 'vuex'
 
 export default {
 	components: {
 		profileNav,
 		info,
 		subscribes
-	}
+  },
+  middleware: ['auth'],
+  methods: {
+    ...mapActions({
+      logout: 'auth/logout'
+    })
+  }
 }
 </script>

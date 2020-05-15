@@ -51,9 +51,10 @@ export const mutations = {
 }
 
 export const actions = {
-	async setAuthFields(store, payload) {
-		payload = payload ? payload : {}
+	async setAuthFields(store, payload = {}) {
+    console.log('auth setAuthFields 1: ', payload)
 
+		// payload = payload ? payload : {}
 		store.commit('SET_TOKEN_TYPE', payload.token_type ? payload.token_type : null)
 		store.commit('SET_TOKEN', payload.access_token ? payload.access_token : null)
 		store.commit('SET_EXPIRES', payload.expires_in ? payload.expires_in : null)
@@ -65,7 +66,8 @@ export const actions = {
 		} else {
 			store.commit('SET_IS_SIGNEDIN', false)
 			store.commit('user/SET_USER', null, { root: true })
-		}
+    }
+    // console.log('auth setAuthFields 2: ', payload)
 	},
 	async signinFromCookies(store, payload = {}) {
 		let cookies = {
@@ -77,6 +79,7 @@ export const actions = {
 		await store.dispatch('setAuthFields', cookies)
 	},
 	async signin(store, payload) {
+    console.log('auth signin: ', payload)
 		await store.dispatch('setAuthFields', await this.$api.post('/login', payload, 'signin'))
 	},
 
@@ -85,7 +88,7 @@ export const actions = {
 	},
 
 	async logout(store, payload) {
-		console.log('logout')
+    console.log('auth logout: ', payload)
 		store.dispatch('setAuthFields', {})
 		if (process.client) {
 			window.location.reload(true)

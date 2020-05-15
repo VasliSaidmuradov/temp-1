@@ -19,7 +19,7 @@ export default function ({ $axios, store, app }, inject) {
         }
         return resp
       } catch (err) {
-        app.$setError(error, err.response.data)
+        app.$setError(error, err)
         return null
       }
     },

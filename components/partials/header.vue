@@ -84,8 +84,8 @@ export default {
       searchProduct: "product/searchProductHint"
     }),
     openAuth() {
-      document.body.classList.add("--hidden"),
-        this.$store.commit("auth/SET_MODAL_STATE", true);
+      document.body.classList.add("--hidden"),  
+      this.$store.commit("auth/SET_MODAL_STATE", true);
     },
     showSearch() {
       this.$store.commit("SET_SEARCH", true);

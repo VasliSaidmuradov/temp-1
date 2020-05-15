@@ -3,7 +3,7 @@
 		<div v-if="isOpen" class="auth-modal">
 			<div @click="closeModal" class="auth-modal-overlay"></div>
 			<transition name="slide-to-left">
-				<div v-if="isInnerOpen" class="auth-modal-inner">
+				<div class="auth-modal-inner">
 					<button @click="closeModal" class="auth-modal-close"></button>
 					<transition name="fade">
 						<div v-if="currentTab === 'signin'" class="auth-modal-content">
@@ -17,6 +17,9 @@
 									<button @click="currentTab = 'register'" class="button --white">зарегистрироваться</button>
 								</div>
 							</form>
+              {{ phoneEmail }}
+              {{ password }}
+              {{ isSignedIn }}
 						</div>
 					</transition>
 					<transition name="fade">
@@ -67,8 +70,6 @@
 			</transition>
 		</div>
 	</transition>
-
- 
 </template>
 
 <script>
@@ -77,7 +78,6 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      isInnerOpen: false,
       currentTab: "signin",
       phoneEmail: null,
       password: null,
@@ -98,7 +98,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      isOpen: "auth/GET_MODAL_STATE"
+      isOpen: "auth/GET_MODAL_STATE",
+      isSignedIn: 'auth/GET_IS_SIGNEDIN'
     })
   },
   methods: {
@@ -115,6 +116,7 @@ export default {
         this.$router.push("/profile");
       }
       this.password = null;
+      // closeModal();
     },
     async sendSignup() {
       if (this.user.password !== this.user.passwordc) {
@@ -124,7 +126,7 @@ export default {
         return;
       }
 
-    await this.signup({...this.user, login: this.user.email});
+      await this.signup({...this.user, login: this.user.email});
 
       if (!this.$getError("signup")) {
         this.openVerify({ ...this.user });

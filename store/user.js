@@ -45,14 +45,20 @@ export const actions = {
 
     store.commit('UPDATE_PRODUCTS_COOKIES')
   },
+
   async fetchUser(store, payload) {
-    let user = await this.$api.get('/auth/user', {})
+    console.log('fetch user payload: ', payload)
+
+    let user = await this.$api.get('/user', {})
+    console.log('fetch user USER: ', user)
+
     if (user) {
       store.commit('SET_USER', user)
     } else {
       store.commit('auth/SET_IS_SIGNEDIN', false, { root: true })
     }
   },
+
   async updateProfile(store, payload) {
     let resp = await this.$api.put('/user', payload, 'updateProfile')
     if (resp) {

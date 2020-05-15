@@ -6,7 +6,6 @@
         <p class="filter-title">Цена</p>
         <button @click="clearPrice">Сбросить</button>
       </div>
-      <!-- ppp: {{ ppp }} -->
       <div class="filter-range-bot">
         <div class="filter-input-wrp">
           <label>от</label>
@@ -50,7 +49,8 @@ import { mapGetters } from "vuex";
 
 export default {
   props: {
-    cats: Array
+    cats: Array,
+    allProducts: Object
   },
   data() {
     return {
@@ -64,7 +64,7 @@ export default {
   computed: {
     ...mapGetters({
       products: "product/GET_PRODUCTS",
-      allProducts: "product/GET_ALL_PRODUCTS",
+      // allProducts: "product/GET_ALL_PRODUCTS",
       brands: "brand/GET_BRANDS",
       filters: "product/GET_FILTERS",
       brandFilter: 'product/GET_BRAND_FILTER'

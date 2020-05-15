@@ -28,6 +28,7 @@
           />
           <!-- brand filter: {{ brandFilterResult }} -->
           <category-filter
+            :allProducts="allProducts"
             @brand-filter="filterBrand"
             :cats="tag ? null : subcategory ? subcategory.tags : category ? category.subcategories : categories"
           />

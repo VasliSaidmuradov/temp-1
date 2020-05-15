@@ -69,12 +69,10 @@ export const actions = {
     store.commit('SET_PRODUCTS', await this.$api.get(payload, {}, 'products'))
   },
   async fetchAllProducts(store, payload = '') {
-    if (payload.indexOf('?') != -1) {
-      payload += '&'
-    } else {
-      payload += '?'
-    }
-    store.commit('SET_ALL_PRODUCTS', await this.$api.get(payload, {}, 'products'))
+    const reg = /^[^?]+/g
+    const url = payload.match(reg).join('')
+    console.log('payload all prod: ', url)
+    store.commit('SET_ALL_PRODUCTS', await this.$api.get(url, {}, 'allProducts'))
   },
   async fetchHits(store, payload) {
     store.commit('SET_HITS', await this.$api.get('/catalog', payload))

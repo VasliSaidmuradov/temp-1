@@ -13,26 +13,20 @@
 					<p class="profile-page-table-heading">Сума (тг)</p>
 				</div>
 			</div>
-			<div class="profile-page-table-row">
+			<div v-for="(bonus, index) in $getUser().bonuses" :key="index" class="profile-page-table-row">
 				<div class="profile-page-table-col">
-					<p class="profile-page-text">05.11.2019 / 19:11</p>
+					<p class="profile-page-text">
+            {{ $formatDate(bonus.created_at, 'DD.MM.YYYY') }}
+             / {{ $formatDate(bonus.created_at, 'HH:MM') }}
+          </p>
 				</div>
 				<div class="profile-page-table-col">
-					<p class="profile-page-text">Артикул №3420</p>
+          <p class="profile-page-text" v-if="bonus.order_id">Артикул №{{ bonus.order_id }}</p>
 				</div>
 				<div class="profile-page-table-col">
-					<p class="profile-page-text">200</p>
-				</div>
-			</div>
-			<div class="profile-page-table-row">
-				<div class="profile-page-table-col">
-					<p class="profile-page-text">05.11.2020 / 19:11</p>
-				</div>
-				<div class="profile-page-table-col">
-					<p class="profile-page-text">Артикул №3420</p>
-				</div>
-				<div class="profile-page-table-col">
-					<p class="profile-page-text">200</p>
+					<!-- <p class="profile-page-text">200</p> -->
+          <p class="profile-page-text" v-if="bonus.added">+{{ $formatMoney(bonus.added) }}</p>
+					<p class="profile-page-text" v-if="bonus.used">-{{ $formatMoney(bonus.used) }}</p>
 				</div>
 			</div>
 		</div>

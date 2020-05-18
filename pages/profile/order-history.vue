@@ -10,7 +10,7 @@
 					<profile-nav />
 				</div>
 				<div class="profile-page-right">
-					<h5 class="profile-page-title">Список заказов пуст</h5>
+					<h5 class="profile-page-title" v-if="!$getUser().orders.length">Список заказов пуст</h5>
 					<nuxt-link to="/catalog" class="button --black">Перейти к каталогу</nuxt-link>
 					<history-table />
 				</div>

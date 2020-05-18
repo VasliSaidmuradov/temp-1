@@ -31,6 +31,7 @@ export default {
 		profileNav,
 		addAddress,
 		addressList
-	}
+  },
+  middleware: ['auth'],
 }
 </script>

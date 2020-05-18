@@ -28,7 +28,9 @@
             <input v-model="searchQuery" type="text" placeholder="Хочу купить..." required />
             <button class="header-search-btn"></button>
           </form>
-          <button class="header-profile" @click="openAuth"></button>
+          <button
+            class="header-profile"
+            @click="openAuth"></button>
           <nuxt-link class="header-favorites" to="/favorites">
             <span class="header-icon-badge" v-if="favoritesQuantity > 0">{{ favoritesQuantity }}</span>
           </nuxt-link>
@@ -84,8 +86,12 @@ export default {
       searchProduct: "product/searchProductHint"
     }),
     openAuth() {
-      document.body.classList.add("--hidden"),  
-      this.$store.commit("auth/SET_MODAL_STATE", true);
+      if (this.$checkAuth()) {
+        this.redirectToProfile();
+      } else {
+        document.body.classList.add("--hidden"),  
+        this.$store.commit("auth/SET_MODAL_STATE", true);
+      }
     },
     showSearch() {
       this.$store.commit("SET_SEARCH", true);
@@ -93,6 +99,9 @@ export default {
     redirectToSearch() {
       this.$store.commit("SET_SEARCH", false);
       this.$router.push({ path: "/search", query: { q: this.searchQuery } });
+    },
+    redirectToProfile() {
+      this.$router.push({ path: '/profile' });
     }
   }
 };

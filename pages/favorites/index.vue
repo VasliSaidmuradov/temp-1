@@ -21,8 +21,11 @@ export default {
   components: {
     product
   },
+  middleware: ['favorites'],
   computed: {
-    ...mapGetters({ favoriteProducts: "user/GET_PRODUCTS" })
+    ...mapGetters({ 
+      favoriteProducts: "user/GET_PRODUCTS"
+    })
   }
 };
 </script>

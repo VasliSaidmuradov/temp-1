@@ -88,11 +88,12 @@ export const actions = {
 	},
 
 	async logout(store, payload) {
-    console.log('auth logout: ', payload)
-		store.dispatch('setAuthFields', {})
-		if (process.client) {
-			window.location.reload(true)
-		}
+    console.log('router: ', this.$router)
+    store.dispatch('setAuthFields', {})
+    await this.$router.push({ path: '/' });
+		// if (process.client) {
+		// 	window.location.reload(true)
+		// }
 	},
 
 	async reset(store, payload) {

@@ -33,7 +33,9 @@
 								<input type="text" placeholder="ФИО" class="auth-modal-input" v-model="user.name" >
 								<input type="password" placeholder="Пароль" class="auth-modal-input" v-model="user.password" required >
 								<input type="password" placeholder="Повторите пароль" class="auth-modal-input" v-model="user.passwordc" >
-								<div class="auth-modal-btn-wrp">
+								<div class="error-text" v-if="$getError('signup')">{{ $getError('signup') }}</div>
+								<div class="success-text" v-if="true">{{ $getError('signin') }}</div>
+                <div class="auth-modal-btn-wrp">
 									<button type="submit" class="button --black">зарегистрироваться</button>
 									<button @click="currentTab = 'signin'" class="button --white">Назад</button>
 								</div>
@@ -114,9 +116,9 @@ export default {
       });
       if (!this.$getError("signin")) {
         this.$router.push("/profile");
+        this.closeModal();
       }
       this.password = null;
-      // closeModal();
     },
     async sendSignup() {
       if (this.user.password !== this.user.passwordc) {

@@ -1,5 +1,6 @@
 <template>
 	<div class="checkout-page">
+		<modal />
 		<div class="container">
 			<div class="breadcrumbs">
 				<nuxt-link to="/cart">Корзина / </nuxt-link>
@@ -22,6 +23,7 @@
 </template>
 
 <script>
+import modal from '@/components/checkout/modal'
 import checkoutAside from '@/components/checkout/aside'
 import contacts from '@/components/checkout/contacts'
 import getting from '@/components/checkout/getting'
@@ -30,6 +32,7 @@ import extra from '@/components/checkout/extra'
 
 export default {
 	components: {
+		modal,
 		contacts,
 		checkoutAside,
 		getting,

@@ -25,7 +25,7 @@
 			</div>
 		</div>
 		<div class="order-aside-link-wrp">
-			<nuxt-link class="button --white" to="">Перейти к оплате</nuxt-link>
+			<nuxt-link class="button --white" to="" @click.native="checkout">Перейти к оплате</nuxt-link>
 		</div>
 	</div>
 </template>
@@ -42,6 +42,11 @@ export default {
       discount: 'cart/GET_DISCOUNT',
       cartQuantity: "cart/GET_QUANTITY"
     })
+  },
+  methods: {
+	  checkout() {
+		  this.$store.commit('cart/setCheckoutModal', true)
+	  }
   }
 
 }

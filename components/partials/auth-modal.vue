@@ -1,4 +1,4 @@
-<template> 
+<template>
 	<transition name="fade" @before-enter="isInnerOpen = true">
 		<div v-if="isOpen" class="auth-modal">
 			<div @click="closeModal" class="auth-modal-overlay"></div>
@@ -17,9 +17,9 @@
 									<button @click="currentTab = 'register'" class="button --white">зарегистрироваться</button>
 								</div>
 							</form>
-              {{ phoneEmail }}
+              <!-- {{ phoneEmail }}
               {{ password }}
-              {{ isSignedIn }}
+              {{ isSignedIn }} -->
 						</div>
 					</transition>
 					<transition name="fade">
@@ -40,20 +40,21 @@
 									<button @click="currentTab = 'signin'" class="button --white">Назад</button>
 								</div>
 							</form>
-              user: {{ user }}
+              <!-- user: {{ user }} -->
 						</div>
 					</transition>
 					<transition name="fade">
 						<div v-if="currentTab === 'restore'" class="auth-modal-content">
-							<div class="auth-modal-restore">
+							<form @submit.prevent="sendReset" class="auth-modal-restore">
 								<h3 class="auth-modal-title">Восстановление пароля</h3>
 								<p class="auth-modal-text">Введите свой e-mail и мы вышлем вам пароль</p>
-								<input type="text" placeholder="Email" class="auth-modal-input">
+								<input v-model="restore.email" type="text" placeholder="Email" class="auth-modal-input">
 								<div class="auth-modal-btn-wrp">
 									<button class="button --black" @click="currentTab = 'restoreSuccess'">Отправить</button>
 									<button @click="currentTab = 'signin'" class="button --white">я вспомнил пароль</button>
 								</div>
-							</div>
+							</form>
+              Reset: {{ restore }}
 						</div>
 					</transition>
 					<transition name="fade">
@@ -88,7 +89,12 @@ export default {
         phone: null,
         name: null,
         password: null,
-        passwordc: null      }
+        passwordc: null      
+      },
+      restore: {
+        phone: null,
+        email: null,
+      }
     };
   },
   watch: {
@@ -107,7 +113,8 @@ export default {
   methods: {
     ...mapActions({
       signin: "auth/signin",
-      signup: "auth/signup"
+      signup: "auth/signup",
+      reset: "auth/reset"
     }),
     async sendSignin() {
       await this.signin({
@@ -155,7 +162,10 @@ export default {
     openVerify(user) {
 			document.body.classList.add('--hidden'),
 			this.$store.commit('SET_VERIFY_MODAL', user)
-		},
+    },
+    async sendReset() {
+			await this.reset({ login: this.restore.email })
+		}
   }
 };
 </script>

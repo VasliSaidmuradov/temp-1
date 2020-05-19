@@ -3,14 +3,13 @@
     <div v-swiper:homeSlider="options">
       <div class="swiper-wrapper">
         <div v-for="slide in slides" :key="slide.id" class="swiper-slide">
-					<!-- slides: {{ slide }} -->
           <nuxt-link to>
             <img :src="slide.image" alt="Skiny image" class="home-slider-img" />
             <div class="home-slider-inner">
               <div>
                 <h3 class="home-slider-title">{{ slide.name }}</h3>
                 <h4 class="home-slider-text" v-html="slide.description"></h4>
-                <button class="button --black --arrow" to>Перейти к покупкам</button>
+                <nuxt-link class="button --black --arrow" to="/catalog">Перейти к покупкам</nuxt-link>
               </div>
             </div>
           </nuxt-link>

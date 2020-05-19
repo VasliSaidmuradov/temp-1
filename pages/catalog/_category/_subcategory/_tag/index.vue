@@ -16,7 +16,7 @@
           :to="`/catalog/${category.slug}/${subcategory.slug}/${tag.slug}`"
         >{{ tag.name }}</nuxt-link>
       </div>
-      <!-- <h1 class="category-page-title">{{ `${tag.name || subcategory.name || category.name}` }}</h1> -->
+      <h1 class="category-page-title">{{ `${tag ? tag.name : subcategory ? subcategory.name : category.name}` }}</h1>
       <div class="row">
         <div class="left-col">
           <nuxt-link class="category-page-back" to="/catalog">Все категории</nuxt-link>
@@ -26,7 +26,6 @@
             :subcat="subcategory"
             :tag="tag"
           />
-          <!-- brand filter: {{ brandFilterResult }} -->
           <category-filter
             :allProducts="allProducts"
             @brand-filter="filterBrand"
@@ -41,10 +40,10 @@
             <div class="category-page-row">
               <div class="category-page-sort">
                 <p>Сортировать:</p>
-                <select>
-                  <option value>По умолчанию</option>
-                  <option value>По возрастанию</option>
-                  <option value>По убыванию</option>
+                <select v-model="sort">
+                  <option value="default">По умолчанию</option>
+                  <option value="asc">По возрастанию</option>
+                  <option value="desc">По убыванию</option>
                 </select>
               </div>
               <button class="category-page-filter">Фильтр</button>
@@ -54,10 +53,10 @@
             <p class="category-page-total">{{ products.total }} товара</p>
             <div class="category-page-sort">
               <p>Сортировать:</p>
-              <select>
-                <option value>По умолчанию</option>
-                <option value>По возрастанию</option>
-                <option value>По убыванию</option>
+              <select v-model="sort">
+                <option value="default">По умолчанию</option>
+                <option value="asc">По возрастанию</option>
+                <option value="desc">По убыванию</option>
               </select>
             </div>
           </div>

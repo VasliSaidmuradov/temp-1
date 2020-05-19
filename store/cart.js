@@ -58,7 +58,7 @@ export const actions = {
   async increase(store, payload) {
     if (payload.limit && store.state.product_ids[`${payload.id}`] && payload.limit <= store.state.product_ids[`${payload.id}`]) {
       this.$alert({
-        message: `На данный продукт установлен лимит ${payload.limit * payload.amount} ${payload.tag.unit}`,
+        message: `На данный продукт установлен лимит ${payload.limit} ${payload.tag.unit}`,
         type: 'error'
       })
       return

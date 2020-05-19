@@ -3,7 +3,7 @@
     <div class="container">
       <div class="breadcrumbs">
         <nuxt-link to>Главная /</nuxt-link>
-        <nuxt-link v-if="category" :to="`/catalog/${category.slug}`">
+        <!-- <nuxt-link v-if="category" :to="`/catalog/${category.slug}`">
           {{ category.name }}
           <span v-if="subcategory">/</span>
         </nuxt-link>
@@ -14,29 +14,29 @@
         <nuxt-link
           v-if="tag"
           :to="`/catalog/${category.slug}/${subcategory.slug}/${tag.slug}`"
-        >{{ tag.name }}</nuxt-link>
+        >{{ tag.name }}</nuxt-link> -->
       </div>
       <!-- <h1 class="category-page-title">{{ `${tag.name || subcategory.name || category.name}` }}</h1> -->
       <div class="row">
         <div class="left-col">
           <nuxt-link class="category-page-back" to="/catalog">Все категории</nuxt-link>
-          <subcategories
+          <!-- <subcategories
             :categories="categories"
             :category="category"
             :subcat="subcategory"
             :tag="tag"
-          />
+          /> -->
           <!-- brand filter: {{ brandFilterResult }} -->
-          <category-filter
+          <!-- <category-filter
             :allProducts="allProducts"
             @brand-filter="filterBrand"
             :cats="tag ? null : subcategory ? subcategory.tags : category ? category.subcategories : categories"
-          />
+          /> -->
         </div>
         <div class="right-col">
-          <!-- <brand v-show="true" /> -->
+          <brand v-show="true" />
           <div class="category-page-mob">
-            <p class="category-page-total">{{ products.total }} товара</p>
+            <!-- <p class="category-page-total">{{ products.total }} товара</p> -->
             <nuxt-link class="category-page-back" to>Все категории</nuxt-link>
             <div class="category-page-row">
               <div class="category-page-sort">
@@ -51,7 +51,7 @@
             </div>
           </div>
           <div class="category-page-sort-wrp">
-            <p class="category-page-total">{{ products.total }} товара</p>
+            <!-- <p class="category-page-total">{{ products.total }} товара</p> -->
             <div class="category-page-sort">
               <p>Сортировать:</p>
               <select>
@@ -62,12 +62,12 @@
             </div>
           </div>
           <div class="category-page-product-wrp">
-            <!-- {{ productList }} -->
-            <product v-for="product in productList.length ? productList : products.data " :key="product.id" :product="product" />
+            <!-- {{ brands }} -->
+            <!-- <product v-for="product in productList.length ? productList : products.data " :key="product.id" :product="product" /> -->
           </div>
         </div>
       </div>
-      <pagination :paginator="products" />
+      <!-- <pagination :paginator="products" /> -->
     </div>
   </div>
 </template>
@@ -81,7 +81,7 @@ import pagination from "@/components/partials/pagination";
 import { mapGetters } from "vuex";
 
 export default {
-  middleware: ["catalog", "brands"],
+  middleware: ["brands"],
   data: () => ({
     isBrand: false,
     sort: "default",
@@ -97,10 +97,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      products: "product/GET_PRODUCTS",
-      allProducts: "product/GET_ALL_PRODUCTS",
-      categories: "menu/GET_CATEGORIES",
-      brandFilterResult: 'brand/GET_FILTER_RESULT'
+      brands: 'brand/GET_BRANDS',
+      products: "brand/GET_BRAND_PRODUCTS",
+      // allProducts: "product/GET_ALL_PRODUCTS",
+      // categories: "menu/GET_CATEGORIES",
+      // brandFilterResult: 'brand/GET_FILTER_RESULT'
     }),
     category() {
       for (let i = 0; i < this.categories.length; ++i) {
@@ -108,14 +109,12 @@ export default {
           return this.categories[i];
         }
       }
-
       return null;
     },
     subcategory() {
       if (!this.category) {
         return null;
       }
-
       for (let i = 0; i < this.category.subcategories.length; ++i) {
         if (
           this.category.subcategories[i].slug == this.$route.params.subcategory
@@ -123,20 +122,17 @@ export default {
           return this.category.subcategories[i];
         }
       }
-
       return null;
     },
     tag() {
       if (!this.subcategory) {
         return null;
       }
-
       for (let i = 0; i < this.subcategory.tags.length; ++i) {
         if (this.subcategory.tags[i].slug == this.$route.params.tag) {
           return this.subcategory.tags[i];
         }
       }
-
       return null;
     }
   },
@@ -144,7 +140,6 @@ export default {
   watch: {
     sort: function(val) {
       let query = { ...this.$route.query };
-
       if (val == "default") {
         delete query["sort"];
       } else {
@@ -156,7 +151,6 @@ export default {
       if (this.delay) {
         clearTimeout(this.delay);
       }
-
       this.delay = setTimeout(() => {
         let query = this.$serialize(this.$route.query);
         query = query ? `?${query}` : "";

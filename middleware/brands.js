@@ -1,7 +1,7 @@
 export default async function ({ store }) {
   let queue = [
     store.dispatch('brand/fetchBrands'),
-    // store.dispatch('brand/filterByBrands', { ids: [5, 6] })
+    // store.dispatch('brand/fetchBrandProducts', 'pao-len')
   ]
 
   await Promise.all(queue)

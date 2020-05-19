@@ -1,0 +1,72 @@
+.profile-modal {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &-overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(#000, 0.5);
+        top: 0;
+        left: 0;
+    }
+    &-inner {
+        background-color: #fff;
+        position: relative;
+        z-index: 1;
+        border-radius: 6px;
+        padding: 40px 30px;
+    }
+    &-title {
+        @include em(24px);
+        font-weight: 600;
+        color: #000;
+        margin-bottom: 10px;
+    }
+    &-text {
+        @include em(14px);
+        font-weight: 500;
+        color: #8F8F8F;
+        margin-bottom: 30px;
+    }
+    &-btn {
+        display: inline-block;
+        cursor: pointer;
+        border-radius: 999px;
+        border: 1px solid #E6E6E6;
+        padding: 16px 25px;
+        color: var(--color-base);
+        text-transform: uppercase;
+        letter-spacing: 1.4px;
+        @include em(11px);
+        font-weight: 700;
+        background-color: #fff;
+        &.--red {
+            border: none;
+            background: #F13D3D;
+            color: #fff;
+            margin-right: 10px;
+        }
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .profile-modal {
+        &-inner {
+            max-width: 95%;
+        }
+        &-btn {
+            width: 100%;
+            &.--red {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}

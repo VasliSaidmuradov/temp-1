@@ -36,7 +36,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
 	components: {
 		favoritesIcon
-	},
+  },
   data() {
 		return {
 			bonusesUsed: null,

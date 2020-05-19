@@ -10,7 +10,7 @@
 				<span>150 бонусов</span> для зарегестрированного покупателя
 			</p>
 		</div>
-		<div class="order-aside-input-wrp" v-if="$checkAuth()">
+		<div class="order-aside-input-wrp" v-if="$checkAuth() && $getUser().bonus">
 			<input type="number" class="order-aside-input" v-model="bonusesUsed" step="1" :max="$getUser().bonus">
 			<button @click="useBonuses(bonusesused)" class="order-aside-apply">Применить</button>
 		</div>
@@ -43,9 +43,9 @@ export default {
 	data() {
 		return {
       isAuth: false,
-      bonusesUsed: null		}
+      bonusesUsed: null
+    }
   },
-  // middleware: ['cart'],
   computed: {
     ...mapGetters({
       sum: 'cart/GET_TOTAL',

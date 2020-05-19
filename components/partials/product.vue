@@ -20,12 +20,12 @@
         <p class="product-old-price">{{ product.old_price }} ₸</p>
       </div>
     </nuxt-link>
-    <div v-if="isAdded" class="product-counter">
-      <button @click="isAdded = false" class="product-counter-decrease"></button>
+    <div v-if="isInCart(product)" class="product-counter">
+      <button @click="count = count > 1 ? count - 1 : 1" class="product-counter-decrease"></button>
       <span>1 {{product.tag.unit}}</span>
-      <button class="product-counter-increase"></button>
+      <button :disabled="product.quantity <= count" @click="increaseCount" class="product-counter-increase"></button>
     </div>
-    <button v-else @click="addToCart" class="button --black">В корзину</button>
+    <button v-if="!isInCart(product)" @click="addToCart" class="button --black">В корзину</button>
   </div>
 </template>
 
@@ -64,7 +64,7 @@ export default {
     ...mapActions({
       toggleFavorite: "user/toggleFavorite",
       increase: "cart/increase",
-      decrease: "cart/decrease"
+      decrease: "cart/decrease",
     }),
     decreaseCount() {
       this.count > 1 ? this.count - 1 : 1;

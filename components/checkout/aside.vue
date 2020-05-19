@@ -43,6 +43,5 @@ export default {
       cartQuantity: "cart/GET_QUANTITY"
     })
   }
-
 }
 </script>

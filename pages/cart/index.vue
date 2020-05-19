@@ -5,7 +5,7 @@
 				<nuxt-link to="">Главная / </nuxt-link>
 				<nuxt-link to="">Корзина</nuxt-link>
 			</div>
-			<h1 class="section-title">В корзине 3 товара</h1>
+			<h1 class="section-title">В корзине {{ cartQuantity }} товара</h1>
 			<div class="cart-page-row">
 				<list />
 				<cart-aside />
@@ -33,6 +33,7 @@ export default {
     ...mapGetters({
       hits: 'product/GET_HITS',
       hints: 'product/GET_HINTS',
+      cartQuantity: "cart/GET_QUANTITY"
     })
   }
 }

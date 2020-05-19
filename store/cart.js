@@ -4,10 +4,12 @@ export const state = () => ({
   product_ids: {},
   products: {data: []},
   bonuses: 0,
-  discount: 200
+  discount: 200,
+  isCheckoutModalOpen: false
 })
 
 export const getters = {
+  getCheckoutModal: state => state.isCheckoutModalOpen,
   GET_PRODUCT_IDS: (state) => state.product_ids,
   GET_PRODUCTS: (state) => state.products,
   GET_BONUSES: (state) => state.bonuses,
@@ -21,6 +23,7 @@ export const getters = {
 }
 
 export const mutations = {
+  setCheckoutModal: (state, payload) => state.isCheckoutModalOpen = payload,
   SET_PRODUCTS: (state, payload) => state.products = payload,
   SET_BONUSES: (state, payload) => state.bonuses = payload,
   SET_PRODUCT_IDS: (state, payload) => state.product_ids = payload,

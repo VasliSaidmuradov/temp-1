@@ -3,6 +3,7 @@ const cookieparser = process.server ? require('cookieparser') : undefined
 export const state = () => ({
   isMobile: false,
   isMobileFilterOpen: false,
+  isCancelOrderOpen: false,
 	isSearchActive: false,
 	isOverlayActive: false,
 	isMobileSearchOpen: false,
@@ -16,6 +17,7 @@ export const state = () => ({
 
 export const mutations = {
   SET_MOBILE_FILTER: (state, payload) => state.isMobileFilterOpen = payload,
+  SET_CANCEL_MODAL: (state, payload) => state.isCancelOrderOpen = payload,
 	SET_SEARCH: (state, payload) => state.isSearchActive = payload,
 	SET_OVERLAY: (state, payload) => state.isOverlayActive = payload,
 	SET_MOB_SEARCH: (state, payload) => state.isMobileSearchOpen = payload,
@@ -65,6 +67,7 @@ export const actions = {
 
 export const getters = {
   GET_IS_MOBILE: state => state.isMobile,
+  GET_CANCEL_MODAL: state => state.isCancelOrderOpen,
   GET_SEARCH: state => state.isSearchActive,
 	GET_MOB_SEARCH: state => state.isMobileSearchOpen,
 	GET_OVERLAY: state => state.isOverlayActive,

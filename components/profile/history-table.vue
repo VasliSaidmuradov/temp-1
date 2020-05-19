@@ -1,6 +1,6 @@
 <template>
 	<div class="profile-history-table">
-		<div class="profile-history-order" v-for="(order, index) in $getUser().orders" :key="index">
+	<div class="profile-history-order" v-for="(order, index) in $getUser().orders" :key="index">
 			<div class="profile-history-row">
 				<div class="profile-history-col">
 					<p class="profile-page-text">№ {{ order.id }}</p>
@@ -105,7 +105,7 @@ export default {
 			this.isDropdownOpen = [...this.isDropdownOpen]
     },
 		removeOrder(index) {
-			this.$store.commit('SET_REMOVE_ORDER', {...this.$getUser().orders[index]})
+      this.$store.commit('SET_REMOVE_ORDER', {...this.$getUser().orders[index]})
 		},
 	}
 }

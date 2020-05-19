@@ -187,7 +187,7 @@ export default {
 			}
 			await this.checkout(this.order)
 			document.body.classList.add('--hidden')
-			this.$store.commit('SET_THANKS', true)
+			this.$store.commit('cart/setCheckoutModal', true)
 			this.resetData()
     },
     resetData() {
@@ -203,7 +203,7 @@ export default {
 				comment: null,
 				payment_type: 0,
 			}
-		}
+    }
   },
   mounted() {
 		if (this.$checkAuth()) {

@@ -12,7 +12,7 @@
 				<div class="cart-list-btn-wrp">
 					<div class="product-counter">
 						<button @click="decrease(product)" class="product-counter-decrease"></button>
-						<span>{{ getCartQuantity(product) * product.amount }} {{ product.tag.unit }}</span>
+						<span>{{ getCartQuantity(product) }} {{ product.tag.unit }}</span>
 						<button :disabled="product.quantity <= getCartQuantity(product)" @click="increase(product)" class="product-counter-increase"></button>
 					</div>
 					<div class="cart-list-price-wrp">

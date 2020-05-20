@@ -24,26 +24,26 @@
             <div class="checkout-getting">
               <h3 class="section-title">Способ получения</h3>
               <div class="checkout-page-radio-wrp">
-                <label class="checkout-page-radio" :class="{'--active' : currentType === 'pickup'}">
-                  <input v-model="currentType" name="getting" value="pickup" type="radio">
+                <label class="checkout-page-radio" :class="{'--active' : order.delivery_type === '1'}">
+                  <input v-model="order.delivery_type" name="getting" value='1' type="radio">
                   <span class="checkout-page-subtitle">Самовывоз</span>
                   <p class="checkout-page-radio-text">
                     Без ожидания курьера!<br>2181 пункт в вашем регионе
                   </p>
                 </label>
-                <label class="checkout-page-radio" :class="{'--active' : currentType === 'courier'}">
-                  <input v-model="currentType" name="getting" value="courier" type="radio">
+                <label class="checkout-page-radio" :class="{'--active' : order.delivery_type === '0'}">
+                  <input v-model="order.delivery_type" name="getting" value='0' type="radio">
                   <span class="checkout-page-subtitle">Курьером</span>
                   <p class="checkout-page-radio-text">
                     В удобный для вас день и интервал времени
                   </p>
                 </label>
               </div>
-              <div class="checkout-getting-pickup" v-if="currentType === 'pickup'">
+              <div class="checkout-getting-pickup" v-if="order.delivery_type === '1'">
                 <h5 class="checkout-page-subtitle">Выберите магазин</h5>
-                <select class="checkout-page-select">
-                  <option value="">г.Алматы, ул.Тимирязева 38/1</option>
-                  <option value="">г.Алматы, ул.Жибек-жолы 38/1</option>
+                <select v-model="order.street" class="checkout-page-select">
+                  <option value="ул.Тимирязева 38/1">г.Алматы, ул.Тимирязева 38/1</option>
+                  <option value="ул.Жибек-жолы 38/1">г.Алматы, ул.Жибек-жолы 38/1</option>
                 </select>
               </div>
               <div class="checkout-getting-courier" v-else>
@@ -155,6 +155,7 @@ export default {
         phone: null,
         email: null,
         // city: "",
+        delivery_type: '1',
 				street: null,
 				house: null,
 				flat: null,
@@ -184,7 +185,13 @@ export default {
 					type: 'error'
 				})
 				return
-			}
+      }
+      if (this.order.delivery_type === '1') {
+        // this.order.street = null,
+        this.order.house = null,
+        this.order.flat = null,
+        this.order.index = null 
+      }
 			await this.checkout(this.order)
 			document.body.classList.add('--hidden')
 			this.$store.commit('cart/setCheckoutModal', true)

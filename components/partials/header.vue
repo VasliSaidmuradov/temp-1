@@ -21,9 +21,9 @@
           <nuxt-link to="/" class="header-logo">
             <img src="/images/logo.png" alt="Skiny logo" />
           </nuxt-link>
-          <div class="header-city-wrp">
+          <!-- <div class="header-city-wrp">
             <span>Алматы</span>
-          </div>
+          </div> -->
           <form class="header-search-wrp" @submit.prevent="redirectToSearch">
             <input v-model="searchQuery" type="text" placeholder="Хочу купить..." required />
             <button class="header-search-btn"></button>

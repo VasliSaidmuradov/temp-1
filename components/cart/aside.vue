@@ -21,17 +21,17 @@
 			</div>
 			<div class="order-aside-row">
 				<p class="order-aside-title">Скидка</p>
-				<p class="order-aside-list-price --red">-{{ discount }} ₸</p>
+				<p class="order-aside-list-price --red">-{{ cartQuantity ? discount: 0 }} ₸</p>
 			</div>
 		</div>
 		<div class="order-aside-total">
 			<div class="order-aside-row">
 				<p class="order-aside-total-title">Итого</p>
-				<p class="order-aside-total-text">{{ $formatMoney(sum - discount) }} ₸</p>
+				<p class="order-aside-total-text">{{ $formatMoney(sum - (cartQuantity ? discount: 0)) }} ₸</p>
 			</div>
 		</div>
 		<div class="order-aside-link-wrp">
-			<nuxt-link class="button --white" to="/checkout">Перейти к оформлению</nuxt-link>
+			<button class="button --white" @click="$router.push('/checkout')" :disabled="!cartQuantity">Перейти к оформлению</button>
 		</div>
 	</div>
 </template>

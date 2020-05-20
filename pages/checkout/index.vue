@@ -119,8 +119,8 @@
                 <!-- <nuxt-link class="button --white" to="">Перейти к оплате</nuxt-link> -->
               </div>
             </div>
-            {{ order }} <br>
-            {{ order.phone ? order.phone.length : 0 }}
+            <!-- {{ order }} <br>
+            {{ order.phone ? order.phone.length : 0 }} -->
           </div>
         </div> 
 			</form>

@@ -3,14 +3,14 @@
     <!-- Tabs {{ tabs }} -->
 		<div>
       <div class="tabs-nav">
-				<button
+				<a
         v-for="tab in tabs"
         :key="tab.id"
         @click="selectTab(tab)"
         class="tabs-nav-btn"
         :class="{ '--active': tab.isActive }"
         :v-model='activeTab'
-      >{{tab.name}}</button>
+      >{{tab.name}}</a>
       </div>
       <div class="tabs-details">
         <tab v-if="newArrivals" name="Новые поступления" :selected="true">

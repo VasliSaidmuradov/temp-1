@@ -21,8 +21,8 @@
             required/>
 		    </client-only>
         <div class="error-text" v-if="$getError('updatePhone')">{{ $getError('updatePhone') }}</div>
-				<button @click="togglePhone = !togglePhone" class="profile-page-edit">
-          {{ togglePhone ? 'Изменить' : 'Сохранить' }}</button>
+				<button v-if="togglePhone" @click="editPhone" class="profile-page-edit">Изменить</button>
+        <button v-else @click="savePhone" class="profile-page-edit">Сохранить</button>
 			</div>
 			<label class="profile-page-label">Пароль</label>
 			<div class="profile-page-input-wrp">
@@ -104,7 +104,14 @@ export default {
     ...mapActions({
       updateProfile: 'user/updateProfile',
       updatePassword: 'user/updatePassword'
-    })
+    }),
+    editPhone() {
+      this.togglePhone = !this.togglePhone
+    },
+    savePhone() {
+      this.togglePhone = !this.togglePhone
+      this.$store.commit('SET_PROFILE_PHONE_MODAL', true)
+    }
   }
 }
 </script>

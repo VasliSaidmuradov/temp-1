@@ -8,6 +8,37 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    &.--phone {
+        text-align: center;
+        .profile-modal-inner {
+            max-width: 340px;
+        }
+        .profile-modal-btn {
+            width: 100%;
+            color: #000;
+            background: #E6E6E6;
+        }
+        .profile-modal-title {
+            margin-bottom: 8px;
+        }
+    }
+    &-close {
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        background: url('/icons/close-icon.svg') center no-repeat;
+        background-size: contain;
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 1;
+    }
+    &-icon {
+        margin: auto;
+        margin-bottom: 8px;
+    }
     &-overlay {
         position: absolute;
         width: 100%;
@@ -24,7 +55,7 @@
         padding: 40px 30px;
     }
     &-title {
-        @include em(24px);
+        font-size: 1.3em;
         font-weight: 600;
         color: #000;
         margin-bottom: 10px;

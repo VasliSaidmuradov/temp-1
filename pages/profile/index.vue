@@ -1,5 +1,6 @@
 <template>
 	<div class="profile-page">
+		<phone-modal />
 		<div class="container">
 			<div class="breadcrumbs">
 				<nuxt-link to="">Главная / </nuxt-link>
@@ -19,6 +20,7 @@
 </template>
 
 <script>
+import phoneModal from '@/components/profile/phone-modal'
 import profileNav from '@/components/profile/nav'
 import info from '@/components/profile/info'
 import subscribes from '@/components/profile/subscribes'
@@ -28,7 +30,8 @@ export default {
 	components: {
 		profileNav,
 		info,
-		subscribes
+		subscribes,
+		phoneModal
   },
   middleware: ['auth'],
   methods: {

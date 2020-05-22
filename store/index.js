@@ -2,7 +2,9 @@ const cookieparser = process.server ? require('cookieparser') : undefined
 
 export const state = () => ({
   isMobile: false,
-  isProfilePhoneOpen: false,
+  isProfilePhoneSuccessOpen: false,
+  isProfileEditPhoneOpen: false,
+  isProfileConfirmPhoneOpen: false,
   isMobileFilterOpen: false,
   isCancelOrderOpen: false,
 	isSearchActive: false,
@@ -18,7 +20,9 @@ export const state = () => ({
 
 export const mutations = {
   SET_MOBILE_FILTER: (state, payload) => state.isMobileFilterOpen = payload,
-  SET_PROFILE_PHONE_MODAL: (state, payload) => state.isProfilePhoneOpen = payload,
+  SET_PROFILE_PHONE_SUCCESS: (state, payload) => state.isProfilePhoneSuccessOpen = payload,
+  SET_PROFILE_PHONE_EDIT: (state, payload) => state.isProfileEditPhoneOpen = payload,
+  SET_PROFILE_PHONE_CONFIRM: (state, payload) => state.isProfileConfirmPhoneOpen = payload,
   SET_CANCEL_MODAL: (state, payload) => state.isCancelOrderOpen = payload,
 	SET_SEARCH: (state, payload) => state.isSearchActive = payload,
 	SET_OVERLAY: (state, payload) => state.isOverlayActive = payload,
@@ -70,7 +74,9 @@ export const actions = {
 export const getters = {
   GET_IS_MOBILE: state => state.isMobile,
   GET_CANCEL_MODAL: state => state.isCancelOrderOpen,
-  GET_PROFILE_PHONE_MODAL: state => state.isProfilePhoneOpen,
+  GET_PROFILE_PHONE_SUCCESS: state => state.isProfilePhoneSuccessOpen,
+  GET_PROFILE_PHONE_EDIT: state => state.isProfileEditPhoneOpen,
+  GET_PROFILE_PHONE_CONFIRM: state => state.isProfileConfirmPhoneOpen,
   GET_SEARCH: state => state.isSearchActive,
 	GET_MOB_SEARCH: state => state.isMobileSearchOpen,
 	GET_OVERLAY: state => state.isOverlayActive,

@@ -8,19 +8,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    &.--phone {
+    &.--text-center {
         text-align: center;
         .profile-modal-inner {
             max-width: 340px;
         }
-        .profile-modal-btn {
+        .button {
             width: 100%;
-            color: #000;
-            background: #E6E6E6;
+        }
+    }
+    &.--phone {
+        .profile-modal-inner {
+            max-width: 340px;
         }
         .profile-modal-title {
             margin-bottom: 8px;
         }
+    }
+    &-input {
+        width: 100%;
+        text-align: left;
+        padding: 17px 20px;
+        border: 1px solid #E6E6E6;
+        border-radius: 6px;
+        color: #000;
+        margin-bottom: 24px;
+        @include em(14px);
+        font-weight: 500;
     }
     &-close {
         width: 20px;
@@ -83,6 +97,14 @@
             background: #F13D3D;
             color: #fff;
             margin-right: 10px;
+        }
+        &.--gray {
+            width: 100%;
+            color: #000;
+            background: #E6E6E6;
+        }
+        &.--no-border {
+            border: none;
         }
     }
 }

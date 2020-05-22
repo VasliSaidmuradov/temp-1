@@ -1,6 +1,8 @@
 <template>
 	<div class="profile-page">
-		<phone-modal />
+		<phone-success />
+		<edit-phone />
+		<phone-confirm />
 		<div class="container">
 			<div class="breadcrumbs">
 				<nuxt-link to="">Главная / </nuxt-link>
@@ -20,7 +22,9 @@
 </template>
 
 <script>
-import phoneModal from '@/components/profile/phone-modal'
+import phoneSuccess from '@/components/profile/modals/phone-success'
+import editPhone from '@/components/profile/modals/edit-phone'
+import phoneConfirm from '@/components/profile/modals/phone-confirm'
 import profileNav from '@/components/profile/nav'
 import info from '@/components/profile/info'
 import subscribes from '@/components/profile/subscribes'
@@ -31,13 +35,15 @@ export default {
 		profileNav,
 		info,
 		subscribes,
-		phoneModal
-  },
-  middleware: ['auth'],
-  methods: {
-    ...mapActions({
-      logout: 'auth/logout'
-    })
-  }
+		phoneSuccess,
+		editPhone,
+		phoneConfirm
+  	},
+ 	middleware: ['auth'],
+  	methods: {
+		...mapActions({
+			logout: 'auth/logout'
+		})
+  	}
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
 	<div class="profile-page">
-		<cancel-modal />
+		<remove-order />
 		<div class="container">
 			<div class="breadcrumbs">
 				<nuxt-link to="">Главная / </nuxt-link>
@@ -23,13 +23,13 @@
 <script>
 import profileNav from '@/components/profile/nav'
 import historyTable from '@/components/profile/history-table'
-import cancelModal from '@/components/profile/cancel-modal'
+import removeOrder from '@/components/profile/modals/remove-order'
 
 export default {
 	components: {
 		profileNav,
 		historyTable,
-		cancelModal
+		removeOrder
 	}
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
 	<div class="product-aside">
-    {{ info.quantity }}
+    <!-- {{ info.quantity }} -->
 		<div class="product-aside-inner">
 			<div class="product-aside-price-wrp">
 				<p class="product-aside-price">{{ info.price }} ₸</p>

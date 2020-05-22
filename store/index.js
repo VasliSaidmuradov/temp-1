@@ -2,7 +2,7 @@ const cookieparser = process.server ? require('cookieparser') : undefined
 
 export const state = () => ({
   isMobile: false,
-  isProfilePhoneOpen: true,
+  isProfilePhoneOpen: false,
   isMobileFilterOpen: false,
   isCancelOrderOpen: false,
 	isSearchActive: false,

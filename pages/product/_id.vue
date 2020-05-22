@@ -26,7 +26,8 @@
         <div class="product-page-col">
           <product-aside :info="product" />
         </div>
-      </div>
+      </div>  
+      <!-- >>  {{ brandProducts }} -->
       <other :brandProducts="brandProducts" />
       <similar :similars="similars" />
     </div>

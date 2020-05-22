@@ -16,25 +16,13 @@
           :to="`/catalog/${category.slug}/${subcategory.slug}/${tag.slug}`"
         >{{ tag.name }}</nuxt-link> -->
       </div>
-      <!-- <h1 class="category-page-title">{{ `${tag.name || subcategory.name || category.name}` }}</h1> -->
+      <h1 class="category-page-title">{{ `${products.name}` }}</h1>
       <div class="row">
         <div class="left-col">
-          <nuxt-link class="category-page-back" to="/catalog">Все категории</nuxt-link>
-          <!-- <subcategories
-            :categories="categories"
-            :category="category"
-            :subcat="subcategory"
-            :tag="tag"
-          /> -->
-          <!-- brand filter: {{ brandFilterResult }} -->
-          <!-- <category-filter
-            :allProducts="allProducts"
-            @brand-filter="filterBrand"
-            :cats="tag ? null : subcategory ? subcategory.tags : category ? category.subcategories : categories"
-          /> -->
+          <!-- <nuxt-link class="category-page-back" to="/catalog">Все категории</nuxt-link> -->
         </div>
         <div class="right-col">
-          <brand v-show="true" />
+          <brand :brand="products" />
           <div class="category-page-mob">
             <!-- <p class="category-page-total">{{ products.total }} товара</p> -->
             <nuxt-link class="category-page-back" to>Все категории</nuxt-link>
@@ -51,7 +39,7 @@
             </div>
           </div>
           <div class="category-page-sort-wrp">
-            <!-- <p class="category-page-total">{{ products.total }} товара</p> -->
+            <p class="category-page-total">{{ 12 }} товара</p>
             <div class="category-page-sort">
               <p>Сортировать:</p>
               <select>
@@ -62,8 +50,9 @@
             </div>
           </div>
           <div class="category-page-product-wrp">
+            <!-- :: {{ products }} -->
             <!-- {{ brands }} -->
-            <!-- <product v-for="product in productList.length ? productList : products.data " :key="product.id" :product="product" /> -->
+            <product v-for="product in products.products " :key="product.id" :product="product" />
           </div>
         </div>
       </div>
@@ -78,7 +67,7 @@ import categoryFilter from "@/components/category/filter";
 import brand from "@/components/category/brand";
 import product from "@/components/partials/product";
 import pagination from "@/components/partials/pagination";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   middleware: ["brands"],
@@ -131,7 +120,13 @@ export default {
         }
       }
       return null;
-    }
+    },
+    // getBrandsFromURL() {
+    //   const brandSlug = this.$route.params.brand
+    //   let brands = this.$store.dispatch('brand/fetchBrandProducts', brandSlug)
+    //   console.log(brands)
+    //   return brands
+    // }
   },
 
   watch: {
@@ -156,7 +151,10 @@ export default {
           `${this.$route.path}${query}`
         );
       }, 500);
-    }
+    },
+    // '$route.params.brand': fucntion(val) {
+    //   this.$store.dispatch('')
+    // }
   },
   mounted() {
     if (this.$route.query.sort) {
@@ -164,19 +162,22 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+
+    }),
     showFilter() {
       this.$store.commit("SET_MOBILE_FILTER", true);
     },
     filterBrand(e) {
       if (e.checked) {
         const res = this.allProducts.data.filter(el => el.brand.id == e.value)
-        console.log(res)
+        // console.log(res)
         this.productList.push(...res)
-        console.log(e.value + ' checked!', this.productList)
+        // console.log(e.value + ' checked!', this.productList)
       }
       else {
         this.productList = this.productList.filter(el => el.brand.id != e.value)
-        console.log(e.value + ' unchecked!', this.productList )
+        // console.log(e.value + ' unchecked!', this.productList )
       }
     }
   }

@@ -12,6 +12,7 @@
         :v-model='activeTab'
       >{{tab.name}}</a>
       </div>
+      <!-- {{ hits.data[0] }} -->
       <div class="tabs-details">
         <tab v-if="newArrivals" name="Новые поступления" :selected="true">
           <product v-for="product in newArrivals.data" :key="product.id" :product="product" />

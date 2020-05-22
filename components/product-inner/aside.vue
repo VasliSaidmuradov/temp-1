@@ -20,7 +20,7 @@
         В избранное
       </button>
 		</div>
-		<nuxt-link class="product-page-link" :to="info.brand.slug">Перейти к производителю</nuxt-link>
+		<nuxt-link class="product-page-link" :to="`/brand/${info.brand.slug}`">Перейти к производителю</nuxt-link>
 		<img :src="info.brand.image" :alt="`/catalog/${info.brand.name}`" class="product-aside-brand">
 	</div>
 </template>

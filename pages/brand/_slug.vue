@@ -98,10 +98,7 @@ export default {
   computed: {
     ...mapGetters({
       brands: 'brand/GET_BRANDS',
-      products: "brand/GET_BRAND_PRODUCTS",
-      // allProducts: "product/GET_ALL_PRODUCTS",
-      // categories: "menu/GET_CATEGORIES",
-      // brandFilterResult: 'brand/GET_FILTER_RESULT'
+      products: "brand/GET_BRAND_PRODUCTS"
     }),
     category() {
       for (let i = 0; i < this.categories.length; ++i) {

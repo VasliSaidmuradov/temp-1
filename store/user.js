@@ -39,7 +39,7 @@ export const actions = {
     store.commit('UPDATE_PRODUCTS_COOKIES')
   },
   toggleFavorite(store, payload) {
-    console.log('favorite toggle', payload)
+    // console.log('favorite toggle', payload)
     if (store.getters['IS_FAVORITE'](payload)) {
       store.commit('REMOVE_PRODUCT_FROM_PRODUCTS', payload)
     } else {
@@ -49,10 +49,10 @@ export const actions = {
   },
 
   async fetchUser(store, payload) {
-    console.log('fetch user payload: ', payload)
+    // console.log('fetch user payload: ', payload)
 
     let user = await this.$api.get('/user', {})
-    console.log('fetch user USER: ', user)
+    // console.log('fetch user USER: ', user)
 
     if (user) {
       store.commit('SET_USER', user)

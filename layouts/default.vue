@@ -5,7 +5,9 @@
         <mobile-menu />
         <auth-modal />
        	<div class="layout-content">
-        	<nuxt />
+          <transition name="page-fade">
+        	  <nuxt />
+          </transition>
         </div>
         <div class="notification-wrapper">
           <notification v-for="(notification, index) in notifications" :key="index" :notification="notification" />

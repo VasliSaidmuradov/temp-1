@@ -24,12 +24,14 @@
 	}
 	&.--success {
 		background: var(--color-base);
+		position: relative;
 		&:before {
 			background: url('/icons/success-icon.svg') center no-repeat;
 			background-size: contain;
 		}
 	}
 	&.--error {
+		position: relative;
 		background: #EF5350;
 		&:before {
 			background: url('/icons/error-icon.svg') center no-repeat;

@@ -63,7 +63,6 @@
 						<p class="profile-page-text">{{ $formatMoney(order.total) }} ₸</p>
 					</li>
 				</ul>
-				<button class="button --black">Оплатить заказ</button>
 			</div>
 		</div>
 	</div>

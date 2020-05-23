@@ -14,7 +14,7 @@
 				</div>
 				<div class="profile-page-right">
 					<info />
-					<subscribes />
+					<!-- <subscribes /> -->
 				</div>
 			</div>
 		</div>

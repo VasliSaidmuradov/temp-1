@@ -11,7 +11,7 @@
 			<div class="product-aside-row">
 				<img src="/icons/bonus-icon.svg" alt="Skiny icon" class="product-aside-icon">
 				<p class="product-aside-text">
-					<span>150 бонусов</span> для зарегестрированного покупателя
+					<span>150 бонусов</span> для <nuxt-link to>зарегистрированного</nuxt-link> покупателя
 				</p>
 			</div>
 			<button @click="addToCart" :disabled="!info.quantity" class="button --main-color">Добавить в корзину</button>
@@ -20,8 +20,8 @@
         В избранное
       </button>
 		</div>
-		<nuxt-link class="product-page-link" :to="info.brand.slug">Перейти к производителю</nuxt-link>
-		<img :src="info.brand.image" :alt="`/catalog/${info.brand.name}`" class="product-aside-brand">
+		<!-- <nuxt-link class="product-page-link" :to="info.brand.slug">Перейти к производителю</nuxt-link> -->
+		<!-- <img :src="info.brand.image" :alt="`/catalog/${info.brand.name}`" class="product-aside-brand"> -->
 	</div>
 </template>
 <script>

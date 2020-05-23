@@ -51,7 +51,8 @@
 		@include em(14px);
 		font-weight: 600;
 		color: #000;
-		span {
+		span,
+		a {
 			color: var(--color-base);
 		}
 	}

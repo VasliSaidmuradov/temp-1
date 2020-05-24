@@ -11,10 +11,10 @@
 					<profile-nav />
 				</div>
 				<div class="profile-page-right">
-					<h5 class="profile-page-title">Мой баланс</h5>
-					<p class="profile-page-text" v-if="$getUser().bonus">У вас {{ $formatMoney($getUser().bonus) }}  баллов</p>
-					<p class="profile-page-text" v-else>У вас нет баллов с покупок.</p>
-					<nuxt-link class="profile-page-link" to="/help/bonuses">Подробнее о баллах</nuxt-link>
+					<h5 class="profile-page-title">Мои бонусы</h5>
+					<p class="profile-page-text" v-if="$getUser().bonus">У вас {{ $formatMoney($getUser().bonus) }}  бонусов</p>
+					<p class="profile-page-text" v-else>У вас нет бонусов с покупок.</p>
+					<nuxt-link class="profile-page-link" to="/help/bonuses">Подробнее о бонусах</nuxt-link>
 					<bonuses-table />
 				</div>
 			</div>

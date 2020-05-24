@@ -6,15 +6,8 @@
 				<nuxt-link to="">Контакты</nuxt-link>
 			</div>
 			<div class="contacts-page-top">
-				<div class="contacts-page-title-wrp">
-					<p class="contacts-page-title">Магазины в городе</p> 
-					<select class="contacts-page-select">
-						<option value="">Алматы</option>
-						<option value="">Нур-Султан</option>
-					</select>
-				</div>
 				<div class="contacts-page-phone">
-					<a href="">8 (727) 396-18-34</a>
+					<a href="tel:87772623060">8 (777) 262-30-60</a>
 				</div>
 				<div class="contacts-page-schedule">
 					<p>Часы работы:</p>
@@ -25,16 +18,12 @@
 			<div class="contacts-page-bot">
 				<ul class="contacts-page-list">
 					<li class="contacts-page-list-item">
-						<p class="contacts-page-address">ул. Розыбакиева, 281</p>
-						<p class="contacts-page-list-phone">8 (727) 396-18-34</p>
-					</li>
-					<li class="contacts-page-list-item">
-						<p class="contacts-page-address">ул. Розыбакиева, 281</p>
-						<p class="contacts-page-list-phone">8 (727) 396-18-34</p>
+						<p class="contacts-page-address">Жибек-Жолы проспект, 81</p>
+						<p class="contacts-page-list-phone"><a href="tel:87772623060">8 (777) 262-30-60</a></p>
 					</li>
 				</ul>
 				<div class="contacts-page-right">
-					<img src="/icons/map.png" alt="">
+					<iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ace3fab0ca49de2ae0671cd03bb9bdb7046993c0a8a9483abfb108ca2ff65c0e9&amp;source=constructor" width="100%" height="100%" frameborder="0"></iframe>
 				</div>
 			</div>
 		</div>

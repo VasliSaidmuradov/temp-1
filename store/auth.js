@@ -91,9 +91,6 @@ export const actions = {
     console.log('router: ', this.$router)
     store.dispatch('setAuthFields', {})
     await this.$router.push({ path: '/' });
-		// if (process.client) {
-		// 	window.location.reload(true)
-		// }
 	},
 
 	async reset(store, payload) {

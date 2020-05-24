@@ -1,10 +1,10 @@
 <template>
   <div class="product-page">
-    <!-- prod: {{brandProducts}} -->
+    <!-- prod: {{product.tag.subcategory}} -->
     <div class="container">
       <div class="breadcrumbs">
         <nuxt-link to="/">Главная /</nuxt-link>
-        <nuxt-link :to="product.tag.subcategory.slug">{{ product.tag.subcategory.name }} /</nuxt-link>
+        <nuxt-link :to="`/catalog/${product.tag.subcategory.categories[0].slug}/${product.tag.subcategory.slug}`">{{ product.tag.subcategory.name }} /</nuxt-link>
         <nuxt-link :to="product.tag.slug">{{ product.tag.name }}</nuxt-link>
       </div>
       <!-- similars: {{ similars }} -->
@@ -26,7 +26,8 @@
         <div class="product-page-col">
           <product-aside :info="product" />
         </div>
-      </div>
+      </div>  
+      <!-- >>  {{ brandProducts }} -->
       <other :brandProducts="brandProducts" />
       <similar :similars="similars" />
     </div>

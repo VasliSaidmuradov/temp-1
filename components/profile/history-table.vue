@@ -26,7 +26,7 @@
 					</div>
 					<div class="profile-history-col --grow">
 						<p class="profile-page-text">
-              {{ item.quantity * (item.product.amount ? item.product.amount : 1) }} 
+              {{ item.quantity }} 
               {{ item.product.tag ? item.product.tag.unit : 'шт' }}</p>
 					</div>
 					<div class="profile-history-col">
@@ -63,7 +63,6 @@
 						<p class="profile-page-text">{{ $formatMoney(order.total) }} ₸</p>
 					</li>
 				</ul>
-				<button class="button --black">Оплатить заказ</button>
 			</div>
 		</div>
 	</div>

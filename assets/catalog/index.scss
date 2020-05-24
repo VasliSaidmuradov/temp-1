@@ -40,7 +40,7 @@
 	&-category {
 		@include em(24px);
 		font-weight: 400;
-		color: #000;
+		color: var(--color-base);
 		display: inline-block;
 		margin-bottom: 40px;
 	}

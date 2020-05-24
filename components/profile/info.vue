@@ -15,14 +15,13 @@
 		      <the-mask 
             :mask="['+7 (###) ###-##-##']"
             class="profile-page-input"
-            :disabled="togglePhone"
+            disabled
             type="tel"
             v-model="user.phone"
             required/>
 		    </client-only>
         <div class="error-text" v-if="$getError('updatePhone')">{{ $getError('updatePhone') }}</div>
-				<button @click="togglePhone = !togglePhone" class="profile-page-edit">
-          {{ togglePhone ? 'Изменить' : 'Сохранить' }}</button>
+				<button @click="editPhone" class="profile-page-edit">Изменить</button>
 			</div>
 			<label class="profile-page-label">Пароль</label>
 			<div class="profile-page-input-wrp">
@@ -104,7 +103,15 @@ export default {
     ...mapActions({
       updateProfile: 'user/updateProfile',
       updatePassword: 'user/updatePassword'
-    })
+    }),
+    editPhone() {
+      this.togglePhone = !this.togglePhone
+      this.$store.commit('SET_PROFILE_PHONE_EDIT', true)
+    },
+    savePhone() {
+      this.togglePhone = !this.togglePhone
+      this.$store.commit('SET_PROFILE_PHONE_MODAL', true)
+    }
   }
 }
 </script>

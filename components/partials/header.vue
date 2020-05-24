@@ -8,9 +8,10 @@
             <nuxt-link to="/help/payment" class="header-top-link">Оплата</nuxt-link>
             <nuxt-link to="/help/delivery" class="header-top-link">Доставка</nuxt-link>
             <nuxt-link to="/help/how-to-order" class="header-top-link">Как сделать заказ</nuxt-link>
+            <nuxt-link to="/help/bonuses" class="header-top-link">Бонусы</nuxt-link>
           </nav>
           <div class="header-phone">
-            <a href>8 (727) 396-18-34</a>
+            <a href="tel:87772623060">8 (777) 262-30-60</a>
           </div>
         </div>
       </div>
@@ -21,15 +22,16 @@
           <nuxt-link to="/" class="header-logo">
             <img src="/images/logo.png" alt="Skiny logo" />
           </nuxt-link>
-          <div class="header-city-wrp">
+          <!-- <div class="header-city-wrp">
             <span>Алматы</span>
-          </div>
+          </div> -->
           <form class="header-search-wrp" @submit.prevent="redirectToSearch">
             <input v-model="searchQuery" type="text" placeholder="Хочу купить..." required />
             <button class="header-search-btn"></button>
           </form>
           <button
             class="header-profile"
+            :class="{'--not-signed' : !$checkAuth()}"
             @click="openAuth"></button>
           <nuxt-link class="header-favorites" to="/favorites">
             <span class="header-icon-badge" v-if="favoritesQuantity > 0">{{ favoritesQuantity }}</span>
@@ -37,6 +39,7 @@
           <nuxt-link class="header-cart" to="/cart">
             <span class="header-icon-badge" v-if="cartQuantity > 0">{{ cartQuantity }}</span>
           </nuxt-link>
+          <p class="header-price">3 560 тг</p>
         </div>
       </div>
     </div>
@@ -45,7 +48,6 @@
         <div class="row">
           <nuxt-link class="header-btn" to="/catalog">Все категории</nuxt-link>
           <nuxt-link class="header-bot-link" to>Акции</nuxt-link>
-          <nuxt-link class="header-bot-link" to="/help/bonuses">Бонусы</nuxt-link>
         </div>
       </div>
     </div>

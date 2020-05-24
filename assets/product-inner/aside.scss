@@ -51,7 +51,8 @@
 		@include em(14px);
 		font-weight: 600;
 		color: #000;
-		span {
+		span,
+		a {
 			color: var(--color-base);
 		}
 	}
@@ -60,18 +61,21 @@
 		text-align: left;
 		padding: 16px 25px;
 		position: relative;
-		&:after {
-			content: '';
-			width: 20px;
-			height: 20px;
-			position: absolute;
-			top: 50%;
-			right: 25px;
-			transform: translateY(-50%);
-			background: url('/icons/cart-icon.svg') center no-repeat;
-			background-size: contain;
-			filter: invert(1);
-		}
+    svg {
+      position: absolute;
+      top: 50%;
+      right: 25px;
+      transform: translateY(-50%);
+    }
+    &.-added {
+      path {
+        fill: var(--color-base);
+        stroke: var(--color-base);
+      }
+    }
+    path {
+      transition: 0.3s ease;
+    }
 		&.--white {
 			margin-top: 10px;
 			border: 1px solid var(--line-base);
@@ -79,7 +83,12 @@
 				background: url('/icons/favorites-icon.svg') center no-repeat;
 				filter: invert(0);
 			}
-		}
+    }
+    &:hover {
+      path {
+        stroke: var(--color-base);
+      }
+    }
 	}
 	&-brand {
 		max-width: 85px;

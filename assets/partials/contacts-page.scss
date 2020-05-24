@@ -1,6 +1,12 @@
 .contacts-page {
 	padding-top: 20px;
-	padding-bottom: 50px;
+	&-top {
+		margin-top: 40px;
+	}
+	&-right {
+		flex: 1;
+		height: 500px;
+	}
 	&-title-wrp {
 		margin-top: 60px;
 		display: inline-flex;
@@ -36,8 +42,8 @@
 		}
 	}
 	&-phone {
-		margin-bottom: 20px;
 		a {
+			margin-bottom: 20px;
 			display: block;
 			position: relative;
 			padding-left: 25px;
@@ -78,6 +84,10 @@
 		&:last-child {
 			border-bottom: 1px solid var(--line-base);
 		}
+		a {
+			font-weight: 500;
+			color: #000;
+		}
 		p {
 			margin-top: 20px;
 			position: relative;
@@ -117,6 +127,10 @@
 		&-list {
 			width: 100%;
 			margin-right: 0;
+		}
+		&-right {
+			width: 100%;
+			flex: initial;
 		}
 	}
 }

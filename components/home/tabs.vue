@@ -3,28 +3,37 @@
     <!-- Tabs {{ tabs }} -->
 		<div>
       <div class="tabs-nav">
-				<button
+				<a
         v-for="tab in tabs"
         :key="tab.id"
         @click="selectTab(tab)"
         class="tabs-nav-btn"
         :class="{ '--active': tab.isActive }"
         :v-model='activeTab'
-      >{{tab.name}}</button>
+      >{{tab.name}}</a>
       </div>
+      <!-- {{ hits.data[0] }} -->
       <div class="tabs-details">
-        <tab v-if="newArrivals" name="Новые поступления" :selected="true">
-          <product v-for="product in newArrivals.data" :key="product.id" :product="product" />
-        </tab>
-        <tab v-if="hits" name="Бестселлеры">
-          <product v-for="product in hits.data" :key="product.id" :product="product" />
-        </tab>
-				<tab v-if="hints" name="Советуем">
-          <product v-for="product in hints.data" :key="product.id" :product="product" />
-        </tab>
-        <tab v-if="sales" name="Акции">
-          <product v-for="product in sales.data" :key="product.id" :product="product" />
-        </tab>
+        <transition name="fade">
+          <tab v-if="newArrivals" name="Новые поступления" :selected="true">
+            <product v-for="product in newArrivals.data" :key="product.id" :product="product" />
+          </tab>
+        </transition>
+        <transition name="fade">
+          <tab v-if="hits" name="Бестселлеры">
+            <product v-for="product in hits.data" :key="product.id" :product="product" />
+          </tab>
+        </transition>
+        <transition name="fade">
+          <tab v-if="hints" name="Советуем">
+            <product v-for="product in hints.data" :key="product.id" :product="product" />
+          </tab>
+        </transition>
+        <transition name="fade">
+          <tab v-if="sales" name="Акции">
+            <product v-for="product in sales.data" :key="product.id" :product="product" />
+          </tab>
+        </transition>
       </div>
     </div>
   </div>

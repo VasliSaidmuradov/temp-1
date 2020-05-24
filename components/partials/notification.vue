@@ -1,5 +1,5 @@
 <template>
-	<transition name="slide-fade">
+	<transition name="fade">
 		<div v-if="is_visible" :class="['notification', notification.class]">
 			<p>{{ notification.message }}</p>
 		</div>

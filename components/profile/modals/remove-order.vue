@@ -3,7 +3,7 @@
         <div v-if="isOpen" class="profile-modal">
             <div class="profile-modal-overlay" @click="closeModal"></div>
             <div class="profile-modal-inner">
-                <h3 class="proile-modal-title">Вы уверены что хотите отменить заказ</h3>
+                <h3 class="profile-modal-title">Вы уверены что хотите отменить заказ</h3>
                 <p class="profile-modal-text">Отмена заказа необратима</p>
                 <button @click="confirm" class="profile-modal-btn --red">Отменить заказ</button>
                 <button @click="closeModal" class="profile-modal-btn">В список заказов</button>

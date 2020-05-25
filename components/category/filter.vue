@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div v-if="getBrands.length" class="filter-block">
+    <div v-if="filterByBrands && getBrands.length" class="filter-block">
       <p class="filter-title">Бренд</p>
       <label class="filter-checkbox" v-for="brand in getBrands" :key="brand.id">
         <input
@@ -50,7 +50,11 @@ import { mapGetters } from "vuex";
 export default {
   props: {
     cats: Array,
-    allProducts: Object
+    allProducts: Object,
+    filterByBrands: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {
@@ -70,7 +74,7 @@ export default {
       brandFilter: 'product/GET_BRAND_FILTER'
     }),
     getBrands() {
-      const products = this.allProducts.data
+      const products = this.allProducts.data || this.allProducts.products
       const brands = products.map(el => el.brand)
       const res = brands.reduce((acc, current) => {
         const x = acc.find(item => item.id === current.id);

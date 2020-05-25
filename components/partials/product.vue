@@ -17,7 +17,7 @@
       <p class="product-name">{{ product.name }}</p>
       <div class="product-price-wrp">
         <p class="product-price">{{ product.price }} ₸</p>
-        <p class="product-old-price">{{ product.old_price }} ₸</p>
+        <p v-if="product.old_price" class="product-old-price">{{ product.old_price }} ₸</p>
       </div>
     </nuxt-link>
     <div v-if="isInCart(product)" class="product-counter">

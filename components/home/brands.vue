@@ -7,7 +7,7 @@
     </div>
     <div v-swiper:brandsSlider="options">
       <div class="swiper-wrapper">
-        <nuxt-link v-for="brand in brands" :key="brand.id" class="swiper-slide" to="/brand">
+        <nuxt-link v-for="brand in brands" :key="brand.id" class="swiper-slide" :to="`/brands/${brand.slug}`">
           <img :src="brand.image" :alt="brand.name" />
         </nuxt-link>
       </div>

@@ -23,7 +23,7 @@ export default async function ({ route, store }) {
     per_page: 9
   }))
   queue.push(store.dispatch('product/fetchHints', {
-    hint: true,
+    recommend: true,
     per_page: 9
   }))
   queue.push(store.dispatch('product/fetchSales', {

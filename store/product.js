@@ -129,6 +129,7 @@ export const actions = {
     store.commit('SET_HITS', await this.$api.get('/catalog', payload))
   },
   async fetchHints(store, payload) {
+    console.log('HINTS: ', payload)
     store.commit('SET_HINTS', await this.$api.get('/catalog', payload))
   },
   async fetchNews(store, payload) {

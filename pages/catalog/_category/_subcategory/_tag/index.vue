@@ -28,9 +28,11 @@
           />
           <category-filter
             :allProducts="allProducts"
+            :filterByBrands="true"
             @brand-filter="filterBrand"
             :cats="tag ? null : subcategory ? subcategory.tags : category ? category.subcategories : categories"
           />
+          <!-- {{ allProducts }} -->
         </div>
         <div class="right-col">
           <!-- <brand v-show="true" /> -->

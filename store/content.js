@@ -3,6 +3,7 @@ export const state = () => ({
   posts: null,
   all_posts: null,
   post: null,
+  banners: null
 })
 
 export const mutations = {
@@ -10,6 +11,7 @@ export const mutations = {
   SET_POSTS: (state, payload) => state.posts = payload,
   SET_ALL_POSTS: (state, payload) => state.all_posts = payload,
   SET_POST: (state, payload) => state.post = payload,
+  SET_BANNERS: (state, payload) => state.banners = payload
 }
 
 export const actions = {
@@ -34,6 +36,10 @@ export const actions = {
     // console.log('Post: ', res.data)
     store.commit('SET_POST', res.data)
   },
+  async fetchBanners(store) {
+    const res = await this.$api.get(`/advertisements`)
+    store.commit('SET_BANNERS', res)
+  }
 }
 
 export const getters = {
@@ -41,4 +47,5 @@ export const getters = {
   GET_POSTS: state => state.posts,
   GET_ALL_POSTS: state => state.all_posts,
   GET_POST: state => state.post,
+  GET_BANNERS: state => state.banners
 }

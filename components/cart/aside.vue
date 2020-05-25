@@ -27,7 +27,7 @@
 		<div class="order-aside-total">
 			<div class="order-aside-row">
 				<p class="order-aside-total-title">Итого</p>
-				<p class="order-aside-total-text">{{ $formatMoney(sum - (cartQuantity ? discount: 0)) }} ₸</p>
+				<p class="order-aside-total-text">{{ $formatMoney(sum) }} ₸</p>
 			</div>
 		</div>
 		<div class="order-aside-link-wrp">

@@ -5,9 +5,9 @@
         <div class="left-col">
           <Nav></Nav>
           <NewsAside></NewsAside>
-          <nuxt-link to class="banner-aside">
-            <img src="/images/banner-aside.png" alt="Skiny banner" />
-          </nuxt-link>
+          <a :href="banners[0].link" class="banner-aside">
+            <img :src="banners[0].image" :alt="banners[0].name" />
+          </a>
         </div>
         <div class="right-col">
           <Slider></Slider>
@@ -28,6 +28,7 @@ import Nav from "@/components/home/nav";
 import NewsAside from "@/components/home/news-aside";
 import Brands from "@/components/home/brands";
 import tabs from "@/components/home/tabs";
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -38,5 +39,10 @@ export default {
     Brands
   },
   middleware: ["home"],
+  computed: {
+    ...mapGetters({
+      banners: 'content/GET_BANNERS',
+    })
+  }
 };
 </script>

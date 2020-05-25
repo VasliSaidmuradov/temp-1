@@ -4,7 +4,7 @@ export const state = () => ({
   product_ids: {},
   products: {data: []},
   bonuses: 0,
-  discount: 200,
+  discount: 0,
   isCheckoutModalOpen: false
 })
 
@@ -19,8 +19,10 @@ export const getters = {
   GET_TOTAL: (state) => Object.keys(state.product_ids).length > 0 ? state.products.data.reduce((sum, product) => {
     return Math.max(0, sum - state.bonuses + product.price * (state.product_ids[`${product.id}`] ? state.product_ids[`${product.id}`] : 0))
   }, 0) : 0,
-  GET_DISCOUNT: state => state.discount
-}
+  GET_DISCOUNT: state => Object.keys(state.product_ids).length > 0 ? state.products.data.reduce((sum, product) => {
+    return Math.max(0, sum - state.bonuses + (product.old_price ? (product.old_price - product.price) : 0) * (state.product_ids[`${product.id}`] ? state.product_ids[`${product.id}`] : 0))
+  }, 0) : 0,
+} 
 
 export const mutations = {
   setCheckoutModal: (state, payload) => state.isCheckoutModalOpen = payload,

@@ -39,7 +39,7 @@
           <nuxt-link class="header-cart" to="/cart">
             <span class="header-icon-badge" v-if="cartQuantity > 0">{{ cartQuantity }}</span>
           </nuxt-link>
-          <p class="header-price">3 560 тг</p>
+          <p class="header-price">{{ $formatMoney(sum) }} тг</p>
         </div>
       </div>
     </div>
@@ -67,6 +67,9 @@ export default {
     ...mapGetters({
       products: "product/GET_HINTS",
       favoritesQuantity: "user/GET_QUANTITY",
+      cartQuantity: "cart/GET_QUANTITY",
+      sum: 'cart/GET_TOTAL',
+      discount: 'cart/GET_DISCOUNT',
       cartQuantity: "cart/GET_QUANTITY"
     })
   },

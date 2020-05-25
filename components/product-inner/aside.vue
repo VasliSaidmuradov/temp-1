@@ -10,11 +10,14 @@
 			<h3 class="product-aside-title">Бонусы за покупки</h3>
 			<div class="product-aside-row">
 				<img src="/icons/bonus-icon.svg" alt="Skiny icon" class="product-aside-icon">
-				<p class="product-aside-text">
+				<p v-if="!$checkAuth()" class="product-aside-text">
 					<span>150 бонусов</span> для <nuxt-link to>зарегистрированного</nuxt-link> покупателя
 				</p>
+        <p v-else class="product-aside-text">
+					<span>{{ bonuses }} бонусов</span> будет начислено вам за покупку
+				</p>
 			</div>
-      <div v-if="isInCart(info)"  class="product-counter">
+      <div v-if="isInCart(info)" class="product-counter">
         <!-- <button @click="count = count > 1 ? count - 1 : 1" class="product-counter-decrease"></button> -->
         <button class="product-counter-decrease" @click="decrease(info)"></button>
         <span>{{ getCartQuantity(info) }} {{info.tag.unit}}</span>
@@ -56,7 +59,10 @@ export default {
 			const msInADay = 60 * 60 * 24 * 1000
 			const today = Date.now()
 			return today + msInADay
-		}
+    },
+    bonuses() {
+      return Math.ceil(this.info.price * 0.03) * (this.getCartQuantity(this.info) ? this.getCartQuantity(this.info) : 1)
+    }
   },
   methods: {
     ...mapActions({

@@ -31,7 +31,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/swiper.js', ssr: false },
+    { src: '~/plugins/swiper.js', mode: 'client' },
     { src: '~/plugins/vue-the-mask.js', ssr: false },
     { src: '~/plugins/smooth-scroll', ssr: false },
     { src: '~/plugins/vue-scrollmagic', ssr: false },

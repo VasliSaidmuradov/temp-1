@@ -1,7 +1,7 @@
 <template>
 	<div class="checkout-page">
 		<modal />
-		<div class="container">
+		<div class="container pin-trigger">
 			<div class="breadcrumbs">
 				<nuxt-link to="/cart">Корзина / </nuxt-link>
 				<nuxt-link to="">Оформление заказа</nuxt-link>
@@ -217,7 +217,14 @@ export default {
 			this.order.name = this.$getUser().name
 			this.order.email = this.$getUser().email
 			this.order.phone = this.$getUser().phone
-		}
+    }
+    const pinScene = this.$scrollmagic.scene({
+      triggerElement: '.pin-trigger',
+      triggerHook: 0,
+      duration: '100%'
+    })
+    .setPin('.order-aside')
+    this.$scrollmagic.addScene(pinScene)
 	},
 }
 </script>

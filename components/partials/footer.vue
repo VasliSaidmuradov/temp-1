@@ -8,7 +8,7 @@
 				</div>
 				<div class="footer-col">
 					<h6 class="footer-heading">Компания</h6>
-					<nuxt-link to="" class="footer-link">О компании</nuxt-link>
+					<nuxt-link to="/help/about" class="footer-link">О компании</nuxt-link>
 					<nuxt-link to="/news" class="footer-link">Новости</nuxt-link>
 					<nuxt-link to="/contacts" class="footer-link">Магазины</nuxt-link>
 				</div>
@@ -21,7 +21,7 @@
 				</div>
 				<div class="footer-col">
 					<h6 class="footer-heading">ИНФОРМАЦИЯ</h6>
-					<nuxt-link to="" class="footer-link">Бренды</nuxt-link>
+					<nuxt-link to="/brand" class="footer-link">Бренды</nuxt-link>
 					<nuxt-link to="" class="footer-link">Акции</nuxt-link>
 				</div>
 				<div class="footer-col">

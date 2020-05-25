@@ -20,6 +20,11 @@
       <div class="row">
         <div class="left-col">
           <!-- <nuxt-link class="category-page-back" to="/catalog">Все категории</nuxt-link> -->
+					<!-- <subcategories /> -->
+          <!-- <category-filter
+          :allProducts="allProducts"
+          :filterByBrands="false"
+          /> -->
         </div>
         <div class="right-col">
           <brand :brand="products" />
@@ -39,7 +44,7 @@
             </div>
           </div>
           <div class="category-page-sort-wrp">
-            <p class="category-page-total">{{ 12 }} товара</p>
+            <p class="category-page-total">{{ products.products.length }} товара</p>
             <div class="category-page-sort">
               <p>Сортировать:</p>
               <select>
@@ -50,7 +55,7 @@
             </div>
           </div>
           <div class="category-page-product-wrp">
-            <!-- :: {{ products }} -->
+            <!-- :: {{ allProducts }} -->
             <!-- {{ brands }} -->
             <product v-for="product in products.products " :key="product.id" :product="product" />
           </div>
@@ -70,7 +75,7 @@ import pagination from "@/components/partials/pagination";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  middleware: ["brands"],
+  middleware: ["catalog", "brandProducts"],
   data: () => ({
     isBrand: false,
     sort: "default",
@@ -87,7 +92,9 @@ export default {
   computed: {
     ...mapGetters({
       brands: 'brand/GET_BRANDS',
-      products: "brand/GET_BRAND_PRODUCTS"
+      products: "brand/GET_BRAND_PRODUCTS",
+      // allProducts: 'products/GET_ALL_PRODUCTS'
+      // categories: "menu/GET_CATEGORIES",
     }),
     category() {
       for (let i = 0; i < this.categories.length; ++i) {
@@ -121,6 +128,11 @@ export default {
       }
       return null;
     },
+    allProducts() {
+      const prods = { ...this.products, data: this.products.products }
+      console.log(prods)
+      return prods
+    }
     // getBrandsFromURL() {
     //   const brandSlug = this.$route.params.brand
     //   let brands = this.$store.dispatch('brand/fetchBrandProducts', brandSlug)

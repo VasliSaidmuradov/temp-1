@@ -14,14 +14,14 @@
         <div class="category-page-sort">
           <p>Сортировать:</p>
           <select v-model="sort">
-            <option value>По умолчанию</option>
-            <option value>По возрастанию</option>
-            <option value>По убыванию</option>
+            <option value="default">По умолчанию</option>
+            <option value="asc">По возрастанию</option>
+            <option value="desc">По убыванию</option>
           </select>
         </div>
       </div>
-      <div class="search-page-row" v-if="searchQuery">
-        <div v-for="product in $chunk(products ? products.data : [], 4)" :key="product.id">
+      <div v-if="searchQuery">
+        <div class="search-page-row" v-for="product in $chunk(products ? products.data : [], 4)" :key="product.id">
           <product v-for="item in product" :key="item.id" :product="item" />
         </div>
       </div>
@@ -58,7 +58,7 @@ export default {
         this.$router.push({ path: this.$route.path, query: query });
       }
     },
-    sort() {
+    sort(val) {
       let query = { ...this.$route.query };
       if (val === "default") {
         delete query["sort"];

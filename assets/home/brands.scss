@@ -33,9 +33,14 @@
 	}
 }
 
-@media screen and (max-width: 426px) {
+@media screen and (max-width: 1601px) {
 	.brands-slider {
 		margin-top: 60px;
+	}
+}
+
+@media screen and (max-width: 426px) {
+	.brands-slider {
 		&-title {
 			@include em(20px);
 		}

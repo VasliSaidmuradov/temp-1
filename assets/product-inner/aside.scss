@@ -95,6 +95,16 @@
 		height: 45px;
 		margin-top: 10px;
 	}
+	.product-counter {
+		opacity: 1;
+		justify-content: space-between;
+		button {
+			height: 50px;
+			background-size: cover;
+			overflow: hidden;
+			border-radius: 6px;
+		}
+	}
 }
 
 @media screen and (max-width: 1025px) {

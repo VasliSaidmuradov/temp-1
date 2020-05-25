@@ -14,7 +14,13 @@
 					<span>150 бонусов</span> для <nuxt-link to>зарегистрированного</nuxt-link> покупателя
 				</p>
 			</div>
-			<button @click="addToCart" :disabled="!info.quantity" class="button --main-color">Добавить в корзину</button>
+      <div v-if="isInCart(info)"  class="product-counter">
+        <!-- <button @click="count = count > 1 ? count - 1 : 1" class="product-counter-decrease"></button> -->
+        <button class="product-counter-decrease" @click="decrease(info)"></button>
+        <span>{{ getCartQuantity(info) }} {{info.tag.unit}}</span>
+        <button class="product-counter-increase" :disabled="info.quantity <= getCartQuantity(info)" @click="increase(info)"></button>
+      </div>
+			<button v-else @click="addToCart" :disabled="!info.quantity" class="button --main-color">Добавить в корзину</button>
 			<button @click="toggleFavorite(info)" :class="{'-added' : isFavorite(info)}" class="button --white">
         <favorites-icon />
         В избранное

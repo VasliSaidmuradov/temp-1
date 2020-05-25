@@ -7,8 +7,8 @@
       </div>
       <div v-swiper:productImagesMain="options">
         <div class="swiper-wrapper">
-          <div class="swiper-slide" v-for="(image,index) in 4" :key="index">
-            <img src="/images/product.png" alt=""/>
+          <div class="swiper-slide" v-for="(image,index) in images" :key="index">
+            <img :src="image" alt=""/>
           </div>
         </div>
       </div>
@@ -16,8 +16,8 @@
     <div class="product-images-slider-wrp">
       <div v-swiper:productImagesThumbs="optionsThumbs">
         <div class="swiper-wrapper">
-          <div class="swiper-slide" v-for="(image,index) in 4" :key="index">
-            <img src="/images/product.png" alt="" class="product-images-slide-img" />
+          <div class="swiper-slide" v-for="(image,index) in images" :key="index">
+            <img :src="image" alt="" class="product-images-slide-img" />
           </div>
         </div>
       </div>
@@ -55,8 +55,14 @@ export default {
           nextEl: ".product-images-next",
           prevEl: ".product-images-prev"
         }
-      }
+      },
+      fakeImages: ['/images/product.png', '/images/product.png', '/images/product.png']
     };
+  },
+  computed: {
+    images() {
+      return !this.product.images ? this.product.images : this.fakeImages
+    }
   }
 };
 </script>

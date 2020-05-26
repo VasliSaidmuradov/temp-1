@@ -90,7 +90,7 @@ export const actions = {
       store.commit('SET_PRODUCT_IDS', {})
       store.commit('UPDATE_PRODUCTS_COOKIES')
     }
-    console.log(resp)
+    return resp
   },
   async useBonuses(store, payload) {
     if (!this.$checkAuth()) {

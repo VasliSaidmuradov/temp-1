@@ -119,8 +119,6 @@
                 <!-- <nuxt-link class="button --white" to="">Перейти к оплате</nuxt-link> -->
               </div>
             </div>
-            <!-- {{ order }} <br>
-            {{ order.phone ? order.phone.length : 0 }} -->
           </div>
         </div> 
 			</form>
@@ -178,7 +176,7 @@ export default {
     ...mapActions({
 			checkout: 'cart/checkout'
     }),
-    async createOrder() {
+    async createOrder(redirect) {
 			if (this.order.phone.length < 10) {
 				this.$alert({
 					message: 'Неправильный номер телефона!',
@@ -190,9 +188,14 @@ export default {
         // this.order.street = null,
         this.order.house = null,
         this.order.flat = null,
-        this.order.index = null 
+        this.order.index = null
       }
-			await this.checkout(this.order)
+      const paybox = await this.checkout(this.order)
+      if (this.order.payment_type == '1') {
+        const url = paybox.join('?')
+        window.location.href = url
+        return
+      }
 			document.body.classList.add('--hidden')
 			this.$store.commit('cart/setCheckoutModal', true)
 			this.resetData()

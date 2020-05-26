@@ -39,7 +39,6 @@ export const actions = {
     store.commit('UPDATE_PRODUCTS_COOKIES')
   },
   toggleFavorite(store, payload) {
-    // console.log('favorite toggle', payload)
     if (store.getters['IS_FAVORITE'](payload)) {
       store.commit('REMOVE_PRODUCT_FROM_PRODUCTS', payload)
     } else {

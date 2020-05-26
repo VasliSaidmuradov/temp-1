@@ -6,6 +6,6 @@ export default async function ({ route, store, redirect }) {
       redirect('/profile');
       store.commit("auth/SET_MODAL_STATE", true);
     }
-      console.log(this)
+      console.log('this: ', this)
   }
 }

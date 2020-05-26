@@ -48,7 +48,7 @@
 					</li>
 					<li class="profile-history-list-item">
 						<p class="profile-page-text">Способ оплаты</p>
-						<p class="profile-page-text">{ payment_types[order.payment_type] }}</p>
+						<p class="profile-page-text">{{ payment_types[order.payment_type] }}</p>
 					</li>
 					<li class="profile-history-list-item">
 						<p class="profile-page-text">Общая стоимость</p>

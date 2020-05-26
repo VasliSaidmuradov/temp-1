@@ -30,6 +30,7 @@ export default {
 		profileNav,
 		historyTable,
 		removeOrder
-	}
+  },
+  middleware: ['auth'],
 }
 </script>

@@ -49,11 +49,7 @@ export const actions = {
   },
 
   async fetchUser(store, payload) {
-    // console.log('fetch user payload: ', payload)
-
     let user = await this.$api.get('/user', {})
-    // console.log('fetch user USER: ', user)
-
     if (user) {
       store.commit('SET_USER', user)
     } else {
@@ -71,7 +67,8 @@ export const actions = {
     let resp = await this.$api.put('/password', payload, 'updatePassword')
   },
   async cancelOrder(store, payload) {
-    let resp = await this.$api.put('/order', payload, 'cancelOrder')
+    console.log('cancel: ', payload)
+    let resp = await this.$api.put('/user/order', payload, 'cancelOrder')
   }
 }
 

@@ -17,9 +17,9 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
     computed: {
-        ...mapGetters({
-            isOpen: 'GET_REMOVE_ORDER'
-        })
+      ...mapGetters({
+        isOpen: 'GET_REMOVE_ORDER'
+      })
     },
     methods: {
       ...mapActions({
@@ -30,7 +30,7 @@ export default {
             this.$store.commit('SET_REMOVE_ORDER', false)
         },
         confirm() {
-          this.cancelOrder({id: this.order.id})
+          this.cancelOrder({id: this.isOpen.id})
           this.refresh()
           this.$store.commit('SET_REMOVE_ORDER', false)
         }

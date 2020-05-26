@@ -3,8 +3,8 @@
 		<p class="profile-page-subtitle">Новый адрес</p>
 		<select class="profile-page-select">
 			<option value="" disabled selected>Город</option>
-			<option value="">Алматы</option>
-			<option value="">Астана</option>
+			<option value="Almaty">Алматы</option>
+			<!-- <option value="">Астана</option> -->
 		</select>
 		<input type="text" placeholder="Улица" class="profile-page-input">
 		<div class="profile-page-input-wrp">

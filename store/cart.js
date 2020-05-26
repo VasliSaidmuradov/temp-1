@@ -11,7 +11,15 @@ export const state = () => ({
 export const getters = {
   getCheckoutModal: state => state.isCheckoutModalOpen,
   GET_PRODUCT_IDS: (state) => state.product_ids,
-  GET_PRODUCTS: (state) => state.products,
+  GET_PRODUCTS: state => {
+    const data = state.products.data.map(el => {
+      return {
+        ...el,
+        image: el.image ? el.image : require('@/static/images/product.png')
+      }
+    })
+    return {...state.products, data: data }
+  },
   GET_BONUSES: (state) => state.bonuses,
   GET_QUANTITY: (state) => Object.keys(state.product_ids).length,
   IS_PRODUCT_IN_CART: (state) => (payload) => state.product_ids[`${payload.id}`] > 0,

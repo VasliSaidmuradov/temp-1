@@ -35,6 +35,11 @@ export default {
     mobileMenu,
     notification
   },
+  watch: {
+    '$route.fullPath': function () {
+      window.scrollTo(0, 0)
+    }
+  },
   computed: {
     ...mapGetters({
       isOverlayActive: 'GET_OVERLAY',

@@ -52,7 +52,6 @@ export const mutations = {
 
 export const actions = {
   async fetchCartProducts(store, payload) {
-    console.log('cart prod ids: ', store.state.product_ids)
     store.commit('SET_PRODUCTS', await this.$api.get('/catalog', {
       ids: Object.keys(store.state.product_ids)
     }))

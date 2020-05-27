@@ -122,14 +122,12 @@ export const actions = {
   async fetchAllProducts(store, payload = '') {
     const reg = /^[^?]+/g
     const url = payload.match(reg).join('')
-    console.log('payload all prod: ', url)
     store.commit('SET_ALL_PRODUCTS', await this.$api.get(url, {}, 'allProducts'))
   },
   async fetchHits(store, payload) {
     store.commit('SET_HITS', await this.$api.get('/catalog', payload))
   },
   async fetchHints(store, payload) {
-    console.log('HINTS: ', payload)
     store.commit('SET_HINTS', await this.$api.get('/catalog', payload))
   },
   async fetchNews(store, payload) {
@@ -140,7 +138,6 @@ export const actions = {
   },
   async fetchProduct(store, payload) {
     const res = await this.$api.get(`/product/${payload}`)
-    console.log('fetch prod: ', res)
     store.commit('SET_PRODUCT', res.product)
     store.commit('SET_SIMILARS', res.similars)
   },

@@ -51,9 +51,6 @@ export const actions = {
     commit('SET_IS_MOBILE', req.headers['x_is_mobile'] == 'true')
 
     const queue = [ dispatch('menu/fetchCategories') ]
-    // console.log('queue1: ', queue)
-    // console.log('Cookie parser: ', cookieparser)
-
     if (req.headers.cookie) {
       const cookies = cookieparser.parse(req.headers.cookie)
 

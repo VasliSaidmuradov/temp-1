@@ -78,7 +78,6 @@ export default {
         use: ['babel-loader', 'vue-svg-loader'],
       });
       if (isClient) {
-        console.log('Mode: ', process.env.NODE_ENV)
         config.devtool = process.env.NODE_ENV === 'development' ? '#source-map' : '';
       }
     }

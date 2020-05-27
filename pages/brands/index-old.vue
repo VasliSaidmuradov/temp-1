@@ -170,13 +170,10 @@ export default {
     filterBrand(e) {
       if (e.checked) {
         const res = this.allProducts.data.filter(el => el.brand.id == e.value)
-        console.log(res)
         this.productList.push(...res)
-        console.log(e.value + ' checked!', this.productList)
       }
       else {
         this.productList = this.productList.filter(el => el.brand.id != e.value)
-        console.log(e.value + ' unchecked!', this.productList )
       }
     }
   }

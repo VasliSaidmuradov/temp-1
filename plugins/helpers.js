@@ -62,7 +62,6 @@ export default function ({ app, store, req, route }, inject) {
   })
 
   inject('addParam', (query, filter, value, multiple, toggle) => {
-    // console.log(query, filter, value)
     filter = filter.toString()
     if (value) {
       value = value.toString()

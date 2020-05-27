@@ -66,7 +66,6 @@ export const actions = {
     let resp = await this.$api.put('/password', payload, 'updatePassword')
   },
   async cancelOrder(store, payload) {
-    console.log('cancel: ', payload)
     let resp = await this.$api.put('/user/order', payload, 'cancelOrder')
   }
 }

@@ -2,7 +2,7 @@
   <div class="category-page">
     <div class="container">
       <div class="breadcrumbs">
-        <nuxt-link to>Главная /</nuxt-link>
+        <nuxt-link to="/">Главная /</nuxt-link>
         <nuxt-link v-if="category" :to="`/catalog/${category.slug}`">
           {{ category.name }}
           <span v-if="subcategory">/</span>

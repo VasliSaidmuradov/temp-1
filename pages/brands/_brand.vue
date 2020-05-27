@@ -2,21 +2,12 @@
   <div class="category-page">
     <div class="container">
       <div class="breadcrumbs">
-        <nuxt-link to>Главная /</nuxt-link>
-        <!-- <nuxt-link v-if="category" :to="`/catalog/${category.slug}`">
-          {{ category.name }}
-          <span v-if="subcategory">/</span>
+        <nuxt-link to="/">Главная /</nuxt-link>
+        <nuxt-link v-if="true" to>
+          {{ products.name }}
         </nuxt-link>
-        <nuxt-link v-if="subcategory" :to="`/catalog/${category.slug}/${subcategory.slug}`">
-          {{ subcategory.name }}
-          <span v-if="tag">/</span>
-        </nuxt-link>
-        <nuxt-link
-          v-if="tag"
-          :to="`/catalog/${category.slug}/${subcategory.slug}/${tag.slug}`"
-        >{{ tag.name }}</nuxt-link> -->
       </div>
-      <h1 class="category-page-title">{{ `${products.name}` }}</h1>
+      <!-- <h1 class="category-page-title">{{ `${products.name}` }}</h1> -->
       <div class="row">
         <div class="left-col">
           <!-- <nuxt-link class="category-page-back" to="/catalog">Все категории</nuxt-link> -->

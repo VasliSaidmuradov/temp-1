@@ -16,19 +16,20 @@
           :allProducts="allProducts"
           :filterByBrands="false"
           /> -->
+          <!-- <nuxt-link v-for="brand in brands" :key="brand.id" :to="brand.slug">{{ brand.name }}</nuxt-link> -->
         </div>
         <div class="right-col">
           <brand :brand="products" />
           <div class="category-page-mob">
-            <!-- <p class="category-page-total">{{ products.total }} товара</p> -->
+            <p class="category-page-total">{{ products.products.length }} товара</p>
             <nuxt-link class="category-page-back" to>Все категории</nuxt-link>
             <div class="category-page-row">
               <div class="category-page-sort">
                 <p>Сортировать:</p>
-                <select>
-                  <option value>По умолчанию</option>
-                  <option value>По возрастанию</option>
-                  <option value>По убыванию</option>
+                <select v-model="sort">
+                  <option value="default">По умолчанию</option>
+                  <option value="asc">По возрастанию</option>
+                  <option value="desc">По убыванию</option>
                 </select>
               </div>
               <button class="category-page-filter">Фильтр</button>
@@ -38,21 +39,18 @@
             <p class="category-page-total">{{ products.products.length }} товара</p>
             <div class="category-page-sort">
               <p>Сортировать:</p>
-              <select>
-                <option value>По умолчанию</option>
-                <option value>По возрастанию</option>
-                <option value>По убыванию</option>
+              <select v-model="sort">
+                <option value="default">По умолчанию</option>
+                <option value="asc">По возрастанию</option>
+                <option value="desc">По убыванию</option>
               </select>
             </div>
           </div>
           <div class="category-page-product-wrp">
-            <!-- :: {{ allProducts }} -->
-            <!-- {{ brands }} -->
             <product v-for="product in products.products " :key="product.id" :product="product" />
           </div>
         </div>
       </div>
-      <!-- <pagination :paginator="products" /> -->
     </div>
   </div>
 </template>
@@ -63,7 +61,7 @@ import categoryFilter from "@/components/category/filter";
 import brand from "@/components/category/brand";
 import product from "@/components/partials/product";
 import pagination from "@/components/partials/pagination";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   middleware: ["catalog", "brandProducts"],
@@ -121,15 +119,8 @@ export default {
     },
     allProducts() {
       const prods = { ...this.products, data: this.products.products }
-      console.log(prods)
       return prods
     }
-    // getBrandsFromURL() {
-    //   const brandSlug = this.$route.params.brand
-    //   let brands = this.$store.dispatch('brand/fetchBrandProducts', brandSlug)
-    //   console.log(brands)
-    //   return brands
-    // }
   },
 
   watch: {
@@ -154,10 +145,7 @@ export default {
           `${this.$route.path}${query}`
         );
       }, 500);
-    },
-    // '$route.params.brand': fucntion(val) {
-    //   this.$store.dispatch('')
-    // }
+    }
   },
   mounted() {
     if (this.$route.query.sort) {
@@ -165,22 +153,16 @@ export default {
     }
   },
   methods: {
-    ...mapActions({
-
-    }),
     showFilter() {
       this.$store.commit("SET_MOBILE_FILTER", true);
     },
     filterBrand(e) {
       if (e.checked) {
         const res = this.allProducts.data.filter(el => el.brand.id == e.value)
-        // console.log(res)
         this.productList.push(...res)
-        // console.log(e.value + ' checked!', this.productList)
       }
       else {
         this.productList = this.productList.filter(el => el.brand.id != e.value)
-        // console.log(e.value + ' unchecked!', this.productList )
       }
     }
   }

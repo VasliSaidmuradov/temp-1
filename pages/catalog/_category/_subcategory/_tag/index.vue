@@ -32,10 +32,8 @@
             @brand-filter="filterBrand"
             :cats="tag ? null : subcategory ? subcategory.tags : category ? category.subcategories : categories"
           />
-          <!-- {{ allProducts }} -->
         </div>
         <div class="right-col">
-          <!-- <brand v-show="true" /> -->
           <div class="category-page-mob">
             <p class="category-page-total">{{ products.total }} товара</p>
             <nuxt-link class="category-page-back" to>Все категории</nuxt-link>
@@ -63,7 +61,6 @@
             </div>
           </div>
           <div class="category-page-product-wrp">
-            <!-- {{ productList }} -->
             <product v-for="product in productList.length ? productList : products.data " :key="product.id" :product="product" />
           </div>
         </div>
@@ -180,13 +177,10 @@ export default {
     filterBrand(e) {
       if (e.checked) {
         const res = this.allProducts.data.filter(el => el.brand.id == e.value)
-        console.log(res)
         this.productList.push(...res)
-        console.log(e.value + ' checked!', this.productList)
       }
       else {
         this.productList = this.productList.filter(el => el.brand.id != e.value)
-        console.log(e.value + ' unchecked!', this.productList )
       }
     }
   }

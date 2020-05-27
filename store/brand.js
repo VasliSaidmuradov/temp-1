@@ -13,7 +13,6 @@ export const mutations = {
 export const actions = {
   async fetchBrands(store) {
     const res = await this.$api.get('/brands')
-    // console.log('Brands: ', res)
     store.commit('SET_BRANDS', res)
   },
   async fetchBrandProducts(store, payload) {

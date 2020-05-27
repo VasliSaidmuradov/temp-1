@@ -4,10 +4,9 @@
       <span class="news-aside-title">Новости</span>
       <nuxt-link to="/news">Все статьи</nuxt-link>
     </div>
-    <nuxt-link v-for="article in news.data" :key="article.id" class="news-aside-link" :to="`/news/${article.slug}`">
+    <nuxt-link v-for="article in newsList" :key="article.id" class="news-aside-link" :to="`/news/${article.slug}`">
       <span class="news-aside-date">{{ $formatDate(article.created_at) }}</span>
       <p class="news-aside-heading">{{ article.name }}</p>
-      <!-- {{ article }} -->
     </nuxt-link>
   </div>
 </template>
@@ -22,7 +21,10 @@ export default {
   computed: {
     ...mapGetters({
       news: "content/GET_POSTS"
-    })
+    }),
+    newsList() {
+      return this.news.data.slice(0,4)
+    }
   }
 };
 </script>

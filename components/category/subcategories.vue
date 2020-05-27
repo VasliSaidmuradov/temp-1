@@ -16,10 +16,13 @@ export default {
 		categories: Array,
     category: Object,
     subcat: Object,
-    tag: Object
+    tag: Object,
+    brandList: Array,
+    isBrandPage: Boolean
 	},
 	computed: {
 		nav() {
+      if (this.isBrandPage) return this.brandList
 			if (this.tag) return this.subcat.tags
 			if (this.subcat) return this.category.subcategories
 			return this.categories

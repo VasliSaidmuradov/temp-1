@@ -25,6 +25,7 @@
             :category="category"
             :subcat="subcategory"
             :tag="tag"
+            :isBrandPage="false"
           />
           <category-filter
             :allProducts="allProducts"

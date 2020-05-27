@@ -10,8 +10,8 @@
       <!-- <h1 class="category-page-title">{{ `${products.name}` }}</h1> -->
       <div class="row">
         <div class="left-col">
-          <!-- <nuxt-link class="category-page-back" to="/catalog">Все категории</nuxt-link> -->
-					<!-- <subcategories /> -->
+          <nuxt-link class="category-page-back" to>Список брендов</nuxt-link>
+					<subcategories :brandList="brands" :isBrandPage="true" />
           <!-- <category-filter
           :allProducts="allProducts"
           :filterByBrands="false"
@@ -64,7 +64,7 @@ import pagination from "@/components/partials/pagination";
 import { mapGetters } from "vuex";
 
 export default {
-  middleware: ["catalog", "brandProducts"],
+  middleware: ["catalog", "brandProducts", "brands"],
   data: () => ({
     isBrand: false,
     sort: "default",

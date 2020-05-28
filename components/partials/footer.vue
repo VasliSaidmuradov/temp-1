@@ -21,7 +21,7 @@
 				</div>
 				<div class="footer-col">
 					<h6 class="footer-heading">ИНФОРМАЦИЯ</h6>
-					<nuxt-link to="/brand" class="footer-link">Бренды</nuxt-link>
+					<nuxt-link :to="`/brands/${brands[0].slug}`" class="footer-link">Бренды</nuxt-link>
 					<nuxt-link to="" class="footer-link">Акции</nuxt-link>
 				</div>
 				<div class="footer-col">
@@ -31,5 +31,22 @@
 				</div>
 			</div>
 		</div>
+    >>> {{ brands ? brands[0].name : 'no data' }}
 	</footer>
 </template>
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  middleware: ['brands'],
+  computed: {
+    ...mapGetters({
+      brands: 'brand/GET_BRANDS'
+    })
+  }
+}
+</script>
+
+<style>
+
+</style>

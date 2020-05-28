@@ -13,20 +13,21 @@
         <img :src="product.image" :alt="product.name" />
       </div>
       <div class="product-rating-wrp"></div>
-      <p class="product-brand">{{ product.brand.name }}</p>
+      <p class="product-brand">{{ product.brand ? product.brand.name : 'Нет бренда' }}</p>
       <p class="product-name">{{ product.name }}</p>
       <div class="product-price-wrp">
         <p class="product-price">{{ product.price }} ₸</p>
         <p v-if="product.old_price" class="product-old-price">{{ product.old_price }} ₸</p>
       </div>
     </nuxt-link>
-    <div v-if="isInCart(product)" class="product-counter">
+    <div v-if="isInCart(product) && product.quantity" class="product-counter">
       <!-- <button @click="count = count > 1 ? count - 1 : 1" class="product-counter-decrease"></button> -->
       <button @click="decrease(product)" class="product-counter-decrease"></button>
       <span>{{ getCartQuantity(product) }} {{product.tag.unit}}</span>
       <button :disabled="product.quantity <= getCartQuantity(product)" @click="increase(product)" class="product-counter-increase"></button>
     </div>
-    <button v-if="!isInCart(product)" @click="addToCart" class="button --black">В корзину</button>
+    <button v-if="!isInCart(product) && product.quantity" @click="addToCart" class="button --black">В корзину</button>
+    <button v-if="!product.quantity" class="button --not-available">Нет в наличии</button>
   </div>
 </template>
 

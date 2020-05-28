@@ -7,6 +7,7 @@
 				<p class="product-aside-old-price">{{ info.old_price }} ₸</p>
 			</div>
 			<p v-if="info.quantity" class="product-aside-available">В наличии на складе</p>
+			<p v-else class="product-aside-not-available">Нет в наличии</p>
 			<h3 class="product-aside-title">Бонусы за покупки</h3>
 			<div class="product-aside-row">
 				<img src="/icons/bonus-icon.svg" alt="Skiny icon" class="product-aside-icon">
@@ -21,9 +22,11 @@
         <!-- <button @click="count = count > 1 ? count - 1 : 1" class="product-counter-decrease"></button> -->
         <button class="product-counter-decrease" @click="decrease(info)"></button>
         <span>{{ getCartQuantity(info) }} {{info.tag.unit}}</span>
-        <button class="product-counter-increase" :disabled="info.quantity <= getCartQuantity(info)" @click="increase(info)"></button>
+        <button class="product-counter-increase" :class="{}" :disabled="info.quantity <= getCartQuantity(info)" @click="increase(info)"></button>
       </div>
-			<button v-else @click="addToCart" :disabled="!info.quantity" class="button --main-color">Добавить в корзину</button>
+			<button v-else @click="addToCart" :disabled="!info.quantity" class="button button-add-to-cart" :class="{'--disabled': !info.quantity, '--main-color': info.quantity}">
+        <cart-icon />
+        Добавить в корзину</button>
 			<button @click="toggleFavorite(info)" :class="{'-added' : isFavorite(info)}" class="button --white">
         <favorites-icon />
         В избранное
@@ -36,13 +39,15 @@
 <script>
 import { mapGetters, mapActions } from "vuex"
 import favoritesIcon from '@/static/icons/favorites-icon2.svg'
+import cartIcon from '@/static/icons/cart-icon.svg'
 
 export default {
   props: {
     info: Object
   },
   components: {
-    favoritesIcon
+    favoritesIcon,
+    cartIcon
   },
   data() {
     return {

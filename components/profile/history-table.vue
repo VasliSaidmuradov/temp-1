@@ -20,7 +20,7 @@
 				<div v-for="item in order.items" :key="item.id"  class="profile-history-product">
 					<div class="profile-history-col">
 						<div class="profile-history-img">
-							<img :src="item.product.image" :alt="item.product.name">
+							<img :src="item.product.image ? item.product.image : require('@/static/images/product.png')" :alt="item.product.name">
 						</div>
 						<p class="profile-page-text">{{ item.product.name }}</p>
 					</div>

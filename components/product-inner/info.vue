@@ -2,7 +2,7 @@
   <div class="product-info">
     <div class="product-info-rating"></div>
     <h3 class="product-info-title">Описание</h3>
-    <p class="product-info-text">{{ info.description }}</p>
+    <p class="product-info-text" v-html="info.description"></p>
     <h3 class="product-info-title">Доставка</h3>
     <div class="product-info-row">
       <img src="/icons/delivery-icon.svg" class="product-info-delivery-icon" alt="Skiny icon" />

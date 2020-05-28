@@ -72,7 +72,15 @@ export const actions = {
 
 
 export const getters = {
-  GET_PRODUCTS: state => state.products,
+  GET_PRODUCTS: state => {
+    const data = state.products.data.map(el => {
+      return {
+        ...el,
+        image: el.image ? el.image : require('@/static/images/product.png')
+      }
+    })
+    return {...state.products, data: data }
+  },
   GET_PRODUCT_IDS: state => state.product_ids,
   IS_FAVORITE: state => payload => state.product_ids.includes(payload.id),
   GET_QUANTITY: state => state.product_ids.length,

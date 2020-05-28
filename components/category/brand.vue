@@ -1,7 +1,7 @@
 <template>
     <div class="category-brand">
         <div class="category-brand-logo">
-            <img :src="brand.image" alt="Skiny image">
+            <img :src="brand.image ? brand.image : require('@/static/images/brand.png')" alt="Skiny image">
         </div>
         <div class="category-brand-text-wrp">
             <div class="category-brand-name-wrp">
@@ -10,7 +10,6 @@
             </div>
             <p class="category-brand-text" v-html="brand.description"></p>
         </div>
-        <!-- {{ brand }} -->
     </div>
 </template>
 <script>

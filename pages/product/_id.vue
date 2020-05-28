@@ -9,14 +9,14 @@
       </div>
       <!-- similars: {{ similars }} -->
       <div class="product-page-name-wrp">
-        <p class="product-page-brand">{{ product.brand.name }}</p>
+        <p class="product-page-brand">{{ product.brand ? product.brand.name : '' }}</p>
         <p class="product-page-name">{{ product.name }}</p>
       </div>
       <div class="product-page-row">
         <div class="product-page-col">
           <images :product="product" />
           <div class="product-page-mob-name">
-            <p class="product-page-brand">{{ product.brand.name }}</p>
+            <p class="product-page-brand">{{ product.brand ? product.brand.name : '' }}</p>
             <p class="product-page-name">{{ product.name }}</p>
           </div>
         </div>

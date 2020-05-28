@@ -21,9 +21,16 @@
     &.--main-color {
         background: var(--color-base);
     }
+    &.--disabled {
+      background: rgba($color-base, .5);
+    }
     &.--white {
         background: #fff;
         color: var(--color-base);
+    }
+    &.--not-available {
+      background: var(--bg-base);
+      color: var(--text-red);
     }
     &.--arrow {
         padding-right: 60px;

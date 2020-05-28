@@ -30,7 +30,14 @@
 		color: #4CAF50;
 		margin-top: 5px;
 		margin-bottom: 30px;
-	}
+  }
+  &-not-available {
+    @include em(14px);
+		font-weight: 600;
+    color: var(--text-red);
+    margin-top: 5px;
+		margin-bottom: 30px;
+  }
 	&-title {
 		@include em(16px);
 		font-weight: 700;
@@ -60,7 +67,7 @@
 		width: 100%;
 		text-align: left;
 		padding: 16px 25px;
-		position: relative;
+    position: relative;
     svg {
       position: absolute;
       top: 50%;
@@ -87,6 +94,18 @@
     &:hover {
       path {
         stroke: var(--color-base);
+      }
+    }
+    &-add-to-cart {
+      path {
+        fill: #fff;
+        stroke: transparent;
+      }
+      &:hover {
+        path {
+          fill: #fff;
+          stroke: transparent;
+        }
       }
     }
 	}

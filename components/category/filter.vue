@@ -30,17 +30,21 @@
       </label>
     </div>
     <div class="filter-block">
-      <p class="filter-title">Эксклюзивные предложения</p>
-      <label class="filter-checkbox">
-        <input type="checkbox" />
+      <!-- <p class="filter-title">Эксклюзивные предложения</p> -->
+      <!-- <label class="filter-checkbox">
+        <input
+          type="checkbox"
+          value="sales"
+          @change="salesFilter"
+        />
         <div class="filter-checkmark"></div>
         <p>Скидки</p>
-      </label>
-      <label class="filter-checkbox">
+      </label> -->
+      <!-- <label class="filter-checkbox">
         <input type="checkbox" />
         <div class="filter-checkmark"></div>
         <p>Товары с подарками</p>
-      </label>
+      </label> -->
     </div>
   </div>
 </template>
@@ -150,6 +154,9 @@ export default {
     },
     onFilterChange(event) {
       this.$emit("brand-filter", event.target)
+    },
+    salesFilter(event) {
+      this.$emit("sales-filter", event.target)
     },
     clearFilters() {
       this.$clearQuery();

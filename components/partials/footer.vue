@@ -31,7 +31,6 @@
 				</div>
 			</div>
 		</div>
-    >>> {{ brands ? brands[0].name : 'no data' }}
 	</footer>
 </template>
 <script>

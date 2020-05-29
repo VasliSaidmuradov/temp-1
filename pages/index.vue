@@ -5,8 +5,8 @@
         <div class="left-col">
           <Nav></Nav>
           <NewsAside></NewsAside>
-          <a :href="banners[0].link" class="banner-aside">
-            <img :src="banners[0].image" :alt="banners[0].name" />
+          <a :href="banners[0] ? banners[0].link : ''" class="banner-aside">
+            <img :src="banners[0] ? banners[0].image : ''" :alt="banners[0] ? banners[0].name : ''" />
           </a>
         </div>
         <div class="right-col">

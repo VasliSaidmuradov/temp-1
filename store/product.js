@@ -120,10 +120,18 @@ export const actions = {
     store.commit('SET_PRODUCTS', await this.$api.get(payload, {}, 'products'))
   },
   async fetchAllProducts(store, payload = '') {
-    const reg = /^[^?]+/g
-    const url = payload.match(reg).join('')
-    store.commit('SET_ALL_PRODUCTS', await this.$api.get(url, {}, 'allProducts'))
+    if (payload.indexOf('?') != -1) {
+      payload += '&'
+    } else {
+      payload += '?'
+    }
+    store.commit('SET_ALL_PRODUCTS', await this.$api.get(payload, {}, 'products'))
   },
+  // async fetchAllProducts(store, payload = '') {
+  //   const reg = /^[^?]+/g
+  //   const url = payload.match(reg).join('')
+  //   store.commit('SET_ALL_PRODUCTS', await this.$api.get(url, {}, 'allProducts'))
+  // },
   async fetchHits(store, payload) {
     store.commit('SET_HITS', await this.$api.get('/catalog', payload))
   },

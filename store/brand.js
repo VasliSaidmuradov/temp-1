@@ -17,6 +17,7 @@ export const actions = {
   },
   async fetchBrandProducts(store, payload) {
     const res = await this.$api.get(`/brands/${payload}`)
+    console.log('brand prod: ', res)
     store.commit('SET_BRAND_PRODUCTS', res.data)
   },
   async filterByBrands(store, payload) {

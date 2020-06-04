@@ -54,7 +54,7 @@
 									<button @click="currentTab = 'signin'" class="button --white">я вспомнил пароль</button>
 								</div>
 							</form>
-              Reset: {{ restore }}
+              <!-- Reset: {{ restore }} -->
 						</div>
 					</transition>
 					<transition name="fade">

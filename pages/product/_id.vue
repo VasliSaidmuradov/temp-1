@@ -1,6 +1,6 @@
 <template>
   <div class="product-page">
-    <!-- prod: {{product.tag.subcategory}} -->
+    <!-- prod: {{product}} -->
     <div class="container">
       <div class="breadcrumbs">
         <nuxt-link to="/">Главная /</nuxt-link>
@@ -28,8 +28,8 @@
         </div>
       </div>  
       <!-- >>  {{ brandProducts }} -->
-      <other :brandProducts="brandProducts" />
-      <similar :similars="similars" />
+      <!-- <other v-if="brandProducts" :brandProducts="brandProducts" /> -->
+      <similar v-if="similars" :similars="similars" />
     </div>
     <div class="product-page-mobile-btn">
       <!-- <button class="button --main-color">Добавить в корзину</button> -->
@@ -64,7 +64,7 @@ export default {
     ...mapGetters({
       product: "product/GET_PRODUCT",
       similars: "product/GET_SIMILARS",
-      brandProducts: "brand/GET_BRAND_PRODUCTS"
+      // brandProducts: "brand/GET_BRAND_PRODUCTS"
     })
   }
 };

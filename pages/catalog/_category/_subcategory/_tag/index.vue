@@ -31,6 +31,7 @@
             :allProducts="allProducts"
             :filterByBrands="true"
             @brand-filter="filterBrand"
+            @sales-filter="filterSales"
             :cats="tag ? null : subcategory ? subcategory.tags : category ? category.subcategories : categories"
           />
         </div>
@@ -62,12 +63,17 @@
             </div>
           </div>
           <div class="category-page-product-wrp">
-            <product v-for="product in productList.length ? productList : products.data " :key="product.id" :product="product" />
+            <product v-for="product in productList.data ? productList.data : products.data" :key="product.id" :product="product" />
           </div>
+          <!-- <div v-if="salesProducts" class="category-page-product-wrp">
+            <product v-for="product in salesProducts.data " :key="product.id" :product="product" />
+          </div> -->
         </div>
       </div>
-      <pagination :paginator="products" />
+      <pagination :paginator="productList.data ? productList : products" />
+      <!-- <pagination v-if="salesProducts" :paginator="salesProducts" /> -->
     </div>
+    <!-- {{ allProducts }} -->
   </div>
 </template>
 
@@ -80,26 +86,28 @@ import pagination from "@/components/partials/pagination";
 import { mapGetters } from "vuex";
 
 export default {
-  middleware: ["catalog", "brands"],
-  data: () => ({
-    isBrand: false,
-    sort: "default",
-    delay: null,
-    productList: []
-  }),
-  components: {
+    components: {
     subcategories,
     categoryFilter,
     product,
     brand,
     pagination
   },
+  middleware: ["catalog", "brands", "sales"],
+  data: () => ({
+    isBrand: false,
+    sort: "default",
+    delay: null,
+    productList: { data: null },
+    salesProducts: null
+  }),
   computed: {
     ...mapGetters({
       products: "product/GET_PRODUCTS",
       allProducts: "product/GET_ALL_PRODUCTS",
       categories: "menu/GET_CATEGORIES",
-      brandFilterResult: 'brand/GET_FILTER_RESULT'
+      brandFilterResult: 'brand/GET_FILTER_RESULT',
+      sales: 'product/GET_SALES'
     }),
     category() {
       for (let i = 0; i < this.categories.length; ++i) {
@@ -176,12 +184,21 @@ export default {
       this.$store.commit("SET_MOBILE_FILTER", true);
     },
     filterBrand(e) {
+      const all = this.allProducts
       if (e.checked) {
-        const res = this.allProducts.data.filter(el => el.brand.id == e.value)
-        this.productList.push(...res)
+        const data = [...this.allProducts.data.filter(el => el.brand.id == e.value)]
+        this.productList = { ...all, data: data }
       }
       else {
-        this.productList = this.productList.filter(el => el.brand.id != e.value)
+        const data = [...this.allProducts.data.filter(el => el.brand.id != e.value)]
+        this.productList = { ...all, data: data }
+      }
+    },
+    filterSales(e) {
+      if (e.checked) {
+        this.salesProducts = {...this.sales}
+      } else {
+        this.salesProducts = null
       }
     }
   }

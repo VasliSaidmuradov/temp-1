@@ -21,7 +21,7 @@
       <div v-if="isInCart(info)" class="product-counter">
         <!-- <button @click="count = count > 1 ? count - 1 : 1" class="product-counter-decrease"></button> -->
         <button class="product-counter-decrease" @click="decrease(info)"></button>
-        <span>{{ getCartQuantity(info) }} {{info.tag.unit}}</span>
+        <span>{{ getCartQuantity(info) }} {{ info.tag ? info.tag.unit : 'шт' }}</span>
         <button class="product-counter-increase" :class="{}" :disabled="info.quantity <= getCartQuantity(info)" @click="increase(info)"></button>
       </div>
 			<button v-else @click="addToCart" :disabled="!info.quantity" class="button button-add-to-cart" :class="{'--disabled': !info.quantity, '--main-color': info.quantity}">

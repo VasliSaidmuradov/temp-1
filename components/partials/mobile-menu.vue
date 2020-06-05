@@ -4,9 +4,9 @@
 			<nuxt-link class="mobile-menu-fav" @click.native="close" to="/favorites">Избранное</nuxt-link>
 			<nav class="mobile-menu-nav">
 				<nuxt-link class="mobile-menu-main-link" @click.native="close" to="/catalog">Категории</nuxt-link>
-				<nuxt-link class="mobile-menu-main-link" @click.native="close" to="">Акции</nuxt-link>
-				<nuxt-link class="mobile-menu-main-link" @click.native="close" to="/help/bonuses">Бонусы</nuxt-link>
+				<nuxt-link class="mobile-menu-main-link --red-text" @click.native="close" to="">Акции</nuxt-link>
 			</nav>
+			<nuxt-link class="mobile-menu-link" @click.native="close" to="/help/bonuses">Бонусы</nuxt-link>
 			<nuxt-link class="mobile-menu-link" @click.native="close" to="/brand">Бренды</nuxt-link>
 			<nuxt-link class="mobile-menu-link" @click.native="close" to="/help/about">О компании</nuxt-link>
 			<nuxt-link class="mobile-menu-link" @click.native="close" to="/contacts">Контакты</nuxt-link>

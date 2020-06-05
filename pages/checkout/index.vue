@@ -28,7 +28,7 @@
                   <input v-model="order.delivery_type" name="getting" value='1' type="radio">
                   <span class="checkout-page-subtitle">Самовывоз</span>
                   <p class="checkout-page-radio-text">
-                    Без ожидания курьера!<br>2181 пункт в вашем регионе
+                    Без ожидания курьера!
                   </p>
                 </label>
                 <label class="checkout-page-radio" :class="{'--active' : order.delivery_type === '0'}">
@@ -221,13 +221,16 @@ export default {
 			this.order.email = this.$getUser().email
 			this.order.phone = this.$getUser().phone
     }
-    const pinScene = this.$scrollmagic.scene({
-      triggerElement: '.pin-trigger',
-      triggerHook: 0,
-      duration: '100%'
-    })
-    .setPin('.order-aside')
-    this.$scrollmagic.addScene(pinScene)
+    if (window.innerWidth > 426) {
+      console.log('This is mobile!')
+        const pinScene = this.$scrollmagic.scene({
+          triggerElement: '.pin-trigger',
+          triggerHook: 0,
+          duration: '100%'
+        })
+        .setPin('.order-aside')
+        this.$scrollmagic.addScene(pinScene)
+    }
 	},
 }
 </script>

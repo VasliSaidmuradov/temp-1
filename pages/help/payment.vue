@@ -3,7 +3,7 @@
         <div class="container">
             <div class="breadcrumbs">
                 <nuxt-link to="/">Главная / </nuxt-link>
-                <nuxt-link to="">Помощь / </nuxt-link>
+                <!-- <nuxt-link to="">Помощь / </nuxt-link> -->
                 <nuxt-link to="">Оплата</nuxt-link>
             </div>
             <div class="row">

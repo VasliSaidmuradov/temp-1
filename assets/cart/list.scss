@@ -128,8 +128,20 @@
 			padding-right: 0;
 		}
 		&-btn-wrp {
-			margin-left: auto;
-		}
+      position: relative;
+      justify-content: flex-end;
+      align-items: center;
+      margin-left: auto;
+      width: 100%;
+    }
+    &-favorites {
+      top: 10px;
+      left: 15px;
+    }
+    &-remove {
+      top: 10px;
+      left: 65px;
+    }
 	}
 }
 
@@ -140,6 +152,14 @@
 				width: 60px;
 				height: 60px;
 			}
-		}
+    }
+    &-favorites {
+      top: 10px;
+      left: 0;
+    }
+    &-remove {
+      top: 10px;
+      left: 40px;
+    }
 	}
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="product" v-if="product">
-    <!-- {{ product.brand }} -->
+    <!-- {{ product }} -->
     <div class="product-icon-wrp">
       <img v-if="product.is_hit" src="/icons/hit-icon.svg" alt="Skiny icon" />
       <img v-if="product.is_new" src="/icons/new-icon.svg" alt="Skiny icon" />

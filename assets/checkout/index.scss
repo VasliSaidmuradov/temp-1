@@ -96,17 +96,23 @@
 		}
 		&-radio {
 			width: 48%;
-		}
+    }
 	}
 }
 
 @media screen and (max-width: 426px) {
-	.checkout-page {
-		&-radio-wrp {
-			flex-wrap: wrap;
+  .checkout-page {
+    &-radio-wrp {
+      flex-wrap: wrap;
 		}
 		&-radio {
-			width: 100%;
+      width: 100%;
 		}
+    &-input-wrp {
+      flex-direction: column;
+      input {
+        width: 100%;
+      }
+    }
 	}
 }

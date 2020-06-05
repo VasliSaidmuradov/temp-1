@@ -75,6 +75,9 @@
         background-size: contain;
     }
 }
+.--red-text {
+  color: var(--text-red) !important;
+}
 
 @media screen and (max-width: 426px) {
     .product-counter {
@@ -86,4 +89,11 @@
     .section-title {
         @include em(24px);
     }
+}
+@media screen and (max-width: 321px) {
+  .product-counter {
+    button {
+      width: 40px;
+    }
+  }
 }

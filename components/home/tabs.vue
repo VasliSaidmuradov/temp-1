@@ -31,7 +31,7 @@
         </transition>
         <transition name="fade">
           <tab v-if="sales" name="Акции">
-            <product   v-for="product in sales.data" :key="product.id" :product="product" />
+            <product v-for="product in sales.data" :key="product.id" :product="product" />
           </tab>
         </transition>
       </div>

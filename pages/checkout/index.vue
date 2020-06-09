@@ -118,6 +118,7 @@
                 <button type="submit" class="button --white" :disabled="sum <= 0">Оформить заказ</button>
                 <!-- <nuxt-link class="button --white" to="">Перейти к оплате</nuxt-link> -->
               </div>
+              <p v-if="$getError('order')" class="error-text">{{ $getError('order') }}</p>
             </div>
           </div>
         </div> 
@@ -201,6 +202,12 @@ export default {
           document.body.classList.add('--hidden')
           this.$store.commit('cart/setCheckoutModal', true)
           this.resetData()
+        } else {
+          this.$setError('order', 'Произошла ошибка при оформлении заказа.')
+          this.$alert({
+            message: 'Произошла ошибка при оформлении заказа. Попробуйте еще раз или свяжитесь с нами по телефону +7 (777) 262-30-60',
+            type: 'error'
+          })
         }
       } catch (error) {
         console.log('Create order', error)

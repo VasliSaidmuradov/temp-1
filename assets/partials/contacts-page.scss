@@ -128,7 +128,7 @@
 	&-col-text {
 		display: flex;
 		align-items: center;
-		font-size: em(14);
+		@include em(14px);
 		font-weight: 600;
 		color: #000;
 		svg {
@@ -159,6 +159,7 @@
 	}
 	&-col-back {
 		background-color: #fff;
+		backface-visibility: hidden;
 		border-radius: 20px;
 		box-shadow: 0px 3px 20px rgba(0, 0, 0, 0);
 		overflow: hidden;
@@ -178,8 +179,18 @@
 
 @media screen and (max-width: 769px) {
 	.contacts-page {
-		&-bot {
+		&-top,
+		&-row {
 			flex-wrap: wrap;
+		}
+		&-col {
+			width: 100%;
+			margin: 0;
+			margin-bottom: 20px;
+		}
+		&-title {
+			@include em(20px);
+			padding: 20px 0;
 		}
 		&-list {
 			width: 100%;

@@ -2,30 +2,20 @@
 	padding-top: 20px;
 	&-top {
 		margin-top: 40px;
+		display: flex;
 	}
 	&-right {
 		flex: 1;
 		height: 500px;
-	}
-	&-title-wrp {
-		margin-top: 60px;
-		display: inline-flex;
-		position: relative;
-		margin-bottom: 40px;
-		// &:after {
-		// 	content: '';
-		// 	width: 15px;
-		// 	height: 15px;
-		// 	background: url('/icons/arrow-base-color.svg') center no-repeat;
-		// 	background-size: contain;
-		// 	position: absolute;
-		// 	right: -20px;
-		// 	top: 50%;
-		// 	transform: translateY(-50%);
-		// }
+		overflow: hidden;
+		border-radius: 8px;
 	}
 	&-title {
-		margin-right: 10px;
+		text-align: center;
+		background-color: var(--bg-base);
+		display: block;
+		padding: 34px 0;
+		border-radius: 20px;
 		@include em(24px);
 		font-weight: 600;
 		color: #000;
@@ -64,16 +54,12 @@
 		}
 	}
 	&-schedule {
-    padding-bottom: 20px;
+		margin-bottom: 30px;
 		p {
 			@include em(16px);
 			font-weight: 600;
 			color: #000;
 		}
-	}
-	&-bot {
-    margin: 60px 0;
-		display: flex;
 	}
 	&-list {
 		width: 350px;
@@ -117,52 +103,94 @@
 			opacity: 0.5;
 			background: url('/icons/phone-icon.svg') center no-repeat;
 		}
-  }
-  &-info {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 60px;
-    &-item {
-      width: 320px;
-      height: 180px;
-      border-radius: 20px;
-      background-color: var(--bg-base);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all .2s ease-in;
-      position: relative;
-      span {
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 22px;
-      }
-      &:hover {
-        background-color: #fff;
-        box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
-      }
-    }
-    &-default {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    &-onhover {
-      display: flex;
-    }
-    &-icon {
-      margin-bottom: 16px;
-    }
-  }
+	}
+	&-row {
+		display: flex;
+		margin: 60px 0;
+		justify-content: center;
+	}
+	&-col {
+		width: 320px;
+		height: 180px;
+		margin: 0 20px;
+		position: relative;
+		perspective: 1000px;
+		&:hover {
+			.contacts-page-col-front {
+				transform: rotateX(-180deg);
+			}
+			.contacts-page-col-back {
+				box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+				transform: rotateX(0);
+			}
+		}
+	}
+	&-col-text {
+		display: flex;
+		align-items: center;
+		@include em(14px);
+		font-weight: 600;
+		color: #000;
+		svg {
+			width: 30px;
+			height: 30px;
+			flex-shrink: 0;
+			margin-right: 10px;
+		}
+		a {
+			color: #000;
+		}
+	}
+	&-col-front {
+		height: 100%;
+		background-color: var(--bg-base);
+		border-radius: 20px;
+		position: absolute;
+		width: 100%;
+		top: 0;
+		left: 0;
+		backface-visibility: hidden;
+		display: flex;
+		z-index: 1;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		transition: transform 0.4s ease;
+	}
+	&-col-back {
+		background-color: #fff;
+		backface-visibility: hidden;
+		border-radius: 20px;
+		box-shadow: 0px 3px 20px rgba(0, 0, 0, 0);
+		overflow: hidden;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		transition: all 0.4s ease;
+		transform: rotateX(180deg);
+	}
 }
 
 @media screen and (max-width: 769px) {
 	.contacts-page {
-		&-bot {
+		&-top,
+		&-row {
 			flex-wrap: wrap;
+		}
+		&-col {
+			width: 100%;
+			margin: 0;
+			margin-bottom: 20px;
+		}
+		&-title {
+			@include em(20px);
+			padding: 20px 0;
 		}
 		&-list {
 			width: 100%;

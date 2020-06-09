@@ -25,7 +25,7 @@
           </tab>
         </transition>
         <transition name="fade">
-          <tab v-if="hints" name="Советуем">
+          <tab v-if="hints" name="Рекомендуем">
             <product v-for="product in hints.data" :key="product.id" :product="product" />
           </tab>
         </transition>

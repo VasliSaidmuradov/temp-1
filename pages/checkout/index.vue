@@ -177,28 +177,34 @@ export default {
 			checkout: 'cart/checkout'
     }),
     async createOrder(redirect) {
-			if (this.order.phone.length < 10) {
-				this.$alert({
-					message: 'Неправильный номер телефона!',
-					type: 'error'
-				})
-				return
+      try {
+        if (this.order.phone.length < 10) {
+          this.$alert({
+            message: 'Неправильный номер телефона!',
+            type: 'error'
+          })
+          return
+        }
+        if (this.order.delivery_type === '1') {
+          this.order.house = null,
+          this.order.flat = null,
+          this.order.index = null
+        }
+        const paybox = await this.checkout(this.order)
+        if (this.order.payment_type == '1') {
+          const url = paybox.join('?')
+          window.location.href = url
+          return
+        }
+        // console.log('Paaybox: ', paybox)
+        if (paybox) {
+          document.body.classList.add('--hidden')
+          this.$store.commit('cart/setCheckoutModal', true)
+          this.resetData()
+        }
+      } catch (error) {
+        console.log('Create order', error)
       }
-      if (this.order.delivery_type === '1') {
-        // this.order.street = null,
-        this.order.house = null,
-        this.order.flat = null,
-        this.order.index = null
-      }
-      const paybox = await this.checkout(this.order)
-      if (this.order.payment_type == '1') {
-        const url = paybox.join('?')
-        window.location.href = url
-        return
-      }
-			document.body.classList.add('--hidden')
-			this.$store.commit('cart/setCheckoutModal', true)
-			this.resetData()
     },
     resetData() {
 			this.order = {
@@ -222,7 +228,6 @@ export default {
 			this.order.phone = this.$getUser().phone
     }
     if (window.innerWidth > 426) {
-      console.log('This is mobile!')
         const pinScene = this.$scrollmagic.scene({
           triggerElement: '.pin-trigger',
           triggerHook: 0,

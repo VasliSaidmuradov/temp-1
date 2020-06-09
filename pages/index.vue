@@ -1,16 +1,17 @@
 <template>
   <div class="home">
     <div class="container">
+      <Slider></Slider>
       <div class="row">
         <div class="left-col">
-          <Nav></Nav>
+          <!-- <Nav></Nav> -->
           <NewsAside></NewsAside>
+          <!-- {{banners}} -->
           <a :href="banners[0] ? banners[0].link : ''" class="banner-aside">
-            <img :src="banners[0] ? banners[0].image : ''" :alt="banners[0] ? banners[0].name : ''" />
+            <img :src="banners[0] ? banners[0].image : '/images/banner-aside.png'" :alt="banners[0] ? banners[0].name : ''" />
           </a>
         </div>
         <div class="right-col">
-          <Slider></Slider>
           <tabs />
           <div class="home-mobile-news">
             <NewsAside />

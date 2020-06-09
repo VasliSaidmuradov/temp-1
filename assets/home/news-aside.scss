@@ -24,8 +24,22 @@
         color: #8F8F8F;
     }
     &-link {
-        display: inline-block;
+        display: inline-flex;
         margin-top: 20px;
+    }
+    &-image {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 5px;
+      }
+    }
+    &-text-wrap {
+      flex: 1;
     }
     &-heading {
         @include em(12px);

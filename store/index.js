@@ -50,7 +50,11 @@ export const actions = {
   async nuxtServerInit({ state, dispatch, commit }, { req, res, app, route }) {
     commit('SET_IS_MOBILE', req.headers['x_is_mobile'] == 'true')
 
-    const queue = [ dispatch('menu/fetchCategories'), dispatch('brand/fetchBrands') ]
+    const queue = [ 
+      dispatch('menu/fetchCategories'),
+      dispatch('brand/fetchBrands'),
+      // dispatch('cart/fetchCartProducts')
+    ]
     if (req.headers.cookie) {
       const cookies = cookieparser.parse(req.headers.cookie)
 

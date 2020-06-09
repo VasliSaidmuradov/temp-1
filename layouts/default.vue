@@ -35,6 +35,7 @@ export default {
     mobileMenu,
     notification
   },
+  middleware: ['cartProducts'],
   watch: {
     '$route.fullPath': function () {
       window.scrollTo(0, 0)
@@ -45,6 +46,6 @@ export default {
       isOverlayActive: 'GET_OVERLAY',
       notifications: 'notification/GET_NOTIFICATIONS',
     })
-  },
+  }
 }
 </script>

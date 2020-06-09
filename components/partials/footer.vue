@@ -21,7 +21,7 @@
 				</div>
 				<div class="footer-col">
 					<h6 class="footer-heading">ИНФОРМАЦИЯ</h6>
-					<nuxt-link :to="brands[0] ? '/brands/${brands[0].slug}' : ''" class="footer-link">Бренды</nuxt-link>
+					<!-- <nuxt-link :to="brands[0] ? '/brands/${brands[0].slug}' : ''" class="footer-link">Бренды</nuxt-link> -->
 					<nuxt-link to="" class="footer-link">Акции</nuxt-link>
 				</div>
 				<div class="footer-col">

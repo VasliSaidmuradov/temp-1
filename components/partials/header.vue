@@ -4,11 +4,11 @@
       <div class="container">
         <div class="row header-top-row">
           <nav class="header-top-nav">
-            <nuxt-link to="/contacts" class="header-top-link">Контакты</nuxt-link>
             <nuxt-link to="/help/payment" class="header-top-link">Оплата</nuxt-link>
             <nuxt-link to="/help/delivery" class="header-top-link">Доставка</nuxt-link>
             <nuxt-link to="/help/how-to-order" class="header-top-link">Как сделать заказ</nuxt-link>
             <nuxt-link to="/help/bonuses" class="header-top-link">Бонусы</nuxt-link>
+            <nuxt-link to="/contacts" class="header-top-link">Контакты</nuxt-link>
           </nav>
           <div class="header-phone">
             <a href="tel:87772623060">8 (777) 262-30-60</a>
@@ -22,9 +22,9 @@
           <nuxt-link to="/" class="header-logo">
             <img src="/images/logo.png" alt="Skiny logo" />
           </nuxt-link>
-          <!-- <div class="header-city-wrp">
-            <span>Алматы</span>
-          </div> -->
+          <div class="header-city-wrp">
+            <!-- <span>Алматы</span> -->
+          </div>  
           <form class="header-search-wrp" @submit.prevent="redirectToSearch">
             <input v-model="searchQuery" type="text" placeholder="Хочу купить..." required />
             <button class="header-search-btn"></button>
@@ -63,6 +63,7 @@ export default {
       searchQuery: null
     };
   },
+  middleware: ['cart'],  
   computed: {
     ...mapGetters({
       products: "product/GET_HINTS",
@@ -70,7 +71,7 @@ export default {
       cartQuantity: "cart/GET_QUANTITY",
       sum: 'cart/GET_TOTAL',
       discount: 'cart/GET_DISCOUNT',
-      cartQuantity: "cart/GET_QUANTITY"
+      cartProductIds: 'cart/GET_PRODUCT_IDS'
     })
   },
   watch: {
@@ -88,7 +89,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      searchProduct: "product/searchProductHint"
+      searchProduct: "product/searchProductHint",
     }),
     openAuth() {
       if (this.$checkAuth()) {

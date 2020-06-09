@@ -64,6 +64,7 @@
 		}
 	}
 	&-schedule {
+    padding-bottom: 20px;
 		p {
 			@include em(16px);
 			font-weight: 600;
@@ -71,12 +72,12 @@
 		}
 	}
 	&-bot {
-		margin-top: 60px;
+    margin: 60px 0;
 		display: flex;
 	}
 	&-list {
 		width: 350px;
-		margin-right: 30px;
+		margin-right: 125px;
 	}
 	&-list-item {
 		border-top: 1px solid var(--line-base);
@@ -116,7 +117,46 @@
 			opacity: 0.5;
 			background: url('/icons/phone-icon.svg') center no-repeat;
 		}
-	}
+  }
+  &-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 60px;
+    &-item {
+      width: 320px;
+      height: 180px;
+      border-radius: 20px;
+      background-color: var(--bg-base);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all .2s ease-in;
+      position: relative;
+      span {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 22px;
+      }
+      &:hover {
+        background-color: #fff;
+        box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+      }
+    }
+    &-default {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    &-onhover {
+      display: flex;
+    }
+    &-icon {
+      margin-bottom: 16px;
+    }
+  }
 }
 
 @media screen and (max-width: 769px) {

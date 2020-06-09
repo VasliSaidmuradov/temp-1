@@ -11,8 +11,9 @@ export const mutations = {
 }
 
 export const actions = {
-  async fetchBrands(store) {
-    const res = await this.$api.get('/brands')
+  async fetchBrands(store, payload = {}) {
+    console.log('Brands: ', payload)
+    const res = await this.$api.get('/brands', payload)
     store.commit('SET_BRANDS', res)
   },
   async fetchBrandProducts(store, payload) {

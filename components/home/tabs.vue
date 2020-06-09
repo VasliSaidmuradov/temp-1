@@ -15,7 +15,7 @@
       <!-- {{ hits.data[0] }} -->
       <div class="tabs-details">
         <transition name="fade">
-          <tab v-if="newArrivals" name="Новые поступления" :selected="true">            
+          <tab v-if="newArrivals" name="Новые поступления" :selected="true">
             <product v-for="product in newArrivals.data" :key="product.id" :product="product" />
           </tab>
         </transition>

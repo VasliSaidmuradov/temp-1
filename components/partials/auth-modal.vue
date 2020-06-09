@@ -11,7 +11,7 @@
 								<h3 class="auth-modal-title">Вход</h3>
 								<input type="text" placeholder="Email или мобильный телефон" class="auth-modal-input" v-model="phoneEmail" required>
 								<input type="password" placeholder="Пароль" class="auth-modal-input" v-model="password" required>
-								<nuxt-link class="auth-modal-forgot" @click="currentTab = 'restore'">Забыли пароль?</nuxt-link>
+								<nuxt-link to class="auth-modal-forgot" @click="currentTab = 'restore'">Забыли пароль?</nuxt-link>
 								<div class="auth-modal-btn-wrp">
 									<button class="button --black">Войти</button>
 									<button @click="currentTab = 'register'" class="button --white">зарегистрироваться</button>
@@ -33,6 +33,17 @@
 								<input type="text" placeholder="ФИО" class="auth-modal-input" v-model="user.name" >
 								<input type="password" placeholder="Пароль" class="auth-modal-input" v-model="user.password" required >
 								<input type="password" placeholder="Повторите пароль" class="auth-modal-input" v-model="user.passwordc" >
+                <client-only>
+                  <label class="auth-modal-checkbox">
+                    <input type="checkbox">
+                    <div class="auth-modal-checkmark">
+                      <checkmark />
+                    </div>
+                    <p class="auth-modal-text">
+                      Нажимая кнопку «Зарегистрироваться», вы принимаете условия договора <nuxt-link to="">оферты</nuxt-link> и <nuxt-link to="">политики конфиденциальности</nuxt-link>
+                    </p>
+                  </label>
+                </client-only>
 								<!-- <div class="error-text" v-if="$getError('signup')">{{ $getError('signup') }}</div> -->
 								<!-- <div class="success-text" v-if="true">{{ $getError('signin') }}</div> -->
                 <div class="auth-modal-btn-wrp">
@@ -77,7 +88,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-
+import checkmark from '@/static/icons/checkmark.svg'
 export default {
   data() {
     return {
@@ -96,6 +107,9 @@ export default {
         email: null,
       }
     };
+  },
+  components: {
+    checkmark
   },
   watch: {
     "route.path": function() {

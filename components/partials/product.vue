@@ -23,7 +23,7 @@
     <div v-if="isInCart(product) && product.quantity" class="product-counter">
       <!-- <button @click="count = count > 1 ? count - 1 : 1" class="product-counter-decrease"></button> -->
       <button @click="decrease(product)" class="product-counter-decrease"></button>
-      <span>{{ getCartQuantity(product) }} {{product.tag ? roduct.tag.unit : 'шт' }}</span>
+      <span>{{ getCartQuantity(product) }} {{ product.tag ? product.tag.unit : 'шт' }}</span>
       <button :disabled="product.quantity <= getCartQuantity(product)" @click="increase(product)" class="product-counter-increase"></button>
     </div>
     <button v-if="!isInCart(product) && product.quantity" @click="addToCart" class="button --black">В корзину</button>
@@ -68,6 +68,7 @@ export default {
       toggleFavorite: "user/toggleFavorite",
       increase: "cart/increase",
       decrease: "cart/decrease",
+      fetchCartProducts: 'cart/fetchCartProducts',
     }),
     decreaseCount() {
       this.count > 1 ? this.count - 1 : 1;
@@ -77,7 +78,7 @@ export default {
       if (this.product.limit && this.product.limit <= this.count) {
         this.$alert({
           message: `На данный продукт установлен лимит ${this.product.limit *
-            this.product.amount} ${this.product.tag.unit}`,
+            this.product.amount} ${this.product.tag ? this.product.tag.unit : ''}`,
           type: "error"
         });
         return;
@@ -100,6 +101,7 @@ export default {
           this.decrease(this.product);
         }
       }
+      this.fetchCartProducts()
       this.isAdded = true;
     }
   }

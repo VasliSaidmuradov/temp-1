@@ -96,8 +96,17 @@
 			width: 50px;
 			height: 50px;
 			margin-left: 20px;
-			background: #fff url('/icons/favorites-icon.svg') center no-repeat;
-			background-size: 40%;
-		}
+			// background: #fff url('/icons/favorites-icon.svg') center no-repeat;
+      background-size: 40%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .-added {
+      path {
+        fill: var(--color-base);
+        stroke: var(--color-base);
+      }
+    }
 	}
 }

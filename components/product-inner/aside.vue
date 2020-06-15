@@ -73,7 +73,8 @@ export default {
     ...mapActions({
       toggleFavorite: 'user/toggleFavorite',
       increase: 'cart/increase',
-      decrease: 'cart/decrease'
+      decrease: 'cart/decrease',
+      fetchCartProducts: 'cart/fetchCartProducts',
     }),
     addToCart() {
       this.$alert({
@@ -90,6 +91,7 @@ export default {
           this.decrease(this.info)
         }
       }
+      this.fetchCartProducts()
     }
    }
 };

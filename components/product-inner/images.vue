@@ -2,13 +2,13 @@
   <div class="product-images">
     <div class="product-images-main">
       <div class="product-images-icon-wrp">
-        <img src="/icons/hit-icon.svg" alt="Skiny icon" />
-        <img src="/icons/new-icon.svg" alt="Skiny icon" />
+        <img src="/icons/hit-icon.svg" alt="Hit icon" />
+        <img src="/icons/new-icon.svg" alt="New icon" />
       </div>
       <div v-swiper:productImagesMain="options">
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for="(image,index) in images" :key="index">
-            <img :src="image" alt=""/>
+            <img :src="image" :alt="product.name"/>
           </div>
         </div>
       </div>
@@ -17,13 +17,14 @@
       <div v-swiper:productImagesThumbs="optionsThumbs">
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for="(image,index) in images" :key="index">
-            <img :src="image" alt="" class="product-images-slide-img" />
+            <img :src="image" :alt="product.name" class="product-images-slide-img" />
           </div>
         </div>
       </div>
       <button class="product-images-arrow product-images-prev"></button>
       <button class="product-images-arrow product-images-next"></button>
     </div>
+    <!-- --- {{ product.images }} -->
   </div>
 </template>
 
@@ -61,7 +62,7 @@ export default {
   },
   computed: {
     images() {
-      return !this.product.images ? this.product.images : this.fakeImages
+      return !this.product.images ? this.product.images : [ this.product.image ]
     }
   }
 };

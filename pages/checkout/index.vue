@@ -197,7 +197,6 @@ export default {
           window.location.href = url
           return
         }
-        // console.log('Paaybox: ', paybox)
         if (paybox) {
           document.body.classList.add('--hidden')
           this.$store.commit('cart/setCheckoutModal', true)

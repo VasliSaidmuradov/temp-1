@@ -9,7 +9,7 @@
                 <img src="/icons/success.svg" alt="Skiny icon" class="checkout-modal-icon">
                 <h4 class="checkout-modal-title">Благодарим за покупку!</h4>
                 <p class="checkout-modal-text">Наш менеджер свяжется с Вами для уточнения деталей</p>
-                <button class="button --black" @click="goToOrderHistory">Перейти к истории заказов</button>
+                <button v-if="$checkAuth()" class="button --black" @click="goToOrderHistory">Перейти к истории заказов</button>
                 <button class="checkout-modal-btn" @click="back">Продолжить покупки</button>
             </div>
         </div>
@@ -34,7 +34,8 @@ export default {
         },
         goToOrderHistory() {
           this.$store.commit('cart/setCheckoutModal', false)
-          this.$router.push('/profile/order-history')
+          if(this.$checkAuth()) this.$router.push('/profile/order-history')
+          else this.$router.push('/')
         }
     }
 }

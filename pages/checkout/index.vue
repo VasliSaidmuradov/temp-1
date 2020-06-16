@@ -198,7 +198,7 @@ export default {
           return
         }
         if (paybox) {
-          document.body.classList.add('--hidden')
+          // document.body.classList.add('--hidden')
           this.$store.commit('cart/setCheckoutModal', true)
           this.resetData()
         } else {

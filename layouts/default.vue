@@ -13,6 +13,7 @@
           <notification v-for="(notification, index) in notifications" :key="index" :notification="notification" />
         </div>
         <Footer />
+        <preloader />
     </div>
 </template>
 
@@ -23,6 +24,7 @@ import Footer from '@/components/partials/footer'
 import authModal from '@/components/partials/auth-modal'
 import mobileMenu from '@/components/partials/mobile-menu'
 import notification from '@/components/partials/notification'
+import Preloader from '@/components/partials/Preloader.vue'
 
 import { mapGetters } from 'vuex'
 
@@ -33,7 +35,8 @@ export default {
     authModal,
     mobileHeader,
     mobileMenu,
-    notification
+    notification,
+    Preloader,
   },
   middleware: ['cartProducts'],
   watch: {

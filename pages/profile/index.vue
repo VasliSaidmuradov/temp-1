@@ -5,7 +5,7 @@
 		<phone-confirm />
 		<div class="container">
 			<div class="breadcrumbs">
-				<nuxt-link to="">Главная / </nuxt-link>
+				<nuxt-link to="/">Главная / </nuxt-link>
 				<nuxt-link to="">Мой кабинет</nuxt-link>
 			</div>
 			<div class="profile-page-row">

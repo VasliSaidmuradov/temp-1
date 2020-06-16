@@ -12,8 +12,8 @@ export const mutations = {
   SET_FAVORITES: (state, payload) => state.favorites = payload,
   UPDATE_PRODUCTS_COOKIES: (state, payload) => Cookies.set('favorites', state.product_ids),
   ADD_PRODUCT_TO_PRODUCTS: (state, payload) => {
-    let ids = state.product_ids, 
-        products = state.products
+    let ids = state.product_ids,
+      products = state.products
     products.data.push(payload)
     ids.push(payload.id)
     state.product_ids = ids
@@ -21,7 +21,7 @@ export const mutations = {
   },
   REMOVE_PRODUCT_FROM_PRODUCTS: (state, payload) => {
     let ids = state.product_ids,
-        products = state.products
+      products = state.products
     ids = state.product_ids.filter(id => id !== payload.id)
     products.data = state.products.data.filter(product => product.id !== payload.id)
     state.product_ids = ids
@@ -79,7 +79,7 @@ export const getters = {
         image: el.image ? el.image : require('@/static/images/product.png')
       }
     })
-    return {...state.products, data: data }
+    return { ...state.products, data: data }
   },
   GET_PRODUCT_IDS: state => state.product_ids,
   IS_FAVORITE: state => payload => state.product_ids.includes(payload.id),

@@ -106,6 +106,10 @@ export default {
 		removeOrder(index) {
       this.$store.commit('SET_REMOVE_ORDER', {...this.$getUser().orders[index]})
 		},
-	}
+	},
+	// async fetch({ store }) {
+	// 	console.log('fetch in file history-table', store)
+	// 	await store.dispatch('user/fetchUser')
+	// }
 }
 </script>

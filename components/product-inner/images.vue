@@ -8,7 +8,7 @@
       <div v-swiper:productImagesMain="options">
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for="(image,index) in images" :key="index">
-            <img :src="image" :alt="product.name"/>
+            <img :src="image" :alt="product.name" />
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@
       <button class="product-images-arrow product-images-prev"></button>
       <button class="product-images-arrow product-images-next"></button>
     </div>
-    <!-- --- {{ product.images }} -->
+    <!-- --- {{ product.image }} -->
   </div>
 </template>
 
@@ -35,34 +35,36 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      const swiperTop = this.productImagesMain
-      const swiperThumbs = this.productImagesThumbs
-      swiperTop.controller.control = swiperThumbs
-      swiperThumbs.controller.control = swiperTop
-    })
+      const swiperTop = this.productImagesMain;
+      const swiperThumbs = this.productImagesThumbs;
+      swiperTop.controller.control = swiperThumbs;
+      swiperThumbs.controller.control = swiperTop;
+    });
   },
   data() {
     return {
       optionsThumbs: {
         slidesPerView: 4,
-        loop: true,
+        loop: false,
         loopedSlides: 4,
         slideToClickedSlide: true
       },
       options: {
-        loop: true,
+        loop: false,
         loopedSlides: 4,
         navigation: {
           nextEl: ".product-images-next",
           prevEl: ".product-images-prev"
         }
       },
-      fakeImages: ['/images/product.png', '/images/product.png', '/images/product.png']
+      fakeImages: ["/images/product.png", "/images/product.png"]
     };
   },
   computed: {
     images() {
-      return !this.product.images ? this.product.images : [ this.product.image ]
+      return !this.product.images
+        ? [this.product.image, ...this.product.images]
+        : [this.product.image];
     }
   }
 };

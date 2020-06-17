@@ -10,7 +10,9 @@
         <b>{{ products ? products.total : 0 }}</b> товара
       </h1>
       <div class="category-page-sort-wrp">
-        <p class="category-page-total"><b>{{ products ? products.total : 0 }}</b> товара</p>
+        <p class="category-page-total">
+          <b>{{ products ? products.total : 0 }}</b> товара
+        </p>
         <div class="category-page-sort">
           <p>Сортировать:</p>
           <select v-model="sort">
@@ -21,22 +23,30 @@
         </div>
       </div>
       <div v-if="searchQuery">
-        <div class="search-page-row" v-for="product in $chunk(products ? products.data : [], 4)" :key="product.id">
+        <div
+          class="search-page-row"
+          v-for="product in $chunk(products ? products.data : [], 4)"
+          :key="product.id"
+        >
           <product v-for="item in product" :key="item.id" :product="item" />
+          <!-- {{ products }} -->
         </div>
       </div>
+      <pagination :paginator="products" />
     </div>
   </div>
 </template>
 
 <script>
 import product from "@/components/partials/product";
+import pagination from "@/components/partials/pagination";
 import { mapGetters } from "vuex";
 
 export default {
   middleware: ["search"],
   components: {
-    product
+    product,
+    pagination
   },
   data() {
     return {

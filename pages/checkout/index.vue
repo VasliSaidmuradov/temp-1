@@ -1,42 +1,63 @@
 <template>
-	<div class="checkout-page">
-		<modal />
-		<div class="container pin-trigger">
-			<div class="breadcrumbs">
-				<nuxt-link to="/cart">Корзина / </nuxt-link>
-				<nuxt-link to="">Оформление заказа</nuxt-link>
-			</div>
-			<form @submit.prevent="createOrder">
+  <div class="checkout-page">
+    <modal />
+    <div class="container pin-trigger">
+      <div class="breadcrumbs">
+        <nuxt-link to="/cart">Корзина /</nuxt-link>
+        <nuxt-link to>Оформление заказа</nuxt-link>
+      </div>
+      <form @submit.prevent="createOrder">
         <!-- prod: {{ products }} -->
         <div class="checkout-page-row">
           <div class="checkout-page-col">
             <!-- <contacts /> -->
             <div class="checkout-contacts">
               <h3 class="section-title">Контактные данные</h3>
-              <input v-model="order.name" type="text" placeholder="ФИО" class="checkout-page-input" required>
+              <input
+                v-model="order.name"
+                type="text"
+                placeholder="ФИО"
+                class="checkout-page-input"
+                required
+              />
               <client-only>
-                <the-mask v-model="order.phone" :mask="['+7 (###) ###-##-##']" class="checkout-page-input" type="tel" placeholder="Номер телефона" required/>
+                <the-mask
+                  v-model="order.phone"
+                  :mask="['+# (###) ###-##-##']"
+                  class="checkout-page-input"
+                  type="tel"
+                  placeholder="Номер телефона"
+                  required
+                />
               </client-only>
-              <input v-model="order.email" type="mail" placeholder="E-mail" class="checkout-page-input" required>
+              <input
+                v-model="order.email"
+                type="mail"
+                placeholder="E-mail"
+                class="checkout-page-input"
+                required
+              />
             </div>
 
             <!-- <getting /> -->
             <div class="checkout-getting">
               <h3 class="section-title">Способ получения</h3>
               <div class="checkout-page-radio-wrp">
-                <label class="checkout-page-radio" :class="{'--active' : order.delivery_type === '1'}">
-                  <input v-model="order.delivery_type" name="getting" value='1' type="radio">
+                <label
+                  class="checkout-page-radio"
+                  :class="{'--active' : order.delivery_type === '1'}"
+                >
+                  <input v-model="order.delivery_type" name="getting" value="1" type="radio" />
                   <span class="checkout-page-subtitle">Самовывоз</span>
-                  <p class="checkout-page-radio-text">
-                    Без ожидания курьера!
-                  </p>
+                  <p class="checkout-page-radio-text">Без ожидания курьера!</p>
                 </label>
-                <label class="checkout-page-radio" :class="{'--active' : order.delivery_type === '0'}">
-                  <input v-model="order.delivery_type" name="getting" value='0' type="radio">
+                <label
+                  class="checkout-page-radio"
+                  :class="{'--active' : order.delivery_type === '0'}"
+                >
+                  <input v-model="order.delivery_type" name="getting" value="0" type="radio" />
                   <span class="checkout-page-subtitle">Курьером</span>
-                  <p class="checkout-page-radio-text">
-                    В удобный для вас день и интервал времени
-                  </p>
+                  <p class="checkout-page-radio-text">В удобный для вас день и интервал времени</p>
                 </label>
               </div>
               <div class="checkout-getting-pickup" v-if="order.delivery_type === '1'">
@@ -51,12 +72,33 @@
                   <option value="" selected disabled>Город</option>
                   <option value="Almaty">г.Алматы</option>
                   <option value="Astana">г.Астана</option>
-                </select> -->
-                <input v-model="order.street" required type="text" placeholder="Улица" class="checkout-page-input">
+                </select>-->
+                <input
+                  v-model="order.street"
+                  required
+                  type="text"
+                  placeholder="Улица"
+                  class="checkout-page-input"
+                />
                 <div class="checkout-page-input-wrp">
-                  <input v-model="order.house" type="text" placeholder="Дом" class="checkout-page-input">
-                  <input v-model="order.flat" type="text" placeholder="Квартира / Офис" class="checkout-page-input">
-                  <input v-model="order.index" type="text" placeholder="Индекс" class="checkout-page-input">
+                  <input
+                    v-model="order.house"
+                    type="text"
+                    placeholder="Дом"
+                    class="checkout-page-input"
+                  />
+                  <input
+                    v-model="order.flat"
+                    type="text"
+                    placeholder="Квартира / Офис"
+                    class="checkout-page-input"
+                  />
+                  <input
+                    v-model="order.index"
+                    type="text"
+                    placeholder="Индекс"
+                    class="checkout-page-input"
+                  />
                 </div>
               </div>
             </div>
@@ -65,12 +107,18 @@
             <div class="checkout-payment">
               <h3 class="section-title">Способы оплаты</h3>
               <label class="checkout-payment-radio">
-                <input v-model="order.payment_type" value="1" name="payment-type" checked type="radio">
+                <input
+                  v-model="order.payment_type"
+                  value="1"
+                  name="payment-type"
+                  checked
+                  type="radio"
+                />
                 <span class="checkout-payment-checkmark"></span>
                 <p class="checkout-payment-radio-title">Картой онлайн</p>
               </label>
               <label class="checkout-payment-radio">
-                <input v-model="order.payment_type" value="0" name="payment-type" type="radio">
+                <input v-model="order.payment_type" value="0" name="payment-type" type="radio" />
                 <span class="checkout-payment-checkmark"></span>
                 <div>
                   <p class="checkout-payment-radio-title">Наличными при получении</p>
@@ -83,9 +131,12 @@
             <div class="checkout-extra">
               <h3 class="section-title">Дополнительно</h3>
               <h5 class="checkout-page-subtitle">Комментарий к заказу</h5>
-              <textarea v-model="order.comment" placeholder="Ваш комментарий к заказу" class="checkout-page-input"></textarea>
+              <textarea
+                v-model="order.comment"
+                placeholder="Ваш комментарий к заказу"
+                class="checkout-page-input"
+              ></textarea>
             </div>
-
           </div>
           <div class="checkout-page-col">
             <!-- <checkout-aside /> -->
@@ -93,8 +144,8 @@
               <div class="order-aside-products">
                 <div class="order-aside-product" v-for="product in products.data" :key="product.id">
                   <div class="order-aside-product-img">
-                    <img :src="product.image" :alt="product.name">
-                  </div>  
+                    <img :src="product.image" :alt="product.name" />
+                  </div>
                   <p class="order-aside-product-name">{{ product.name }}</p>
                 </div>
               </div>
@@ -121,127 +172,139 @@
               <p v-if="$getError('order')" class="error-text">{{ $getError('order') }}</p>
             </div>
           </div>
-        </div> 
-			</form>
-		</div>
-	</div>
+        </div>
+      </form>
+    </div>
+  </div>
 </template>
 
 <script>
-import modal from '@/components/checkout/modal'
-import checkoutAside from '@/components/checkout/aside'
-import contacts from '@/components/checkout/contacts'
-import getting from '@/components/checkout/getting'
-import payment from '@/components/checkout/payment'
-import extra from '@/components/checkout/extra'
-import { mapActions, mapGetters } from "vuex"
+import modal from "@/components/checkout/modal";
+import checkoutAside from "@/components/checkout/aside";
+import contacts from "@/components/checkout/contacts";
+import getting from "@/components/checkout/getting";
+import payment from "@/components/checkout/payment";
+import extra from "@/components/checkout/extra";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
-	components: {
-		modal,
-		contacts,
-		checkoutAside,
-		getting,
-		payment,
-		extra
+  components: {
+    modal,
+    contacts,
+    checkoutAside,
+    getting,
+    payment,
+    extra
   },
-  middleware: ['cart'],
+  middleware: ["cart"],
   data() {
     return {
-      currentType: 'pickup',
+      currentType: "pickup",
       order: {
         name: null,
         phone: null,
         email: null,
         // city: "",
-        delivery_type: '1',
-				street: null,
-				house: null,
-				flat: null,
-				index: null,
+        delivery_type: "1",
+        street: null,
+        house: null,
+        flat: null,
+        index: null,
         comment: null,
         payment_type: 0
-			}
+      }
+    };
+  },
+  watch: {
+    "$route.path": function() {
+      this.order.phone = null;
+    },
+    "order.phone": function(val) {
+      if (val && val.length && val[0] != "7") {
+        this.order.phone = "7" + val.substring(1);
+      }
     }
   },
   computed: {
     ...mapGetters({
-      products: 'cart/GET_PRODUCTS',
-      sum: 'cart/GET_TOTAL',
-      bonuses: 'cart/GET_BONUSES',
-      discount: 'cart/GET_DISCOUNT',
+      products: "cart/GET_PRODUCTS",
+      sum: "cart/GET_TOTAL",
+      bonuses: "cart/GET_BONUSES",
+      discount: "cart/GET_DISCOUNT",
       cartQuantity: "cart/GET_QUANTITY"
     })
   },
   methods: {
     ...mapActions({
-			checkout: 'cart/checkout'
+      checkout: "cart/checkout"
     }),
     async createOrder(redirect) {
       try {
         if (this.order.phone.length < 10) {
           this.$alert({
-            message: 'Неправильный номер телефона!',
-            type: 'error'
-          })
-          return
+            message: "Неправильный номер телефона!",
+            type: "error"
+          });
+          return;
         }
-        if (this.order.delivery_type === '1') {
-          this.order.house = null,
-          this.order.flat = null,
-          this.order.index = null
+        if (this.order.delivery_type === "1") {
+          (this.order.house = null),
+            (this.order.flat = null),
+            (this.order.index = null);
         }
-        const paybox = await this.checkout(this.order)
-        if (this.order.payment_type == '1') {
-          const url = paybox.join('?')
-          window.location.href = url
-          return
+        const paybox = await this.checkout(this.order);
+        if (this.order.payment_type == "1") {
+          const url = paybox.join("?");
+          window.location.href = url;
+          return;
         }
         if (paybox) {
           // document.body.classList.add('--hidden')
-          this.$store.commit('cart/setCheckoutModal', true)
-          this.resetData()
+          this.$store.commit("cart/setCheckoutModal", true);
+          this.resetData();
         } else {
-          this.$setError('order', 'Произошла ошибка при оформлении заказа.')
+          this.$setError("order", "Произошла ошибка при оформлении заказа.");
           this.$alert({
-            message: 'Произошла ошибка при оформлении заказа. Попробуйте еще раз или свяжитесь с нами по телефону +7 (777) 262-30-60',
-            type: 'error'
-          })
+            message:
+              "Произошла ошибка при оформлении заказа. Попробуйте еще раз или свяжитесь с нами по телефону +7 (777) 262-30-60",
+            type: "error"
+          });
         }
       } catch (error) {
-        console.log('Create order', error)
+        console.log("Create order", error);
       }
     },
     resetData() {
-			this.order = {
-				name: null,
-				phone: null,
+      this.order = {
+        name: null,
+        phone: null,
         email: null,
         // city:'',
-				street: null,
-				house: null,
-				flat: null,
-				index: null,
-				comment: null,
-				payment_type: 0,
-			}
+        street: null,
+        house: null,
+        flat: null,
+        index: null,
+        comment: null,
+        payment_type: 0
+      };
     }
   },
   mounted() {
-		if (this.$checkAuth()) {
-			this.order.name = this.$getUser().name
-			this.order.email = this.$getUser().email
-			this.order.phone = this.$getUser().phone
+    if (this.$checkAuth()) {
+      this.order.name = this.$getUser().name;
+      this.order.email = this.$getUser().email;
+      this.order.phone = this.$getUser().phone;
     }
     if (window.innerWidth > 426) {
-        const pinScene = this.$scrollmagic.scene({
-          triggerElement: '.pin-trigger',
+      const pinScene = this.$scrollmagic
+        .scene({
+          triggerElement: ".pin-trigger",
           triggerHook: 0,
-          duration: '100%'
+          duration: "100%"
         })
-        .setPin('.order-aside')
-        this.$scrollmagic.addScene(pinScene)
+        .setPin(".order-aside");
+      this.$scrollmagic.addScene(pinScene);
     }
-	},
-}
+  }
+};
 </script>

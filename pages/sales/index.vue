@@ -3,20 +3,9 @@
     <div class="container">
       <div class="breadcrumbs">
         <nuxt-link to="/">Главная /</nuxt-link>
-        <nuxt-link v-if="category" :to="`/catalog/${category.slug}`">
-          {{ category.name }}
-          <span v-if="subcategory">/</span>
-        </nuxt-link>
-        <nuxt-link v-if="subcategory" :to="`/catalog/${category.slug}/${subcategory.slug}`">
-          {{ subcategory.name }}
-          <span v-if="tag">/</span>
-        </nuxt-link>
-        <nuxt-link
-          v-if="tag"
-          :to="`/catalog/${category.slug}/${subcategory.slug}/${tag.slug}`"
-        >{{ tag.name }}</nuxt-link>
+        <nuxt-link to>Акции</nuxt-link>
       </div>
-      <h1 class="category-page-title">{{ `${tag ? tag.name : subcategory ? subcategory.name : category.name}` }}</h1>
+      <h1 class="category-page-title">Акции</h1>
       <div class="row">
         <div class="left-col">
           <nuxt-link class="category-page-back" to="/catalog">Все категории</nuxt-link>
@@ -27,17 +16,17 @@
             :tag="tag"
             :isBrandPage="false"
           />
-          <category-filter
+          <!-- <category-filter
             :allProducts="allProducts"
             :filterByBrands="true"
             @brand-filter="filterBrand"
             @sales-filter="filterSales"
             :cats="tag ? null : subcategory ? subcategory.tags : category ? category.subcategories : categories"
-          />
+          /> -->
         </div>
         <div class="right-col">
           <div class="category-page-mob">
-            <p class="category-page-total">{{ products.total }} товара</p>
+            <p class="category-page-total">{{ sales.total }} товара</p>
             <nuxt-link class="category-page-back" to>Все категории</nuxt-link>
             <div class="category-page-row">
               <div class="category-page-sort">
@@ -52,7 +41,7 @@
             </div>
           </div>
           <div class="category-page-sort-wrp">
-            <p class="category-page-total">{{ products.total }} товара</p>
+            <p class="category-page-total">{{ sales.total }} товара</p>
             <div class="category-page-sort">
               <p>Сортировать:</p>
               <select v-model="sort">
@@ -63,14 +52,11 @@
             </div>
           </div>
           <div class="category-page-product-wrp">
-            <product v-for="product in productList.data ? productList.data : products.data" :key="product.id" :product="product" />
-          </div>
-          <!-- <div v-if="sales.data" class="category-page-product-wrp">
             <product v-for="product in sales.data " :key="product.id" :product="product" />
-          </div> -->
+          </div>
         </div>
       </div>
-      <pagination :paginator="productList.data ? productList : products" />
+      <pagination :paginator="sales" />
     </div>
     <!-- {{ sales }} -->
   </div>
@@ -85,28 +71,27 @@ import pagination from "@/components/partials/pagination";
 import { mapGetters } from "vuex";
 
 export default {
-    components: {
+  components: {
     subcategories,
     categoryFilter,
     product,
     brand,
     pagination
   },
-  middleware: ["catalog", "brands", "sales"],
+  middleware: ["brands", "sales"],
   data: () => ({
     isBrand: false,
     sort: "default",
     delay: null,
-    productList: { data: null },
-    salesProducts: null
+    productList: { data: null }
   }),
   computed: {
     ...mapGetters({
-      products: "product/GET_PRODUCTS",
+      // products: "product/GET_PRODUCTS",
       allProducts: "product/GET_ALL_PRODUCTS",
       categories: "menu/GET_CATEGORIES",
-      brandFilterResult: 'brand/GET_FILTER_RESULT',
-      sales: 'product/GET_SALES'
+      brandFilterResult: "brand/GET_FILTER_RESULT",
+      sales: "product/GET_SALES"
     }),
     category() {
       for (let i = 0; i < this.categories.length; ++i) {
@@ -183,21 +168,17 @@ export default {
       this.$store.commit("SET_MOBILE_FILTER", true);
     },
     filterBrand(e) {
-      const all = this.allProducts
+      const all = this.allProducts;
       if (e.checked) {
-        const data = [...this.allProducts.data.filter(el => el.brand.id == e.value)]
-        this.productList = { ...all, data: data }
-      }
-      else {
-        const data = [...this.allProducts.data.filter(el => el.brand.id != e.value)]
-        this.productList = { ...all, data: data }
-      }
-    },
-    filterSales(e) {
-      if (e.checked) {
-        this.salesProducts = {...this.sales}
+        const data = [
+          ...this.allProducts.data.filter(el => el.brand.id == e.value)
+        ];
+        this.productList = { ...all, data: data };
       } else {
-        this.salesProducts = null
+        const data = [
+          ...this.allProducts.data.filter(el => el.brand.id != e.value)
+        ];
+        this.productList = { ...all, data: data };
       }
     }
   }

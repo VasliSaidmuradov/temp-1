@@ -47,7 +47,7 @@
       <div class="container">
         <div class="row">
           <nuxt-link class="header-btn" to="/catalog">Все категории</nuxt-link>
-          <nuxt-link class="header-bot-link" to>Акции</nuxt-link>
+          <nuxt-link class="header-bot-link" to="/sales">Акции</nuxt-link>
         </div>
       </div>
     </div>

@@ -116,7 +116,7 @@ export const actions = {
     } else {
       payload += '?'
     }
-    payload += 'per_page=9'
+    payload += 'per_page=15'
     store.commit('SET_PRODUCTS', await this.$api.get(payload, {}, 'products'))
   },
   async fetchAllProducts(store, payload = '') {

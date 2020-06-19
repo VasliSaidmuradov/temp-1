@@ -81,7 +81,7 @@
                     </div>
                     <p class="auth-modal-text">
                       Нажимая кнопку «Зарегистрироваться», вы принимаете условия договора
-                      <nuxt-link to>оферты</nuxt-link>и
+                      <nuxt-link to>оферты</nuxt-link>&nbsp;и
                       <nuxt-link to>политики конфиденциальности</nuxt-link>
                     </p>
                   </label>
@@ -189,41 +189,54 @@ export default {
       reset: "auth/reset"
     }),
     async sendSignin() {
-      await this.signin({
-        login: this.phoneEmail,
-        password: this.password
-      });
-      if (!this.$getError("signin")) {
+      try {
+        const res = await this.signin({
+          login: this.phoneEmail,
+          password: this.password
+        });
         this.$router.push("/profile");
         this.closeModal();
+      } catch (error) {
+        this.$alert({
+          message: this.$getError("signin"),
+          type: "error"
+        });
+      } finally {
+        this.password = null;
       }
-      this.password = null;
     },
     async sendSignup() {
-      if (this.user.password !== this.user.passwordc) {
-        this.$getError("signup", "Пароли не совпадают!");
-        this.user.password = null;
-        this.user.passwordc = null;
-        return;
-      }
+      try {
+        if (this.user.password !== this.user.passwordc) {
+          this.$getError("signup", "Пароли не совпадают!");
+          this.$alert({
+            message: "Пароли не совпадают!",
+            type: "error"
+          });
+          this.user.password = null;
+          this.user.passwordc = null;
+          return;
+        }
 
-      const res = await this.signup({ ...this.user, login: this.user.email });
+        const res = await this.signup({ ...this.user, login: this.user.email });
+        if (this.$getError("signup")) {
+          if (this.$getError("signup") === "validation.unique") {
+            this.$alert({
+              message: " Такой e-mail и/или телефон уже зарегистрирован!",
+              type: "error"
+            });
+          }
+          return;
+        }
 
-      if (!this.$getError("signup")) {
         this.$alert({
           message: "Письмо с подтверждением отправлено на ваш e-mail",
           type: "success"
         });
         this.openVerify({ ...this.user });
         this.clearUser();
-      } else {
-        if (this.$getError("signup") === "validation.unique") {
-          console.log("Reg error", res);
-          this.$alert({
-            message: " Такой e-mail и/или телефон уже зарегистрирован!",
-            type: "error"
-          });
-        }
+      } catch (error) {
+        console.log("Signup error: ", error);
       }
     },
     closeModal() {
@@ -244,8 +257,8 @@ export default {
       };
     },
     openVerify(user) {
-      document.body.classList.add("--hidden"),
-        this.$store.commit("SET_VERIFY_MODAL", user);
+      document.body.classList.add("--hidden");
+      this.$store.commit("SET_VERIFY_MODAL", user);
     },
     async sendReset() {
       await this.reset({ login: this.restore.email });

@@ -12,13 +12,11 @@ export const mutations = {
 
 export const actions = {
   async fetchBrands(store, payload = {}) {
-    console.log('Brands: ', payload)
     const res = await this.$api.get('/brands', payload)
     store.commit('SET_BRANDS', res)
   },
   async fetchBrandProducts(store, payload) {
     const res = await this.$api.get(`/brands/${payload}`)
-    console.log('brand prod: ', res)
     store.commit('SET_BRAND_PRODUCTS', res.data)
   },
   async filterByBrands(store, payload) {

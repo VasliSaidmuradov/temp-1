@@ -283,8 +283,6 @@ export default {
             (this.order.flat = null),
             (this.order.index = null);
         }
-        console.log("This order: ", this.order);
-        // return
         const paybox = await this.checkout(this.order);
         if (this.order.payment_type == "1") {
           const url = paybox.join("?");

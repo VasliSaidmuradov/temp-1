@@ -62,17 +62,25 @@
               </div>
               <div class="checkout-getting-pickup" v-if="order.delivery_type === '1'">
                 <h5 class="checkout-page-subtitle">Выберите магазин</h5>
-                <select v-model="order.street" class="checkout-page-select">
+                <select v-model="order.street" class="checkout-page-select" required>
                   <option value="ул.Тимирязева 38/1">г.Алматы, ул.Тимирязева 38/1</option>
                   <option value="ул.Жибек-жолы 38/1">г.Алматы, ул.Жибек-жолы 38/1</option>
                 </select>
               </div>
               <div class="checkout-getting-courier" v-else>
-                <!-- <select v-model="order.city" class="checkout-page-select">
-                  <option value="" selected disabled>Город</option>
-                  <option value="Almaty">г.Алматы</option>
-                  <option value="Astana">г.Астана</option>
-                </select>-->
+                <select v-model="order.city" class="checkout-page-select" required>
+                  <!-- <option value="" selected disabled>Город</option> -->
+                  <option value="1" selected>г.Алматы</option>
+                  <option value="0">Казахстан</option>
+                </select>
+                <input
+                  v-show="order.city == '0'"
+                  v-model="order.city_name"
+                  type="text"
+                  required
+                  placeholder="Укажите город"
+                  class="checkout-page-input"
+                />
                 <input
                   v-model="order.street"
                   required
@@ -94,6 +102,7 @@
                     class="checkout-page-input"
                   />
                   <input
+                    v-show="order.city == '0'"
                     v-model="order.index"
                     type="text"
                     placeholder="Индекс"
@@ -155,6 +164,10 @@
                   <p class="order-aside-list-price">{{ $formatMoney(sum) }} ₸</p>
                 </div>
                 <div class="order-aside-row">
+                  <p class="order-aside-title">Доставка</p>
+                  <p class="order-aside-list-price">{{ $formatMoney(delivery) }} ₸</p>
+                </div>
+                <div class="order-aside-row">
                   <p class="order-aside-title">Скидка</p>
                   <p class="order-aside-list-price --red">-{{ $formatMoney(discount) }} ₸</p>
                 </div>
@@ -162,7 +175,7 @@
               <div class="order-aside-total">
                 <div class="order-aside-row">
                   <p class="order-aside-total-title">Итого</p>
-                  <p class="order-aside-total-text">{{ $formatMoney(sum - discount) }} ₸</p>
+                  <p class="order-aside-total-text">{{ $formatMoney(total) }} ₸</p>
                 </div>
               </div>
               <div class="order-aside-link-wrp">
@@ -170,6 +183,7 @@
                 <!-- <nuxt-link class="button --white" to="">Перейти к оплате</nuxt-link> -->
               </div>
               <p v-if="$getError('order')" class="error-text">{{ $getError('order') }}</p>
+              <!-- {{ order }} -->
             </div>
           </div>
         </div>
@@ -204,8 +218,10 @@ export default {
         name: null,
         phone: null,
         email: null,
-        // city: "",
+        city: "1",
+        city_name: "",
         delivery_type: "1",
+        delivery_cost: 0,
         street: null,
         house: null,
         flat: null,
@@ -232,7 +248,21 @@ export default {
       bonuses: "cart/GET_BONUSES",
       discount: "cart/GET_DISCOUNT",
       cartQuantity: "cart/GET_QUANTITY"
-    })
+    }),
+    delivery() {
+      let deliveryCost = 0;
+      if (this.order.city == "0" && this.sum < 12000) deliveryCost = 2000;
+      else if (
+        this.order.city == "1" &&
+        this.sum < 7000 &&
+        this.order.delivery_type == "0"
+      )
+        deliveryCost = 500;
+      return deliveryCost;
+    },
+    total() {
+      return this.sum - this.discount + this.delivery;
+    }
   },
   methods: {
     ...mapActions({
@@ -248,10 +278,13 @@ export default {
           return;
         }
         if (this.order.delivery_type === "1") {
-          (this.order.house = null),
+          (this.order.city = "1"),
+            (this.order.house = null),
             (this.order.flat = null),
             (this.order.index = null);
         }
+        console.log("This order: ", this.order);
+        // return
         const paybox = await this.checkout(this.order);
         if (this.order.payment_type == "1") {
           const url = paybox.join("?");
@@ -279,7 +312,8 @@ export default {
         name: null,
         phone: null,
         email: null,
-        // city:'',
+        city: "1",
+        city_name: "",
         street: null,
         house: null,
         flat: null,

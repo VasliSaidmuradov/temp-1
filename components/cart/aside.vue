@@ -19,6 +19,10 @@
 				<p class="order-aside-title">Товары ({{ cartQuantity }})</p>
 				<p class="order-aside-list-price">{{ $formatMoney(sum) }} ₸</p>
 			</div>
+			<!-- <div class="order-aside-row">
+				<p class="order-aside-title">Доставка</p>
+				<p class="order-aside-list-price">{{ delivery }} ₸</p>
+			</div> -->
 			<div class="order-aside-row">
 				<p class="order-aside-title">Скидка</p>
 				<p class="order-aside-list-price --red">-{{ cartQuantity ? discount: 0 }} ₸</p>
@@ -27,7 +31,7 @@
 		<div class="order-aside-total">
 			<div class="order-aside-row">
 				<p class="order-aside-total-title">Итого</p>
-				<p class="order-aside-total-text">{{ $formatMoney(sum) }} ₸</p>
+				<p class="order-aside-total-text">{{ $formatMoney(total) }} ₸</p>
 			</div>
 		</div>
 		<div class="order-aside-link-wrp">
@@ -55,11 +59,11 @@ export default {
       cartQuantity: "cart/GET_QUANTITY"
     }),
     // delivery() {
-		// 	return this.sum >= 10000 ? 0 : 500
+		// 	return this.sum >= 7000 ? 0 : 500
 		// },
-		// total() {
-		// 	return this.sum - this.discount
-		// }
+		total() {
+			return this.sum - this.discount
+		}
   },
   	mounted() {
 		this.bonusesUsed = this.bonuses ? this.bonuses : null

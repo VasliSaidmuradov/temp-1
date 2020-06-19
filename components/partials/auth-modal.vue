@@ -75,7 +75,7 @@
                 />
                 <client-only>
                   <label class="auth-modal-checkbox">
-                    <input type="checkbox" />
+                    <input type="checkbox" @change="confirmation = !confirmation" />
                     <div class="auth-modal-checkmark">
                       <checkmark />
                     </div>
@@ -89,7 +89,11 @@
                 <!-- <div class="error-text" v-if="$getError('signup')">{{ $getError('signup') }}</div> -->
                 <!-- <div class="success-text" v-if="true">{{ $getError('signin') }}</div> -->
                 <div class="auth-modal-btn-wrp">
-                  <button type="submit" class="button --black">зарегистрироваться</button>
+                  <button
+                    :disabled="!confirmation"
+                    type="submit"
+                    class="button --black"
+                  >зарегистрироваться</button>
                   <button @click="currentTab = 'signin'" class="button --white">Назад</button>
                 </div>
               </form>
@@ -152,8 +156,8 @@ export default {
       restore: {
         phone: null,
         email: null
-      }
-      // phone: null
+      },
+      confirmation: false
     };
   },
   components: {
@@ -203,11 +207,23 @@ export default {
         return;
       }
 
-      await this.signup({ ...this.user, login: this.user.email });
+      const res = await this.signup({ ...this.user, login: this.user.email });
 
       if (!this.$getError("signup")) {
+        this.$alert({
+          message: "Письмо с подтверждением отправлено на ваш e-mail",
+          type: "success"
+        });
         this.openVerify({ ...this.user });
         this.clearUser();
+      } else {
+        if (this.$getError("signup") === "validation.unique") {
+          console.log("Reg error", res);
+          this.$alert({
+            message: " Такой e-mail и/или телефон уже зарегистрирован!",
+            type: "error"
+          });
+        }
       }
     },
     closeModal() {

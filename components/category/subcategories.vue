@@ -5,7 +5,7 @@
       v-for="link in nav"
       :key="link.id"
       class="category-page-subcat-link"
-      :to="`${tag ? link.slug : subcat ? subcat.slug + '/' + link.slug : (category ? category.slug + '/' + link.slug : 'catalog/' + link.slug)}`"
+      :to="isBrandPage ? link.slug : `${tag ? link.slug : subcat ? subcat.slug + '/' + link.slug : (category ? category.slug + '/' + link.slug : 'catalog/' + link.slug)}`"
     >
       {{ link.name }}
       <br />

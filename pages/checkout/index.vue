@@ -74,7 +74,7 @@
                   <option value="0">Казахстан</option>
                 </select>
                 <input
-                  v-show="order.city == '0'"
+                  v-if="order.city == '0'"
                   v-model="order.city_name"
                   type="text"
                   required
@@ -102,7 +102,7 @@
                     class="checkout-page-input"
                   />
                   <input
-                    v-show="order.city == '0'"
+                    v-if="order.city == '0'"
                     v-model="order.index"
                     type="text"
                     placeholder="Индекс"

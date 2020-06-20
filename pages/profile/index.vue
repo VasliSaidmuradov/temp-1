@@ -39,7 +39,7 @@ export default {
 		editPhone,
 		phoneConfirm
   	},
- 	middleware: ['auth'],
+ 	middleware: ['auth', 'user'],
   	methods: {
 		...mapActions({
 			logout: 'auth/logout'

@@ -49,6 +49,8 @@ export const actions = {
 
   async fetchUser(store, payload) {
     let user = await this.$api.get('/user', {})
+    console.log('User: ', user)
+    
     if (user) {
       store.commit('SET_USER', user)
     } else {

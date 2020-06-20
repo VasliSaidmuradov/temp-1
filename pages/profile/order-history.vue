@@ -5,7 +5,7 @@
       <div class="breadcrumbs">
         <nuxt-link to="/">Главная /</nuxt-link>
         <nuxt-link to="/profile">Мой кабинет /</nuxt-link>
-				<nuxt-link to="">История заказов</nuxt-link>
+        <nuxt-link to>История заказов</nuxt-link>
       </div>
       <div class="profile-page-row">
         <div class="profile-page-left">

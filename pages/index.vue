@@ -6,10 +6,7 @@
         <div class="left-col">
           <!-- <Nav></Nav> -->
           <NewsAside></NewsAside>
-          <!-- {{banners}} -->
-          <a :href="banners[0] ? banners[0].link : ''" class="banner-aside">
-            <img :src="banners[0] ? banners[0].image : '/images/banner-aside.png'" :alt="banners[0] ? banners[0].name : ''" />
-          </a>
+          <Banner :banners="banners" class="home-banner-aside" />
         </div>
         <div class="right-col">
           <tabs />
@@ -29,7 +26,8 @@ import Nav from "@/components/home/nav";
 import NewsAside from "@/components/home/news-aside";
 import Brands from "@/components/home/brands";
 import tabs from "@/components/home/tabs";
-import { mapGetters } from 'vuex';
+import Banner from "@/components/home/BannerAside";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -37,12 +35,13 @@ export default {
     Slider,
     Nav,
     NewsAside,
-    Brands
+    Brands,
+    Banner
   },
   middleware: ["home"],
   computed: {
     ...mapGetters({
-      banners: 'content/GET_BANNERS',
+      banners: "content/GET_BANNERS"
     })
   }
 };

@@ -8,7 +8,7 @@ export default {
     title: 'Интернет-магазин уходовой косметики | SKINY.KZ',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no' },
       { hid: 'description', name: 'description', content: 'Интернет-магазин уходовой косметики, заказать косметику Алматы, косметика Алматы, доставка косметика Алматы, доставка уходовой косметики' },
       // { "http-equiv": "Content-Security-Policy", content: "default-src *; style-src 'self' http://* https://* 'unsafe-inline'; script-src 'self' http://* https://* 'unsafe-inline' 'unsafe-eval'"}
     ],
@@ -51,6 +51,20 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-115008368-2'
+    }],
+    [
+      '@nuxtjs/yandex-metrika',
+      {
+        id: '65062288',
+        webvisor: true,
+        clickmap: true,
+        // useCDN:false,
+        trackLinks: true,
+        accurateTrackBounce: true,
+      }
+    ]
   ],
   /*
   ** Axios module configuration

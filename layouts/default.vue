@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="layout">
         <Header></Header>
         <mobile-header />
         <mobile-menu />

@@ -6,9 +6,12 @@
 			<nuxt-link class="mobile-header-logo" to="/"><img src="/images/logo.png" alt="Skiny logo"></nuxt-link>
 			<button @click="openAuth" class="mobile-header-profile"></button>
 			<!-- <nuxt-link class="mobile-header-profile" to="/profile"></nuxt-link> -->
+			<nuxt-link class="mobile-header-favorites" to="/favorites">
+				<span class="header-icon-badge" v-if="favoritesQuantity > 0">{{ favoritesQuantity }}</span>
+			</nuxt-link>
 			<nuxt-link class="mobile-header-cart" to="/cart">
-        <span class="header-icon-badge" v-if="cartQuantity > 0">{{ cartQuantity }}</span>
-      </nuxt-link>
+				<span class="header-icon-badge" v-if="cartQuantity > 0">{{ cartQuantity }}</span>
+			</nuxt-link>
 		</div>
 	</header>
 </template>
@@ -18,7 +21,8 @@ import { mapMutations, mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      cartQuantity: 'cart/GET_QUANTITY'
+		cartQuantity: 'cart/GET_QUANTITY',
+		favoritesQuantity: "user/GET_QUANTITY",
     })
   },
 	methods: {

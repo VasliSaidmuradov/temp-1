@@ -5,9 +5,14 @@
         <nuxt-link to="/">Главная /</nuxt-link>
         <nuxt-link to>Избранное</nuxt-link>
       </div>
-      <h1 class="section-title">Избранное</h1>
-      <div class="favorites-page-row">
-        <product v-for="product in favoriteProducts.data" :key="product.id" :product="product" />
+      <div v-if="favoriteProducts.data.length > 0">
+        <h1 class="section-title">Избранное</h1>
+        <div class="favorites-page-row">
+          <product v-for="product in favoriteProducts.data" :key="product.id" :product="product" />
+        </div>
+      </div>
+      <div v-else>
+        <h1 class="section-title">В избранных 0 товаров</h1>
       </div>
     </div>
   </div>

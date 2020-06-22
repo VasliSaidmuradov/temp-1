@@ -29,6 +29,11 @@ export default {
       options: {
         slidesPerView: 1,
         spaceBetween: 10,
+        speed: 1000,
+        loop: true,
+        autoplay: {
+          delay: 3000
+        },
         pagination: {
           el: ".swiper-pagination",
           type: "bullets",

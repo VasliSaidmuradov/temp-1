@@ -19,10 +19,6 @@
         <nuxt-link v-if="product" :to="product.slug">{{ product.name }}</nuxt-link>
       </div>
       <!-- similars: {{ similars }} -->
-      <div class="product-page-name-wrp">
-        <p class="product-page-brand">{{ product.brand ? product.brand.name : '' }}</p>
-        <p class="product-page-name">{{ product.name }}</p>
-      </div>
       <div class="product-page-row">
         <div class="product-page-col">
           <images :product="product" />
@@ -31,11 +27,19 @@
             <p class="product-page-name">{{ product.name }}</p>
           </div>
         </div>
-        <div class="product-page-col">
-          <info :info="product" />
-        </div>
-        <div class="product-page-col">
-          <product-aside :info="product" />
+        <div class="product-page-right">
+          <div class="product-page-name-wrp">
+            <p class="product-page-brand">{{ product.brand ? product.brand.name : '' }}</p>
+            <p class="product-page-name">{{ product.name }}</p>
+          </div>
+          <div class="product-page-right-inner">
+            <div class="product-page-col">
+              <info :info="product" />
+            </div>
+            <div class="product-page-col">
+              <product-aside :info="product" />
+            </div>
+          </div>
         </div>
       </div>  
       <!-- >>  {{ brandProducts }} -->

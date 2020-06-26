@@ -27,22 +27,21 @@
             font-weight: 500;
             color: #000;
             display: inline-block;
-            margin-left: 15px;
         }
     }
     &-subcategory-wrp {
         position: absolute;
+        min-width: 240px;
         left: 100%;
-        width: 740px;
         top: -1px;
         z-index: 3;
         background-color: #fff;
         box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.06);
-        border-radius: 0px 8px 8px 0px;
+        border-radius: 8px;
         display: flex;
         flex-wrap: wrap;
         padding: 20px;
-        // padding-bottom: 0;
+        white-space: nowrap;
     }
     &-subcategory-item {
         // margin-right: 50px;
@@ -54,12 +53,14 @@
     }
     &-subcategory {
         display: block;
-        width: calc(100% / 3);
         @include em(12px);
-        font-weight: 600;
+        font-weight: 500;
         color: #000;
-        // margin-bottom: 8px;
+        margin-bottom: 8px;
         padding: 0 8px;
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
     &-tag {
         display: block;

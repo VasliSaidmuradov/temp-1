@@ -39,18 +39,22 @@
 	&-sort {
 		display: flex;
 		align-items: center;
-		// position: relative;
-		// &:after {
-		// 	content: '';
-		// 	width: 10px;
-		// 	height: 10px;
-		// 	background: url('/icons/nav-arrow-icon.svg') center no-repeat;
-		// 	background-size: contain;
-		// 	position: absolute;
-		// 	right: 0;
-		// 	top: 50%;
-		// 	transform: translateY(-50%) rotate(90deg);
-		// }
+		border: 1px solid var(--line-base);
+		padding: 10px 20px;
+		border-radius: 999px;
+		position: relative;
+		padding-right: 40px;
+		&:after {
+			content: '';
+			width: 10px;
+			height: 10px;
+			background: url('/icons/nav-arrow-icon.svg') center no-repeat;
+			background-size: contain;
+			position: absolute;
+			right: 20px;
+			top: 50%;
+			transform: translateY(-50%) rotate(90deg);
+		}
 		p {
 			@include em(14px);
 			font-weight: 700;

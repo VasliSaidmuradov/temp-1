@@ -78,7 +78,7 @@
                   v-model="order.city_name"
                   type="text"
                   required
-                  placeholder="Укажите город"
+                  placeholder="Укажите город / населенный пункт"
                   class="checkout-page-input"
                 />
                 <input

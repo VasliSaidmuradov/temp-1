@@ -4,35 +4,51 @@
       <div @click="closeModal" class="auth-modal-overlay"></div>
       <transition name="slide-to-left">
         <div class="auth-modal-inner">
-          <button @click="closeModal" class="auth-modal-close"></button>
           <transition name="fade">
-            <div v-if="currentTab === 'signin'" class="auth-modal-content">
-              <form @submit.prevent="sendSignin" class="auth-modal-signin">
-                <h3 class="auth-modal-title">Вход</h3>
-                <input
-                  type="text"
-                  placeholder="Email или мобильный телефон"
-                  class="auth-modal-input"
-                  v-model="phoneEmail"
-                  required
-                />
-                <input
-                  type="password"
-                  placeholder="Пароль"
-                  class="auth-modal-input"
-                  v-model="password"
-                  required
-                />
-                <nuxt-link
-                  to
-                  class="auth-modal-forgot"
-                  @click="currentTab = 'restore'"
-                >Забыли пароль?</nuxt-link>
-                <div class="auth-modal-btn-wrp">
-                  <button class="button --black">Войти</button>
-                  <button @click="currentTab = 'register'" class="button --white">зарегистрироваться</button>
-                </div>
-              </form>
+            <div v-if="currentTab === 'signin'" class="auth-modal-content --signin">
+              <button @click="closeModal" class="auth-modal-close"></button>
+              <div class="auth-modal-left">
+                <form @submit.prevent="sendSignin" class="auth-modal-signin">
+                  <h3 class="auth-modal-title">Вход</h3>
+                  <input
+                    type="text"
+                    placeholder="Email или мобильный телефон"
+                    class="auth-modal-input"
+                    v-model="phoneEmail"
+                    required
+                  />
+                  <input
+                    type="password"
+                    placeholder="Пароль"
+                    class="auth-modal-input"
+                    v-model="password"
+                    required
+                  />
+                  <div class="auth-modal-btn-wrp">
+                    <button class="button --main-color">Войти</button>
+                    <button class="auth-modal-forgot" @click="currentTab = 'restore'">Забыли пароль?</button>
+                  </div>
+                </form>
+              </div>
+              <div class="auth-modal-right">
+                <h3 class="auth-modal-title">Еще не зарегистрированы?</h3>
+                <p class="auth-modal-text">Преимущества зарегистрированных пользователей</p>
+                <ul class="auth-modal-list">
+                  <li>
+                    <check />
+                    <p class="auth-modal-text">Получение информации о новинках и акциях</p>
+                  </li>
+                  <li>
+                    <check />
+                    <p class="auth-modal-text">Бонусы постоянным покупателям</p>
+                  </li>
+                  <li>
+                    <check />
+                    <p class="auth-modal-text">Просмотр истории заказов в личном кабинете</p>
+                  </li>
+                </ul>
+                <button @click="currentTab = 'register'" class="button --white">зарегистрироваться</button>
+              </div>
               <!-- {{ phoneEmail }}
               {{ password }}
               {{ isSignedIn }}-->
@@ -40,68 +56,88 @@
           </transition>
           <transition name="fade">
             <div v-if="currentTab === 'register'" class="auth-modal-content">
-              <form @submit.prevent="sendSignup" class="auth-modal-register">
-                <h3 class="auth-modal-title">Регистрация</h3>
-                <input
-                  type="text"
-                  placeholder="Email"
-                  class="auth-modal-input"
-                  v-model="user.email"
-                  required
-                />
-                <client-only>
-                  <the-mask
-                    :mask="['+# (###) ###-##-##']"
+              <button @click="closeModal" class="auth-modal-close"></button>
+              <div class="auth-modal-left">
+                <h3 class="auth-modal-title">Уже зарегистрированы?</h3>
+                <p class="auth-modal-text">Преимущества зарегистрированных пользователей</p>
+                <ul class="auth-modal-list">
+                  <li>
+                    <check />
+                    <p class="auth-modal-text">Получение информации о новинках и акциях</p>
+                  </li>
+                  <li>
+                    <check />
+                    <p class="auth-modal-text">Бонусы постоянным покупателям</p>
+                  </li>
+                  <li>
+                    <check />
+                    <p class="auth-modal-text">Просмотр истории заказов в личном кабинете</p>
+                  </li>
+                </ul>
+                <button @click="currentTab = 'signin'" class="button --white">Войти</button>
+              </div>
+              <div class="auth-modal-right">
+                <form @submit.prevent="sendSignup" class="auth-modal-register">
+                  <h3 class="auth-modal-title">Регистрация</h3>
+                  <input
+                    type="text"
+                    placeholder="Email"
                     class="auth-modal-input"
-                    type="tel"
-                    placeholder="Телефон"
+                    v-model="user.email"
                     required
-                    v-model="user.phone"
                   />
-                </client-only>
-                <input type="text" placeholder="ФИО" class="auth-modal-input" v-model="user.name" />
-                <input
-                  type="password"
-                  placeholder="Пароль"
-                  class="auth-modal-input"
-                  v-model="user.password"
-                  required
-                />
-                <input
-                  type="password"
-                  placeholder="Повторите пароль"
-                  class="auth-modal-input"
-                  v-model="user.passwordc"
-                />
-                <client-only>
-                  <label class="auth-modal-checkbox">
-                    <input type="checkbox" @change="confirmation = !confirmation" />
-                    <div class="auth-modal-checkmark">
-                      <checkmark />
-                    </div>
-                    <p class="auth-modal-text">
-                      Нажимая кнопку «Зарегистрироваться», вы принимаете условия договора
-                      <nuxt-link to>оферты</nuxt-link>&nbsp;и
-                      <nuxt-link to>политики конфиденциальности</nuxt-link>
-                    </p>
-                  </label>
-                </client-only>
-                <!-- <div class="error-text" v-if="$getError('signup')">{{ $getError('signup') }}</div> -->
-                <!-- <div class="success-text" v-if="true">{{ $getError('signin') }}</div> -->
-                <div class="auth-modal-btn-wrp">
-                  <button
-                    :disabled="!confirmation"
-                    type="submit"
-                    class="button --black"
-                  >зарегистрироваться</button>
-                  <button @click="currentTab = 'signin'" class="button --white">Назад</button>
-                </div>
-              </form>
+                  <client-only>
+                    <the-mask
+                      :mask="['+# (###) ###-##-##']"
+                      class="auth-modal-input"
+                      type="tel"
+                      placeholder="Телефон"
+                      required
+                      v-model="user.phone"
+                    />
+                  </client-only>
+                  <input type="text" placeholder="ФИО" class="auth-modal-input" v-model="user.name" />
+                  <input
+                    type="password"
+                    placeholder="Пароль"
+                    class="auth-modal-input"
+                    v-model="user.password"
+                    required
+                  />
+                  <input
+                    type="password"
+                    placeholder="Повторите пароль"
+                    class="auth-modal-input"
+                    v-model="user.passwordc"
+                  />
+                  <client-only>
+                    <label class="auth-modal-checkbox">
+                      <input type="checkbox" @change="confirmation = !confirmation" />
+                      <div class="auth-modal-checkmark">
+                        <checkmark />
+                      </div>
+                      <p class="auth-modal-text">
+                        Нажимая кнопку «Зарегистрироваться», вы принимаете условия договора
+                        <nuxt-link to>оферты</nuxt-link>&nbsp;и
+                        <nuxt-link to>политики конфиденциальности</nuxt-link>
+                      </p>
+                    </label>
+                  </client-only>
+                  <!-- <div class="error-text" v-if="$getError('signup')">{{ $getError('signup') }}</div> -->
+                  <!-- <div class="success-text" v-if="true">{{ $getError('signin') }}</div> -->
+                    <button
+                      :disabled="!confirmation"
+                      type="submit"
+                      class="button --main-color"
+                    >зарегистрироваться</button>
+                </form>
+              </div>
               <!-- user: {{ user }} -->
             </div>
           </transition>
           <transition name="fade">
-            <div v-if="currentTab === 'restore'" class="auth-modal-content">
+            <div v-if="currentTab === 'restore'" class="auth-modal-content --restore">
+              <button @click="closeModal" class="auth-modal-close"></button>
               <form @submit.prevent="sendReset" class="auth-modal-restore">
                 <h3 class="auth-modal-title">Восстановление пароля</h3>
                 <p class="auth-modal-text">Введите свой e-mail и мы вышлем вам пароль</p>
@@ -120,7 +156,8 @@
             </div>
           </transition>
           <transition name="fade">
-            <div v-if="currentTab === 'restoreSuccess'" class="auth-modal-content">
+            <div v-if="currentTab === 'restoreSuccess'" class="auth-modal-content --restore">
+              <button @click="closeModal" class="auth-modal-close"></button>
               <div class="auth-modal-restore">
                 <h3 class="auth-modal-title">Восстановление пароля</h3>
                 <p class="auth-modal-text">Письмо с восстановлением пароля успешно отправлено</p>
@@ -140,6 +177,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import checkmark from "@/static/icons/checkmark.svg";
+import check from "@/static/icons/check.svg";
 export default {
   data() {
     return {
@@ -161,7 +199,8 @@ export default {
     };
   },
   components: {
-    checkmark
+    checkmark,
+    check
   },
   watch: {
     "route.path": function() {
@@ -241,11 +280,9 @@ export default {
     },
     closeModal() {
       document.body.classList.remove("--hidden"),
-        (this.isInnerOpen = false),
-        (this.currentTab = "signin"),
-        setTimeout(() => {
-          this.$store.commit("auth/SET_MODAL_STATE", false);
-        }, 100);
+      (this.isInnerOpen = false),
+      (this.currentTab = "signin"),
+      this.$store.commit("auth/SET_MODAL_STATE", false);
     },
     clearUser() {
       this.user = {

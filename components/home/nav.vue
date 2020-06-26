@@ -7,11 +7,13 @@
       :to="`/catalog/${category.slug}`"
       @mouseover.native="onHoverCategory(category)"
     >
-      <img class="home-nav-link-icon" :src="category.icon" :alt="category.name" />
+      <!-- <img class="home-nav-link-icon" :src="category.icon" :alt="category.name" /> -->
       <span>{{ category.name }}</span>
-      <transition name="fade" v-if="hoveredCategory">
-        <div class="home-nav-subcategory-wrp" v-if="hoveredCategory.id === category.id">
-          <div class="home-nav-subcategory-item">
+    </nuxt-link>
+    <transition name="fade">
+      <div class="home-nav-subcategory-wrp" v-if="hoveredCategory">
+        <div class="home-nav-subcategory-item" v-for="category in categories" :key="category.id">
+          <div v-if="hoveredCategory.id === category.id">
             <nuxt-link
               class="home-nav-subcategory"
               :to="`/catalog/${category.slug}/${subcategory.slug}`"
@@ -19,17 +21,17 @@
               :key="subcategory.id"
             >
               {{subcategory.name}}
-              <nuxt-link
+              <!-- <nuxt-link
                 class="home-nav-tag"
                 v-for="tag in subcategory.tags"
                 :key="tag.id"
                 :to="`/catalog/${category.slug}/${subcategory.slug}/${tag.slug}`"
-              >{{tag.name}}</nuxt-link>
+              >{{tag.name}}</nuxt-link> -->
             </nuxt-link>
           </div>
         </div>
-      </transition>
-    </nuxt-link>
+      </div>
+    </transition>
   </nav>
 </template>
 
@@ -61,17 +63,7 @@ export default {
   computed: {
     ...mapGetters({
       categories: "menu/GET_CATEGORIES"
-    }),
-    getSubCategoryChunks: function() {
-      const chunked_arr = [];
-      let copied = [...this.hoveredCategory.subcategories];
-      const size = 4;
-      const numOfChild = Math.ceil(copied.length / size);
-      for (let i = 0; i < numOfChild; i++) {
-        chunked_arr.push(copied.splice(0, size));
-      }
-      return chunked_arr;
-    }
+    })
   }
 };
 </script>

@@ -15,11 +15,6 @@
       <!-- {{ hits.data[0] }} -->
       <div class="tabs-details">
         <transition name="fade">
-          <tab v-if="newArrivals" name="Новые поступления" :selected="true">
-            <product v-for="product in newArrivals.data" :key="product.id" :product="product" />
-          </tab>
-        </transition>
-        <transition name="fade">
           <tab v-if="hits" name="Бестселлеры">
             <product v-for="product in hits.data" :key="product.id" :product="product" />
           </tab>
@@ -27,6 +22,11 @@
         <transition name="fade">
           <tab v-if="hints" name="Рекомендуем">
             <product v-for="product in hints.data" :key="product.id" :product="product" />
+          </tab>
+        </transition>
+        <transition name="fade">
+          <tab v-if="newArrivals" name="Новые поступления" :selected="true">
+            <product v-for="product in newArrivals.data" :key="product.id" :product="product" />
           </tab>
         </transition>
         <transition name="fade">

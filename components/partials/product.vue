@@ -14,10 +14,10 @@
       </div>
       <div class="product-rating-wrp"></div>
       <p class="product-brand">{{ product.brand ? product.brand.name : 'Нет бренда' }}</p>
-      <p class="product-name">{{ product.name }}</p>
+      <p v-if="product.name" class="product-name">{{ product.name.length > 45 ? product.name.slice(0, 45) + '...' : product.name }}</p>
       <div class="product-price-wrp">
-        <p class="product-price">{{ product.price }} ₸</p>
-        <p v-if="product.old_price" class="product-old-price">{{ product.old_price }} ₸</p>
+        <p class="product-price">{{ $formatMoney(product.price) }} ₸</p>
+        <p v-if="product.old_price" class="product-old-price">{{ $formatMoney(product.old_price) }} ₸</p>
       </div>
     </nuxt-link>
     <div v-if="isInCart(product) && product.quantity" class="product-counter">

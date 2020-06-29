@@ -42,11 +42,21 @@
             <div class="category-page-row">
               <div class="category-page-sort">
                 <p>Сортировать:</p>
-                <select v-model="sort">
+                <div class="category-page-select-wrp">
+                  <div class="category-page-current-sort">
+                    <p @click="toggleSelect">По умолчанию</p>
+                  </div>
+                  <div class="category-page-select-dropdown" v-if="isSortOpen">
+                    <p>По умолчанию</p>
+                    <p>По возрастанию</p>
+                    <p>По убыванию</p>
+                  </div>
+                </div>
+                <!-- <select v-model="sort">
                   <option value="default">По умолчанию</option>
                   <option value="asc">По возрастанию</option>
                   <option value="desc">По убыванию</option>
-                </select>
+                </select> -->
               </div>
               <button class="category-page-filter">Фильтр</button>
             </div>
@@ -55,11 +65,21 @@
             <p class="category-page-total">{{ products.total }} товара</p>
             <div class="category-page-sort">
               <p>Сортировать:</p>
-              <select v-model="sort">
+              <div class="category-page-select-wrp">
+                <div class="category-page-current-sort">
+                  <p @click="toggleSelect">По умолчанию</p>
+                </div>
+                <div class="category-page-select-dropdown" v-if="isSortOpen">
+                  <p>По умолчанию</p>
+                  <p>По возрастанию</p>
+                  <p>По убыванию</p>
+                </div>
+              </div>
+              <!-- <select v-model="sort">
                 <option value="default">По умолчанию</option>
                 <option value="asc">По возрастанию</option>
                 <option value="desc">По убыванию</option>
-              </select>
+              </select> -->
             </div>
           </div>
           <div class="category-page-product-wrp">
@@ -98,7 +118,8 @@ export default {
     sort: "default",
     delay: null,
     productList: { data: null },
-    salesProducts: null
+    salesProducts: null,
+    isSortOpen: false
   }),
   computed: {
     ...mapGetters({
@@ -181,6 +202,9 @@ export default {
   methods: {
     showFilter() {
       this.$store.commit("SET_MOBILE_FILTER", true);
+    },
+    toggleSelect() {
+      this.isSortOpen = !this.isSortOpen
     },
     filterBrand(e) {
       const all = this.allProducts

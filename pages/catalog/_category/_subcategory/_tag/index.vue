@@ -16,7 +16,9 @@
           :to="`/catalog/${category.slug}/${subcategory.slug}/${tag.slug}`"
         >{{ tag.name }}</nuxt-link>
       </div>
-      <h1 class="category-page-title">{{ `${tag ? tag.name : subcategory ? subcategory.name : category.name}` }}</h1>
+      <h1
+        class="category-page-title"
+      >{{ `${tag ? tag.name : subcategory ? subcategory.name : category.name}` }}</h1>
       <div class="row">
         <div class="left-col">
           <nuxt-link class="category-page-back" to="/catalog">Все категории</nuxt-link>
@@ -44,19 +46,14 @@
                 <p>Сортировать:</p>
                 <div class="category-page-select-wrp">
                   <div class="category-page-current-sort">
-                    <p @click="toggleSelect">По умолчанию</p>
+                    <p @click="toggleSelect">{{ currentSort }}</p>
                   </div>
                   <div class="category-page-select-dropdown" v-if="isSortOpen">
-                    <p>По умолчанию</p>
-                    <p>По возрастанию</p>
-                    <p>По убыванию</p>
+                    <p @click.prevent="sorting('default')">По умолчанию</p>
+                    <p @click.prevent="sorting('asc')">По возрастанию</p>
+                    <p @click.prevent="sorting('desc')">По убыванию</p>
                   </div>
                 </div>
-                <!-- <select v-model="sort">
-                  <option value="default">По умолчанию</option>
-                  <option value="asc">По возрастанию</option>
-                  <option value="desc">По убыванию</option>
-                </select> -->
               </div>
               <button class="category-page-filter">Фильтр</button>
             </div>
@@ -67,27 +64,26 @@
               <p>Сортировать:</p>
               <div class="category-page-select-wrp">
                 <div class="category-page-current-sort">
-                  <p @click="toggleSelect">По умолчанию</p>
+                  <p @click="toggleSelect">{{ currentSort }}</p>
                 </div>
                 <div class="category-page-select-dropdown" v-if="isSortOpen">
-                  <p>По умолчанию</p>
-                  <p>По возрастанию</p>
-                  <p>По убыванию</p>
+                  <p @click.prevent="sorting('default')">По умолчанию</p>
+                  <p @click.prevent="sorting('asc')">По возрастанию</p>
+                  <p @click.prevent="sorting('desc')">По убыванию</p>
                 </div>
               </div>
-              <!-- <select v-model="sort">
-                <option value="default">По умолчанию</option>
-                <option value="asc">По возрастанию</option>
-                <option value="desc">По убыванию</option>
-              </select> -->
             </div>
           </div>
           <div class="category-page-product-wrp">
-            <product v-for="product in productList.data ? productList.data : products.data" :key="product.id" :product="product" />
+            <product
+              v-for="product in productList.data ? productList.data : products.data"
+              :key="product.id"
+              :product="product"
+            />
           </div>
           <!-- <div v-if="sales.data" class="category-page-product-wrp">
             <product v-for="product in sales.data " :key="product.id" :product="product" />
-          </div> -->
+          </div>-->
         </div>
       </div>
       <pagination :paginator="productList.data ? productList : products" />
@@ -105,7 +101,7 @@ import pagination from "@/components/partials/pagination";
 import { mapGetters } from "vuex";
 
 export default {
-    components: {
+  components: {
     subcategories,
     categoryFilter,
     product,
@@ -126,8 +122,8 @@ export default {
       products: "product/GET_PRODUCTS",
       allProducts: "product/GET_ALL_PRODUCTS",
       categories: "menu/GET_CATEGORIES",
-      brandFilterResult: 'brand/GET_FILTER_RESULT',
-      sales: 'product/GET_SALES'
+      brandFilterResult: "brand/GET_FILTER_RESULT",
+      sales: "product/GET_SALES"
     }),
     category() {
       for (let i = 0; i < this.categories.length; ++i) {
@@ -165,6 +161,19 @@ export default {
       }
 
       return null;
+    },
+    currentSort() {
+      switch (this.sort) {
+        case "asc":
+          return "По возрастанию";
+          break;
+        case "desc":
+          return "По убыванию";
+          break;
+        default:
+          return "По умолчанию";
+          break;
+      }
     }
   },
 
@@ -204,25 +213,32 @@ export default {
       this.$store.commit("SET_MOBILE_FILTER", true);
     },
     toggleSelect() {
-      this.isSortOpen = !this.isSortOpen
+      this.isSortOpen = !this.isSortOpen;
     },
     filterBrand(e) {
-      const all = this.allProducts
+      const all = this.allProducts;
       if (e.checked) {
-        const data = [...this.allProducts.data.filter(el => el.brand.id == e.value)]
-        this.productList = { ...all, data: data }
-      }
-      else {
-        const data = [...this.allProducts.data.filter(el => el.brand.id != e.value)]
-        this.productList = { ...all, data: data }
+        const data = [
+          ...this.allProducts.data.filter(el => el.brand.id == e.value)
+        ];
+        this.productList = { ...all, data: data };
+      } else {
+        const data = [
+          ...this.allProducts.data.filter(el => el.brand.id != e.value)
+        ];
+        this.productList = { ...all, data: data };
       }
     },
     filterSales(e) {
       if (e.checked) {
-        this.salesProducts = {...this.sales}
+        this.salesProducts = { ...this.sales };
       } else {
-        this.salesProducts = null
+        this.salesProducts = null;
       }
+    },
+    sorting(e) {
+      console.log(">> ", e);
+      this.sort = e;
     }
   }
 };

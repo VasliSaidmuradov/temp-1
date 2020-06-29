@@ -4,6 +4,7 @@
         <mobile-header />
         <mobile-menu />
         <auth-modal />
+        <verify-modal />
        	<div class="layout-content">
           <transition name="page-fade">
         	  <nuxt />
@@ -25,6 +26,7 @@ import authModal from '@/components/partials/auth-modal'
 import mobileMenu from '@/components/partials/mobile-menu'
 import notification from '@/components/partials/notification'
 import Preloader from '@/components/partials/Preloader.vue'
+import VerifyModal from '@/components/partials/VerifyModal.vue'
 
 import { mapGetters } from 'vuex'
 
@@ -37,6 +39,7 @@ export default {
     mobileMenu,
     notification,
     Preloader,
+    VerifyModal,
   },
   middleware: ['cartProducts'],
   watch: {

@@ -136,9 +136,15 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
+			flex-wrap: wrap;
 			margin-bottom: 50px;
 			padding-bottom: 20px;
 			border-bottom: 1px solid var(--line-base);
+		}
+		&-sort {
+			width: 100%;
+			justify-content: space-between;
+			margin-bottom: 10px;
 		}
 		&-filter {
 			@include em(14px);
@@ -198,9 +204,6 @@
 
 @media screen and (max-width: 321px) {
 	.category-page {
-		&-row {
-			flex-wrap: wrap;
-		}
 		&-filter {
 			margin-top: 10px;
 			padding-left: 0;

@@ -6,7 +6,7 @@
         <nuxt-link to>Результаты поиска</nuxt-link>
       </div>
       <h1 class="search-page-title">
-        По запросу «крем» найдено
+        По запросу «{{ searchQuery }}» найдено
         <b>{{ products ? products.total : 0 }}</b> товара
       </h1>
       <div class="category-page-sort-wrp">

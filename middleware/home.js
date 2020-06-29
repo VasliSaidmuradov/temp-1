@@ -32,6 +32,7 @@ export default async function ({ route, store }) {
   }))
   // }
   queue.push(store.dispatch('content/fetchBanners'))
+  queue.push(store.dispatch('product/fetchHomePageCategories'))
 
   await Promise.all(queue)
 }

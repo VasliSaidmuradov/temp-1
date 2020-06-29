@@ -10,7 +10,8 @@ export const state = () => ({
   hints: null,
   search_query: null,
   filters: null,
-  brandFilter: null
+  brandFilter: null,
+  homePageCategories: null,
 })
 
 export const getters = {
@@ -76,7 +77,8 @@ export const getters = {
   GET_RESULTS: state => state.results,
   GET_SEARCH_QUERY: state => state.search_query,
   GET_FILTERS: state => state.filters,
-  GET_BRAND_FILTER: state => id => state.products.data.filter(el => el.brand.id == id)
+  GET_BRAND_FILTER: state => id => state.products.data.filter(el => el.brand.id == id),
+  GET_HOME_PAGE_CATEGORIES: state => state.homePageCategories,
 }
 
 export const mutations = {
@@ -104,6 +106,7 @@ export const mutations = {
     payload.paginator.current_page = payload.resp.current_page
     payload.paginator.last_page = payload.resp.last_page
   },
+  SET_HOME_PAGE_CATEGORIES: (state, payload) => state.homePageCategories = payload,
 }
 
 export const actions = {
@@ -177,5 +180,8 @@ export const actions = {
       paginator: payload,
       resp: await this.$api.get(payload.next_page_url)
     })
+  },
+  async fetchHomePageCategories(store) {
+    store.commit('SET_HOME_PAGE_CATEGORIES', await this.$api.get('/categories?to_main=1'))
   }
 }

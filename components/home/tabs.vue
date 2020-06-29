@@ -1,21 +1,19 @@
 <template>
   <div class="home-products">
-    <!-- Tabs {{ tabs }} -->
-		<div>
+    <div>
       <div class="tabs-nav">
-				<a
-        v-for="tab in tabs"
-        :key="tab.id"
-        @click="selectTab(tab)"
-        class="tabs-nav-btn"
-        :class="{ '--active': tab.isActive }"
-        :v-model='activeTab'
-      >{{tab.name}}</a>
+        <a
+          v-for="tab in tabs"
+          :key="tab.id"
+          @click="selectTab(tab)"
+          class="tabs-nav-btn"
+          :class="{ '--active': tab.isActive }"
+          :v-model="activeTab"
+        >{{tab.name}}</a>
       </div>
-      <!-- {{ hits.data[0] }} -->
       <div class="tabs-details">
         <transition name="fade">
-          <tab v-if="hits" name="Бестселлеры">
+          <tab v-if="hits" name="Бестселлеры" :selected="true">
             <product v-for="product in hits.data" :key="product.id" :product="product" />
           </tab>
         </transition>
@@ -25,7 +23,7 @@
           </tab>
         </transition>
         <transition name="fade">
-          <tab v-if="newArrivals" name="Новые поступления" :selected="true">
+          <tab v-if="newArrivals" name="Новые поступления">
             <product v-for="product in newArrivals.data" :key="product.id" :product="product" />
           </tab>
         </transition>
@@ -41,13 +39,13 @@
 
 <script>
 import product from "@/components/partials/product";
-import tab from "@/components/home/tab"
+import tab from "@/components/home/tab";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
-		product,
-		tab
+    product,
+    tab
   },
   data() {
     return {
@@ -68,16 +66,16 @@ export default {
       hints: "product/GET_HINTS",
       sales: "product/GET_SALES"
     })
-	},
-	created() {
+  },
+  created() {
     this.tabs = this.$children;
   },
   methods: {
     selectTab(selectedTab) {
       this.tabs.forEach(tab => {
-        tab.isActive = (tab.name == selectedTab.name);
+        tab.isActive = tab.name == selectedTab.name;
       });
-    },
+    }
   }
 };
 </script>

@@ -237,8 +237,8 @@ export default {
       }
     },
     sorting(e) {
-      console.log(">> ", e);
       this.sort = e;
+      this.isSortOpen = false
     }
   }
 };

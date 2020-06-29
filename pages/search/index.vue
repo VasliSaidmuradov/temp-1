@@ -15,11 +15,21 @@
         </p>
         <div class="category-page-sort">
           <p>Сортировать:</p>
-          <select v-model="sort">
+          <div class="category-page-select-wrp">
+            <div class="category-page-current-sort">
+              <p @click="toggleSelect">{{ currentSort }}</p>
+            </div>
+            <div class="category-page-select-dropdown" v-if="isSortOpen">
+              <p @click.prevent="sorting('default')">По умолчанию</p>
+              <p @click.prevent="sorting('asc')">По возрастанию</p>
+              <p @click.prevent="sorting('desc')">По убыванию</p>
+            </div>
+          </div>
+          <!-- <select v-model="sort">
             <option value="default">По умолчанию</option>
             <option value="asc">По возрастанию</option>
             <option value="desc">По убыванию</option>
-          </select>
+          </select>-->
         </div>
       </div>
       <div v-if="searchQuery">
@@ -29,7 +39,6 @@
           :key="product.id"
         >
           <product v-for="item in product" :key="item.id" :product="item" />
-          <!-- {{ products }} -->
         </div>
       </div>
       <pagination :paginator="products" />
@@ -51,13 +60,29 @@ export default {
   data() {
     return {
       sort: "default",
-      searchQuery: this.$route.query.q
+      isSortOpen: false
     };
   },
   computed: {
     ...mapGetters({
       products: "product/GET_RESULTS"
-    })
+    }),
+    searchQuery() {
+      return this.$route.query.q;
+    },
+    currentSort() {
+      switch (this.sort) {
+        case "asc":
+          return "По возрастанию";
+          break;
+        case "desc":
+          return "По убыванию";
+          break;
+        default:
+          return "По умолчанию";
+          break;
+      }
+    }
   },
   watch: {
     searchQuery(val) {
@@ -76,6 +101,15 @@ export default {
         query["sort"] = val.toString();
       }
       this.$router.push({ path: this.$route.path, query: query });
+    }
+  },
+  methods: {
+    toggleSelect() {
+      this.isSortOpen = !this.isSortOpen;
+    },
+    sorting(e) {
+      this.sort = e;
+      this.isSortOpen = false
     }
   },
   mounted() {

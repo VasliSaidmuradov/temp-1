@@ -179,7 +179,7 @@
                 </div>
               </div>
               <div class="order-aside-link-wrp">
-                <button type="submit" class="button --white" :disabled="sum <= 0">Оформить заказ</button>
+                <button type="submit" class="button --main-color" :disabled="sum <= 0">Оформить заказ</button>
                 <!-- <nuxt-link class="button --white" to="">Перейти к оплате</nuxt-link> -->
               </div>
               <p v-if="$getError('order')" class="error-text">{{ $getError('order') }}</p>

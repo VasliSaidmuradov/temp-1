@@ -25,7 +25,7 @@
 			</div>
 		</div>
 		<div class="order-aside-link-wrp">
-			<nuxt-link class="button --white" to="" @click.native="checkout">Перейти к оплате</nuxt-link>
+			<nuxt-link class="button --main-color" to="" @click.native="checkout">Перейти к оплате</nuxt-link>
 		</div>
 	</div>
 </template>

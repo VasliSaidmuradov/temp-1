@@ -35,7 +35,7 @@
 			</div>
 		</div>
 		<div class="order-aside-link-wrp">
-			<button class="button --white" @click="$router.push('/checkout')" :disabled="!cartQuantity">Перейти к оформлению</button>
+			<button class="button --main-color" @click="$router.push('/checkout')" :disabled="!cartQuantity">Перейти к оформлению</button>
 		</div>
 	</div>
 </template>

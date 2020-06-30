@@ -105,7 +105,10 @@ export default {
       }
     },
     toggleName: async function(val) {
-      if (val) await this.updateProfile({ name: this.user.name });
+      if (val) {
+        const res = await this.updateProfile({ name: this.user.name });
+        console.log('res', res)
+      }
     },
     toggleEmail: async function(val) {
       if (val && this.user.email != this.$getUser().email) {

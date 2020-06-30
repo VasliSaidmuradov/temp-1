@@ -272,7 +272,7 @@ export default {
           message: "Письмо с подтверждением отправлено на ваш e-mail",
           type: "success"
         });
-        this.openVerify({ ...this.user });
+        // this.openVerify({ ...this.user });
         this.clearUser();
       } catch (error) {
         console.log("Signup error: ", error);

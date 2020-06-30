@@ -36,7 +36,6 @@ export default {
       signin: "auth/signin"
     }),
     closeModal() {
-      // document.body.classList.remove("-hidden");
       this.$store.commit("SET_VERIFY_MODAL", false);
     },
     async sendVerify() {

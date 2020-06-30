@@ -43,7 +43,7 @@ export const mutations = {
 		}
 		state.modals = Object.assign({}, state.modals, modal)
 	},
-	CLOSE_MODAL: (state, payload) => state.modals[payload] = null
+  CLOSE_MODAL: (state, payload) => state.modals[payload] = null
 }
 
 export const actions = {
@@ -87,5 +87,5 @@ export const getters = {
 	GET_VERIFY_MODAL: state => state.isVerifyOpen,
 	GET_REMOVE_ORDER: state => state.isRemoveOrderOpen,
 	GET_NOTIFICATION: state => state.isNotifOpen,
-	IS_MODAL_OPEN: (state) => (payload) => state.modals[payload]
+  IS_MODAL_OPEN: (state) => (payload) => state.modals[payload]
 }

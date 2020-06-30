@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -35,6 +35,14 @@ export default {
         this.phone = "7" + val.substring(1);
       }
     }
+    // togglePhone: async function(val) {
+    //   if (val && this.phone != this.$getUser().phone) {
+    //     await this.updateProfile({ phone: this.phone });
+    //     if (!this.$getError("updatePhone")) {
+    //       this.$store.commit("SET_VERIFY_MODAL", this.user);
+    //     }
+    //   }
+    // }
   },
   computed: {
     ...mapGetters({
@@ -42,12 +50,43 @@ export default {
     })
   },
   methods: {
+    ...mapActions({
+      updateProfile: "user/updateProfile"
+    }),
     close() {
       this.$store.commit("SET_PROFILE_PHONE_EDIT", false);
     },
-    getCode() {
-      this.$store.commit("SET_PROFILE_PHONE_EDIT", false);
-      this.$store.commit("SET_PROFILE_PHONE_CONFIRM", true);
+    async getCode() {
+      try {
+        console.log("111");
+        if (!this.phone || this.phone && this.phone.length !== 11) {
+          this.$alert({
+            message: "Введите корректный номер телофона.",
+            type: "error"
+          });
+          return;
+        }
+        console.log("222");
+        if (this.phone != this.$getUser().phone) {
+          console.log("333");
+          const res = await this.updateProfile({ phone: this.phone });
+          console.log("444", res);
+          if (!this.$getError("updatePhone")) {
+            console.log("555");
+            await this.$store.commit("SET_PROFILE_PHONE_EDIT", false);
+            await this.$store.commit("user/SET_CONFIRM_PHONE", this.phone);
+            this.$store.commit("SET_PROFILE_PHONE_CONFIRM", true);
+          } else {
+            this.$alert({
+              message: "Возникла ошибка при регистрации номера телефона",
+              type: "error"
+            });
+          }
+          console.log("666");
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 };

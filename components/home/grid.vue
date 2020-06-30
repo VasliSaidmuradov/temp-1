@@ -26,7 +26,7 @@ export default {
     categories() {
       const data = [
         ...this.homePageCategories,
-        { id: "brands", name: "Бренды", slug: "brands" }
+        { id: "brands", name: "Бренды", slug: "brands", image: '/images/bg-brands.png' }
       ];
       return data;
     }

@@ -24,6 +24,9 @@
 	}
 	&-col {
 		width: 33.3%;
+		&.--padding {
+			padding-left: 20px;
+		}
 	}
 	&-mob-name {
 		display: none;
@@ -63,6 +66,9 @@
 		}
 		&-col {
 			width: 100%;
+			&.--padding {
+				padding-left: 0;
+			}
 		}
 		&-mob-name {
 			margin-top: 30px;

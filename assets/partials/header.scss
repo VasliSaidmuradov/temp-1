@@ -79,7 +79,7 @@
     }
     &-search-wrp {
         position: relative;
-        width: 650px;
+        width: 1050px;
         margin-left: 40px;
         input {
             display: block;
@@ -214,6 +214,22 @@
 }
 
 .mobile-header { display: none; }
+
+@media screen and (max-width: 1367px) {
+    .header {
+        &-search-wrp {
+            width: 950px;
+        }
+    }
+}
+
+@media screen and (max-width: 1281px) {
+    .header {
+        &-search-wrp {
+            width: 850px;
+        }
+    }
+}
 
 @media screen and (max-width: 815px) {
     .header {

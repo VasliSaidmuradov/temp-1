@@ -28,6 +28,7 @@
         <div class="filter-checkmark"></div>
         <p>{{ brand.name }}</p>
       </label>
+      <!-- {{ getBrands }} -->
     </div>
     <div class="filter-block">
       <!-- <p class="filter-title">Эксклюзивные предложения</p> -->
@@ -75,11 +76,13 @@ export default {
       // allProducts: "product/GET_ALL_PRODUCTS",
       brands: "brand/GET_BRANDS",
       filters: "product/GET_FILTERS",
-      brandFilter: 'product/GET_BRAND_FILTER'
+      brandFilter: 'product/GET_BRAND_FILTER',
+
     }),
     getBrands() {
       const products = this.allProducts.data || this.allProducts.products
       const brands = products.map(el => el.brand)
+      console.log(this.$route)
       const res = brands.reduce((acc, current) => {
         const x = acc.find(item => item.id === current.id);
         if (!x) {

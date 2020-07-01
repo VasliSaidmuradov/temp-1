@@ -17,7 +17,8 @@
                         </div>
                         <div class="help-page-content">
                             <h3 class="help-page-title">О компании</h3>
-                            <p class="help-page-text --margin">
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/9WkNE8tYRQg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <!-- <p class="help-page-text --margin">
                                 Бесплатная курьерская доставка по г.Алматы, при заказе на любую сумму.
                             </p>
                             <p class="help-page-text --margin">
@@ -57,7 +58,7 @@
                             </p>
                             <p class="help-page-text --margin">
                                 В личном кабинете, в разделе «Профиль -> Бонусы». В этом же разделе, вы можете детально посмотреть, за какой заказ и в каком количестве вам начислили бонусы. 
-                            </p>
+                            </p> -->
                         </div>
                     </div>
                 </div>

@@ -13,7 +13,7 @@
         <client-only>
           <the-mask :mask="['####']" class="profile-modal-input" required />
         </client-only>
-        <button class="button --black" @click="confirm">Подтвердить</button>
+        <button class="button --main-color" @click="confirm">Подтвердить</button>
         <button class="profile-modal-btn --no-border" @click="back">Использовать другой номер</button>
       </div>
     </div>

@@ -12,6 +12,6 @@
 			<input type="text" placeholder="Квартира / офис" class="profile-page-input">
 			<input type="text" placeholder="Индекс" class="profile-page-input">
 		</div>
-		<button class="button --black">Сохранить</button>
+		<button class="button --main-color">Сохранить</button>
 	</div>
 </template>

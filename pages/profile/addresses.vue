@@ -12,7 +12,7 @@
 				</div>
 				<div class="profile-page-right">
 					<h5 class="profile-page-title">Вы пока не добавили ни одного адреса.</h5>
-					<button class="button --black">Добавить адрес</button>
+					<button class="button --main-color">Добавить адрес</button>
 					<add-address />
 					<address-list />
 				</div>

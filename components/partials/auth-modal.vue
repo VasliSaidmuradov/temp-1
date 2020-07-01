@@ -148,7 +148,7 @@
                   class="auth-modal-input"
                 />
                 <div class="auth-modal-btn-wrp">
-                  <button class="button --black" @click="currentTab = 'restoreSuccess'">Отправить</button>
+                  <button class="button --main-color" @click="currentTab = 'restoreSuccess'">Отправить</button>
                   <button @click="currentTab = 'signin'" class="button --white">я вспомнил пароль</button>
                 </div>
               </form>
@@ -163,7 +163,7 @@
                 <p class="auth-modal-text">Письмо с восстановлением пароля успешно отправлено</p>
                 <img src="/icons/email-success.svg" alt="Skiny icon" class="auth-modal-img" />
                 <div class="auth-modal-btn-wrp">
-                  <button class="button --black" @click="closeModal">Вернуться на главную</button>
+                  <button class="button --main-color" @click="closeModal">Вернуться на главную</button>
                 </div>
               </div>
             </div>

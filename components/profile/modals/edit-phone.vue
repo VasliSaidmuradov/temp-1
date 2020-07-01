@@ -16,8 +16,8 @@
           />
         </client-only>
         <button
-          class="button --gray"
-          :class="{ '--main-color' : isPhoneValidated }"
+          class="button"
+          :class="{ '--main-color' : isPhoneValidated, '--disabled' : !isPhoneValidated }"
           @click="getCode"
         >Получить код</button>
       </div>
@@ -39,8 +39,8 @@ export default {
       if (val && val.length && val[0] != "7") {
         this.phone = "7" + val.substring(1);
       }
-      if (val && val.length === 11) this.isPhoneValidated = true
-      else this.isPhoneValidated = false
+      if (val && val.length === 11) this.isPhoneValidated = true;
+      else this.isPhoneValidated = false;
     }
   },
   computed: {

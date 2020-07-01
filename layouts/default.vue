@@ -1,6 +1,6 @@
 <template>
     <div class="layout">
-        <Header></Header>
+        <!-- <Header></Header>
         <mobile-header />
         <mobile-menu />
         <auth-modal />
@@ -14,7 +14,7 @@
           <notification v-for="(notification, index) in notifications" :key="index" :notification="notification" />
         </div>
         <Footer />
-        <preloader />
+        <preloader /> -->
     </div>
 </template>
 

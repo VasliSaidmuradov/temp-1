@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="container">
+    <!-- <div class="container">
       <div class="row">
         <div class="left-col">
           <Nav></Nav>
@@ -17,7 +17,7 @@
         </div>
       </div>
       <Brands />
-    </div>
+    </div> -->
   </div>
 </template>
 

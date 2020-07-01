@@ -29,6 +29,13 @@
             :tag="tag"
             :isBrandPage="false"
           />
+          <!-- {{categories ? 'ccc' : 'no ccc'}}
+          <br />
+          {{category ? category  : 'no cats'}}
+          <br />
+          {{subcategory ? 'subcats' : 'no subcat'}}
+          <br />
+          {{tag ? 'tags' : 'no tags'}} -->
           <category-filter
             :allProducts="allProducts"
             :filterByBrands="true"
@@ -135,6 +142,7 @@ export default {
       return null;
     },
     subcategory() {
+      console.log('category', this.category)
       if (!this.category) {
         return null;
       }
@@ -151,6 +159,7 @@ export default {
     },
     tag() {
       if (!this.subcategory) {
+        console.log('subcategory', this.subcategory)
         return null;
       }
 

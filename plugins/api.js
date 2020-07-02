@@ -13,7 +13,10 @@ export default function ({ $axios, store, app }, inject) {
 
       data['_method'] = 'GET'
       try {
+        // let debug_key = this.getCacheKey(url, data)
+        // console.time(debug_key)
         const resp = await $axios.$post(url.includes('://') ? url : (this.baseUrl + url), data)
+        // console.timeEnd(debug_key)
         if (process.client) {
           this.setCache(key, resp)
         }

@@ -10,6 +10,7 @@
       {{ link.name }}
       <br />
     </nuxt-link>
+    <!-- >> {{ nav }} -->
   </div>
 </template>
 
@@ -20,15 +21,19 @@ export default {
     category: Object,
     subcat: Object,
     tag: Object,
-    brandList: Array,
+    brandList: Object,
     isBrandPage: Boolean
   },
   computed: {
     nav() {
-      if (this.isBrandPage) return this.brandList;
+      if (this.isBrandPage) return this.brandList.data;
       if (this.tag) return this.subcat.tags;
       if (this.subcat) return this.subcat.tags;
-      if (this.category) return this.category.subcategories;
+      if (this.category) {
+        const arr = this.category.subcategories.map(el => el.tags)
+        console.log(arr)
+        return this.category.subcategories
+      }
       return this.categories;
     }
   }

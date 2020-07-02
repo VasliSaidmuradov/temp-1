@@ -35,9 +35,8 @@
           <br />
           {{subcategory ? 'subcats' : 'no subcat'}}
           <br />
-          {{tag ? 'tags' : 'no tags'}} -->
+          {{tag ? 'tags' : 'no tags'}}-->
           <category-filter
-            :allProducts="allProducts"
             :filterByBrands="true"
             @brand-filter="filterBrand"
             @sales-filter="filterSales"
@@ -45,6 +44,7 @@
           />
         </div>
         <div class="right-col">
+            <!-- {{ filteredProducts }} -->
           <div class="category-page-mob">
             <p class="category-page-total">{{ products.total }} товара</p>
             <nuxt-link class="category-page-back" to>Все категории</nuxt-link>
@@ -83,7 +83,7 @@
           </div>
           <div class="category-page-product-wrp">
             <product
-              v-for="product in productList.data ? productList.data : products.data"
+              v-for="product in (filteredProducts && filteredProducts.data.length) ? filteredProducts.data : products.data"
               :key="product.id"
               :product="product"
             />
@@ -93,9 +93,8 @@
           </div>-->
         </div>
       </div>
-      <pagination :paginator="productList.data ? productList : products" />
+      <pagination :paginator="(filteredProducts && filteredProducts.data.length) ? filteredProducts : products" />
     </div>
-    <!-- {{ sales }} -->
   </div>
 </template>
 
@@ -105,7 +104,7 @@ import categoryFilter from "@/components/category/filter";
 import brand from "@/components/category/brand";
 import product from "@/components/partials/product";
 import pagination from "@/components/partials/pagination";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
@@ -122,14 +121,15 @@ export default {
     delay: null,
     productList: { data: null },
     salesProducts: null,
-    isSortOpen: false
+    isSortOpen: false,
+    ids: []
   }),
   computed: {
     ...mapGetters({
       products: "product/GET_PRODUCTS",
-      allProducts: "product/GET_ALL_PRODUCTS",
+      // allProducts: "product/GET_ALL_PRODUCTS",
       categories: "menu/GET_CATEGORIES",
-      brandFilterResult: "brand/GET_FILTER_RESULT",
+      filteredProducts: "brand/GET_FILTERED_PRODUCTS",
       sales: "product/GET_SALES"
     }),
     category() {
@@ -142,7 +142,7 @@ export default {
       return null;
     },
     subcategory() {
-      console.log('category', this.category)
+      console.log("category", this.category);
       if (!this.category) {
         return null;
       }
@@ -159,7 +159,7 @@ export default {
     },
     tag() {
       if (!this.subcategory) {
-        console.log('subcategory', this.subcategory)
+        console.log("subcategory", this.subcategory);
         return null;
       }
 
@@ -218,6 +218,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      filterByBrands: "brand/filterByBrands"
+    }),
     showFilter() {
       this.$store.commit("SET_MOBILE_FILTER", true);
     },
@@ -225,18 +228,16 @@ export default {
       this.isSortOpen = !this.isSortOpen;
     },
     filterBrand(e) {
-      const all = this.allProducts;
-      if (e.checked) {
-        const data = [
-          ...this.allProducts.data.filter(el => el.brand.id == e.value)
-        ];
-        this.productList = { ...all, data: data };
-      } else {
-        const data = [
-          ...this.allProducts.data.filter(el => el.brand.id != e.value)
-        ];
-        this.productList = { ...all, data: data };
+      if (!this.ids.includes(e.value)) this.ids.push(e.value);
+      else if (this.ids.includes(e.value)) {
+        this.ids.splice(this.ids.indexOf(e.value), 1);
       }
+      const idsStr = this.ids.join(",");
+      const params = this.$route.params;
+      const slug = `${params.category ? params.category : ""}${
+        params.subcategory ? "/" + params.subcategory : ""
+      }${params.tag ? "/" + params.tag : ""}`;
+      this.filterByBrands({ slug: slug, ids: idsStr });
     },
     filterSales(e) {
       if (e.checked) {
@@ -247,7 +248,7 @@ export default {
     },
     sorting(e) {
       this.sort = e;
-      this.isSortOpen = false
+      this.isSortOpen = false;
     }
   }
 };

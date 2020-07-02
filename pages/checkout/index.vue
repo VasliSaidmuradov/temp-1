@@ -63,7 +63,7 @@
               <div class="checkout-getting-pickup" v-if="order.delivery_type === '1'">
                 <h5 class="checkout-page-subtitle">Выберите магазин</h5>
                 <select v-model="order.street" class="checkout-page-select" required>
-                  <option value="ул.Тимирязева 38/1">г.Алматы, ул.Тимирязева 38/1</option>
+                  <!-- <option value="ул.Тимирязева 38/1">г.Алматы, ул.Тимирязева 38/1</option> -->
                   <option value="ул.Жибек-жолы 38/1">г.Алматы, ул.Жибек-жолы 38/1</option>
                 </select>
               </div>

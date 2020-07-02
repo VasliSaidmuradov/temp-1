@@ -7,8 +7,8 @@
     </div>
     <div v-swiper:brandsSlider="options">
       <div class="swiper-wrapper">
-        <nuxt-link v-for="brand in brands" :key="brand.id" class="swiper-slide" :to="`/brands/${brand.slug}`">
-          <!-- {{ brand.name }} -->
+        <!-- {{ brands }} -->
+        <nuxt-link v-for="brand in brands.data" :key="brand.id" class="swiper-slide" :to="`/brands/${brand.slug}`">
           <img class="brands-slider-image" :src="brand.image ? brand.image : '/images/brand.png'" :alt="brand.name" />
         </nuxt-link>
       </div>

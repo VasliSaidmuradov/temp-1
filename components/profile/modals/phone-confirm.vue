@@ -11,9 +11,14 @@
           <b>+{{ confirmPhone }}</b>
         </p>
         <client-only>
-          <the-mask :mask="['####']" class="profile-modal-input" required />
+          <the-mask :mask="['####']" v-model="code" class="profile-modal-input" required />
         </client-only>
-        <button class="button --main-color" @click="confirm">Подтвердить</button>
+        <button
+          class="button"
+          :class="{ '--main-color': isValidated, '--disabled': !isValidated }"
+          :disabled="!isValidated"
+          @click="confirm"
+        >Подтвердить</button>
         <button class="profile-modal-btn --no-border" @click="back">Использовать другой номер</button>
       </div>
     </div>
@@ -24,6 +29,18 @@
 import { mapGetters } from "vuex";
 
 export default {
+  data() {
+    return {
+      code: null,
+      isValidated: false
+    };
+  },
+  watch: {
+    code: function(val) {
+      if (val && val.length === 4) this.isValidated = true;
+      else this.isValidated = false;
+    }
+  },
   computed: {
     ...mapGetters({
       isOpen: "GET_PROFILE_PHONE_CONFIRM",

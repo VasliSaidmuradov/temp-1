@@ -15,7 +15,11 @@
             required
           />
         </client-only>
-        <button class="profile-modal-btn --gray" @click="getCode">Получить код</button>
+        <button
+          class="button"
+          :class="{ '--main-color' : isPhoneValidated, '--disabled' : !isPhoneValidated }"
+          @click="getCode"
+        >Получить код</button>
       </div>
     </div>
   </transition>
@@ -26,7 +30,8 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      phone: null
+      phone: null,
+      isPhoneValidated: false
     };
   },
   watch: {
@@ -34,15 +39,9 @@ export default {
       if (val && val.length && val[0] != "7") {
         this.phone = "7" + val.substring(1);
       }
+      if (val && val.length === 11) this.isPhoneValidated = true;
+      else this.isPhoneValidated = false;
     }
-    // togglePhone: async function(val) {
-    //   if (val && this.phone != this.$getUser().phone) {
-    //     await this.updateProfile({ phone: this.phone });
-    //     if (!this.$getError("updatePhone")) {
-    //       this.$store.commit("SET_VERIFY_MODAL", this.user);
-    //     }
-    //   }
-    // }
   },
   computed: {
     ...mapGetters({
@@ -59,7 +58,7 @@ export default {
     async getCode() {
       try {
         console.log("111");
-        if (!this.phone || this.phone && this.phone.length !== 11) {
+        if (!this.phone || (this.phone && this.phone.length !== 11)) {
           this.$alert({
             message: "Введите корректный номер телофона.",
             type: "error"

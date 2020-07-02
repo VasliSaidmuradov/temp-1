@@ -38,25 +38,6 @@
             </div>
             <div class="product-page-col --padding">
               <product-aside :info="product" />
-              <h3 class="product-info-title">Доставка</h3>
-              <div class="product-info-row">
-                <img src="/icons/delivery-icon.svg" class="product-info-delivery-icon" alt="delivery icon" />
-                <p class="product-info-delivery-text">
-                  Доставка курьером,
-                  <b v-if="tomorrow === now">завтра, {{ $formatDate(now) }},</b>
-                  <b v-else>сегодня, {{ $formatDate(now) }},</b>
-                  <span>Бесплатно</span>
-                </p>
-              </div>
-              <div class="product-info-row">
-                <img src="/icons/house-icon.svg" class="product-info-delivery-icon" alt="Skiny icon" />
-                <p class="product-info-delivery-text">
-                  Самовывоз,
-                  <b v-if="tomorrow === now">завтра, {{ $formatDate(now) }},</b>
-                  <b v-else>сегодня, {{ $formatDate(now) }},</b>
-                </p>
-              </div>
-              <nuxt-link class="product-page-link" to="/help/delivery">Подробнее про условия доставки</nuxt-link>
             </div>
           </div>
         </div>
@@ -86,7 +67,6 @@ import productAside from "@/components/product-inner/aside";
 import similar from "@/components/product-inner/similar";
 import other from "@/components/product-inner/other";
 import favoritesIcon from "@/static/icons/favorites-icon2.svg";
-import moment from 'moment'
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -108,23 +88,6 @@ export default {
       isInCart: "cart/IS_PRODUCT_IN_CART",
       // brandProducts: "brand/GET_BRAND_PRODUCTS"
     }),
-		tomorrow() {
-			const msInADay = 60 * 60 * 24 * 1000
-			const today = Date.now()
-			return today + msInADay
-    },
-    today() {
-      return Date.now()
-    },
-    now() {
-      let hour = moment().hour()
-      const fn = () => hour = moment().hour()
-      setInterval(fn, 1000)
-      if (hour >= 19 && hour <= 23) {
-        return this.tomorrow
-      }
-      return this.today
-    }
   },
   methods: {
     ...mapActions({

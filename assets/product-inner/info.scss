@@ -5,6 +5,9 @@
 		font-weight: 700;
 		color: #000;
 		margin-bottom: 10px;
+		&.--margin {
+			margin-top: 60px;
+		}
 	}
 	&-text {
 		@include em(14px);
@@ -36,5 +39,10 @@
 @media screen and (max-width: 810px) {
 	.product-info {
 		padding-top: 30px;
+		&-title {
+			&.--margin {
+				margin-top: 0;
+			}
+		}
 	}
 }

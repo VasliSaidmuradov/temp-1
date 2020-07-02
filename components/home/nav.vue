@@ -7,7 +7,7 @@
       :to="`/catalog/${category.slug}`"
       @mouseover.native="onHoverCategory(category)"
     >
-      <!-- <img class="home-nav-link-icon" :src="category.icon" :alt="category.name" /> -->
+      <img class="home-nav-link-icon" :src="category.icon" :alt="category.name" />
       <span>{{ category.name }}</span>
     </nuxt-link>
     <transition name="fade">

@@ -29,7 +29,7 @@
         color: var(--color-base);
     }
     &.--not-available {
-      background: var(--bg-base);
+      background: var(--bg-base) !important;
       color: var(--text-red);
     }
     &.--arrow {

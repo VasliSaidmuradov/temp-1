@@ -26,8 +26,15 @@
             <span>Алматы</span>
           </div>   -->
           <form class="header-search-wrp" @submit.prevent="redirectToSearch">
-            <input v-model="searchQuery" type="text" placeholder="Хочу купить..." required />
+            <input v-model="searchQuery" 
+              type="text" 
+              @focus="isSearchOpen = true" 
+              @blur="isSearchOpen = false" 
+              placeholder="Хочу купить..." required />
             <button class="header-search-btn"></button>
+            <transition name="fade">
+              <search-dropdown v-if="isSearchOpen" />
+            </transition>
           </form>
           <button
             class="header-profile"
@@ -56,11 +63,12 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-
+import searchDropdown from '@/components/partials/search-dropdown'
 export default {
   data() {
     return {
-      searchQuery: null
+      searchQuery: null,
+      isSearchOpen: false
     };
   },
   middleware: ['cart'],  
@@ -73,6 +81,9 @@ export default {
       discount: 'cart/GET_DISCOUNT',
       cartProductIds: 'cart/GET_PRODUCT_IDS'
     })
+  },
+  components: {
+    searchDropdown
   },
   watch: {
     searchQuery: async function(val) {

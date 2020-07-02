@@ -22,10 +22,7 @@ export const actions = {
     store.commit('SET_BRAND_PRODUCTS', res.data)
   },
   async filterByBrands(store, payload) {
-    console.log('filter by brands: ', payload)
-    // return
-    const res = await this.$api.get(`/brands-filter/${payload.slug}`, payload.ids, 'filterBrands')
-    console.log('filter by brands res: ', res)
+    const res = await this.$api.get(`/brands-filter/${payload.slug}?ids=${payload.ids}&per_page=15`)
     store.commit('FILTER_BRANDS', res)
   }
 }

@@ -83,7 +83,7 @@
           </div>
           <div class="category-page-product-wrp">
             <product
-              v-for="product in productList.data ? productList.data : products.data"
+              v-for="product in (filteredProducts && filteredProducts.data.length) ? filteredProducts.data : products.data"
               :key="product.id"
               :product="product"
             />
@@ -93,9 +93,8 @@
           </div>-->
         </div>
       </div>
-      <pagination :paginator="productList.data ? productList : products" />
+      <pagination :paginator="(filteredProducts && filteredProducts.data.length) ? filteredProducts : products" />
     </div>
-    <!-- {{ sales }} -->
   </div>
 </template>
 
@@ -130,7 +129,7 @@ export default {
       products: "product/GET_PRODUCTS",
       allProducts: "product/GET_ALL_PRODUCTS",
       categories: "menu/GET_CATEGORIES",
-      brandFilterResult: "brand/GET_FILTER_RESULT",
+      filteredProducts: "brand/GET_FILTERED_PRODUCTS",
       sales: "product/GET_SALES"
     }),
     category() {
@@ -229,30 +228,16 @@ export default {
       this.isSortOpen = !this.isSortOpen;
     },
     filterBrand(e) {
-      console.log(e.value);
       if (!this.ids.includes(e.value)) this.ids.push(e.value);
       else if (this.ids.includes(e.value)) {
         this.ids.splice(this.ids.indexOf(e.value), 1);
       }
       const idsStr = this.ids.join(",");
-      console.log("ids: ", this.ids, idsStr);
       const params = this.$route.params;
       const slug = `${params.category ? params.category : ""}${
         params.subcategory ? "/" + params.subcategory : ""
       }${params.tag ? "/" + params.tag : ""}`;
       this.filterByBrands({ slug: slug, ids: idsStr });
-      // const all = this.allProducts;
-      // if (e.checked) {
-      //   const data = [
-      //     ...this.allProducts.data.filter(el => el.brand.id == e.value)
-      //   ];
-      //   this.productList = { ...all, data: data };
-      // } else {
-      //   const data = [
-      //     ...this.allProducts.data.filter(el => el.brand.id != e.value)
-      //   ];
-      //   this.productList = { ...all, data: data };
-      // }
     },
     filterSales(e) {
       if (e.checked) {

@@ -24,22 +24,21 @@
           </nuxt-link>
           <!-- <div class="header-city-wrp">
             <span>Алматы</span>
-          </div>   -->
+          </div>-->
           <form class="header-search-wrp" @submit.prevent="redirectToSearch">
-            <input v-model="searchQuery" 
-              type="text" 
-              @focus="isSearchOpen = true" 
-              @blur="isSearchOpen = false" 
-              placeholder="Хочу купить..." required />
+            <input v-model="searchQuery" type="text" placeholder="Хочу купить..." required />
             <button class="header-search-btn"></button>
+            <!-- @focus="isSearchOpen = true" 
+              @blur="isSearchOpen = false"  -->
             <transition name="fade">
-              <search-dropdown v-if="isSearchOpen" />
+              <search-dropdown />
             </transition>
           </form>
           <button
             class="header-profile"
             :class="{'--not-signed' : !$checkAuth()}"
-            @click="openAuth"></button>
+            @click="openAuth"
+          ></button>
           <nuxt-link class="header-favorites" to="/favorites">
             <span class="header-icon-badge" v-if="favoritesQuantity > 0">{{ favoritesQuantity }}</span>
           </nuxt-link>
@@ -63,7 +62,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import searchDropdown from '@/components/partials/search-dropdown'
+import searchDropdown from "@/components/partials/search-dropdown";
 export default {
   data() {
     return {
@@ -71,15 +70,15 @@ export default {
       isSearchOpen: false
     };
   },
-  middleware: ['cart'],  
+  middleware: ["cart"],
   computed: {
     ...mapGetters({
       products: "product/GET_HINTS",
       favoritesQuantity: "user/GET_QUANTITY",
       cartQuantity: "cart/GET_QUANTITY",
-      sum: 'cart/GET_TOTAL',
-      discount: 'cart/GET_DISCOUNT',
-      cartProductIds: 'cart/GET_PRODUCT_IDS'
+      sum: "cart/GET_TOTAL",
+      discount: "cart/GET_DISCOUNT",
+      cartProductIds: "cart/GET_PRODUCT_IDS"
     })
   },
   components: {
@@ -100,14 +99,14 @@ export default {
   },
   methods: {
     ...mapActions({
-      searchProduct: "product/searchProductHint",
+      searchProduct: "product/searchProductHint"
     }),
     openAuth() {
       if (this.$checkAuth()) {
         this.redirectToProfile();
       } else {
-        document.body.classList.add("--hidden"),  
-        this.$store.commit("auth/SET_MODAL_STATE", true);
+        document.body.classList.add("--hidden"),
+          this.$store.commit("auth/SET_MODAL_STATE", true);
       }
     },
     showSearch() {
@@ -118,7 +117,7 @@ export default {
       this.$router.push({ path: "/search", query: { q: this.searchQuery } });
     },
     redirectToProfile() {
-      this.$router.push({ path: '/profile' });
+      this.$router.push({ path: "/profile" });
     }
   }
 };

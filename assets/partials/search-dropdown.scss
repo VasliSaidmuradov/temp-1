@@ -25,6 +25,7 @@
         display: inline-block;
         position: relative;
         padding-right: 20px;
+        cursor: pointer;
         &:after {
             content: '';
             width: 10px;

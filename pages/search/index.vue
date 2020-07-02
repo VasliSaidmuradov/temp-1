@@ -41,7 +41,7 @@
           <product v-for="item in product" :key="item.id" :product="item" />
         </div>
       </div>
-      <pagination :paginator="products" />
+      <pagination v-if="searchQuery" :paginator="products" />
     </div>
   </div>
 </template>
@@ -109,7 +109,7 @@ export default {
     },
     sorting(e) {
       this.sort = e;
-      this.isSortOpen = false
+      this.isSortOpen = false;
     }
   },
   mounted() {

@@ -37,7 +37,6 @@
           <br />
           {{tag ? 'tags' : 'no tags'}}-->
           <category-filter
-            :allProducts="allProducts"
             :filterByBrands="true"
             @brand-filter="filterBrand"
             @sales-filter="filterSales"
@@ -45,6 +44,7 @@
           />
         </div>
         <div class="right-col">
+            <!-- {{ filteredProducts }} -->
           <div class="category-page-mob">
             <p class="category-page-total">{{ products.total }} товара</p>
             <nuxt-link class="category-page-back" to>Все категории</nuxt-link>
@@ -127,7 +127,7 @@ export default {
   computed: {
     ...mapGetters({
       products: "product/GET_PRODUCTS",
-      allProducts: "product/GET_ALL_PRODUCTS",
+      // allProducts: "product/GET_ALL_PRODUCTS",
       categories: "menu/GET_CATEGORIES",
       filteredProducts: "brand/GET_FILTERED_PRODUCTS",
       sales: "product/GET_SALES"

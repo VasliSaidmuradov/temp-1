@@ -28,8 +28,10 @@
         <div class="filter-checkmark"></div>
         <p>{{ brand.name }}</p>
       </label>
-      <!-- {{ getBrands }} -->
     </div>
+      <!-- brands: {{ getBrands }}<br /> -->
+      <!-- all prods: {{ allProducts.data.length }}<br/> -->
+      <!-- products: {{ products.data.length }} -->
     <div class="filter-block">
       <!-- <p class="filter-title">Эксклюзивные предложения</p> -->
       <!-- <label class="filter-checkbox">
@@ -55,7 +57,7 @@ import { mapGetters } from "vuex";
 export default {
   props: {
     cats: Array,
-    allProducts: Object,
+    // allProducts: Object,
     filterByBrands: {
       type: Boolean,
       default: true
@@ -73,7 +75,7 @@ export default {
   computed: {
     ...mapGetters({
       products: "product/GET_PRODUCTS",
-      // allProducts: "product/GET_ALL_PRODUCTS",
+      allProducts: "product/GET_ALL_PRODUCTS",
       brands: "brand/GET_BRANDS",
       filters: "product/GET_FILTERS",
       brandFilter: 'product/GET_BRAND_FILTER',
@@ -81,6 +83,7 @@ export default {
     }),
     getBrands() {
       const products = this.allProducts.data || this.allProducts.products
+      console.log('prod: ', products)
       const brands = products.map(el => el.brand)
       console.log(this.$route)
       const res = brands.reduce((acc, current) => {

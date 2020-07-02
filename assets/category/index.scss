@@ -110,7 +110,7 @@
 	}
 	&-product-wrp {
 		display: flex;
-		flex-wrap: wrap;
+		// flex-wrap: wrap;
 		.product {
 			margin-right: 30px;
 			&:nth-child(3n) {

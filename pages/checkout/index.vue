@@ -179,7 +179,11 @@
                 </div>
               </div>
               <div class="order-aside-link-wrp">
-                <button type="submit" class="button --main-color" :disabled="sum <= 0">Оформить заказ</button>
+                <button
+                  type="submit"
+                  class="button --main-color"
+                  :disabled="sum <= 0"
+                >Оформить заказ</button>
                 <!-- <nuxt-link class="button --white" to="">Перейти к оплате</nuxt-link> -->
               </div>
               <p v-if="$getError('order')" class="error-text">{{ $getError('order') }}</p>
@@ -222,7 +226,7 @@ export default {
         city_name: "",
         delivery_type: "1",
         delivery_cost: 0,
-        street: null,
+        street: "ул.Жибек-жолы 38/1",
         house: null,
         flat: null,
         index: null,
@@ -239,6 +243,11 @@ export default {
       if (val && val.length && val[0] != "7") {
         this.order.phone = "7" + val.substring(1);
       }
+    },
+    "order.delivery_type": function(val) {
+      val && val === "1"
+        ? (this.order.street = "ул.Жибек-жолы 38/1")
+        : (this.order.street = null);
     }
   },
   computed: {

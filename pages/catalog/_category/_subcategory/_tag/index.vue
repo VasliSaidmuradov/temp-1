@@ -44,7 +44,7 @@
           />
         </div>
         <div class="right-col">
-            <!-- {{ filteredProducts }} -->
+          <!-- {{ filteredProducts }} -->
           <div class="category-page-mob">
             <p class="category-page-total">{{ products.total }} товара</p>
             <nuxt-link class="category-page-back" to>Все категории</nuxt-link>
@@ -81,19 +81,18 @@
               </div>
             </div>
           </div>
-          <div class="category-page-product-wrp">
-            <product
-              v-for="product in (filteredProducts && filteredProducts.data.length) ? filteredProducts.data : products.data"
-              :key="product.id"
-              :product="product"
-            />
+          <div
+            class="category-page-product-wrp"
+            v-for="(items, index) in $chunk((filteredProducts && filteredProducts.data.length) ? filteredProducts.data : products.data, 4)"
+            :key="index"
+          >
+            <product v-for="product in items" :key="product.id" :product="product" />
           </div>
-          <!-- <div v-if="sales.data" class="category-page-product-wrp">
-            <product v-for="product in sales.data " :key="product.id" :product="product" />
-          </div>-->
         </div>
       </div>
-      <pagination :paginator="(filteredProducts && filteredProducts.data.length) ? filteredProducts : products" />
+      <pagination
+        :paginator="(filteredProducts && filteredProducts.data.length) ? filteredProducts : products"
+      />
     </div>
   </div>
 </template>

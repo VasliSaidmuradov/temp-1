@@ -2,8 +2,8 @@
   <div class="product" v-if="product">
     <!-- {{ product }} -->
     <div class="product-icon-wrp">
-      <img v-if="product.is_hit" src="/icons/hit-icon.svg" alt="Skiny icon" />
-      <img v-if="product.is_new" src="/icons/new-icon.svg" alt="Skiny icon" />
+      <img v-if="product.is_hit" src="/icons/hit-icon.svg" alt="Hit icon" />
+      <img v-if="product.is_new" src="/icons/new-icon.svg" alt="New icon" />
     </div>
     <button class="product-add-favorites" :class="{'-added' : isFavorite(product)}" @click="toggleFavorite(product)">
       <favorites-icon />

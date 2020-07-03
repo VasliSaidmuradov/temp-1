@@ -97,6 +97,10 @@
         background-color: #fff;
         cursor: pointer;
     }
+    &-slide-image {
+        height: 95%;
+        object-fit: contain;
+    }
 }
 
 @media (max-width: 426px) {

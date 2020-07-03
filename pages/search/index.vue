@@ -41,6 +41,7 @@
           <product v-for="item in product" :key="item.id" :product="item" />
         </div>
       </div>
+      {{ searchQuery }}
       <pagination v-if="searchQuery" :paginator="products" />
     </div>
   </div>

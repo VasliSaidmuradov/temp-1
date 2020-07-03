@@ -149,6 +149,7 @@ export const actions = {
   },
   async fetchProduct(store, payload) {
     const res = await this.$api.get(`/product/${payload}`)
+    // console.log(res)
     store.commit('SET_PRODUCT', res.product)
     store.commit('SET_SIMILARS', res.similars)
   },

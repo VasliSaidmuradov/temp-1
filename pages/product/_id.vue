@@ -1,7 +1,7 @@
 <template>
   <div class="product-page">
     <transition name="fade">
-      <modal v-if="isModalOpen"  @closeGallery="closeGallery"/>
+      <modal :product="product" v-if="isModalOpen"  @closeGallery="closeGallery"/>
     </transition>
     <!-- prod: {{product}} -->
     <div class="container">
@@ -49,11 +49,11 @@
     </div>
     <div class="product-page-mobile-btn">
       <button
-        v-if="!isInCart(product) && product.quantity"
+        v-show="!isInCart(product) && product.quantity"
         @click="addToCart"
         class="button --main-color"
       >Добавить в корзину</button>
-      <div v-if="isInCart(product) && product.quantity" class="product-counter">
+      <div v-show="isInCart(product) && product.quantity" class="product-counter">
         <button @click="decrease(product)" class="product-counter-decrease"></button>
         <span>{{ getCartQuantity(product) }} {{ product.tag ? product.tag.unit : 'шт' }}</span>
         <button

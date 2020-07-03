@@ -1,6 +1,6 @@
 <template>
   <div class="product-info">
-    <div class="product-info-rating"></div>
+    <!-- <div class="product-info-rating"></div> -->
     <h3 class="product-info-title">Описание</h3>
     <p class="product-info-text" v-html="info.description ? info.description : ''"></p>
     <h3 class="product-info-title --margin">Доставка</h3>

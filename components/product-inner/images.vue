@@ -1,6 +1,6 @@
 <template>
   <div class="product-images">
-    <div class="product-images-main">
+    <div class="product-images-main" @click="showGallery">
       <div class="product-images-icon-wrp">
         <img src="/icons/hit-icon.svg" alt="Hit icon" />
         <img src="/icons/new-icon.svg" alt="New icon" />
@@ -65,6 +65,11 @@ export default {
       return !this.product.images
         ? [this.product.image, ...this.product.images]
         : [this.product.image];
+    }
+  },
+  methods: {
+    showGallery() {
+      this.$emit('showGallery')
     }
   }
 };

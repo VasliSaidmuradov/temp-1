@@ -1,0 +1,121 @@
+.product-modal {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(#000, 0.5);
+    }
+    &-inner {
+        background-color: #fff;
+        height: 90%;
+        width: 90%;
+        position: relative;
+        z-index: 1;
+        border-radius: 10px;
+    }
+    &-slider-wrp {
+        height: calc(100% - 160px);
+        width: 100%;
+        .swiper-container {
+            height: 100%;
+        }
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    &-prev,
+    &-next {
+        position: absolute;
+        z-index: 4;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    &-prev {
+        left: 40px;
+        svg {
+            transform: rotate(-180deg);
+        }
+    }
+    &-next {
+        right: 40px;
+    }
+    &-thumbs-wrp {
+        border-top: 1px solid var(--line-base);
+        padding: 40px 0;
+        .swiper-container {
+            opacity: 0;
+        }
+    }
+    &-thumb {
+        width: 80px !important;
+        height: 80px !important;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 2px solid transparent;
+        cursor: pointer;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        &.swiper-slide-active {
+            border-color: var(--color-base);
+        }
+    }
+    &-close {
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        border: none;
+        position: absolute;
+        right: 40px;
+        top: 40px;
+        z-index: 4;
+        background-color: #fff;
+        cursor: pointer;
+    }
+}
+
+@media (max-width: 426px) {
+    .product-modal {
+        &-next {
+            right: 20px;
+        }
+        &-prev {
+            left: 20px;
+        }
+        &-close {
+            top: 20px;
+            right: 20px;
+        }
+        &-thumbs-wrp {
+            padding: 20px 0;
+        }
+        &-slider-wrp {
+            height: calc(100% - 120px);
+        }
+    }
+}

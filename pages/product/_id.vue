@@ -1,5 +1,8 @@
 <template>
   <div class="product-page">
+    <transition name="fade">
+      <modal v-if="isModalOpen"  @closeGallery="closeGallery"/>
+    </transition>
     <!-- prod: {{product}} -->
     <div class="container">
       <div class="breadcrumbs">
@@ -21,7 +24,7 @@
       <!-- similars: {{ similars }} -->
       <div class="product-page-row">
         <div class="product-page-col">
-          <images :product="product" />
+          <images :product="product" @showGallery="showGallery" />
           <div class="product-page-mob-name">
             <p class="product-page-brand">{{ product.brand ? product.brand.name : '' }}</p>
             <p class="product-page-name">{{ product.name }}</p>
@@ -34,7 +37,9 @@
           </div>
           <div class="product-page-right-inner">
             <div class="product-page-col">
-              <info :info="product" />
+              <client-only>
+                <info :info="product" />
+              </client-only>
             </div>
             <div class="product-page-col --padding">
               <product-aside :info="product" />
@@ -67,6 +72,7 @@ import productAside from "@/components/product-inner/aside";
 import similar from "@/components/product-inner/similar";
 import other from "@/components/product-inner/other";
 import favoritesIcon from "@/static/icons/favorites-icon2.svg";
+import modal from '@/components/product-inner/modal'
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -76,9 +82,15 @@ export default {
     productAside,
     similar,
     other,
-    favoritesIcon
+    favoritesIcon,
+    modal
   },
   middleware: ["product"],
+  data() {
+    return {
+      isModalOpen: false
+    }
+  },
   computed: {
     ...mapGetters({
       product: "product/GET_PRODUCT",
@@ -96,6 +108,12 @@ export default {
       decrease: "cart/decrease",
       fetchCartProducts: 'cart/fetchCartProducts',
     }),
+    showGallery() {
+      this.isModalOpen = true
+    },
+    closeGallery() {
+      this.isModalOpen = false
+    }
   }
 };
 </script>

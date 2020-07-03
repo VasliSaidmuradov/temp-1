@@ -7,15 +7,11 @@
         <nuxt-link
           v-if="product.tag.subcategory && product.tag.subcategory.categories[0]"
           :to="`/catalog/${product.tag.subcategory.categories[0].slug}/${product.tag.subcategory.slug}`"
-        >
-          {{ product.tag.subcategory.name }} /
-        </nuxt-link>
+        >{{ product.tag.subcategory.name }} /</nuxt-link>
         <nuxt-link
           v-if="product.tag && product.tag.subcategory.categories[0]"
           :to="`/catalog/${product.tag.subcategory.categories[0].slug}/${product.tag.subcategory.slug}/${product.tag.slug}`"
-        >
-          {{ product.tag.name }} /
-        </nuxt-link>
+        >{{ product.tag.name }} /</nuxt-link>
         <nuxt-link v-if="product" :to="product.slug">{{ product.name }}</nuxt-link>
       </div>
       <!-- similars: {{ similars }} -->
@@ -41,19 +37,31 @@
             </div>
           </div>
         </div>
-      </div>  
+      </div>
       <!-- >>  {{ brandProducts }} -->
       <!-- <other v-if="brandProducts" :brandProducts="brandProducts" /> -->
       <similar v-if="similars" :similars="similars" />
     </div>
     <div class="product-page-mobile-btn">
-      <!-- <button class="button --main-color">Добавить в корзину</button> -->
-      <div class="product-counter">
+      <button
+        v-if="!isInCart(product) && product.quantity"
+        @click="addToCart"
+        class="button --main-color"
+      >Добавить в корзину</button>
+      <div v-if="isInCart(product) && product.quantity" class="product-counter">
         <button @click="decrease(product)" class="product-counter-decrease"></button>
         <span>{{ getCartQuantity(product) }} {{ product.tag ? product.tag.unit : 'шт' }}</span>
-        <button :disabled="product.quantity <= getCartQuantity(product)" @click="increase(product)" class="product-counter-increase"></button>
+        <button
+          :disabled="product.quantity <= getCartQuantity(product)"
+          @click="increase(product)"
+          class="product-counter-increase"
+        ></button>
       </div>
-      <button :class="{'-added' : isFavorite(product)}" @click="toggleFavorite(product)" class="product-page-add-favorites">
+      <button
+        :class="{'-added' : isFavorite(product)}"
+        @click="toggleFavorite(product)"
+        class="product-page-add-favorites"
+      >
         <favorites-icon />
       </button>
     </div>
@@ -79,23 +87,48 @@ export default {
     favoritesIcon
   },
   middleware: ["product"],
+  data() {
+    return {
+      isAdded: false,
+      count: 1,
+      isAvailable: false
+    };
+  },
   computed: {
     ...mapGetters({
       product: "product/GET_PRODUCT",
       similars: "product/GET_SIMILARS",
       getCartQuantity: "cart/GET_CART_QUANTITY",
       isFavorite: "user/IS_FAVORITE",
-      isInCart: "cart/IS_PRODUCT_IN_CART",
+      isInCart: "cart/IS_PRODUCT_IN_CART"
       // brandProducts: "brand/GET_BRAND_PRODUCTS"
-    }),
+    })
   },
   methods: {
     ...mapActions({
       toggleFavorite: "user/toggleFavorite",
       increase: "cart/increase",
       decrease: "cart/decrease",
-      fetchCartProducts: 'cart/fetchCartProducts',
+      fetchCartProducts: "cart/fetchCartProducts"
     }),
+    addToCart() {
+      this.$alert({
+        message: "Товар добавлен в корзину!",
+        type: "success"
+      });
+      let d = this.count - this.getCartQuantity(this.product);
+      while (typeof d === "number" && d !== 0) {
+        if (d > 0) {
+          d--;
+          this.increase(this.product);
+        } else {
+          d++;
+          this.decrease(this.product);
+        }
+      }
+      this.fetchCartProducts();
+      this.isAdded = true;
+    }
   }
 };
 </script>

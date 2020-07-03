@@ -2,8 +2,8 @@
   <div class="product-images">
     <div class="product-images-main">
       <div class="product-images-icon-wrp">
-        <img src="/icons/hit-icon.svg" alt="Hit icon" />
-        <img src="/icons/new-icon.svg" alt="New icon" />
+        <img v-if="product.is_hit" src="/icons/hit-icon.svg" alt="Hit icon" />
+        <img v-if="product.is_new" src="/icons/new-icon.svg" alt="New icon" />
       </div>
       <div v-swiper:productImagesMain="options">
         <div class="swiper-wrapper">

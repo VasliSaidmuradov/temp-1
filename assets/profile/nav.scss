@@ -1,23 +1,39 @@
 .profile-nav {
-	margin-right: 170px;
+	margin-right: 60px;
+	width: 200px;
+	&-inner {
+		overflow: hidden;
+		border-radius: 10px;
+		margin-bottom: 15px;
+	}
 	&-link {
-		display: block;
+		background-color: #fff;
+		display: flex;
+		align-items: center;
 		@include em(14px);
-		font-weight: 500;
+		font-weight: 700;
 		color: #000;
-    margin-bottom: 15px;
-    cursor: pointer;
+		padding: 15px 20px;
+		cursor: pointer;
+		svg {
+			margin-right: 10px;
+			width: 20px;
+			height: 20px;
+		}
+		path {
+			fill: #000;
+		}
 		&.nuxt-link-exact-active {
-			color: var(--color-base);
+			color: #fff;
+			background-color: var(--color-base);
+			border-radius: 10px;
+			path {
+				fill: #fff;
+			}
 		}
 		&.--red {
+			border-radius: 10px;
 			color: #F13D3D;
 		}
-	}
-}
-
-@media screen and (max-width: 1025px) {
-	.profile-nav {
-		margin-right: 80px;
 	}
 }

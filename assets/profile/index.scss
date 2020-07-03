@@ -1,15 +1,23 @@
 .profile-page {
 	padding-top: 20px;
 	padding-bottom: 60px;
+	background: var(--bg-base);
 	&-row {
-		padding-top: 60px;
-		margin-top: 30px;
-		border-top: 1px solid var(--line-base);
+		margin-top: 60px;
 		display: flex;
 		align-items: flex-start;
 	}
 	&-right {
 		flex: 1;
+		max-width: 780px;
+	}
+	&-block {
+		background-color: #fff;
+		border-radius: 10px;
+		padding: 20px 30px;
+		&.--margin-bottom {
+			margin-bottom: 40px;
+		}
 	}
 	&-title {
 		@include em(24px);
@@ -21,18 +29,57 @@
 		@include em(18px);
 		font-weight: 700;
 		color: #000;
-		margin-bottom: 20px;
+		margin-bottom: 35px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid var(--line-base);
+		position: relative;
+		a {
+			position: absolute;
+			right: 0;
+			top: 0;
+			font-weight: 400;
+			font-size: 12px;
+		}
 	}
 	&-text {
 		@include em(14px);
 		font-weight: 500;
 		color: #000;
 	}
+	&-label-wrp {
+		display: flex;
+		align-items: center;
+		position: relative;
+		justify-content: space-between;
+		padding: 15px 0;
+		cursor: pointer;
+		&:last-child {
+			margin-bottom: 0;
+		}
+		p {
+			@include em(14px);
+			font-weight: 700;
+			color: #8F8F8F;
+		}
+		button {
+			position: absolute;
+			right: 0;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
 	&-label {
-		@include em(12px);
-		font-weight: 500;
-		color: var(--gray-base);
-		display: block;
+		@include em(14px);
+		font-weight: 700;
+		color: #000;
+		display: flex;
+		align-items: center;
+		svg {
+			margin-right: 16px;
+			align-items: center;
+			width: 20px;
+			height: 20px;
+		}
 	}
 	&-link {
 		@include em(14px);
@@ -69,8 +116,7 @@
 		width: 100%;
 		background: #fff;
 		&:disabled {
-			padding: 0;
-			border: none;
+			background: var(--bg-base);
 		}
 	}
 	&-checkbox {
@@ -103,9 +149,13 @@
 	&-table-row {
 		display: flex;
 		border-bottom: 1px solid var(--line-base);
-		padding: 20px 0;
+		&.--bg {
+			background-color: var(--bg-base);
+			border-radius: 10px;
+		}
 	}
 	&-table-col {
+		padding: 20px;
 		&:first-child {
 			width: 30%;
 		}
@@ -129,6 +179,18 @@
 		&-input-wrp {
 			width: 100%;
 		}
+		&-block {
+			padding: 20px; 
+		}
+		&-table-row {
+			&.--bg {
+				background-color: #fff;
+				border-radius: 0;
+			}
+		}
+		&-table-col {
+			padding: 0 0 10px;
+		}
 	}
 }
 
@@ -136,6 +198,7 @@
 	.profile-page {
 		padding-bottom: 30px;
 		&-row {
+			margin-top: 0;
 			padding-top: 30px;
 		}
 		&-input-wrp {
@@ -151,6 +214,14 @@
 		.button {
 			width: 100%;
 			text-align: center;
+		}
+	}
+}
+
+@media screen and (max-width: 321px) {
+	.profile-page {
+		&-block {
+			padding: 10px;
 		}
 	}
 }

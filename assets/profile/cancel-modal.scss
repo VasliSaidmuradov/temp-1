@@ -67,6 +67,7 @@
         z-index: 1;
         border-radius: 6px;
         padding: 40px 30px;
+        min-width: 360px;
     }
     &-title {
         font-size: 1.3em;
@@ -113,6 +114,7 @@
     .profile-modal {
         &-inner {
             max-width: 95%;
+            min-width: 100%;
         }
         &-btn {
             width: 100%;

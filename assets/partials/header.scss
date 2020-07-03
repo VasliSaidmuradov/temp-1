@@ -20,6 +20,7 @@
         @include em(14px);
         font-weight: 500;
         color: #000;
+        white-space: nowrap;
     }
     &-phone {
         position: relative;
@@ -144,9 +145,13 @@
         background-size: contain;
     }
     &-cart {
-        margin-right: 10px;
-        background: url('/icons/cart-icon.svg') center no-repeat;
-        background-size: contain;
+        display: flex;
+        align-items: center;
+        width: auto;
+        margin-right: 0;
+        img {
+            margin-right: 10px;
+        }
     }
     &-btn {
         position: relative;

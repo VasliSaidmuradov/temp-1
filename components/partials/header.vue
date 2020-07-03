@@ -43,9 +43,10 @@
             <span class="header-icon-badge" v-if="favoritesQuantity > 0">{{ favoritesQuantity }}</span>
           </nuxt-link>
           <nuxt-link class="header-cart" to="/cart">
+            <img src="/icons/cart-icon.svg" alt="Skiny icon">
             <span class="header-icon-badge" v-if="cartQuantity > 0">{{ cartQuantity }}</span>
+            <p class="header-price">{{ $formatMoney(sum) }} тг</p>
           </nuxt-link>
-          <p class="header-price">{{ $formatMoney(sum) }} тг</p>
         </div>
       </div>
     </div>

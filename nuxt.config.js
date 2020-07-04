@@ -82,7 +82,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    analyze: true,
+    analyze: false,
     extend(config, { ctx, isClient }) {
       const svgRule = config.module.rules.find(rule => rule.test.test('.svg'));
 

@@ -3,19 +3,17 @@
     <div class="container">
       <div class="breadcrumbs">
         <nuxt-link to="/">Главная /</nuxt-link>
-        <nuxt-link v-if="true" to>
-          {{ products.name }}
-        </nuxt-link>
+        <nuxt-link v-if="true" to>{{ products.name }}</nuxt-link>
       </div>
       <!-- <h1 class="category-page-title">{{ `${products.name}` }}</h1> -->
       <div class="row">
         <div class="left-col">
           <nuxt-link class="category-page-back" to>Список брендов</nuxt-link>
-					<subcategories :brandList="brands" :isBrandPage="true" />
+          <subcategories :brandList="brands" :isBrandPage="true" />
           <!-- <category-filter
           :allProducts="allProducts"
           :filterByBrands="false"
-          /> -->
+          />-->
           <!-- <nuxt-link v-for="brand in brands" :key="brand.id" :to="brand.slug">{{ brand.name }}</nuxt-link> -->
         </div>
         <div class="right-col">
@@ -65,9 +63,12 @@
           </div>
         </div>
       </div>
-      <pagination
-        :paginator="products.products"
-      />
+
+      <!-- <pagination
+        :paginator="products"
+      />-->
+      <!-- {{ Array.isArray(products) }}
+      <pre>{{ products }}</pre> -->
     </div>
   </div>
 </template>
@@ -98,8 +99,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      brands: 'brand/GET_BRANDS',
-      products: "brand/GET_BRAND_PRODUCTS",
+      brands: "brand/GET_BRANDS",
+      products: "brand/GET_BRAND_PRODUCTS"
       // allProducts: 'products/GET_ALL_PRODUCTS'
       // categories: "menu/GET_CATEGORIES",
     }),
@@ -136,8 +137,8 @@ export default {
       return null;
     },
     allProducts() {
-      const prods = { ...this.products, data: this.products.products }
-      return prods
+      const prods = { ...this.products, data: this.products.products };
+      return prods;
     },
     currentSort() {
       switch (this.sort) {
@@ -192,11 +193,12 @@ export default {
     },
     filterBrand(e) {
       if (e.checked) {
-        const res = this.allProducts.data.filter(el => el.brand.id == e.value)
-        this.productList.push(...res)
-      }
-      else {
-        this.productList = this.productList.filter(el => el.brand.id != e.value)
+        const res = this.allProducts.data.filter(el => el.brand.id == e.value);
+        this.productList.push(...res);
+      } else {
+        this.productList = this.productList.filter(
+          el => el.brand.id != e.value
+        );
       }
     },
     sorting(e) {

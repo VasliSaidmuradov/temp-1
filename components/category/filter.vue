@@ -83,7 +83,7 @@ export default {
     }),
     getBrands() {
       const products = this.allProducts.data || this.allProducts.products
-      console.log('prod: ', products)
+      // console.log('prod: ', products)
       const brands = products.map(el => el.brand)
       console.log(this.$route)
       const res = brands.reduce((acc, current) => {

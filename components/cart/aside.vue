@@ -7,7 +7,7 @@
 				У вас есть <span>{{ $formatMoney($getUser().bonus ? $getUser().bonus : 0) }} бонусов</span>
 			</p>
 			<p class="order-aside-text" v-else>
-				<span>150 бонусов</span> для зарегестрированного покупателя
+				<span>500 бонусов</span> для зарегестрированного покупателя
 			</p>
 		</div>
 		<div class="order-aside-input-wrp" v-if="$checkAuth() && $getUser().bonus">

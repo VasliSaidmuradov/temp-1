@@ -12,7 +12,7 @@
 			<div class="product-aside-row">
 				<img src="/icons/bonus-icon.svg" alt="Skiny icon" class="product-aside-icon">
 				<p v-if="!$checkAuth()" class="product-aside-text">
-					<span>150 бонусов</span> для <nuxt-link to>зарегистрированного</nuxt-link> покупателя
+					<span>500 бонусов</span> для <nuxt-link to>зарегистрированного</nuxt-link> покупателя
 				</p>
         <p v-else class="product-aside-text">
 					<span>{{ bonuses }} бонусов</span> будет начислено вам за покупку

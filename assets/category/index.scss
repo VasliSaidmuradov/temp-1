@@ -111,12 +111,12 @@
 	&-product-wrp {
 		display: flex;
 		// flex-wrap: wrap;
-		.product {
-			margin-right: 30px;
-			&:nth-child(3n) {
-				margin-right: 0;
-			}
-		}
+		// .product {
+			// margin-right: 30px;
+			// &:nth-child(3n) {
+			// 	margin-right: 0;
+			// }
+		// }
 	}
 	&-mob {
 		display: none;

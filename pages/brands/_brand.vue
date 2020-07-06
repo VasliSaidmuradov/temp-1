@@ -19,7 +19,9 @@
         <div class="right-col">
           <brand :brand="products" />
           <div class="category-page-mob">
-            <p class="category-page-total">{{ products.products.length }} товара</p>
+            <p
+              class="category-page-total"
+            >{{ products.products.length }} товар{{!products.products.length || products.products.length >= 5 ? 'ов' : products.products.length === 1 ? '' : 'а'}}</p>
             <nuxt-link class="category-page-back" to>Все категории</nuxt-link>
             <div class="category-page-row">
               <div class="category-page-sort">
@@ -39,7 +41,9 @@
             </div>
           </div>
           <div class="category-page-sort-wrp">
-            <p class="category-page-total">{{ products.products.length }} товара</p>
+            <p
+              class="category-page-total"
+            >{{ products.products.length }} товар{{!products.products.length || products.products.length >= 5 ? 'ов' : products.products.length === 1 ? '' : 'а'}}</p>
             <div class="category-page-sort">
               <p>Сортировать:</p>
               <div class="category-page-select-wrp">
@@ -68,7 +72,7 @@
         :paginator="products"
       />-->
       <!-- {{ Array.isArray(products) }}
-      <pre>{{ products }}</pre> -->
+      <pre>{{ products }}</pre>-->
     </div>
   </div>
 </template>

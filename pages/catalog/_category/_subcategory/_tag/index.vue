@@ -46,7 +46,9 @@
         <div class="right-col">
           <!-- {{ filteredProducts }} -->
           <div class="category-page-mob">
-            <p class="category-page-total">{{ products.total }} товара</p>
+            <p
+              class="category-page-total"
+            >{{ products.total }} товар{{!products.total || products.total >= 5 ? 'ов' : products.total === 1 ? '' : 'а'}}</p>
             <nuxt-link class="category-page-back" to>Все категории</nuxt-link>
             <div class="category-page-row">
               <div class="category-page-sort">
@@ -66,7 +68,9 @@
             </div>
           </div>
           <div class="category-page-sort-wrp">
-            <p class="category-page-total">{{ products.total }} товара</p>
+            <p
+              class="category-page-total"
+            >{{ products.total }} товар{{!products.total || products.total >= 5 ? 'ов' : products.total === 1 ? '' : 'а'}}</p>
             <div class="category-page-sort">
               <p>Сортировать:</p>
               <div class="category-page-select-wrp">

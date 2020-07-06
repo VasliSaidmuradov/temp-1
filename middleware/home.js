@@ -10,9 +10,9 @@ export default async function ({ route, store }) {
   if (!store.getters['menu/GET_CATEGORIES']) {
     queue.push(store.dispatch('menu/fetchCategories'))
   }
-  if (!store.getters['brand/GET_BRANDS']) {
+  // if (!store.getters['brand/GET_BRANDS']) {
     queue.push(store.dispatch('brand/fetchBrands', { to_main: 1 }))
-  }
+  // }
   // if (!store.getters['content/GET_NEWS']) {
   queue.push(store.dispatch('product/fetchHits', {
     hit: true,

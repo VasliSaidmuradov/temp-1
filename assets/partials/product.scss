@@ -89,6 +89,7 @@
         @include em(14px);
         font-weight: 500;
         color: #000;
+        min-height: 65px;
     }
 
     &-price-wrp {

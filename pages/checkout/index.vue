@@ -68,17 +68,17 @@
                 <!-- <select v-model="order.street" class="checkout-page-select" required>
                   <option value="ул.Тимирязева 38/1">г.Алматы, ул.Тимирязева 38/1</option>
                   <option value="ул.Жибек-жолы 38/1">г.Алматы, ул.Жибек-жолы 38/1</option>
-                </select> -->
+                </select>-->
                 <div class="checkout-page-dropdown-wrp">
                   <div class="checkout-page-current-market" @click="togglePickupDropdown">
-                    <p>г.Алматы, ул.Жибек-жолы 38/1</p>
+                    <!-- <p>г.Алматы, ул.Жибек-жолы 38/1</p> -->
+                    <p>{{ order.street }}</p>
                   </div>
                   <transition name="fade">
                     <div class="checkout-page-dropdown" v-if="isPickupDropdownOpen">
-                      <p>г.Алматы, ул.Жибек-жолы 38/1222</p>
-                      <p>г.Алматы, ул.Жибек-жолы 38/1333</p>
-                      <p>г.Алматы, ул.Жибек-жолы 38/1333</p>
-                      <p>г.Алматы, ул.Жибек-жолы 38/1333</p>
+                      <p
+                        @click.prevent="checkOrderStreet('г.Алматы, ул.Жибек-жолы 38/1')"
+                      >г.Алматы, ул.Жибек-жолы 38/1</p>
                     </div>
                   </transition>
                 </div>
@@ -88,15 +88,15 @@
                   <option value="" selected disabled>Город</option>
                   <option value="1" selected>г.Алматы</option>
                   <option value="0">Казахстан</option>
-                </select> -->
+                </select>-->
                 <div class="checkout-page-dropdown-wrp">
                   <div class="checkout-page-current-market" @click="toggleCourierDropdown">
-                    <p>г.Алматы</p>
+                    <p>{{ currentCity }}</p>
                   </div>
                   <transition name="fade">
                     <div class="checkout-page-dropdown" v-if="isCourierDropdownOpen">
-                      <p>г.Алматы</p>
-                      <p>Казахстан</p>
+                      <p @click.prevent="checkOrderCity('1')">г.Алматы</p>
+                      <p @click.prevent="checkOrderCity('0')">Казахстан</p>
                     </div>
                   </transition>
                 </div>
@@ -143,6 +143,7 @@
                 </div>
               </div>
             </div>
+            <!-- <pre>{{ order }}</pre> -->
 
             <!-- <payment /> -->
             <div class="checkout-payment">
@@ -261,7 +262,7 @@ export default {
         city_name: "",
         delivery_type: "1",
         delivery_cost: 0,
-        street: "ул.Жибек-жолы 38/1",
+        street: "г.Алматы, ул.Жибек-жолы 38/1",
         house: null,
         flat: null,
         index: null,
@@ -281,7 +282,7 @@ export default {
     },
     "order.delivery_type": function(val) {
       val && val === "1"
-        ? (this.order.street = "ул.Жибек-жолы 38/1")
+        ? (this.order.street = "г.Алматы, ул.Жибек-жолы 38/1")
         : (this.order.street = null);
     },
     "order.city": function(val) {
@@ -311,6 +312,16 @@ export default {
     },
     total() {
       return this.sum - this.discount + this.delivery;
+    },
+    currentCity() {
+      switch (this.order.city) {
+        case "1":
+          return "г.Алматы";
+          break;
+        case "0":
+          return "Казахстан";
+          break;
+      }
     }
   },
   methods: {
@@ -318,10 +329,18 @@ export default {
       checkout: "cart/checkout"
     }),
     togglePickupDropdown() {
-      this.isPickupDropdownOpen = !this.isPickupDropdownOpen
+      this.isPickupDropdownOpen = !this.isPickupDropdownOpen;
     },
     toggleCourierDropdown() {
-      this.isCourierDropdownOpen = !this.isCourierDropdownOpen
+      this.isCourierDropdownOpen = !this.isCourierDropdownOpen;
+    },
+    checkOrderStreet(val) {
+      this.order.street = val;
+      this.togglePickupDropdown();
+    },
+    checkOrderCity(val) {
+      this.order.city = val;
+      this.toggleCourierDropdown();
     },
     async createOrder(redirect) {
       try {

@@ -17,7 +17,7 @@
       <pass-confirm v-if="isPassConfirmOpen" @closePassConfirm="closePassConfirm"/>
     </transition>
     <!-- <span style="font-size: 12px">{{ user }}</span> -->
-    <div class="profile-info-col profile-page-block --margin-bottom">
+    <div class="profile-info-col profile-page-block --profile --margin-bottom">
       <h5 class="profile-page-subtitle">Профиль</h5>
       <div class="profile-page-label-wrp" @click="openEmailModal">
         <label class="profile-page-label">

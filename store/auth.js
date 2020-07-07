@@ -76,11 +76,11 @@ export const actions = {
 		await store.dispatch('setAuthFields', cookies)
 	},
 	async signin(store, payload) {
-		await store.dispatch('setAuthFields', await this.$api.post('/login', payload, 'signin'))
+		await store.dispatch('setAuthFields', await this.$api.post('/auth/login', payload, 'signin'))
 	},
 
 	async signup(store, payload) {
-		await this.$api.post('/register', payload, 'signup')
+		await this.$api.post('/auth/register', payload, 'signup')
 	},
 
 	async logout(store, payload) {
@@ -89,11 +89,11 @@ export const actions = {
 	},
 
 	async reset(store, payload) {
-		await this.$api.post('/password', payload, 'resetPassword')
+		await this.$api.post('/auth/password', payload, 'resetPassword')
 	},
 
 	async validateCode(store, payload) {
-		return await this.$api.get('/verify', payload, 'validateCode')
+		return await this.$api.get('/auth/verify', payload, 'validateCode')
 	},
 
 	async resendCode(store, payload) {

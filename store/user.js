@@ -50,7 +50,7 @@ export const actions = {
   },
 
   async fetchUser(store, payload) {
-    let user = await this.$api.get('/user', {})
+    let user = await this.$api.get('/auth/user', {})
     // console.log('User: ', user)
     
     if (user) {
@@ -68,7 +68,8 @@ export const actions = {
     return resp
   },
   async updatePassword(store, payload) {
-    let resp = await this.$api.put('/password', payload, 'updatePassword')
+    let resp = await this.$api.put('/auth/password', payload, 'updatePassword')
+    return resp
   },
   async cancelOrder(store, payload) {
     let resp = await this.$api.put('/user/order', payload, 'cancelOrder')

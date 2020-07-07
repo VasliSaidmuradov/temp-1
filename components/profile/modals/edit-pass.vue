@@ -5,10 +5,29 @@
       <div class="profile-modal-inner">
         <button class="profile-modal-close" @click="close"></button>
         <h4 class="profile-modal-title">Пароль</h4>
-        <input type="email" class="profile-modal-input" placeholder="Старый пароль">
-        <input type="email" class="profile-modal-input" placeholder="Новый пароль">
-        <input type="email" class="profile-modal-input" placeholder="Повторите пароль">
-        <button class="button --disabled" @click="save">Сохранить</button>
+        <input
+          v-model="oldPass"
+          type="password"
+          class="profile-modal-input"
+          placeholder="Старый пароль"
+        />
+        <input
+          v-model="pass"
+          type="password"
+          class="profile-modal-input"
+          placeholder="Новый пароль"
+        />
+        <input
+          v-model="passc"
+          type="password"
+          class="profile-modal-input"
+          placeholder="Повторите пароль"
+        />
+        <button
+          class="button"
+          :class="{ '--main-color': isPassValidated, '--disabled': !isPassValidated }"
+          @click="save"
+        >Сохранить</button>
         <!-- :class="{ '--main-color' : isPhoneValidated, '--disabled' : !isPhoneValidated }" -->
       </div>
     </div>
@@ -16,14 +35,55 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
-    methods: {
-        save() {
-            this.$emit('savePass')
-        },
-        close() {
-            this.$emit('closePassModal')
+  data() {
+    return {
+      oldPass: null,
+      pass: null,
+      passc: null
+    };
+  },
+  methods: {
+    ...mapActions({
+      updatePassword: "user/updatePassword"
+    }),
+    async save() {
+      try {
+        if (this.pass !== this.passc) {
+          this.$setError("updatePassword", "Пароли не совпадают!");
+          return;
         }
+        const res = await this.updatePassword({
+          password: this.oldPass,
+          new_password: this.pass
+        });
+        if (res) {
+          this.$alert({
+            message: res.message,
+            type: "success"
+          });
+        } else {
+          this.$alert({
+            message: this.$getError("updatePassword"),
+            type: "error"
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    close() {
+      this.$emit("closePassModal");
     }
-}
+  },
+  computed: {
+    isPassValidated() {
+      return (
+        this.oldPass && this.pass && this.passc && this.pass === this.passc
+      );
+    }
+  }
+};
 </script>

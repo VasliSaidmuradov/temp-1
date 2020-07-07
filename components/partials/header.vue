@@ -105,7 +105,7 @@ export default {
         this.redirectToProfile();
       } else {
         document.body.classList.add("--hidden"),
-          this.$store.commit("auth/SET_MODAL_STATE", true);
+        this.$store.commit("auth/SET_MODAL_STATE", true);
       }
     },
     showSearch() {

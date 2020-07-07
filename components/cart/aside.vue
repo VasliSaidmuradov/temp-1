@@ -8,7 +8,7 @@
         <span>{{ $formatMoney($getUser().bonus ? $getUser().bonus : 0) }} бонусов</span>
       </p>
       <p class="order-aside-text" v-else>
-        <span>500 бонусов</span> для зарегестрированного покупателя
+        <span>500 бонусов</span> для <nuxt-link to @click.native="openAuth">зарегестрированного</nuxt-link> покупателя
       </p>
     </div>
     <div class="order-aside-input-wrp" v-if="$checkAuth() && $getUser().bonus">
@@ -104,7 +104,11 @@ export default {
   methods: {
     ...mapActions({
       useBonuses: "cart/useBonuses"
-    })
+    }),
+    openAuth() {
+      document.body.classList.add("--hidden"),
+      this.$store.commit("auth/SET_MODAL_STATE", true);
+    },
   }
 };
 </script>

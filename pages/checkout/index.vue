@@ -16,7 +16,7 @@
               <input
                 v-model="order.name"
                 type="text"
-                placeholder="ФИО"
+                placeholder="ФИО*"
                 class="checkout-page-input"
                 :class="{ '--border-red': !order.name }"
                 required
@@ -27,7 +27,7 @@
                   :mask="['+# (###) ###-##-##']"
                   class="checkout-page-input"
                   type="tel"
-                  placeholder="Номер телефона"
+                  placeholder="Номер телефона*"
                   required
                   :class="{ '--border-red': !order.phone }"
                 />
@@ -35,7 +35,7 @@
               <input
                 v-model="order.email"
                 type="mail"
-                placeholder="E-mail"
+                placeholder="E-mail*"
                 class="checkout-page-input"
                 :class="{ '--border-red': !order.email }"
                 required
@@ -65,17 +65,41 @@
               </div>
               <div class="checkout-getting-pickup" v-if="order.delivery_type === '1'">
                 <h5 class="checkout-page-subtitle">Выберите магазин</h5>
-                <select v-model="order.street" class="checkout-page-select" required>
-                  <!-- <option value="ул.Тимирязева 38/1">г.Алматы, ул.Тимирязева 38/1</option> -->
+                <!-- <select v-model="order.street" class="checkout-page-select" required>
+                  <option value="ул.Тимирязева 38/1">г.Алматы, ул.Тимирязева 38/1</option>
                   <option value="ул.Жибек-жолы 38/1">г.Алматы, ул.Жибек-жолы 38/1</option>
-                </select>
+                </select> -->
+                <div class="checkout-page-dropdown-wrp">
+                  <div class="checkout-page-current-market" @click="togglePickupDropdown">
+                    <p>г.Алматы, ул.Жибек-жолы 38/1</p>
+                  </div>
+                  <transition name="fade">
+                    <div class="checkout-page-dropdown" v-if="isPickupDropdownOpen">
+                      <p>г.Алматы, ул.Жибек-жолы 38/1222</p>
+                      <p>г.Алматы, ул.Жибек-жолы 38/1333</p>
+                      <p>г.Алматы, ул.Жибек-жолы 38/1333</p>
+                      <p>г.Алматы, ул.Жибек-жолы 38/1333</p>
+                    </div>
+                  </transition>
+                </div>
               </div>
               <div class="checkout-getting-courier" v-else>
-                <select v-model="order.city" class="checkout-page-select" required>
-                  <!-- <option value="" selected disabled>Город</option> -->
+                <!-- <select v-model="order.city" class="checkout-page-select" required>
+                  <option value="" selected disabled>Город</option>
                   <option value="1" selected>г.Алматы</option>
                   <option value="0">Казахстан</option>
-                </select>
+                </select> -->
+                <div class="checkout-page-dropdown-wrp">
+                  <div class="checkout-page-current-market" @click="toggleCourierDropdown">
+                    <p>г.Алматы</p>
+                  </div>
+                  <transition name="fade">
+                    <div class="checkout-page-dropdown" v-if="isCourierDropdownOpen">
+                      <p>г.Алматы</p>
+                      <p>Казахстан</p>
+                    </div>
+                  </transition>
+                </div>
                 <input
                   v-if="order.city == '0'"
                   v-model="order.city_name"
@@ -93,7 +117,7 @@
                   class="checkout-page-input"
                   :class="{ '--border-red': !order.street }"
                 />
-                <div class="checkout-page-input-wrp">
+                <div class="checkout-page-input-wrp" :class="{'--half' : order.city != '0'}">
                   <input
                     v-model="order.house"
                     type="text"
@@ -227,6 +251,8 @@ export default {
   data() {
     return {
       currentType: "pickup",
+      isPickupDropdownOpen: false,
+      isCourierDropdownOpen: false,
       order: {
         name: null,
         phone: null,
@@ -291,6 +317,12 @@ export default {
     ...mapActions({
       checkout: "cart/checkout"
     }),
+    togglePickupDropdown() {
+      this.isPickupDropdownOpen = !this.isPickupDropdownOpen
+    },
+    toggleCourierDropdown() {
+      this.isCourierDropdownOpen = !this.isCourierDropdownOpen
+    },
     async createOrder(redirect) {
       try {
         if (this.order.phone.length < 10) {

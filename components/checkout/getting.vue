@@ -34,7 +34,7 @@
 			<div class="checkout-page-input-wrp">
 				<input type="text" placeholder="Дом" class="checkout-page-input">
 				<input type="text" placeholder="Квартира / Офис" class="checkout-page-input">
-				<input type="text" placeholder="Индекс" class="checkout-page-input">
+				<!-- <input type="text" placeholder="Индекс" class="checkout-page-input"> -->
 			</div>
 		</div>
 	</div>

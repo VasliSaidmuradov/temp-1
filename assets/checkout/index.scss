@@ -58,27 +58,44 @@
 		font-weight: 600;
 		color: var(--gray-base);
 	}
-	&-select {
+	&-current-market {
 		width: 100%;
 		border: 1px solid var(--line-base);
 		border-radius: 6px;
 		padding: 14px 20px;
-		@include em(14px);
-		font-weight: 600;
-		color: #000;
 		margin-top: 10px;
 		cursor: pointer;
-		option {
+	}
+	&-dropdown-wrp {
+		position: relative;
+		p {
 			@include em(14px);
 			font-weight: 600;
 			color: #000;
 		}
 	}
+	&-dropdown {
+		border: 1px solid var(--line-base);
+		border-radius: 0 0 6px 6px;
+		padding: 14px 20px;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		width: 100%;
+		background-color: #fff;
+		z-index: 1;
+		cursor: pointer;
+	}
 	&-input-wrp {
 		display: flex;
 		justify-content: space-between;
 		input {
-			width: 48%;
+			width: 32%;
+		}
+		&.--half {
+			input {
+				width: 49%;
+			}
 		}
 	}
 }
@@ -96,23 +113,23 @@
 		}
 		&-radio {
 			width: 48%;
-    }
+    	}
 	}
 }
 
 @media screen and (max-width: 426px) {
   .checkout-page {
-    &-radio-wrp {
-      flex-wrap: wrap;
+	&-radio-wrp {
+		flex-wrap: wrap;
+	}
+	&-radio {
+      	width: 100%;
+	}
+	&-input-wrp {
+		flex-direction: column;
+		input {
+			width: 100% !important;
 		}
-		&-radio {
-      width: 100%;
 		}
-    &-input-wrp {
-      flex-direction: column;
-      input {
-        width: 100%;
-      }
-    }
 	}
 }

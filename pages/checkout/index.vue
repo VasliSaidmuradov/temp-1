@@ -18,6 +18,7 @@
                 type="text"
                 placeholder="ФИО"
                 class="checkout-page-input"
+                :class="{ '--border-red': !order.name }"
                 required
               />
               <client-only>
@@ -28,6 +29,7 @@
                   type="tel"
                   placeholder="Номер телефона"
                   required
+                  :class="{ '--border-red': !order.phone }"
                 />
               </client-only>
               <input
@@ -35,6 +37,7 @@
                 type="mail"
                 placeholder="E-mail"
                 class="checkout-page-input"
+                :class="{ '--border-red': !order.email }"
                 required
               />
             </div>
@@ -80,6 +83,7 @@
                   required
                   placeholder="Укажите город / населенный пункт"
                   class="checkout-page-input"
+                  :class="{ '--border-red': !order.city_name }"
                 />
                 <input
                   v-model="order.street"
@@ -87,6 +91,7 @@
                   type="text"
                   placeholder="Улица"
                   class="checkout-page-input"
+                  :class="{ '--border-red': !order.street }"
                 />
                 <div class="checkout-page-input-wrp">
                   <input
@@ -94,12 +99,14 @@
                     type="text"
                     placeholder="Дом"
                     class="checkout-page-input"
+                    :class="{ '--border-red': !order.house }"
                   />
                   <input
                     v-model="order.flat"
                     type="text"
                     placeholder="Квартира / Офис"
                     class="checkout-page-input"
+                    :class="{ '--border-red': !order.flat }"
                   />
                   <input
                     v-if="order.city == '0'"
@@ -107,6 +114,7 @@
                     type="text"
                     placeholder="Индекс"
                     class="checkout-page-input"
+                    :class="{ '--border-red': !order.index }"
                   />
                 </div>
               </div>
@@ -126,7 +134,7 @@
                 <span class="checkout-payment-checkmark"></span>
                 <p class="checkout-payment-radio-title">Картой онлайн</p>
               </label>
-              <label class="checkout-payment-radio">
+              <label v-if="order.city === '1'" class="checkout-payment-radio">
                 <input v-model="order.payment_type" value="0" name="payment-type" type="radio" />
                 <span class="checkout-payment-checkmark"></span>
                 <div>
@@ -144,6 +152,7 @@
                 v-model="order.comment"
                 placeholder="Ваш комментарий к заказу"
                 class="checkout-page-input"
+                :class="{ '--border-red': !order.comment }"
               ></textarea>
             </div>
           </div>
@@ -248,6 +257,11 @@ export default {
       val && val === "1"
         ? (this.order.street = "ул.Жибек-жолы 38/1")
         : (this.order.street = null);
+    },
+    "order.city": function(val) {
+      val && val === "1"
+        ? (this.order.payment_type = 0)
+        : (this.order.payment_type = 1);
     }
   },
   computed: {

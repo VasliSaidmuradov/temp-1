@@ -97,6 +97,6 @@ export const actions = {
 	},
 
 	async resendCode(store, payload) {
-		return await this.$api.put('/user', { phone: payload }, 'updateProfile')
+		return await this.$api.put('/auth/user', { phone: payload }, 'updateProfile')
 	},
 }

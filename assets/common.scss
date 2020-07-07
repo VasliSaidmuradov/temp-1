@@ -78,6 +78,9 @@
 .--red-text {
   color: var(--text-red) !important;
 }
+.--border-red {
+    border-color: var(--text-red) !important;
+}
 
 @media screen and (max-width: 426px) {
     .product-counter {

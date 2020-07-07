@@ -85,7 +85,7 @@ export default {
       const products = this.allProducts.data || this.allProducts.products
       // console.log('prod: ', products)
       const brands = products.map(el => el.brand)
-      console.log(this.$route)
+      // console.log(this.$route)
       const res = brands.reduce((acc, current) => {
         const x = acc.find(item => item.id === current.id);
         if (!x) {

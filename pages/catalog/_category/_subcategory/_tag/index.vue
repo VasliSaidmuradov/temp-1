@@ -92,11 +92,19 @@
           >
             <product v-for="product in items" :key="product.id" :product="product" />
           </div>
+          <!-- <div
+            class="category-page-product-wrp"
+            v-for="(items, index) in $chunk(products.data, 4)"
+            :key="index"
+          >
+            <product v-for="product in items" :key="product.id" :product="product" />
+          </div> -->
         </div>
       </div>
       <pagination
-        :paginator="(filteredProducts && filteredProducts.data.length) ? filteredProducts : products"
+        :paginator="products"
       />
+      {{ products.data.length }}
     </div>
   </div>
 </template>
@@ -145,7 +153,7 @@ export default {
       return null;
     },
     subcategory() {
-      console.log("category", this.category);
+      // console.log("category", this.category);
       if (!this.category) {
         return null;
       }
@@ -162,7 +170,7 @@ export default {
     },
     tag() {
       if (!this.subcategory) {
-        console.log("subcategory", this.subcategory);
+        // console.log("subcategory", this.subcategory);
         return null;
       }
 

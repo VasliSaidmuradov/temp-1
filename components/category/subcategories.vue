@@ -31,7 +31,7 @@ export default {
       if (this.subcat) return this.subcat.tags;
       if (this.category) {
         const arr = this.category.subcategories.map(el => el.tags)
-        console.log(arr)
+        // console.log(arr)
         return this.category.subcategories
       }
       return this.categories;

@@ -1,15 +1,15 @@
 <template>
-  <div class="pagination">
-		<!-- {{ paginator }} -->
+  <div class="pagination" ref="pagination">
+    <!-- {{ paginator }} -->
     <nuxt-link
       v-show="paginator.current_page > 1"
       class="pagination-prev"
-      :to="{path: $route.path, query: Object.assign({}, $route.query, {page: `${paginator.current_page - 1}`})}"
+      :to="{path: $route.path, query: Object.assign({}, $route.query, { page: `${paginator.current_page - 1}` })}"
       @click.native="scrollToTop"
     ></nuxt-link>
     <span
       v-if="Math.abs(paginator.current_page - index) <= 2 || index == paginator.last_page || index == 1"
-      v-for="index in Math.ceil(paginator.total/paginator.per_page)"
+      v-for="index in Math.ceil(paginator.total / paginator.per_page)"
       :key="index.id"
     >
       <nuxt-link
@@ -19,7 +19,7 @@
         class="pagination-link"
         :class="[{'--active': paginator.current_page == index}]"
       >{{ index }}</nuxt-link>
-      <span v-else-if="Math.abs(paginator.current_page - index) ==2">...</span>
+      <span v-else-if="Math.abs(paginator.current_page - index) == 2">...</span>
     </span>
     <nuxt-link
       v-show="paginator.current_page < paginator.last_page"
@@ -42,7 +42,9 @@ export default {
     };
   },
   methods: {
-    ...mapActions({ paginate: "product/PAGINATE" }),
+    ...mapActions({
+      paginate: "product/paginate"
+    }),
     scrollToTop() {
       window.scrollTo(0, 0);
     }

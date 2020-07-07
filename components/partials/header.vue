@@ -28,8 +28,6 @@
           <form class="header-search-wrp" @submit.prevent="redirectToSearch">
             <input v-model="searchQuery" type="text" placeholder="Хочу купить..." required />
             <button class="header-search-btn"></button>
-            <!-- @focus="isSearchOpen = true" 
-              @blur="isSearchOpen = false"  -->
             <transition name="fade">
               <search-dropdown />
             </transition>

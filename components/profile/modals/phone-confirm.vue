@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
@@ -48,17 +48,26 @@ export default {
     })
   },
   methods: {
+    ...mapActions({
+      verify: 'auth/validateCode',
+      fetchUser: 'user/fetchUser'
+    }),
     close() {
       this.$store.commit("SET_PROFILE_PHONE_CONFIRM", false);
     },
     confirm() {
+      this.sendVerify();
       this.$store.commit("SET_PROFILE_PHONE_CONFIRM", false);
       this.$store.commit("SET_PROFILE_PHONE_SUCCESS", true);
     },
     back() {
       this.$store.commit("SET_PROFILE_PHONE_CONFIRM", false);
       this.$store.commit("SET_PROFILE_PHONE_EDIT", true);
-    }
+    },
+    async sendVerify() {
+      await this.verify({login: this.confirmPhone, token: this.code});
+      this.fetchUser();
+		},
   }
 };
 </script>

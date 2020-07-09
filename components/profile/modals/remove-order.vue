@@ -29,9 +29,10 @@ export default {
         closeModal() {
             this.$store.commit('SET_REMOVE_ORDER', false)
         },
-        confirm() {
-          this.cancelOrder({id: this.isOpen.id})
-          this.refresh()
+        async confirm() {
+          await this.cancelOrder({id: this.isOpen.id})
+          await this.refresh()
+          this.$getUser();
           this.$store.commit('SET_REMOVE_ORDER', false)
         }
     }

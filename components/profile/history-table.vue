@@ -79,6 +79,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   data() {
     return {
@@ -109,6 +111,9 @@ export default {
     this.isDropdownOpen = [...this.isDropdownOpen];
   },
   methods: {
+    ...mapActions({
+      fetchUser: 'user/fetchUser',
+    }),
     toggleDropdown(index) {
       this.isDropdownOpen[index] = !this.isDropdownOpen[index];
       this.isDropdownOpen = [...this.isDropdownOpen];

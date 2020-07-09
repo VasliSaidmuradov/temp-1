@@ -20,6 +20,7 @@
           :class="{ '--main-color' : isPhoneValidated, '--disabled' : !isPhoneValidated }"
           @click="getCode"
         >Получить код</button>
+        <!-- {{ phone === $getUser().phone }} -->
       </div>
     </div>
   </transition>
@@ -57,7 +58,6 @@ export default {
     },
     async getCode() {
       try {
-        console.log("111");
         if (!this.phone || (this.phone && this.phone.length !== 11)) {
           this.$alert({
             message: "Введите корректный номер телофона.",
@@ -65,13 +65,25 @@ export default {
           });
           return;
         }
-        console.log("222");
+        if (this.phone === this.$getUser().phone) {
+          this.$alert({
+            message: "Введите другой номер телофона.",
+            type: "error"
+          });
+          return
+        }
         if (this.phone != this.$getUser().phone) {
-          console.log("333");
-          const res = await this.updateProfile({ phone: this.phone });
-          console.log("444", res);
+          const res = await this.updateProfile({ login: this.phone });
+          console.log("res: ", res);
+          if (this.$getError("updateProfile")) {
+            
+            this.$alert({
+              message: this.$getError("updateProfile") === "validation.unique" ? "Такой номер уже существует" : "Возникла ошибка при регистрации номера телефона",
+              type: "error"
+            })
+            return;
+          }
           if (!this.$getError("updatePhone")) {
-            console.log("555");
             await this.$store.commit("SET_PROFILE_PHONE_EDIT", false);
             await this.$store.commit("user/SET_CONFIRM_PHONE", this.phone);
             this.$store.commit("SET_PROFILE_PHONE_CONFIRM", true);
@@ -81,10 +93,9 @@ export default {
               type: "error"
             });
           }
-          console.log("666");
         }
       } catch (error) {
-        console.log(error);
+        console.log('Error: ', error);
       }
     }
   }

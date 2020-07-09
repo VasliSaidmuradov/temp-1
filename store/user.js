@@ -61,7 +61,7 @@ export const actions = {
   },
 
   async updateProfile(store, payload) {
-    let resp = await this.$api.put('/user', payload, 'updateProfile')
+    let resp = await this.$api.put('/auth/user', payload, 'updateProfile')
     if (resp) {
       store.commit('SET_USER', resp)
     }
@@ -73,6 +73,7 @@ export const actions = {
   },
   async cancelOrder(store, payload) {
     let resp = await this.$api.put('/user/order', payload, 'cancelOrder')
+    return resp
   }
 }
 

@@ -1,6 +1,7 @@
 <template>
   <div class="category-page">
     <div class="container">
+      {{ changeCurrentRoute() }}
       <div class="breadcrumbs">
         <nuxt-link to="/">Главная /</nuxt-link>
         <nuxt-link v-if="category" :to="`/catalog/${category.slug}`">
@@ -101,10 +102,12 @@
           </div> -->
         </div>
       </div>
-      <pagination
+      <!-- <pagination
         :paginator="products"
+      /> -->
+      <pagination
+        :paginator="(filteredProducts && filteredProducts.data.length) ? filteredProducts : products"
       />
-      {{ products.data.length }}
     </div>
   </div>
 </template>
@@ -133,7 +136,8 @@ export default {
     productList: { data: null },
     salesProducts: null,
     isSortOpen: false,
-    ids: []
+    ids: [],
+    currentRoute: null
   }),
   computed: {
     ...mapGetters({
@@ -198,6 +202,20 @@ export default {
   },
 
   watch: {
+    "$route.fullPath": function(fullPath) {
+      // this.changeCurrentRoute()
+      if (this.delay) {
+        clearTimeout(this.delay);
+      }
+      this.delay = setTimeout(() => {
+        let query = this.$serialize(this.$route.query);
+        query = query ? `?${query}` : "";
+        this.$store.dispatch(
+          "product/fetchProducts",
+          `${this.$route.path}${query}`
+        );
+      }, 500);
+    },
     sort: function(val) {
       let query = { ...this.$route.query };
 
@@ -208,20 +226,12 @@ export default {
       }
       this.$router.push({ path: this.$route.path, query: query });
     },
-    "$route.fullPath": function(fullPath) {
-      if (this.delay) {
-        clearTimeout(this.delay);
+    currentRoute: function(path) {
+      console.log('>>>>')
+      if (this.filteredProducts && this.filteredProducts.data.length) {
+        this.$store.commit("brand/FILTER_BRANDS", null);
       }
-
-      this.delay = setTimeout(() => {
-        let query = this.$serialize(this.$route.query);
-        query = query ? `?${query}` : "";
-        this.$store.dispatch(
-          "product/fetchProducts",
-          `${this.$route.path}${query}`
-        );
-      }, 500);
-    }
+    },
   },
   mounted() {
     if (this.$route.query.sort) {
@@ -260,6 +270,9 @@ export default {
     sorting(e) {
       this.sort = e;
       this.isSortOpen = false;
+    },
+    changeCurrentRoute() {
+      this.currentRoute = this.$route.fullPath;
     }
   }
 };

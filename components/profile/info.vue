@@ -16,7 +16,7 @@
     <transition name="fade">
       <pass-confirm v-if="isPassConfirmOpen" @closePassConfirm="closePassConfirm"/>
     </transition>
-    <!-- <span style="font-size: 12px">{{ user }}</span> -->
+    <!-- <span style="font-size: 12px; background: #1da7af4f">{{ user.name }}: {{ user.phone }}</span> -->
     <div class="profile-info-col profile-page-block --profile --margin-bottom">
       <h5 class="profile-page-subtitle">Профиль</h5>
       <div class="profile-page-label-wrp" @click="openEmailModal">
@@ -100,7 +100,7 @@
 				<label class="profile-page-label">Дата рождения</label>
 				<input type="text" class="profile-page-input" value="12 декабря 1990" disabled>
       </div>-->
-      <div class="error-text" v-if="$getError('updateProfile')">{{ $getError('updateProfile') }}</div>
+      <!-- <div class="error-text" v-if="$getError('updateProfile')">{{ $getError('updateProfile') }}</div> -->
       <button class="button --main-color" @click="toggleName = !toggleName">
         {{ toggleName ? 'Изменить' : 'Сохранить' }}
       </button>

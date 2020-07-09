@@ -162,8 +162,7 @@ export default {
     },
     toggleName: async function(val) {
       if (val) {
-        const res = await this.updateProfile({ name: this.user.name });
-        // console.log('res', res)
+        const res = await this.updateName({ name: this.user.name });
       }
     },
     toggleEmail: async function(val) {
@@ -187,7 +186,8 @@ export default {
   methods: {
     ...mapActions({
       updateProfile: "user/updateProfile",
-      updatePassword: "user/updatePassword"
+      updatePassword: "user/updatePassword",
+      updateName: "user/updateName",
     }),
     openEmailModal() {
       this.isEmailModalOpen = true

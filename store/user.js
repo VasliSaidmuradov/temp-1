@@ -67,6 +67,13 @@ export const actions = {
     }
     return resp
   },
+  async updateName(store, payload) {
+    let resp = await this.$api.put('/user', payload, 'updateProfile')
+    if (resp) {
+      store.commit('SET_USER', resp)
+    }
+    return resp
+  },
   async updatePassword(store, payload) {
     let resp = await this.$api.put('/auth/password', payload, 'updatePassword')
     return resp

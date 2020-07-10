@@ -20,7 +20,6 @@
           :class="{ '--main-color' : isPhoneValidated, '--disabled' : !isPhoneValidated }"
           @click="getCode"
         >Получить код</button>
-        <!-- {{ phone === $getUser().phone }} -->
       </div>
     </div>
   </transition>

@@ -42,12 +42,18 @@ export default {
   methods: {
     hideSearch() {
       this.$store.commit("SET_SEARCH", false);
+      this.$emit("closeSearch")
     },
     redirectToSearch() {
       this.hideSearch();
       this.$router.push({ path: "/search", query: { q: this.search_query } });
     }
-  }
+  },
+  watch: {
+    "$route.fullPath": function(fullPath) {
+      this.hideSearch()
+    } 
+  },
 };
 </script>
 

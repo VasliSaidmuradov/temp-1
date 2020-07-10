@@ -15,6 +15,7 @@ export const mutations = {
 export const actions = {
   async fetchBrands(store, payload = {}) {
     const res = await this.$api.get('/brands', payload)
+    // console.log('brands: ', res)
     store.commit('SET_BRANDS', res)
   },
   async fetchBrandProducts(store, payload) {
@@ -30,9 +31,9 @@ export const actions = {
 export const getters = {
   GET_BRANDS: state => state.brands,
   GET_BRAND_PRODUCTS: state => {
-    const data = state.brandProducts.products.map(el => {
+    const data = state.brandProducts ? state.brandProducts.products.map(el => {
       return { ...el, image: el.image ? el.image : require('@/static/images/product.png') }
-    })
+    }) : []
     return { ...state.brandProducts, products: data }
   },
   GET_FILTERED_PRODUCTS: state => state.filteredProducts

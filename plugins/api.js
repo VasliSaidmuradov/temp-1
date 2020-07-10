@@ -3,7 +3,7 @@ export default function ({ $axios, store, app }, inject) {
     cache: {},
     baseUrl: process.env.NODE_ENV == 'development' ? 'https://admin.skiny.kz/api' : 'https://admin.skiny.kz/api',
 
-    async get(url, data = {}, error = 'default') {
+      async get(url, data = {}, error = 'default') {
       app.$setError(error, null)
 
       let key = this.getCacheKey(url, data)

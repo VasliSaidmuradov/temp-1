@@ -227,7 +227,6 @@ export default {
       this.$router.push({ path: this.$route.path, query: query });
     },
     currentRoute: function(path) {
-      console.log('>>>>')
       if (this.filteredProducts && this.filteredProducts.data.length) {
         this.$store.commit("brand/FILTER_BRANDS", null);
       }

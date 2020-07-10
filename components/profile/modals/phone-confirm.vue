@@ -66,8 +66,9 @@ export default {
     },
     async sendVerify() {
       await this.verify({login: this.confirmPhone, token: this.code});
-      this.fetchUser();
-		},
+      await this.fetchUser();
+      this.$reloadPage();
+    }
   }
 };
 </script>

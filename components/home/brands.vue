@@ -7,7 +7,6 @@
     </div>
     <div v-swiper:brandsSlider="options">
       <div class="swiper-wrapper">
-        <!-- {{ brands }} -->
         <nuxt-link
           v-for="brand in brands.data"
           :key="brand.id"

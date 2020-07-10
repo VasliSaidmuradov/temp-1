@@ -22,6 +22,7 @@
 <script>
 import { mapMutations, mapGetters } from 'vuex'
 import mobSearch from '@/components/partials/mobile-search'
+
 export default {
 	data() {
 		return {

@@ -6,24 +6,45 @@
       <button>
         <search />
       </button>
+      <transition name="fade">
+        <search-dropdown @closeSearch="closeSearch"/>
+      </transition>
     </form>
   </div>
 </template>
 
 <script>
 import search from "@/static/icons/search-icon.svg";
+import searchDropdown from "@/components/partials/search-dropdown/"
 import { mapActions } from "vuex";
 
 export default {
   components: {
-    search
+    search,
+    searchDropdown,
   },
   data() {
     return {
       searchQuery: null
     };
   },
+  watch: {
+    searchQuery: async function(val) {
+      if (val && val.length > 1) {
+        await this.searchProduct({ q: val })
+        this.showSearch()
+      } else {
+        this.$store.commit('SET_SEARCH', false)
+      }
+    }
+  },
   methods: {
+    ...mapActions({
+      searchProduct: 'product/searchProductHint'
+    }),
+    showSearch() {
+      this.$store.commit('SET_SEARCH', true)
+    },
     closeSearch() {
       this.$emit("closeSearch");
     },

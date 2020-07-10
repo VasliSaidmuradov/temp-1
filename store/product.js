@@ -16,51 +16,51 @@ export const state = () => ({
 
 export const getters = {
   GET_PRODUCTS: state => {
-    const data = state.products.data.map(el => {
+    const data = state.products ? state.products.data.map(el => {
       return {
         ...el,
         image: el.image ? el.image : require('@/static/images/product.png')
       }
-    })
+    }) : []
     return { ...state.products, data: data }
   },
   GET_ALL_PRODUCTS: state => {
-    const data = state.allProducts.data.map(el => {
+    const data = state.allProducts ? state.allProducts.data.map(el => {
       return {
         ...el,
         image: el.image ? el.image : require('@/static/images/product.png')
       }
-    })
+    }) : []
     return { ...state.allProducts, data: data }
   },
   GET_HITS: state => {
-    const data = state.hits.data.map(el => {
+    const data = state.hints ? state.hits.data.map(el => {
       return {
         ...el, 
         image: el.image ? el.image : require('@/static/images/product.png')
       }
-    })
+    }) : []
     const result = { ...state.hits, data: data }
     return result
   },
   GET_SALES: state => {
-    const data = state.sales.data.map(el => {
+    const data = state.sales ? state.sales.data.map(el => {
       return { ...el, image: el.image ? el.image : require('@/static/images/product.png') }
-    })
+    }) : []
     const result = { ...state.sales, data: data }
     return result
   },
   GET_NEWS: state => {
-    const data = state.news.data.map(el => {
+    const data = state.news ? state.news.data.map(el => {
       return { ...el, image: el.image ? el.image : require('@/static/images/product.png') }
-    })
+    }) : []
     const result = { ...state.news, data: data }
     return result
   },
   GET_HINTS: state => {
-    const data = state.hints.data.map(el => {
+    const data = state.hints ? state.hints.data.map(el => {
       return { ...el, image: el.image ? el.image : require('@/static/images/product.png') }
-    })
+    }) : []
     const result = { ...state.hints, data: data }
     return result
   },
@@ -69,9 +69,9 @@ export const getters = {
     image: state.product.image ? state.product.image : require('@/static/images/product.png')
   }),
   GET_SIMILARS: state => {
-    const data = state.similars.data.map(el => {
+    const data = state.similars ? state.similars.data.map(el => {
       return { ...el, image: el.image ? el.image : require('@/static/images/product.png') }
-    })
+    }) : []
     return { ...state.similars, data: data }
   },
   GET_RESULTS: state => state.results,

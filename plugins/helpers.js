@@ -101,4 +101,6 @@ export default function ({ app, store, req, route }, inject) {
     }
     return JSON.parse(JSON.stringify(query))
   })
+
+  inject('reloadPage', () => location.reload())
 }

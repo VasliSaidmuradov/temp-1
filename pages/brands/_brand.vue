@@ -9,7 +9,12 @@
       <div class="row">
         <div class="left-col">
           <nuxt-link class="category-page-back" to>Список брендов</nuxt-link>
-          <subcategories :brandList="brands" :isBrandPage="true" />
+          <subcategories :brandList="brands.data" :isBrandPage="true" />
+          <!-- <pre> -->
+            <!-- {{ brands }} -->
+          <!-- </pre> -->
+          <!-- {{ Object.values(brands).flat(Infinity) }} -->
+          
           <!-- <category-filter
           :allProducts="allProducts"
           :filterByBrands="false"
@@ -21,6 +26,7 @@
           <div class="category-page-mob">
             <p
               class="category-page-total"
+
             >{{ products.products.length }} товар{{!products.products.length || products.products.length >= 5 ? 'ов' : products.products.length === 1 ? '' : 'а'}}</p>
             <nuxt-link class="category-page-back" to>Все категории</nuxt-link>
             <div class="category-page-row">
@@ -67,12 +73,6 @@
           </div>
         </div>
       </div>
-
-      <!-- <pagination
-        :paginator="products"
-      />-->
-      <!-- {{ Array.isArray(products) }}
-      <pre>{{ products }}</pre>-->
     </div>
   </div>
 </template>

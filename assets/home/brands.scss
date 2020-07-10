@@ -29,6 +29,9 @@
 	}
 	.swiper-slide {
 		height: 111px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
   }
   &-image {
     max-width: 111px;

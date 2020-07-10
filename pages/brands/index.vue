@@ -5,10 +5,11 @@
         <nuxt-link to="/">Главная /</nuxt-link>
         <nuxt-link to>Бренды</nuxt-link>
       </div>
+      <!-- :: {{ brandList }} -->
       <h1 class="section-title">Бренды</h1>
       <div class="brand-list-letter-wrp">
         <div class="brand-list-letters">
-          <button v-for="(letter, index) in letters" :key="index">{{letter}}</button>
+          <button v-for="(letter, index) in letters" :key="index" @click="toggleBrand(letter)">{{letter}}</button>
         </div>
         <div class="brand-list-search">
           <input type="text" placeholder="Поиск брендов">
@@ -17,89 +18,12 @@
       </div>
       <div class="brand-list-row">
         <div class="brand-list-col">
-          <span class="brand-list-letter">A</span>
+          <span class="brand-list-letter">{{ currentLetter }}</span>
         </div>
         <div class="brand-list-col">
-          <nuxt-link to class="brand-list-brand">
-            <p>A-Derma</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-          <nuxt-link to class="brand-list-brand">
-            <p>ABSOLUTE NEW YORK</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-          <nuxt-link to class="brand-list-brand">
-            <p>Avene</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-          <nuxt-link to class="brand-list-brand">
-            <p>A-Derma</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-          <nuxt-link to class="brand-list-brand">
-            <p>ABSOLUTE NEW YORK</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-          <nuxt-link to class="brand-list-brand">
-            <p>Avene</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-        </div>
-        <div class="brand-list-col">
-          <nuxt-link to class="brand-list-brand">
-            <p>A-Derma</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-          <nuxt-link to class="brand-list-brand">
-            <p>ABSOLUTE NEW YORK</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-          <nuxt-link to class="brand-list-brand">
-            <p>Avene</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-          <nuxt-link to class="brand-list-brand">
-            <p>A-Derma</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-          <nuxt-link to class="brand-list-brand">
-            <p>ABSOLUTE NEW YORK</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-          <nuxt-link to class="brand-list-brand">
-            <p>Avene</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-        </div>
-      </div>
-      <div class="brand-list-row">
-        <div class="brand-list-col">
-          <span class="brand-list-letter">B</span>
-        </div>
-        <div class="brand-list-col">
-          <nuxt-link to class="brand-list-brand">
-            <p>A-Derma</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-          <nuxt-link to class="brand-list-brand">
-            <p>ABSOLUTE NEW YORK</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-          <nuxt-link to class="brand-list-brand">
-            <p>Avene</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-          <nuxt-link to class="brand-list-brand">
-            <p>A-Derma</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-          <nuxt-link to class="brand-list-brand">
-            <p>ABSOLUTE NEW YORK</p>
-            <img src="/images/brand.png" alt="Skiny image">
-          </nuxt-link>
-          <nuxt-link to class="brand-list-brand">
-            <p>Avene</p>
-            <img src="/images/brand.png" alt="Skiny image">
+          <nuxt-link :to="`/brands/${brand.slug}`" class="brand-list-brand" v-for="(brand, index) in brandList" :key="index">
+            <p>{{ brand.name }}</p>
+            <img :src="brand.image ? brand.image : require('@/static/images/brand.png')" :alt="brand.name">
           </nuxt-link>
         </div>
       </div>
@@ -109,6 +33,8 @@
 
 <script>
 import search from '@/static/icons/search-icon.svg'
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
@@ -139,13 +65,37 @@ export default {
         'x',
         'y',
         'z',
-        'А—Я',
-        '0—9'
-      ]
+        'А-Я',
+        '0-9'
+      ],
+      brandList: [],
+      currentLetter: 'A'
     }
   },
   components: {
     search
+  },
+  computed: {
+    ...mapGetters({
+      brands: 'brand/GET_BRANDS'
+    }),
+  },
+  methods: {
+    toggleBrand(value) {
+      const letter = value.toUpperCase()
+      const allBrands = Object.assign({}, this.brands);
+      this.brandList = allBrands[letter];
+      this.currentLetter = letter;
+      // console.log('letter', allBrands)
+    }
+  },
+  mounted() {
+    if (!this.brandList.length) {
+      this.brandList = this.brands['A']
+    }
+  },
+  async fetch({ store }) {
+    await store.dispatch('brand/fetchBrands')
   }
 }
 </script>

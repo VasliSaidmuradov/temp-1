@@ -21,7 +21,7 @@
           <img :src="product.image" :alt="product.name" />
         </div>
         <div class="search-dropdown-name-wrp">
-          <p class="search-dropdown-brand">{{ product.brand.name }}</p>
+          <p class="search-dropdown-brand">{{ product.brand ? product.brand.name : 'НЕТ БРЕНДА' }}</p>
           <p class="search-dropdown-name">{{ product.name }}</p>
         </div>
       </nuxt-link>
@@ -51,7 +51,8 @@ export default {
   },
   watch: {
     "$route.fullPath": function(fullPath) {
-      this.hideSearch()
+      // this.hideSearch()
+      this.$emit("closeSearch")
     } 
   },
 };

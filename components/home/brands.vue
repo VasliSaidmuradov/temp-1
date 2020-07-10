@@ -1,5 +1,5 @@
 <template>
-  <div class="brands-slider" v-if="brands.data.length > 0">
+  <div class="brands-slider" v-if="brands.data ? brands.data.length > 0 : false">
     <h3 class="brands-slider-title">Бренды</h3>
     <div class="brands-slider-btn-wrp">
       <button class="brands-slider-prev"></button>

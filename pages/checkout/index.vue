@@ -221,7 +221,9 @@
                 <!-- <nuxt-link class="button --white" to="">Перейти к оплате</nuxt-link> -->
               </div>
               <p v-if="$getError('order')" class="error-text">{{ $getError('order') }}</p>
-              <!-- {{ order }} -->
+              <!-- <pre> -->
+                <!-- {{ order }} -->
+              <!-- </pre> -->
             </div>
           </div>
         </div>

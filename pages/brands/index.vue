@@ -5,11 +5,18 @@
         <nuxt-link to="/">Главная /</nuxt-link>
         <nuxt-link to>Бренды</nuxt-link>
       </div>
-      <!-- :: {{ brandList }} -->
+      <!-- :: {{ brands }} -->
       <h1 class="section-title">Бренды</h1>
       <div class="brand-list-letter-wrp">
         <div class="brand-list-letters">
-          <button v-for="(letter, index) in letters" :key="index" @click="toggleBrand(letter)">{{letter}}</button>
+          <button 
+            v-if="!!brands[letter.toUpperCase()]"
+            v-for="(letter, index) in letters"
+            :key="index"
+            @click="toggleBrand(letter)"
+            >
+              {{letter}}
+            </button>
         </div>
         <div class="brand-list-search">
           <input type="text" placeholder="Поиск брендов">

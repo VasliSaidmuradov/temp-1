@@ -2,14 +2,16 @@ export const state = () => ({
   brands: null,
   brandProducts: null,
   filterResult: null,
-  filteredProducts: null
+  filteredProducts: null,
+  brandsToMain: null,
 })
 
 export const mutations = {
   SET_BRANDS: (state, payload) => state.brands = payload,
   SET_BRAND_PRODUCTS: (state, payload) => state.brandProducts = payload,
   FILTER_RESULT: (state, payload) => state.filterResult = payload,
-  FILTER_BRANDS: (state, payload) => state.filteredProducts = payload
+  FILTER_BRANDS: (state, payload) => state.filteredProducts = payload,
+  SET_BRANDS_TO_MAIN: (state, payload) => state.brandsToMain = payload,
 }
 
 export const actions = {
@@ -17,6 +19,9 @@ export const actions = {
     const res = await this.$api.get('/brands', payload)
     // console.log('brands: ', res)
     store.commit('SET_BRANDS', res)
+  },
+  async fetchBrandsToMain(store) {
+    store.commit('SET_BRANDS_TO_MAIN', await this.$api.get('/brands', { to_main: 1 }))
   },
   async fetchBrandProducts(store, payload) {
     const res = await this.$api.get(`/brands/${payload}`)
@@ -36,5 +41,6 @@ export const getters = {
     }) : []
     return { ...state.brandProducts, products: data }
   },
-  GET_FILTERED_PRODUCTS: state => state.filteredProducts
+  GET_FILTERED_PRODUCTS: state => state.filteredProducts,
+  GET_BRANDS_TO_MAIN: state => state.brandsToMain,
 }

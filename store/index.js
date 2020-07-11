@@ -52,7 +52,7 @@ export const actions = {
 
     const queue = [ 
       dispatch('menu/fetchCategories'),
-      dispatch('brand/fetchBrands', { to_main: 1 }),
+      dispatch('brand/fetchBrandsToMain'),
       // dispatch('cart/fetchCartProducts')
     ]
     if (req.headers.cookie) {

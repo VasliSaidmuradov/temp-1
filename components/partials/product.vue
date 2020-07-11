@@ -1,6 +1,6 @@
 <template>
   <div class="product" v-if="product">
-    <!-- {{ product }} -->
+    <!-- {{ product.quantity }} : {{ count }} -->
     <div class="product-icon-wrp">
       <img v-if="product.is_hit" src="/icons/hit-icon.svg" alt="Hit icon" />
       <img v-if="product.is_new" src="/icons/new-icon.svg" alt="New icon" />
@@ -23,9 +23,9 @@
     </nuxt-link>
     <div v-if="isInCart(product) && product.quantity" class="product-counter">
       <!-- <button @click="count = count > 1 ? count - 1 : 1" class="product-counter-decrease"></button> -->
-      <button @click="decrease(product)" class="product-counter-decrease"></button>
+      <button @click="decreaseCount(product)" class="product-counter-decrease"></button>
       <span>{{ getCartQuantity(product) }} {{ product.tag ? product.tag.unit : 'шт' }}</span>
-      <button :disabled="product.quantity <= getCartQuantity(product)" @click="increase(product)" class="product-counter-increase"></button>
+      <button :disabled="product.quantity <= getCartQuantity(product)" @click="increaseCount(product)" class="product-counter-increase"></button>
     </div>
     <button v-if="!isInCart(product) && product.quantity" @click="addToCart" class="button --black">В корзину</button>
     <button v-if="!product.quantity" class="button --not-available">Нет в наличии</button>
@@ -71,11 +71,18 @@ export default {
       decrease: "cart/decrease",
       fetchCartProducts: 'cart/fetchCartProducts',
     }),
-    decreaseCount() {
-      this.count > 1 ? this.count - 1 : 1;
+    decreaseCount(prod) {
+      this.decrease(prod)
+      if (this.count > 1) { 
+        this.count--
+      } else 1;
       if(this.count === 1) this.isAdded  = false;
     },
-    increaseCount() {
+    increaseCount(prod) {
+      // console.log(this.product.quantity, this.product.limit)
+      this.increase(prod);
+      this.count++;
+      this.isAdded = true;
       if (this.product.limit && this.product.limit <= this.count) {
         this.$alert({
           message: `На данный продукт установлен лимит ${this.product.limit *
@@ -84,8 +91,13 @@ export default {
         });
         return;
       }
-      this.count++;
-      this.isAdded = true;
+      if (this.product.quantity && this.product.quantity <= this.count) {
+        this.$alert({
+          message: `Достигнуто максимальное количество товара`,
+          type: "error"
+        });
+        return;
+      }
     },
     addToCart() {
       this.$alert({

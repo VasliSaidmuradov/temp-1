@@ -1,11 +1,11 @@
 <template>
-  <div class="brands-slider" v-if="brands.data ? brands.data.length > 0 : false">
+  <div class="brands-slider" v-if="brands && brands.data ? brands.data.length > 0 : false">
     <h3 class="brands-slider-title">Бренды</h3>
     <div class="brands-slider-btn-wrp">
       <button class="brands-slider-prev"></button>
       <button class="brands-slider-next"></button>
     </div>
-    <div v-swiper:brandsSlider="options">
+    <div v-if="brands" v-swiper:brandsSlider="options">
       <div class="swiper-wrapper">
         <nuxt-link
           v-for="brand in brands.data"
@@ -48,7 +48,9 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({ brands: "brand/GET_BRANDS" })
+    ...mapGetters({
+      brands: "brand/GET_BRANDS_TO_MAIN"
+      })
   }
 };
 </script>

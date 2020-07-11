@@ -1,6 +1,10 @@
 <template>
+<div class="mobile-filter" :class="{'--open' : isOpen}">
+  <div class="mobile-filter__header">
+    <span class="mobile-filter__title">Фильтр</span>
+    <close-icon @click="close" class="mobile-filter__close-icon" />
+  </div>
   <div class="filter">
-    <button class="filter-clear" @click="clearFilters">Очистить фильтр</button>
     <div class="filter-block">
       <div class="filter-range-top">
         <p class="filter-title">Цена</p>
@@ -20,45 +24,37 @@
     <div v-if="filterByBrands && getBrands.length" class="filter-block">
       <p class="filter-title">Бренд</p>
       <label class="filter-checkbox" v-for="brand in getBrands" :key="brand.id">
-        <input
-          type="checkbox"
-          :value="brand.id"
-          @change="onFilterChange"
-        />
+        <input type="checkbox" :value="brand.id" @change="onFilterChange" />
         <div class="filter-checkmark"></div>
         <p>{{ brand.name }}</p>
       </label>
     </div>
     <div class="filter-block">
-      <!-- <p class="filter-title">Эксклюзивные предложения</p> -->
-      <!-- <label class="filter-checkbox">
-        <input
-          type="checkbox"
-          value="sales"
-          @change="salesFilter"
-        />
-        <div class="filter-checkmark"></div>
-        <p>Скидки</p>
-      </label> -->
-      <!-- <label class="filter-checkbox">
-        <input type="checkbox" />
-        <div class="filter-checkmark"></div>
-        <p>Товары с подарками</p>
-      </label> -->
     </div>
   </div>
+  <div class="mobile-filter__footer">
+    <button class="filter-clear" @click="clearFilters">Очистить фильтр</button>
+    <button class="filter-accept button --main-color" @click="clearFilters">Применить</button>
+  </div>
+</div>
 </template>
+
 <script>
-import { mapGetters } from "vuex";
+import {
+  mapGetters
+} from "vuex";
+import closeIcon from "@/static/icons/close-icon.svg"
 
 export default {
   props: {
     cats: Array,
-    // allProducts: Object,
     filterByBrands: {
       type: Boolean,
       default: true
     }
+  },
+  components: {
+    closeIcon,
   },
   data() {
     return {
@@ -76,13 +72,11 @@ export default {
       brands: "brand/GET_BRANDS",
       filters: "product/GET_FILTERS",
       brandFilter: 'product/GET_BRAND_FILTER',
-
+      isOpen: 'filter/GET_MOBILE_FILTER',
     }),
     getBrands() {
       const products = this.allProducts.data || this.allProducts.products
-      // console.log('prod: ', products)
       const brands = products.map(el => el.brand)
-      // console.log(this.$route)
       const res = brands.reduce((acc, current) => {
         const x = acc.find(item => item.id === current.id);
         if (!x) {
@@ -96,12 +90,12 @@ export default {
   },
   mounted() {
     if (this.products) {
-      const minPrice = this.$route.query.min_price
-        ? this.$route.query.min_price
-        : this.products.min_price;
-      const maxPrice = this.$route.query.max_price
-        ? this.$route.query.max_price
-        : this.products.max_price;
+      const minPrice = this.$route.query.min_price ?
+        this.$route.query.min_price :
+        this.products.min_price;
+      const maxPrice = this.$route.query.max_price ?
+        this.$route.query.max_price :
+        this.products.max_price;
       this.price = [minPrice, maxPrice];
       this.minmax = [
         Math.min(minPrice, this.products.min_price),
@@ -110,15 +104,15 @@ export default {
     }
   },
   watch: {
-    products: function(products) {
+    products: function (products) {
       if (products.min_price && products.max_price) {
         this.showPrice = false;
-        const minPrice = this.$route.query.min_price
-          ? this.$route.query.min_price
-          : this.products.min_price;
-        const maxPrice = this.$route.query.max_price
-          ? this.$route.query.max_price
-          : this.products.max_price;
+        const minPrice = this.$route.query.min_price ?
+          this.$route.query.min_price :
+          this.products.min_price;
+        const maxPrice = this.$route.query.max_price ?
+          this.$route.query.max_price :
+          this.products.max_price;
         this.price = [minPrice, maxPrice];
         this.minmax = [
           Math.min(minPrice, this.products.min_price),
@@ -127,14 +121,13 @@ export default {
         this.showPrice = true;
       }
     },
-    price: function(val) {
+    price: function (val) {
       if (this.priceTimeout) {
         clearTimeout(this.priceTimeout);
       }
 
       this.priceTimeout = setTimeout(() => {
-        this.$addQuery(
-          {
+        this.$addQuery({
             min_price: val[0] !== this.products.min_price ? val[0] : null,
             max_price: val[1] !== this.products.max_price ? val[1] : null
           },
@@ -165,18 +158,17 @@ export default {
       this.$clearQuery();
     },
     clearPrice() {
-      this.$addQuery(
-        {
+      this.$addQuery({
           min_price: this.products.min_price,
           max_price: this.products.max_price
         },
         false,
         false
       )
+    },
+    close() {
+      this.$store.commit('filter/SET_MOBILE_FILTER', false)
     }
   }
 };
 </script>
-
-<style>
-</style>

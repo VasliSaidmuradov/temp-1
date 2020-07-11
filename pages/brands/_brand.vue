@@ -9,7 +9,7 @@
       <div class="row">
         <div class="left-col">
           <nuxt-link class="category-page-back" to="/brands">Список брендов</nuxt-link>
-          <!-- <subcategories :brandList="brands.data" :isBrandPage="true" /> -->
+          <subcategories :brandList="barndsToMain.data" :isBrandPage="true" />
           <!-- <category-filter
           :allProducts="allProducts"
           :filterByBrands="false"
@@ -80,7 +80,7 @@ import pagination from "@/components/partials/pagination";
 import { mapGetters } from "vuex";
 
 export default {
-  middleware: ["catalog", "brandProducts", "brands"],
+  middleware: ["catalog", "brandProducts"],
   data: () => ({
     isBrand: false,
     sort: "default",
@@ -98,6 +98,7 @@ export default {
   computed: {
     ...mapGetters({
       brands: "brand/GET_BRANDS",
+      barndsToMain: 'brand/GET_BRANDS_TO_MAIN',
       products: "brand/GET_BRAND_PRODUCTS"
       // allProducts: 'products/GET_ALL_PRODUCTS'
       // categories: "menu/GET_CATEGORIES",

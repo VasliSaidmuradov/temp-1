@@ -20,9 +20,9 @@
 			</div>
       <div v-if="isInCart(info)" class="product-counter">
         <!-- <button @click="count = count > 1 ? count - 1 : 1" class="product-counter-decrease"></button> -->
-        <button class="product-counter-decrease" @click="decrease(info)"></button>
+        <button class="product-counter-decrease" @click="decreaseCount(info)"></button>
         <span>{{ getCartQuantity(info) }} {{ info.tag ? info.tag.unit : 'шт' }}</span>
-        <button class="product-counter-increase" :class="{}" :disabled="info.quantity <= getCartQuantity(info)" @click="increase(info)"></button>
+        <button class="product-counter-increase" :class="{}" :disabled="info.quantity <= getCartQuantity(info)" @click="increaseCount(info)"></button>
       </div>
 			<button v-else @click="addToCart" :disabled="!info.quantity" class="button button-add-to-cart" :class="{'--disabled': !info.quantity, '--main-color': info.quantity}">
         <cart-icon />
@@ -96,7 +96,35 @@ export default {
         }
       }
       this.fetchCartProducts()
-    }
-   }
+    },
+    decreaseCount(prod) {
+      this.decrease(prod)
+      if (this.count > 1) { 
+        this.count--
+      } else 1;
+      if(this.count === 1) this.isAdded  = false;
+    },
+    increaseCount(prod) {
+      // console.log(this.product.quantity, this.product.limit)
+      this.increase(prod);
+      this.count++;
+      this.isAdded = true;
+      if (this.info.limit && this.info.limit <= this.count) {
+        this.$alert({
+          message: `На данный продукт установлен лимит ${this.info.limit *
+            this.info.amount} ${this.info.tag ? this.info.tag.unit : ''}`,
+          type: "error"
+        });
+        return;
+      }
+      if (this.info.quantity && this.info.quantity <= this.count) {
+        this.$alert({
+          message: `Достигнуто максимальное количество товара`,
+          type: "error"
+        });
+        return;
+      }   
+    },
+  }
 };
 </script>

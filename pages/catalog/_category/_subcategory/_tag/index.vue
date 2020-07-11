@@ -65,7 +65,7 @@
                   </div>
                 </div>
               </div>
-              <button class="category-page-filter">Фильтр</button>
+              <button class="category-page-filter" @click.prevent="openFilter">Фильтр</button>
             </div>
           </div>
           <div class="category-page-sort-wrp">
@@ -272,6 +272,9 @@ export default {
     },
     changeCurrentRoute() {
       this.currentRoute = this.$route.fullPath;
+    },
+    openFilter() {
+      this.$store.commit('filter/SET_MOBILE_FILTER', true)
     }
   }
 };

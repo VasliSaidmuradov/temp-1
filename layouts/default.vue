@@ -3,6 +3,7 @@
     <Header></Header>
     <mobile-header />
     <mobile-menu />
+    <mobile-filter />
     <auth-modal />
     <verify-modal />
     <div class="layout-content">
@@ -28,6 +29,7 @@ import mobileHeader from "@/components/partials/mobile-header";
 import Footer from "@/components/partials/footer";
 import authModal from "@/components/partials/auth-modal";
 import mobileMenu from "@/components/partials/mobile-menu";
+import mobileFilter from "@/components/category/mobile-filter.vue";
 import notification from "@/components/partials/notification";
 import Preloader from "@/components/partials/Preloader.vue";
 import VerifyModal from "@/components/partials/VerifyModal.vue";
@@ -43,7 +45,8 @@ export default {
     mobileMenu,
     notification,
     Preloader,
-    VerifyModal
+    VerifyModal,
+    mobileFilter,
   },
   middleware: ['cartProducts'],
   watch: {

@@ -11,9 +11,9 @@
 				</div>
 				<div class="cart-list-btn-wrp">
 					<div class="product-counter">
-						<button @click="decrease(product)" class="product-counter-decrease"></button>
+						<button @click="decreaseCount(product)" class="product-counter-decrease"></button>
 						<span>{{ getCartQuantity(product) }} {{ product.tag ? product.tag.unit : 'шт' }}</span>
-						<button :disabled="product.quantity <= getCartQuantity(product)" @click="increase(product)" class="product-counter-increase"></button>
+						<button :disabled="product.quantity <= getCartQuantity(product)" @click="increaseCount(product)" class="product-counter-increase"></button>
 					</div>
 					<div class="cart-list-price-wrp">
 						<p class="cart-list-price">{{ $formatMoney(product.price * getCartQuantity(product)) }} ₸</p>
@@ -39,7 +39,8 @@ export default {
   },
   data() {
 		return {
-			bonusesUsed: null,
+      bonusesUsed: null,
+      count: 1,
 		}
 	},
 	computed: {
@@ -62,7 +63,35 @@ export default {
 			while(this.getCartQuantity(product) > 0) {
 				this.decrease(product)
 			}
-		}
+    },
+    decreaseCount(prod) {
+      this.decrease(prod)
+      if (this.count > 1) { 
+        this.count--
+      } else 1;
+      if(this.count === 1) this.isAdded  = false;
+    },
+    increaseCount(prod) {
+      console.log('> ', prod.limit && prod.limit <= this.count)
+      this.increase(prod);
+      this.count++;
+      this.isAdded = true;
+      if (prod.limit && prod.limit <= this.count) {
+        this.$alert({
+          message: `На данный продукт установлен лимит ${prod.limit *
+            prod.amount} ${prod.tag ? prod.tag.unit : ''}`,
+          type: "error"
+        });
+        return;
+      }
+      if (prod.quantity && prod.quantity <= this.count) {
+        this.$alert({
+          message: `Достигнуто максимальное количество товара`,
+          type: "error"
+        });
+        return;
+      }   
+    },
 	}
 }
 </script>

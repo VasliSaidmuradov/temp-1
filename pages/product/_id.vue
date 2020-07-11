@@ -54,11 +54,11 @@
         class="button --main-color"
       >Добавить в корзину</button>
       <div v-show="isInCart(product) && product.quantity" class="product-counter">
-        <button @click="decrease(product)" class="product-counter-decrease"></button>
+        <button @click="decreaseCount(product)" class="product-counter-decrease"></button>
         <span>{{ getCartQuantity(product) }} {{ product.tag ? product.tag.unit : 'шт' }}</span>
         <button
           :disabled="product.quantity <= getCartQuantity(product)"
-          @click="increase(product)"
+          @click="increaseCount(product)"
           class="product-counter-increase"
         ></button>
       </div>
@@ -142,7 +142,35 @@ export default {
       }
       this.fetchCartProducts();
       this.isAdded = true;
-    }
+    },
+    decreaseCount(prod) {
+      this.decrease(prod)
+      if (this.count > 1) { 
+        this.count--
+      } else 1;
+      if(this.count === 1) this.isAdded  = false;
+    },
+    increaseCount(prod) {
+      // console.log(this.product.quantity, this.product.limit)
+      this.increase(prod);
+      this.count++;
+      this.isAdded = true;
+      if (this.product.limit && this.product.limit <= this.count) {
+        this.$alert({
+          message: `На данный продукт установлен лимит ${this.product.limit *
+            this.product.amount} ${this.product.tag ? this.product.tag.unit : ''}`,
+          type: "error"
+        });
+        return;
+      }
+      if (this.product.quantity && this.product.quantity <= this.count) {
+        this.$alert({
+          message: `Достигнуто максимальное количество товара`,
+          type: "error"
+        });
+        return;
+      }   
+    },
   }
 };
 </script>

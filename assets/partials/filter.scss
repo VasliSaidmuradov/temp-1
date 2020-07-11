@@ -71,7 +71,7 @@
 		align-items: center;
 		margin-bottom: 5px;
 		cursor: pointer;
-		input {
+		&-input {
 			display: none;
 			&:checked {
 				& ~ .filter-checkmark {

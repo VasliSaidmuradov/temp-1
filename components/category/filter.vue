@@ -17,13 +17,14 @@
         </div>
       </div>
     </div>
-    <div v-if="filterByBrands && getBrands.length" class="filter-block">
+    <div v-if="filterByBrands && getBrands.length" id="filterBlockWeb" class="filter-block">
       <p class="filter-title">Бренд</p>
       <label class="filter-checkbox" v-for="brand in getBrands" :key="brand.id">
         <input
           type="checkbox"
           :value="brand.id"
           @change="onFilterChange"
+          class="filter-checkbox-input"
         />
         <div class="filter-checkmark"></div>
         <p>{{ brand.name }}</p>
@@ -135,6 +136,7 @@ export default {
       this.priceTimeout = setTimeout(() => {
         this.$addQuery(
           {
+            // page: 1,
             min_price: val[0] !== this.products.min_price ? val[0] : null,
             max_price: val[1] !== this.products.max_price ? val[1] : null
           },
@@ -163,17 +165,24 @@ export default {
     },
     clearFilters() {
       this.$clearQuery();
+      this.checkboxCheckOff("filterBlockWeb", ".filter-checkbox-input");
     },
     clearPrice() {
       this.$addQuery(
         {
+          page: 1,
           min_price: this.products.min_price,
           max_price: this.products.max_price
         },
         false,
         false
       )
-    }
+    },
+    checkboxCheckOff(elem, input) {
+      const element = document.getElementById(elem);
+      let checkboxes = [...element.querySelectorAll(input)];
+      checkboxes.forEach(el => (el.checked = false));
+    },
   }
 };
 </script>

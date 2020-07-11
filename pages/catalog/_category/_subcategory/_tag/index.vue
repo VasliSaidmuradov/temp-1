@@ -89,7 +89,7 @@
           </div>
           <div
             class="category-page-product-wrp"
-            v-for="(items, index) in $chunk((filteredProducts && filteredProducts.data.length) ? filteredProducts.data : products.data, 4)"
+            v-for="(items, index) in $chunk(products.data, 4)"
             :key="index"
           >
             <product v-for="product in items" :key="product.id" :product="product" />
@@ -103,12 +103,12 @@
           </div>-->
         </div>
       </div>
-      <!-- <pagination
-        :paginator="products"
-      />-->
       <pagination
-        :paginator="(filteredProducts && filteredProducts.data.length) ? filteredProducts : products"
+        :paginator="products"
       />
+      <!-- <pagination
+        :paginator="(filteredProducts && filteredProducts.data.length) ? filteredProducts : products"
+      /> -->
     </div>
   </div>
 </template>

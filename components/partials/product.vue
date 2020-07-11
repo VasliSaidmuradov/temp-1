@@ -17,7 +17,7 @@
       <p v-if="product.name" class="product-name">
         {{ product.name.length > 70 ? product.name.slice(0, 75) + '...' : product.name }}</p>
       <div class="product-price-wrp">
-        <p class="product-price">{{ $formatMoney(product.price) }} ₸</p>
+        <p class="product-price" :class="{'--sale' : product.old_price}">{{ $formatMoney(product.price) }} ₸</p>
         <p v-if="product.old_price" class="product-old-price">{{ $formatMoney(product.old_price) }} ₸</p>
       </div>
     </nuxt-link>

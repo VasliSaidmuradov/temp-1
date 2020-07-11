@@ -101,7 +101,7 @@
     }
 
     &-old-price {
-        @include em(20px);
+        @include em(14px);
         font-weight: 500;
         text-decoration: line-through;
         color: #B3B3B3;
@@ -109,9 +109,12 @@
     }
 
     &-price {
-        @include em(20px);
+        @include em(16px);
         font-weight: 500;
         color: #000;
+        &.--sale {
+            color: var(--text-red);
+        }
     }
 
     &-counter {

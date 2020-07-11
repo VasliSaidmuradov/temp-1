@@ -4,8 +4,7 @@
 	left: 0;
 	width: 100%;
 	height: 100vh;
-	background: #fff;
-	padding-top: 100px;
+	background: #F7F7F7;
 	overflow-y: auto;
 	padding-bottom: 15vh;
 	z-index: 9;
@@ -61,7 +60,10 @@
 		}
 	}
 	&-nav {
-		margin: 30px 0;
+		margin-bottom: 30px;
+		background-color: #fff;
+		padding-top: 65px;
+		padding-bottom: 10px;
 	}
 	&-main-link {
 		margin-bottom: 20px;
@@ -72,20 +74,47 @@
 	}
 	&-bot-link {
 		display: block;
-		@include em(16px);
+		@include em(14px);
 		font-weight: 400;
-		color: #000;
-		margin-bottom: 5px;
+		color: var(--text-base);
+		margin-bottom: 20px;
+	}
+	&-subcategory-wrp {
+		&:last-child {
+			border-bottom: 1px solid var(--line-base);
+		}
 	}
 	&-subcategory {
 		@include em(14px);
-		font-weight: 500;
+		font-weight: 600;
 		display: block;
-		padding-left: 54px;
-		margin-bottom: 10px;
-		color: #000;
+		padding: 14px 0;
+		padding-left: 20px;
+		color: var(--text-base);
+		position: relative;
+		svg {
+			position: absolute;
+			right: 20px;
+			top: 50%;
+			transform: translateY(-50%);
+			z-index: 1;
+			transition: transform 0.3s ease;
+			path {
+				fill: #B3B3B3;
+				transition: fill 0.3s ease;
+			}
+		}
 		&.--open {
 			color: var(--color-base);
+			svg {
+				transform: translateY(-50%) rotate(-180deg);
+				path {
+					fill: var(--color-base);
+				}
+			}
+		}
+		& ~ div {
+			border-bottom: 1px solid var(--line-base);
 		}
 	}
 	&-category {
@@ -94,26 +123,31 @@
 		position: relative;
 		padding: 15px 20px;
 		padding-right: 40px;
+		border-bottom: 2px solid transparent;
+		transition: border-color 0.3s ease;
 		&.--open {
-			background-color: var(--color-base);
+			border-color: var(--color-base);
 			p {
-				color: #fff;
+				color: var(--color-base);
 			}
-			&:after,
-			img {
-				filter: invert(1);
+			svg {
+				transform: translateY(-50%) rotate(-180deg);
+				path {
+					fill: var(--color-base);
+				}
 			}
 		}
-		&:after {
-			content: '';
-			width: 15px;
-			height: 15px;
-			background: url('/icons/menu-arrow.svg') center no-repeat;
-			background-size: contain;
+		svg {
 			position: absolute;
+			z-index: 1;
 			right: 20px;
 			top: 50%;
 			transform: translateY(-50%);
+			transition: transform 0.3s ease;
+			path {
+				transition: fill 0.3s ease;
+				fill: #B3B3B3;
+			}
 		}
 		img {
 			flex-shrink: 0;
@@ -129,25 +163,32 @@
 	}
 	&-all {
 		@include em(14px);
-		font-weight: 500;
-		color: var(--color-base);
+		font-weight: 600;
+		color: var(--text-base);
 		padding: 15px;
-		padding-left: 54px;
+		padding-left: 20px;
 		display: block;
+		svg {
+			transform: rotate(-90deg);
+			margin-left: 10px;
+		}
 	}
 	&-link {
 		@include em(14px);
 		font-weight: 400;
-		color: #000;
-		padding: 10px;
+		color: #666;
+		padding: 12px;
 		padding-top: 0;
-		padding-left: 74px;
+		padding-left: 20px;
 		display: block;
+		// &:last-child {
+		// 	padding-bottom: 12px;
+		// }
 	}
 	&-phone {
 		@include em(16px);
 		font-weight: 500;
-		color: #000;
+		color: var(--text-base);
 		display: block;
 	}
 	&-phone-wrp {

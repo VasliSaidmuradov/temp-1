@@ -22,13 +22,13 @@
         <div class="product-page-col">
           <images :product="product" @showGallery="showGallery" />
           <div class="product-page-mob-name">
-            <p class="product-page-brand">{{ product.brand ? product.brand.name : '' }}</p>
+            <nuxt-link :to="`/brands/${product.brand.slug}`" class="product-page-brand">{{ product.brand ? product.brand.name : '' }}</nuxt-link>
             <p class="product-page-name">{{ product.name }}</p>
           </div>
         </div>
         <div class="product-page-right">
           <div class="product-page-name-wrp">
-            <p class="product-page-brand">{{ product.brand ? product.brand.name : '' }}</p>
+            <nuxt-link :to="`/brands/${product.brand.slug}`" class="product-page-brand">{{ product.brand ? product.brand.name : '' }}</nuxt-link>
             <p class="product-page-name">{{ product.name }}</p>
           </div>
           <div class="product-page-right-inner">

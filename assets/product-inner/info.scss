@@ -11,8 +11,9 @@
 	}
 	&-text {
 		@include em(14px);
-		font-weight: 500;
-		color: #000;
+		font-weight: 400;
+		color: #8F8F8F;
+		line-height: 22px;
 		margin-bottom: 30px;
 	}
 	&-row {

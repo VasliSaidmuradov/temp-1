@@ -7,13 +7,20 @@
 					@click="toggleDropdown(category.id)">
 					<img :src="category.icon" alt="Skiny icon" class="mobile-menu-icon">
 					<p class="mobile-menu-category-name">{{category.name}}</p>
+					<arrow />
 				</div>
 				<div v-if="categoryIndex === category.id">
-					<nuxt-link class="mobile-menu-all" :to="`/catalog/${category.slug}`" @click.native="close">Перейти к категории</nuxt-link>
-					<div v-for="subcategory in category.subcategories" :key="subcategory.id">
+					<nuxt-link class="mobile-menu-all" :to="`/catalog/${category.slug}`" @click.native="close">
+						Все товары категории
+						<arrow />
+					</nuxt-link>
+					<div class="mobile-menu-subcategory-wrp" v-for="subcategory in category.subcategories" :key="subcategory.id">
 						<div class="mobile-menu-subcategory" 
 							:class="{'--open': subcategoryIndex === subcategory.id}"
-							@click="toggleSubcat(subcategory.id)">{{subcategory.name}}</div>
+							@click="toggleSubcat(subcategory.id)">
+							{{subcategory.name}}
+							<arrow />
+						</div>
 						<div v-if="subcategoryIndex === subcategory.id">
 							<nuxt-link class="mobile-menu-link" 
 								@click.native="close"
@@ -35,7 +42,7 @@
             <nuxt-link to="/help/bonuses" @click.native="close" class="mobile-menu-bot-link">Бонусы</nuxt-link>
             <nuxt-link to="/contacts" @click.native="close" class="mobile-menu-bot-link">Контакты</nuxt-link>
 			<div class="mobile-menu-phone-wrp">
-				<a href="tel:87772623060" @click="close" class="mobile-menu-phone">8 (777) 262-30-60</a>
+				<a href="tel:87756444441" @click="close" class="mobile-menu-phone">8 (775) 644-44-41</a>
 			</div>
 		</div>
 	</div>
@@ -43,7 +50,7 @@
 
 <script>
 import {mapGetters} from 'vuex'
-
+import arrow from '@/static/icons/menu-arrow.svg'
 export default {
 	computed: {
 		...mapGetters({
@@ -77,6 +84,9 @@ export default {
 			this.subcategoryIndex = null
 			this.$store.commit('menu/TOGGLE_MENU_STATE', false)
 		}
+	},
+	components: {
+		arrow
 	}
 }
 </script>

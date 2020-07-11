@@ -11,7 +11,7 @@
             <nuxt-link to="/contacts" class="header-top-link">Контакты</nuxt-link>
           </nav>
           <div class="header-phone">
-            <a href="tel:87772623060">8 (777) 262-30-60</a>
+            <a href="tel:87756444441">8 (775) 644-44-41</a>
           </div>
         </div>
       </div>

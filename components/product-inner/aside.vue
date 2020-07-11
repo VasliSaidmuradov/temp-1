@@ -3,7 +3,7 @@
     <!-- {{ info.quantity }} -->
 		<div class="product-aside-inner">
 			<div class="product-aside-price-wrp">
-				<p class="product-aside-price">{{ info.price }} ₸</p>
+				<p class="product-aside-price" :class="{'--sale' : info.old_price}">{{ info.price }} ₸</p>
 				<p v-if="info.old_price" class="product-aside-old-price">{{ info.old_price }} ₸</p>
 			</div>
 			<p v-if="info.quantity" class="product-aside-available">В наличии на складе</p>

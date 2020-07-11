@@ -9,19 +9,21 @@
 			<div class="contacts-page-top">
 				<div class="contacts-page-info">
 					<div class="contacts-page-phone">
-						<a href="tel:87772623060">8 (777) 262-30-60</a>
+						<a href="tel:87756444441">8 (775) 644-44-41</a>
 					</div>
 					<div class="contacts-page-schedule">
-						<p>Часы работы:</p>
-						<p>Пн - Чт 10:00 — 18:00,</p>
-						<p>Пт 10:00 — 15:30</p>
+						<p>Режим работы магазина:</p>
 					</div>
 					<ul class="contacts-page-list">
 						<li class="contacts-page-list-item">
 							<p class="contacts-page-address">Жибек-Жолы проспект, 81</p>
-							<p class="contacts-page-list-phone"><a href="tel:87772623060">8 (777) 262-30-60</a></p>
+							<p class="contacts-page-list-phone"><a href="tel:87756444441">8 (775) 644-44-41</a></p>
 						</li>
 					</ul>
+					<div class="contacts-page-schedule">
+						<p>Ежедневно с 10:00 — 22:00</p>
+						<p>Консультация интернет-магазина с 10:00 — 00:00</p>
+					</div>
 				</div>
 				<div class="contacts-page-right">
 					<iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ace3fab0ca49de2ae0671cd03bb9bdb7046993c0a8a9483abfb108ca2ff65c0e9&amp;source=constructor" width="100%" height="100%" frameborder="0"></iframe>
@@ -37,11 +39,11 @@
 						<div>
 							<p class="contacts-page-col-text">
 								<phone-icon />
-								<a href="">8 (727) 396-18-34</a>
+								<a href="tel:87079222217">8 (707) 922-22-17</a>
 							</p>
 							<p class="contacts-page-col-text">
 								<email-icon />
-								<a href="">email@mail.com</a>
+								<a href="mailto:arman@brandstudio.kz">arman@brandstudio.kz</a>
 							</p>
 						</div>
 					</div>
@@ -55,12 +57,12 @@
 						<div>
 							<p class="contacts-page-col-text">
 								<phone-icon />
-								<a href="">8 (727) 396-18-34</a>
+								<a href="tel:87018429093">8 (701) 842-90-93</a>
 							</p>
-							<p class="contacts-page-col-text">
+							<!-- <p class="contacts-page-col-text">
 								<email-icon />
 								<a href="">email@mail.com</a>
-							</p>
+							</p> -->
 						</div>
 					</div>
 				</div>
@@ -73,11 +75,11 @@
 						<div>
 							<p class="contacts-page-col-text">
 								<phone-icon />
-								<a href="">8 (727) 396-18-34</a>
+								<a href="">8 (708) 618-62-23</a>
 							</p>
 							<p class="contacts-page-col-text">
 								<email-icon />
-								<a href="">email@mail.com</a>
+								<a href="mailto:nazym@brandstudio.kz">nazym@brandstudio.kz</a>
 							</p>
 						</div>
 					</div>

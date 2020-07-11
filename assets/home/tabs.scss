@@ -23,12 +23,20 @@
 @media screen and (max-width: 426px) {
 	.tabs-nav {
 		&-btn {
-			margin-right: 20px;
+			margin-right: 15px;
 			margin-bottom: 15px;
 			@include em(12px);
 			&:last-child {
 				margin-right: 0;
 			}
+		}
+	}
+}
+
+@media screen and (max-width: 376px) {
+	.tabs-nav {
+		&-btn {
+			margin-right: 7px;
 		}
 	}
 }

@@ -26,7 +26,7 @@
 				</div>
 				<div class="footer-col">
 					<div class="footer-phone-wrp">
-						<a href="tel:87772623060" class="footer-phone">8 (777) 262-30-60</a>
+						<a href="tel:87756444441" class="footer-phone">8 (775) 644-44-41</a>
 					</div>
 				</div>
 			</div>

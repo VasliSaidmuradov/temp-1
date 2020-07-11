@@ -77,3 +77,14 @@
         color: #000;
     }
 }
+
+@media (max-width: 815px) {
+    .search-dropdown {
+        height: calc(100vh - 132px);
+        overflow-y: auto;
+        border-radius: 0;
+        &-item {
+            padding-right: 35px;
+        }
+    }
+}

@@ -1,49 +1,52 @@
 <template>
-<div class="mobile-filter" :class="{'--open' : isOpen}">
-  <div class="mobile-filter__header">
-    <span class="mobile-filter__title">Фильтр</span>
-    <close-icon @click="close" class="mobile-filter__close-icon" />
-  </div>
-  <div class="filter">
-    <div class="filter-block">
-      <div class="filter-range-top">
-        <p class="filter-title">Цена</p>
-        <button @click="clearPrice">Сбросить</button>
-      </div>
-      <div class="filter-range-bot">
-        <div class="filter-input-wrp">
-          <label>от</label>
-          <input type="text" v-model="price[0]" class="filter-input" />
+  <div class="mobile-filter" :class="{'--open' : isOpen}">
+    <div class="mobile-filter__header">
+      <span class="mobile-filter__title">Фильтр</span>
+      <close-icon @click="close" class="mobile-filter__close-icon" />
+    </div>
+    <!-- {{ brandIds }} -->
+    <div class="filter">
+      <div class="filter-block">
+        <div class="filter-range-top">
+          <p class="filter-title">Цена</p>
+          <button @click="clearPrice">Сбросить</button>
         </div>
-        <div class="filter-input-wrp">
-          <label>до</label>
-          <input type="text" v-model="price[1]" class="filter-input" />
+        <div class="filter-range-bot">
+          <div class="filter-input-wrp">
+            <label>от</label>
+            <input type="text" v-model="price[0]" class="filter-input" />
+          </div>
+          <div class="filter-input-wrp">
+            <label>до</label>
+            <input type="text" v-model="price[1]" class="filter-input" />
+          </div>
         </div>
       </div>
+      <div v-if="filterByBrands && getBrands.length" id="filterBlock" class="filter-block">
+        <p class="filter-title">Бренд</p>
+        <label class="filter-checkbox" v-for="brand in getBrands" :key="brand.id">
+          <input
+            class="filter-checkbox-input"
+            type="checkbox"
+            :value="brand.id"
+            @change="onFilterChange"
+          />
+          <div class="filter-checkmark"></div>
+          <p>{{ brand.name }}</p>
+        </label>
+      </div>
+      <div class="filter-block"></div>
     </div>
-    <div v-if="filterByBrands && getBrands.length" class="filter-block">
-      <p class="filter-title">Бренд</p>
-      <label class="filter-checkbox" v-for="brand in getBrands" :key="brand.id">
-        <input type="checkbox" :value="brand.id" @change="onFilterChange" />
-        <div class="filter-checkmark"></div>
-        <p>{{ brand.name }}</p>
-      </label>
-    </div>
-    <div class="filter-block">
+    <div class="mobile-filter__footer">
+      <button class="filter-clear" @click="clearFilters">Очистить фильтр</button>
+      <button class="filter-accept button --main-color" @click="applyFillters">Применить</button>
     </div>
   </div>
-  <div class="mobile-filter__footer">
-    <button class="filter-clear" @click="clearFilters">Очистить фильтр</button>
-    <button class="filter-accept button --main-color" @click="clearFilters">Применить</button>
-  </div>
-</div>
 </template>
 
 <script>
-import {
-  mapGetters
-} from "vuex";
-import closeIcon from "@/static/icons/close-icon.svg"
+import { mapGetters } from "vuex";
+import closeIcon from "@/static/icons/close-icon.svg";
 
 export default {
   props: {
@@ -54,15 +57,16 @@ export default {
     }
   },
   components: {
-    closeIcon,
+    closeIcon
   },
   data() {
     return {
       minmax: [0, 0],
       price: [0, 0],
+      brandIds: [],
       isDropdownOpen: true,
       priceTimeout: null,
-      showPrice: true,
+      showPrice: true
     };
   },
   computed: {
@@ -71,12 +75,12 @@ export default {
       allProducts: "product/GET_ALL_PRODUCTS",
       brands: "brand/GET_BRANDS",
       filters: "product/GET_FILTERS",
-      brandFilter: 'product/GET_BRAND_FILTER',
-      isOpen: 'filter/GET_MOBILE_FILTER',
+      brandFilter: "product/GET_BRAND_FILTER",
+      isOpen: "filter/GET_MOBILE_FILTER"
     }),
     getBrands() {
-      const products = this.allProducts.data || this.allProducts.products
-      const brands = products.map(el => el.brand)
+      const products = this.allProducts.data || this.allProducts.products;
+      const brands = products.map(el => el.brand);
       const res = brands.reduce((acc, current) => {
         const x = acc.find(item => item.id === current.id);
         if (!x) {
@@ -85,17 +89,17 @@ export default {
           return acc;
         }
       }, []);
-      return res
+      return res;
     }
   },
   mounted() {
     if (this.products) {
-      const minPrice = this.$route.query.min_price ?
-        this.$route.query.min_price :
-        this.products.min_price;
-      const maxPrice = this.$route.query.max_price ?
-        this.$route.query.max_price :
-        this.products.max_price;
+      const minPrice = this.$route.query.min_price
+        ? this.$route.query.min_price
+        : this.products.min_price;
+      const maxPrice = this.$route.query.max_price
+        ? this.$route.query.max_price
+        : this.products.max_price;
       this.price = [minPrice, maxPrice];
       this.minmax = [
         Math.min(minPrice, this.products.min_price),
@@ -104,15 +108,15 @@ export default {
     }
   },
   watch: {
-    products: function (products) {
+    products: function(products) {
       if (products.min_price && products.max_price) {
         this.showPrice = false;
-        const minPrice = this.$route.query.min_price ?
-          this.$route.query.min_price :
-          this.products.min_price;
-        const maxPrice = this.$route.query.max_price ?
-          this.$route.query.max_price :
-          this.products.max_price;
+        const minPrice = this.$route.query.min_price
+          ? this.$route.query.min_price
+          : this.products.min_price;
+        const maxPrice = this.$route.query.max_price
+          ? this.$route.query.max_price
+          : this.products.max_price;
         this.price = [minPrice, maxPrice];
         this.minmax = [
           Math.min(minPrice, this.products.min_price),
@@ -120,21 +124,6 @@ export default {
         ];
         this.showPrice = true;
       }
-    },
-    price: function (val) {
-      if (this.priceTimeout) {
-        clearTimeout(this.priceTimeout);
-      }
-
-      this.priceTimeout = setTimeout(() => {
-        this.$addQuery({
-            min_price: val[0] !== this.products.min_price ? val[0] : null,
-            max_price: val[1] !== this.products.max_price ? val[1] : null
-          },
-          false,
-          false
-        );
-      }, 500);
     }
   },
   methods: {
@@ -149,25 +138,59 @@ export default {
       return this.$route.query[filter] === value;
     },
     onFilterChange(event) {
-      this.$emit("brand-filter", event.target)
+      console.log(event.target.value);
+      this.filterBrand(event.target);
+      // this.$emit("brand-filter", event.target);
     },
     salesFilter(event) {
-      this.$emit("sales-filter", event.target)
+      this.$emit("sales-filter", event.target);
     },
     clearFilters() {
       this.$clearQuery();
+      this.price = [this.products.min_price, this.products.max_price];
+      this.checkboxCheckOff("filterBlock", ".filter-checkbox-input");
+      // this.close();
     },
     clearPrice() {
-      this.$addQuery({
+      this.$addQuery(
+        {
           min_price: this.products.min_price,
           max_price: this.products.max_price
         },
         false,
         false
-      )
+      );
+      this.price = [this.products.min_price, this.products.max_price];
     },
     close() {
-      this.$store.commit('filter/SET_MOBILE_FILTER', false)
+      this.$store.commit("filter/SET_MOBILE_FILTER", false);
+    },
+    applyFillters() {
+      this.$addQuery(
+        {
+          page: 1,
+          min_price:
+            this.price[0] !== this.products.min_price ? this.price[0] : null,
+          max_price:
+            this.price[1] !== this.products.max_price ? this.price[1] : null,
+          brand_ids: this.brandIds ? this.brandIds : null
+        },
+        false,
+        false
+      );
+      this.close();
+    },
+    checkboxCheckOff(elem, input) {
+      const element = document.getElementById(elem);
+      let checkboxes = [...element.querySelectorAll(input)];
+      checkboxes.forEach(el => (el.checked = false));
+    },
+    filterBrand(e) {
+      if (!this.brandIds.includes(e.value)) this.brandIds.push(e.value);
+      else if (this.brandIds.includes(e.value)) {
+        this.brandIds.splice(this.brandIds.indexOf(e.value), 1);
+      }
+      this.brandIds.join(",");
     }
   }
 };

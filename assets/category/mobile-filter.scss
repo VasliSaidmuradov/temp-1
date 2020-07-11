@@ -17,11 +17,17 @@
         max-width: 90%;
         margin: 0 auto;
         overflow-y: auto;
-        height: calc(100vh - 70px);
+        height: calc(100vh - 130px);
 
         &-clear,
         &-accept {
             width: 47.5%;
+        }
+        &-input-wrp {
+            width: 47.5%;
+        }
+        &-input {
+            width: 100%;
         }
     }
 

@@ -3,7 +3,6 @@
     <Header></Header>
     <mobile-header />
     <mobile-menu />
-    <mobile-filter />
     <auth-modal />
     <verify-modal />
     <div class="layout-content">

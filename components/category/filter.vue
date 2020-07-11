@@ -141,7 +141,7 @@ export default {
           false,
           false
         );
-      }, 500);
+      }, 800);
     }
   },
   methods: {

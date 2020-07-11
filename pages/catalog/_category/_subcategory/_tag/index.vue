@@ -1,5 +1,6 @@
 <template>
   <div class="category-page">
+    <mobile-filter @brand-filter="filterBrand" />
     <div class="container">
       {{ changeCurrentRoute() }}
       <div class="breadcrumbs">
@@ -99,12 +100,12 @@
             :key="index"
           >
             <product v-for="product in items" :key="product.id" :product="product" />
-          </div> -->
+          </div>-->
         </div>
       </div>
       <!-- <pagination
         :paginator="products"
-      /> -->
+      />-->
       <pagination
         :paginator="(filteredProducts && filteredProducts.data.length) ? filteredProducts : products"
       />
@@ -118,6 +119,8 @@ import categoryFilter from "@/components/category/filter";
 import brand from "@/components/category/brand";
 import product from "@/components/partials/product";
 import pagination from "@/components/partials/pagination";
+import mobileFilter from "@/components/category/mobile-filter.vue";
+
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -126,7 +129,8 @@ export default {
     categoryFilter,
     product,
     brand,
-    pagination
+    pagination,
+    mobileFilter
   },
   middleware: ["catalog", "brands", "sales"],
   data: () => ({
@@ -230,7 +234,7 @@ export default {
       if (this.filteredProducts && this.filteredProducts.data.length) {
         this.$store.commit("brand/FILTER_BRANDS", null);
       }
-    },
+    }
   },
   mounted() {
     if (this.$route.query.sort) {
@@ -252,12 +256,19 @@ export default {
       else if (this.ids.includes(e.value)) {
         this.ids.splice(this.ids.indexOf(e.value), 1);
       }
-      const idsStr = this.ids.join(",");
-      const params = this.$route.params;
-      const slug = `${params.category ? params.category : ""}${
-        params.subcategory ? "/" + params.subcategory : ""
-      }${params.tag ? "/" + params.tag : ""}`;
-      this.filterByBrands({ slug: slug, ids: idsStr });
+      this.$addQuery(
+        {
+          page: 1,
+          brand_ids: this.ids ? this.ids : null
+        },
+        false,
+        false
+      );
+      // const params = this.$route.params;
+      // const slug = `${params.category ? params.category : ""}${
+      //   params.subcategory ? "/" + params.subcategory : ""
+      // }${params.tag ? "/" + params.tag : ""}`;
+      // this.filterByBrands({ slug: slug, ids: idsStr });
     },
     filterSales(e) {
       if (e.checked) {
@@ -274,7 +285,7 @@ export default {
       this.currentRoute = this.$route.fullPath;
     },
     openFilter() {
-      this.$store.commit('filter/SET_MOBILE_FILTER', true)
+      this.$store.commit("filter/SET_MOBILE_FILTER", true);
     }
   }
 };

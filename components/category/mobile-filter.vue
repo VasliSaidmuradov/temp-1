@@ -147,6 +147,7 @@ export default {
     },
     clearFilters() {
       this.$clearQuery();
+      this.brandIds = []
       this.price = [this.products.min_price, this.products.max_price];
       this.checkboxCheckOff("filterBlock", ".filter-checkbox-input");
       // this.close();

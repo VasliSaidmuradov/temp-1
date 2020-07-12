@@ -4,7 +4,7 @@
     <h3 class="product-info-title">Описание</h3>
     <p class="product-info-text" v-html="info.description ? info.description : ''"></p>
     <h3 class="product-info-title --margin">Доставка</h3>
-    <div class="product-info-row">
+    <!-- <div class="product-info-row">
       <img src="/icons/delivery-icon.svg" class="product-info-delivery-icon" alt="delivery icon" />
       <p class="product-info-delivery-text">
         Доставка курьером,
@@ -12,7 +12,7 @@
         <b v-else>сегодня, {{ $formatDate(now) }},</b>
         <span>Бесплатно</span>
       </p>
-    </div>
+    </div> -->
     <div class="product-info-row">
       <img src="/icons/house-icon.svg" class="product-info-delivery-icon" alt="Skiny icon" />
       <p class="product-info-delivery-text">

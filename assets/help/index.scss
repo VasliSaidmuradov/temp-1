@@ -1,6 +1,9 @@
 .help-page {
     padding-top: 30px;
     padding-bottom: 40px;
+    iframe {
+        margin-bottom: 16px;
+    }
     .row {
         margin-top: 40px;
         align-items: flex-start;
@@ -31,6 +34,12 @@
         color: #000;
         margin-bottom: 16px;
     }
+    &-heading {
+        @include em(14px);
+        font-weight: 700;
+        color: var(--text-base);
+        margin: 16px 0;
+    }
     &-icon {
         margin: auto;
         margin-bottom: 24px;
@@ -44,7 +53,7 @@
     &-text {
         @include em(14px);
         font-weight: 500;
-        color: #000;
+        color: var(--text-base);
         button {
             border: none;
             background-color: transparent;

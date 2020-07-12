@@ -1,6 +1,9 @@
 .help-page {
     padding-top: 30px;
     padding-bottom: 40px;
+    iframe {
+        margin-bottom: 16px;
+    }
     .row {
         margin-top: 40px;
         align-items: flex-start;

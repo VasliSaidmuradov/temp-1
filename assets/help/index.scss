@@ -31,6 +31,12 @@
         color: #000;
         margin-bottom: 16px;
     }
+    &-heading {
+        @include em(14px);
+        font-weight: 700;
+        color: var(--text-base);
+        margin: 16px 0;
+    }
     &-icon {
         margin: auto;
         margin-bottom: 24px;
@@ -44,7 +50,7 @@
     &-text {
         @include em(14px);
         font-weight: 500;
-        color: #000;
+        color: var(--text-base);
         button {
             border: none;
             background-color: transparent;

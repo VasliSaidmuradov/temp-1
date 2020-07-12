@@ -19,7 +19,7 @@
             </button>
         </div>
         <div class="brand-list-search">
-          <input type="text" placeholder="Поиск брендов">
+          <input v-model="brandSearchQuery" type="text" placeholder="Поиск брендов">
           <button><search /></button>
         </div>
       </div>
@@ -40,7 +40,7 @@
 
 <script>
 import search from '@/static/icons/search-icon.svg'
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
@@ -76,7 +76,8 @@ export default {
         '0-9'
       ],
       brandList: [],
-      currentLetter: 'A'
+      currentLetter: 'A',
+      brandSearchQuery: null,
     }
   },
   components: {
@@ -84,16 +85,27 @@ export default {
   },
   computed: {
     ...mapGetters({
-      brands: 'brand/GET_BRANDS'
+      brands: 'brand/GET_BRANDS',
+      brandSeachResult: 'brand/GET_SEARCH_BRANDS',
     }),
   },
   methods: {
+    ...mapActions({
+      searchBrands: 'brand/searchBrands'
+    }),
     toggleBrand(value) {
       const letter = value.toUpperCase()
       const allBrands = Object.assign({}, this.brands);
       this.brandList = allBrands[letter];
       this.currentLetter = letter;
-      // console.log('letter', allBrands)
+    },
+  },
+  watch: {
+    brandSearchQuery: async function(val) {
+      if (val && val.length > 1) {
+        console.log(val);
+        await this.searchBrands(val);
+      }
     }
   },
   mounted() {

@@ -6,8 +6,10 @@
         <nuxt-link to="/cart">Корзина /</nuxt-link>
         <nuxt-link to>Оформление заказа</nuxt-link>
       </div>
+      <pre>
+        {{ deliveryCost }}
+      </pre>
       <form @submit.prevent="createOrder">
-        <!-- prod: {{ products }} -->
         <div class="checkout-page-row">
           <div class="checkout-page-col">
             <!-- <contacts /> -->
@@ -18,7 +20,7 @@
                 type="text"
                 placeholder="ФИО*"
                 class="checkout-page-input"
-                :class="{ '--border-red': !order.name }"
+                :class="{ '--border-red': !order.name && isSubmitted }"
                 required
               />
               <client-only>
@@ -29,7 +31,7 @@
                   type="tel"
                   placeholder="Номер телефона*"
                   required
-                  :class="{ '--border-red': !order.phone }"
+                  :class="{ '--border-red': !order.phone && isSubmitted }"
                 />
               </client-only>
               <input
@@ -37,7 +39,7 @@
                 type="mail"
                 placeholder="E-mail*"
                 class="checkout-page-input"
-                :class="{ '--border-red': !order.email }"
+                :class="{ '--border-red': !order.email && isSubmitted  }"
                 required
               />
             </div>
@@ -107,7 +109,7 @@
                   required
                   placeholder="Укажите город / населенный пункт"
                   class="checkout-page-input"
-                  :class="{ '--border-red': !order.city_name }"
+                  :class="{ '--border-red': !order.city_name && isSubmitted }"
                 />
                 <input
                   v-model="order.street"
@@ -115,7 +117,7 @@
                   type="text"
                   placeholder="Улица"
                   class="checkout-page-input"
-                  :class="{ '--border-red': !order.street }"
+                  :class="{ '--border-red': !order.street && isSubmitted }"
                 />
                 <div class="checkout-page-input-wrp" :class="{'--half' : order.city != '0'}">
                   <input
@@ -123,14 +125,14 @@
                     type="text"
                     placeholder="Дом"
                     class="checkout-page-input"
-                    :class="{ '--border-red': !order.house }"
+                    :class="{ '--border-red': !order.house && isSubmitted }"
                   />
                   <input
                     v-model="order.flat"
                     type="text"
                     placeholder="Квартира / Офис"
                     class="checkout-page-input"
-                    :class="{ '--border-red': !order.flat }"
+                    :class="{ '--border-red': !order.flat && isSubmitted }"
                   />
                   <input
                     v-if="order.city == '0'"
@@ -138,7 +140,7 @@
                     type="text"
                     placeholder="Индекс"
                     class="checkout-page-input"
-                    :class="{ '--border-red': !order.index }"
+                    :class="{ '--border-red': !order.index && isSubmitted }"
                   />
                 </div>
               </div>
@@ -177,7 +179,6 @@
                 v-model="order.comment"
                 placeholder="Ваш комментарий к заказу"
                 class="checkout-page-input"
-                :class="{ '--border-red': !order.comment }"
               ></textarea>
             </div>
           </div>
@@ -199,7 +200,7 @@
                 </div>
                 <div class="order-aside-row">
                   <p class="order-aside-title">Доставка</p>
-                  <p class="order-aside-list-price">{{ $formatMoney(delivery) }} ₸</p>
+                  <p class="order-aside-list-price">{{ $formatMoney(deliveryCost.delivery_cost) }} ₸</p>
                 </div>
                 <div class="order-aside-row">
                   <p class="order-aside-title">Скидка</p>
@@ -217,13 +218,14 @@
                   type="submit"
                   class="button --main-color"
                   :disabled="sum <= 0"
+                  @click="isSubmitted = true"
                 >Оформить заказ</button>
                 <!-- <nuxt-link class="button --white" to="">Перейти к оплате</nuxt-link> -->
               </div>
               <p v-if="$getError('order')" class="error-text">{{ $getError('order') }}</p>
-              <!-- <pre> -->
-                <!-- {{ order }} -->
-              <!-- </pre> -->
+              <pre>
+                {{ order }}
+              </pre>
             </div>
           </div>
         </div>
@@ -270,7 +272,8 @@ export default {
         index: null,
         comment: null,
         payment_type: 0
-      }
+      },
+      isSubmitted: false,
     };
   },
   watch: {
@@ -282,15 +285,28 @@ export default {
         this.order.phone = "7" + val.substring(1);
       }
     },
-    "order.delivery_type": function(val) {
-      val && val === "1"
-        ? (this.order.street = "г.Алматы, ул.Жибек-жолы 38/1")
-        : (this.order.street = null);
+    "order.delivery_type": async function(val) {
+      if (val && val === "1") {
+        this.order.street = "г.Алматы, ул.Жибек-жолы 38/1";
+        // await this.$store.commit('cart/RESET_DELIVERY_COST');
+      } else {
+        this.order.street = null;
+        if (val === "0" && this.order.city === "1") {
+          console.log('val: ', val)
+          await this.fetchDeliveryCost({ city_id: 1, total: this.sum });
+        } else {
+          console.log('val else: ', val)
+          await this.fetchDeliveryCost({ city_id: 0, total: this.sum });
+        }
+      }
     },
-    "order.city": function(val) {
-      val && val === "1"
-        ? (this.order.payment_type = 0)
-        : (this.order.payment_type = 1);
+    "order.city": async function(val) {
+      if (val && val === "1") {
+        this.order.payment_type = 0;
+      } else {
+        this.order.payment_type = 1
+      }
+      await this.fetchDeliveryCost({ city_id: val, total: this.sum })
     }
   },
   computed: {
@@ -299,21 +315,22 @@ export default {
       sum: "cart/GET_TOTAL",
       bonuses: "cart/GET_BONUSES",
       discount: "cart/GET_DISCOUNT",
-      cartQuantity: "cart/GET_QUANTITY"
+      cartQuantity: "cart/GET_QUANTITY",
+      deliveryCost: "cart/GET_DELIVERY_COST",
     }),
-    delivery() {
-      let deliveryCost = 0;
-      if (this.order.city == "0" && this.sum < 12000) deliveryCost = 2000;
-      else if (
-        this.order.city == "1" &&
-        this.sum < 7000 &&
-        this.order.delivery_type == "0"
-      )
-        deliveryCost = 500;
-      return deliveryCost;
-    },
+    // delivery() {
+    //   let deliveryCost = 0;
+    //   if (this.order.city == "0" && this.sum < 12000) deliveryCost = 2000;
+    //   else if (
+    //     this.order.city == "1" &&
+    //     this.sum < 7000 &&
+    //     this.order.delivery_type == "0"
+    //   )
+    //     deliveryCost = 500;
+    //   return deliveryCost;
+    // },
     total() {
-      return this.sum - this.discount + this.delivery;
+      return this.sum - this.discount + this.deliveryCost.delivery_cost;
     },
     currentCity() {
       switch (this.order.city) {
@@ -328,7 +345,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      checkout: "cart/checkout"
+      checkout: "cart/checkout",
+      fetchDeliveryCost: "cart/deliveryCost",
     }),
     togglePickupDropdown() {
       this.isPickupDropdownOpen = !this.isPickupDropdownOpen;
@@ -413,6 +431,9 @@ export default {
         .setPin(".order-aside");
       this.$scrollmagic.addScene(pinScene);
     }
-  }
+    // if (this.order.delivery_type === "1") {
+    //   this.$store.commit('cart/RESET_DELIVERY_COST');
+    // }
+  },
 };
 </script>

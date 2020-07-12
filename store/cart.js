@@ -5,7 +5,8 @@ export const state = () => ({
   products: {data: []},
   bonuses: 0,
   discount: 0,
-  isCheckoutModalOpen: false
+  isCheckoutModalOpen: false,
+  deliveryCost: { delivery_cost: 0 },
 })
 
 export const getters = {
@@ -30,6 +31,7 @@ export const getters = {
   GET_DISCOUNT: state => Object.keys(state.product_ids).length > 0 ? state.products.data.reduce((sum, product) => {
     return Math.max(0, sum - state.bonuses + (product.old_price ? (product.old_price - product.price) : 0) * (state.product_ids[`${product.id}`] ? state.product_ids[`${product.id}`] : 0))
   }, 0) : 0,
+  GET_DELIVERY_COST: state => state.deliveryCost,
 } 
 
 export const mutations = {
@@ -48,6 +50,8 @@ export const mutations = {
     state.product_ids = {...state.product_ids}
     Cookies.set('cart', state.product_ids)
   },
+  SET_DELIVERY_COST: (state, payload) => state.deliveryCost = payload,
+  RESET_DELIVERY_COST: (state, payload) => state.deliveryCost.delivery_cost = 0,
 }
 
 export const actions = {
@@ -108,5 +112,9 @@ export const actions = {
         type: 'error',
       })
     }
+  },
+  async deliveryCost(store, payload) {
+    const res = await this.$api.get('/delivery-cost', payload);
+    store.commit('SET_DELIVERY_COST', res);
   }
 }

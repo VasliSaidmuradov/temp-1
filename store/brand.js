@@ -4,6 +4,7 @@ export const state = () => ({
   filterResult: null,
   filteredProducts: null,
   brandsToMain: null,
+  searchBrandResult: null,
 })
 
 export const mutations = {
@@ -12,6 +13,7 @@ export const mutations = {
   FILTER_RESULT: (state, payload) => state.filterResult = payload,
   FILTER_BRANDS: (state, payload) => state.filteredProducts = payload,
   SET_BRANDS_TO_MAIN: (state, payload) => state.brandsToMain = payload,
+  SET_SEARCH_BRANDS: (state, payload) => state.searchBrandResult = payload,
 }
 
 export const actions = {
@@ -30,6 +32,10 @@ export const actions = {
   async filterByBrands(store, payload) {
     const res = await this.$api.get(`/brands-filter/${payload.slug}?ids=${payload.ids}`)
     store.commit('FILTER_BRANDS', res)
+  },
+  async searchBrands(store, payload) {
+    const res = await this.$api.get(`/search-brand?q=${payload}`);
+    store.commit('SET_SEARCH_BRANDS', res);
   }
 }
 
@@ -43,4 +49,5 @@ export const getters = {
   },
   GET_FILTERED_PRODUCTS: state => state.filteredProducts,
   GET_BRANDS_TO_MAIN: state => state.brandsToMain,
+  GET_SEARCH_BRANDS: state => state.searchBrandResult,
 }

@@ -318,17 +318,6 @@ export default {
       cartQuantity: "cart/GET_QUANTITY",
       deliveryCost: "cart/GET_DELIVERY_COST",
     }),
-    // delivery() {
-    //   let deliveryCost = 0;
-    //   if (this.order.city == "0" && this.sum < 12000) deliveryCost = 2000;
-    //   else if (
-    //     this.order.city == "1" &&
-    //     this.sum < 7000 &&
-    //     this.order.delivery_type == "0"
-    //   )
-    //     deliveryCost = 500;
-    //   return deliveryCost;
-    // },
     total() {
       return this.sum - this.discount + this.deliveryCost.delivery_cost;
     },

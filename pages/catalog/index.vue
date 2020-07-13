@@ -22,7 +22,7 @@
             <nuxt-link :to="`/catalog/${category.slug}`" class="catalog-page-category">
               {{ category.name }}
             </nuxt-link>
-            <div class="catalog-page-row">
+            <div class="catalog-page-row" :class="{'--count-1' : Object.entries(category.subcategories).length === 1 && Object.entries(category.subcategories[0].tags).length < 10}">
               <div class="catalog-page-col" v-for="subcat in category.subcategories" :key="subcat.id">
                 <nuxt-link class="catalog-page-subcategory"
                   :to="`/catalog/${category.slug}/${subcat.slug}`">

@@ -41,7 +41,6 @@
           <category-filter
             :filterByBrands="true"
             @brand-filter="filterBrand"
-            @sales-filter="filterSales"
             :cats="tag ? null : subcategory ? subcategory.tags : category ? category.subcategories : categories"
           />
         </div>
@@ -94,21 +93,11 @@
           >
             <product v-for="product in items" :key="product.id" :product="product" />
           </div>
-          <!-- <div
-            class="category-page-product-wrp"
-            v-for="(items, index) in $chunk(products.data, 4)"
-            :key="index"
-          >
-            <product v-for="product in items" :key="product.id" :product="product" />
-          </div>-->
         </div>
       </div>
       <pagination
         :paginator="products"
       />
-      <!-- <pagination
-        :paginator="(filteredProducts && filteredProducts.data.length) ? filteredProducts : products"
-      /> -->
     </div>
   </div>
 </template>
@@ -138,7 +127,7 @@ export default {
     sort: "default",
     delay: null,
     productList: { data: null },
-    salesProducts: null,
+    // salesProducts: null,
     isSortOpen: false,
     ids: [],
     currentRoute: null
@@ -148,8 +137,8 @@ export default {
       products: "product/GET_PRODUCTS",
       // allProducts: "product/GET_ALL_PRODUCTS",
       categories: "menu/GET_CATEGORIES",
-      filteredProducts: "brand/GET_FILTERED_PRODUCTS",
-      sales: "product/GET_SALES"
+      // filteredProducts: "brand/GET_FILTERED_PRODUCTS",
+      // sales: "product/GET_SALES"
     }),
     category() {
       for (let i = 0; i < this.categories.length; ++i) {
@@ -161,7 +150,6 @@ export default {
       return null;
     },
     subcategory() {
-      // console.log("category", this.category);
       if (!this.category) {
         return null;
       }
@@ -178,7 +166,6 @@ export default {
     },
     tag() {
       if (!this.subcategory) {
-        // console.log("subcategory", this.subcategory);
         return null;
       }
 
@@ -230,16 +217,12 @@ export default {
       }
       this.$router.push({ path: this.$route.path, query: query });
     },
-    currentRoute: function(path) {
-      if (this.filteredProducts && this.filteredProducts.data.length) {
-        this.$store.commit("brand/FILTER_BRANDS", null);
-      }
-    }
   },
   mounted() {
     if (this.$route.query.sort) {
       this.sort = this.$route.query.sort;
     }
+    console.log(this.products)
   },
   methods: {
     ...mapActions({
@@ -264,18 +247,6 @@ export default {
         false,
         false
       );
-      // const params = this.$route.params;
-      // const slug = `${params.category ? params.category : ""}${
-      //   params.subcategory ? "/" + params.subcategory : ""
-      // }${params.tag ? "/" + params.tag : ""}`;
-      // this.filterByBrands({ slug: slug, ids: idsStr });
-    },
-    filterSales(e) {
-      if (e.checked) {
-        this.salesProducts = { ...this.sales };
-      } else {
-        this.salesProducts = null;
-      }
     },
     sorting(e) {
       this.sort = e;

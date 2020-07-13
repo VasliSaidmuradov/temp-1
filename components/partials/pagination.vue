@@ -2,14 +2,14 @@
   <div class="pagination" ref="pagination">
     <!-- {{ paginator }} -->
     <nuxt-link
-      v-show="paginator.current_page > 1"
+      v-if="paginator.current_page > 1"
       class="pagination-prev"
       :to="{path: $route.path, query: Object.assign({}, $route.query, { page: `${paginator.current_page - 1}` })}"
       @click.native="scrollToTop"
     ></nuxt-link>
     <span
-      v-if="Math.abs(paginator.current_page - index) <= 2 || index == paginator.last_page || index == 1"
       v-for="index in Math.ceil(paginator.total / paginator.per_page)"
+      v-if="Math.abs(paginator.current_page - index) <= 2 || index == paginator.last_page || index == 1"
       :key="index.id"
     >
       <nuxt-link
@@ -22,7 +22,7 @@
       <span v-else-if="Math.abs(paginator.current_page - index) == 2">...</span>
     </span>
     <nuxt-link
-      v-show="paginator.current_page < paginator.last_page"
+      v-if="paginator.current_page < paginator.last_page"
       class="pagination-next"
       :to="{path: $route.path, query: Object.assign({}, $route.query, {page: `${paginator.current_page + 1}`})}"
       @click.native="scrollToTop"

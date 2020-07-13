@@ -25,11 +25,6 @@
               <p @click.prevent="sorting('desc')">По убыванию</p>
             </div>
           </div>
-          <!-- <select v-model="sort">
-            <option value="default">По умолчанию</option>
-            <option value="asc">По возрастанию</option>
-            <option value="desc">По убыванию</option>
-          </select>-->
         </div>
       </div>
       <div v-if="searchQuery">

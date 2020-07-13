@@ -15,15 +15,16 @@ export const state = () => ({
 })
 
 export const getters = {
-  GET_PRODUCTS: state => {
-    const data = state.products ? state.products.data.map(el => {
-      return {
-        ...el,
-        image: el.image ? el.image : require('@/static/images/product.png')
-      }
-    }) : []
-    return { ...state.products, data: data }
-  },
+  // GET_PRODUCTS: state => {
+    // const data = state.products ? state.products.data.map(el => {
+      // return {
+        // ...el,
+        // image: el.image ? el.image : require('@/static/images/product.png')
+      // }
+    // }) : []
+    // return { ...state.products, data: data }
+  // },
+  GET_PRODUCTS: state => state.products,
   GET_ALL_PRODUCTS: state => {
     const data = state.allProducts ? state.allProducts.data.map(el => {
       return {
@@ -165,9 +166,7 @@ export const actions = {
   },
   async paginate(store, payload) {
     let url = payload.next_page_url
-    if (!url) {
-      return
-    }
+    if (!url || payload.current_page === payload.last_page) return
     if (payload.rand && url.indexOf('rand=') == -1) {
       if (url.indexOf('?') != -1) {
         url += '&'

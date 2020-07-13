@@ -10,7 +10,7 @@
     </button>
     <nuxt-link :to="`/product/${product.slug}`">
       <div class="product-img">
-        <img :src="product.image" :alt="product.name" />
+        <img :src="product.image ? product.image : require('@/static/images/product.png')" :alt="product.name" />
       </div>
       <div class="product-rating-wrp"></div>
       <p class="product-brand">{{ product.brand ? product.brand.name : 'Нет бренда' }}</p>

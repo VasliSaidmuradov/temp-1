@@ -51,7 +51,6 @@ export const mutations = {
     Cookies.set('cart', state.product_ids)
   },
   SET_DELIVERY_COST: (state, payload) => state.deliveryCost = payload,
-  RESET_DELIVERY_COST: (state, payload) => state.deliveryCost.delivery_cost = 0,
 }
 
 export const actions = {

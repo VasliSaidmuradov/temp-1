@@ -6,9 +6,9 @@
         <nuxt-link to="/cart">Корзина /</nuxt-link>
         <nuxt-link to>Оформление заказа</nuxt-link>
       </div>
-      <pre>
-        {{ deliveryCost }}
-      </pre>
+      <!-- <pre> -->
+        <!-- {{ deliveryCost }} -->
+      <!-- </pre> -->
       <form @submit.prevent="createOrder">
         <div class="checkout-page-row">
           <div class="checkout-page-col">
@@ -223,9 +223,9 @@
                 <!-- <nuxt-link class="button --white" to="">Перейти к оплате</nuxt-link> -->
               </div>
               <p v-if="$getError('order')" class="error-text">{{ $getError('order') }}</p>
-              <pre>
-                {{ order }}
-              </pre>
+              <!-- <pre> -->
+                <!-- {{ order }} -->
+              <!-- </pre> -->
             </div>
           </div>
         </div>
@@ -288,7 +288,7 @@ export default {
     "order.delivery_type": async function(val) {
       if (val && val === "1") {
         this.order.street = "г.Алматы, ул.Жибек-жолы 38/1";
-        // await this.$store.commit('cart/RESET_DELIVERY_COST');
+        await this.fetchDeliveryCost({ city_id: 2, total: this.sum });
       } else {
         this.order.street = null;
         if (val === "0" && this.order.city === "1") {
@@ -431,9 +431,7 @@ export default {
         .setPin(".order-aside");
       this.$scrollmagic.addScene(pinScene);
     }
-    // if (this.order.delivery_type === "1") {
-    //   this.$store.commit('cart/RESET_DELIVERY_COST');
-    // }
+    this.fetchDeliveryCost({ city_id: 2, total: this.sum });
   },
 };
 </script>

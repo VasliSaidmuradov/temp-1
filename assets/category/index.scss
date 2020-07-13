@@ -3,6 +3,16 @@
 	.row {
 		align-items: flex-start;
 	}
+	&-toggle-btn {
+		@include em(14px);
+		padding: 0;
+		border: none;
+		background-color: transparent;
+		color: var(--color-base);
+		font-weight: 600;
+		margin-top: 16px;
+		margin-bottom: 30px;
+	}
 	&-back {
 		position: relative;
 		display: inline-block;

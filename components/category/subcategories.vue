@@ -10,6 +10,7 @@
       {{ link.name }}
       <br />
     </nuxt-link>
+    <button class="category-page-toggle-btn">Показать еще</button>
   </div>
 </template>
 

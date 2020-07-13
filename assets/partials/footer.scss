@@ -24,7 +24,26 @@
 		@include em(14px);
 		font-weight: 500;
 		color: #000;
-		display: block;
+		display: inline-block;
+		position: relative;
+        &:hover {
+            &:after {
+                transform-origin: left center;
+                transform: scale(1);
+            }
+        }
+        &:after {
+            content: '';
+            width: 100%;
+            height: 1px;
+            background: #818690;
+            transition: transform .4s cubic-bezier(.4,0,.2,1);
+            transform-origin: right center;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            transform: scaleX(0);
+        }
 	}
 	&-link {
 		margin-top: 10px;

@@ -10,7 +10,7 @@
       {{ link.name }}
       <br />
     </nuxt-link>
-    <button class="category-page-toggle-btn">Показать еще</button>
+    <!-- <button v-if="isBrandPage" class="category-page-toggle-btn">Показать еще</button> -->
   </div>
 </template>
 
@@ -21,12 +21,12 @@ export default {
     category: Object,
     subcat: Object,
     tag: Object,
-    brandList: Array,
+    // brandList: Array,
     isBrandPage: Boolean
   },
   computed: {
     nav() {
-      if (this.isBrandPage) return this.brandList;
+      // if (this.isBrandPage) return this.brandList;
       if (this.tag) return this.subcat.tags;
       if (this.subcat) return this.subcat.tags;
       if (this.category) {
@@ -38,6 +38,3 @@ export default {
   }
 };
 </script>
-
-<style>
-</style>

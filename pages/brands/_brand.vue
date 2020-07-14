@@ -1,49 +1,39 @@
 <template>
-  <div class="category-page">
-    <div class="container">
-      <div class="breadcrumbs">
-        <nuxt-link to="/">Главная /</nuxt-link>
-        <nuxt-link v-if="true" to>{{ products.name }}</nuxt-link>
+<div class="category-page">
+  <div class="container">
+    <div class="breadcrumbs">
+      <nuxt-link to="/">Главная /</nuxt-link>
+      <nuxt-link v-if="true" to>{{ products.name }}</nuxt-link>
+    </div>
+    <!-- <h1 class="category-page-title">{{ `${products.name}` }}</h1> -->
+    <div class="row">
+      <div class="left-col">
+        <nuxt-link class="category-page-back" to="/brands">Список брендов</nuxt-link>
+        <!-- <subcategories :brandList="barndsToMain.data" :isBrandPage="true" /> -->
+        <!-- <div v-for="(brands, i) in brandsToShow" :key="i"> -->
+          <!-- <nuxt-link v-for="brand in brands" :key="brand.id" :to="brand.slug" class="category-page-subcat-link">{{ brand.name }}</nuxt-link> -->
+        <!-- </div> -->
+
+        <nuxt-link
+          v-if="brandIndex <= brandsToMain.data.length"
+          v-for="brandIndex in brandsToShow"
+          :key="brandIndex"
+          :to="brandsToMain.data[brandIndex - 1].slug"
+          class="category-page-subcat-link"
+        >{{ brandsToMain.data[brandIndex - 1].name }}</nuxt-link>
+
+        <button 
+          @click="brandsToShow += 30" 
+          :disabled="brandsToShow >= brandsToMain.data.length"
+          :class="{ '--disabled': brandsToShow >= brandsToMain.data.length }"
+          class="category-page-toggle-btn">Показать еще</button>
       </div>
-      <!-- <h1 class="category-page-title">{{ `${products.name}` }}</h1> -->
-      <div class="row">
-        <div class="left-col">
-          <nuxt-link class="category-page-back" to="/brands">Список брендов</nuxt-link>
-          <subcategories :brandList="barndsToMain.data" :isBrandPage="true" />
-          <!-- <category-filter
-          :allProducts="allProducts"
-          :filterByBrands="false"
-          />-->
-          <!-- <nuxt-link v-for="brand in brands" :key="brand.id" :to="brand.slug">{{ brand.name }}</nuxt-link> -->
-        </div>
-        <div class="right-col">
-          <brand :brand="products" />
-          <div class="category-page-mob">
-            <p
-              class="category-page-total"
-            >{{ products.products.length }} товар{{!products.products.length || products.products.length >= 5 ? 'ов' : products.products.length === 1 ? '' : 'а'}}</p>
-            <nuxt-link class="category-page-back" to>Все категории</nuxt-link>
-            <div class="category-page-row">
-              <div class="category-page-sort">
-                <p>Сортировать:</p>
-                <div class="category-page-select-wrp">
-                  <div class="category-page-current-sort">
-                    <p @click="toggleSelect">{{ currentSort }}</p>
-                  </div>
-                  <div class="category-page-select-dropdown" v-if="isSortOpen">
-                    <p @click.prevent="sorting('default')">По умолчанию</p>
-                    <p @click.prevent="sorting('asc')">По возрастанию</p>
-                    <p @click.prevent="sorting('desc')">По убыванию</p>
-                  </div>
-                </div>
-              </div>
-              <button class="category-page-filter">Фильтр</button>
-            </div>
-          </div>
-          <div class="category-page-sort-wrp">
-            <p
-              class="category-page-total"
-            >{{ products.products.length }} товар{{!products.products.length || products.products.length >= 5 ? 'ов' : products.products.length === 1 ? '' : 'а'}}</p>
+      <div class="right-col">
+        <brand :brand="products" />
+        <div class="category-page-mob">
+          <p class="category-page-total">{{ products.products.length }} товар{{!products.products.length || products.products.length >= 5 ? 'ов' : products.products.length === 1 ? '' : 'а'}}</p>
+          <nuxt-link class="category-page-back" to>Все категории</nuxt-link>
+          <div class="category-page-row">
             <div class="category-page-sort">
               <p>Сортировать:</p>
               <div class="category-page-select-wrp">
@@ -57,18 +47,32 @@
                 </div>
               </div>
             </div>
+            <button class="category-page-filter">Фильтр</button>
           </div>
-          <div
-            class="category-page-product-wrp"
-            v-for="(items, index) in $chunk(products.products, 4)"
-            :key="index"
-          >
-            <product v-for="product in items" :key="product.id" :product="product" />
+        </div>
+        <div class="category-page-sort-wrp">
+          <p class="category-page-total">{{ products.products.length }} товар{{!products.products.length || products.products.length >= 5 ? 'ов' : products.products.length === 1 ? '' : 'а'}}</p>
+          <div class="category-page-sort">
+            <p>Сортировать:</p>
+            <div class="category-page-select-wrp">
+              <div class="category-page-current-sort">
+                <p @click="toggleSelect">{{ currentSort }}</p>
+              </div>
+              <div class="category-page-select-dropdown" v-if="isSortOpen">
+                <p @click.prevent="sorting('default')">По умолчанию</p>
+                <p @click.prevent="sorting('asc')">По возрастанию</p>
+                <p @click.prevent="sorting('desc')">По убыванию</p>
+              </div>
+            </div>
           </div>
+        </div>
+        <div class="category-page-product-wrp" v-for="(items, index) in $chunk(products.products, 4)" :key="index">
+          <product v-for="product in items" :key="product.id" :product="product" />
         </div>
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -77,7 +81,9 @@ import categoryFilter from "@/components/category/filter";
 import brand from "@/components/category/brand";
 import product from "@/components/partials/product";
 import pagination from "@/components/partials/pagination";
-import { mapGetters } from "vuex";
+import {
+  mapGetters
+} from "vuex";
 
 export default {
   middleware: ["catalog", "brandProducts"],
@@ -86,7 +92,8 @@ export default {
     sort: "default",
     delay: null,
     isSortOpen: false,
-    productList: []
+    productList: [],
+    brandsToShow: 20,
   }),
   components: {
     subcategories,
@@ -98,11 +105,15 @@ export default {
   computed: {
     ...mapGetters({
       brands: "brand/GET_BRANDS",
-      barndsToMain: 'brand/GET_BRANDS_TO_MAIN',
+      brandsToMain: 'brand/GET_BRANDS_TO_MAIN',
       products: "brand/GET_BRAND_PRODUCTS"
       // allProducts: 'products/GET_ALL_PRODUCTS'
       // categories: "menu/GET_CATEGORIES",
     }),
+    brandList() {
+      let chunkedArr = this.$chunk(this.brandsToMain.data, 20);
+      return chunkedArr;
+    },
     category() {
       for (let i = 0; i < this.categories.length; ++i) {
         if (this.categories[i].slug === this.$route.params.category) {
@@ -136,7 +147,10 @@ export default {
       return null;
     },
     allProducts() {
-      const prods = { ...this.products, data: this.products.products };
+      const prods = {
+        ...this.products,
+        data: this.products.products
+      };
       return prods;
     },
     currentSort() {
@@ -155,16 +169,21 @@ export default {
   },
 
   watch: {
-    sort: function(val) {
-      let query = { ...this.$route.query };
+    sort: function (val) {
+      let query = {
+        ...this.$route.query
+      };
       if (val == "default") {
         delete query["sort"];
       } else {
         query["sort"] = val.toString();
       }
-      this.$router.push({ path: this.$route.path, query: query });
+      this.$router.push({
+        path: this.$route.path,
+        query: query
+      });
     },
-    "$route.fullPath": function(fullPath) {
+    "$route.fullPath": function (fullPath) {
       if (this.delay) {
         clearTimeout(this.delay);
       }
@@ -203,6 +222,11 @@ export default {
     sorting(e) {
       this.sort = e;
       this.isSortOpen = false;
+    },
+    showMore() {
+      // const brands = [...this.brandsToMain.data];
+      // this.brandList = this.$chunk(brands, 20);
+      console.log('brands: ', Array.isArray(this.brandList));
     }
   }
 };

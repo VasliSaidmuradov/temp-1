@@ -19,16 +19,27 @@
     </div>
     <div v-if="filterByBrands && getBrands.length" id="filterBlockWeb" class="filter-block">
       <p class="filter-title">Бренд</p>
-      <label class="filter-checkbox" v-for="brand in getBrands" :key="brand.id">
+      <label
+        v-if="brandIndex <= getBrands.length"
+        class="filter-checkbox"
+        v-for="brandIndex in brandsToShow"
+        :key="brandIndex">
         <input
           type="checkbox"
-          :value="brand.id"
+          :value="getBrands[brandIndex - 1].id"
           @change="onFilterChange"
           class="filter-checkbox-input"
         />
         <div class="filter-checkmark"></div>
-        <p>{{ brand.name }}</p>
+        <p>{{ getBrands[brandIndex - 1].name }}</p>
       </label>
+      <button
+        v-if="getBrands.length > 10"
+        @click="brandsToShow += 20" 
+        :disabled="brandsToShow >= getBrands.length"
+        :class="{ '--disabled': brandsToShow >= getBrands.length }"
+        class="category-page-toggle-btn"
+      >Показать еще</button>
     </div>
     <div class="filter-block">
       <!-- <p class="filter-title">Эксклюзивные предложения</p> -->
@@ -55,10 +66,9 @@ import { mapGetters } from "vuex";
 export default {
   props: {
     cats: Array,
-    // allProducts: Object,
     filterByBrands: {
       type: Boolean,
-      default: true
+      default: true,
     }
   },
   data() {
@@ -68,6 +78,7 @@ export default {
       isDropdownOpen: true,
       priceTimeout: null,
       showPrice: true,
+      brandsToShow: 10,
     };
   },
   computed: {

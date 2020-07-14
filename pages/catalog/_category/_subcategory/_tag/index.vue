@@ -127,7 +127,6 @@ export default {
     sort: "default",
     delay: null,
     productList: { data: null },
-    // salesProducts: null,
     isSortOpen: false,
     ids: [],
     currentRoute: null
@@ -135,10 +134,7 @@ export default {
   computed: {
     ...mapGetters({
       products: "product/GET_PRODUCTS",
-      // allProducts: "product/GET_ALL_PRODUCTS",
       categories: "menu/GET_CATEGORIES",
-      // filteredProducts: "brand/GET_FILTERED_PRODUCTS",
-      // sales: "product/GET_SALES"
     }),
     category() {
       for (let i = 0; i < this.categories.length; ++i) {

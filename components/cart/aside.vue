@@ -26,10 +26,10 @@
         <p class="order-aside-title">Товары ({{ cartQuantity }})</p>
         <p class="order-aside-list-price">{{ $formatMoney(sum) }} ₸</p>
       </div>
-      <div class="order-aside-row">
-        <p class="order-aside-title">Доставка</p>
-        <p class="order-aside-list-price">{{ $formatMoney(delivery) }} ₸</p>
-      </div>
+      <!-- <div class="order-aside-row"> -->
+        <!-- <p class="order-aside-title">Доставка</p> -->
+        <!-- <p class="order-aside-list-price">{{ $formatMoney(delivery) }} ₸</p> -->
+      <!-- </div> -->
       <div class="order-aside-row">
         <p class="order-aside-title">Скидка</p>
         <p class="order-aside-list-price --red">-{{ cartQuantity ? $formatMoney(discount): 0 }} ₸</p>

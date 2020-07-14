@@ -19,7 +19,7 @@
         step="1"
         :max="$getUser().bonus"
       />
-      <button @click="useBonuses(bonusesused)" class="order-aside-apply">Применить</button>
+      <button @click="useBonuses(bonusesUsed)" class="order-aside-apply">Применить</button>
     </div>
     <div class="order-aside-list">
       <div class="order-aside-row">

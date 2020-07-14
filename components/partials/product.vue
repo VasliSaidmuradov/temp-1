@@ -35,7 +35,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 
-import favoritesIcon from "@/static/icons/favorites-icon2.svg";
+import favoritesIcon from "@/static/icons/fav-icon.svg";
 
 export default {
   props: {

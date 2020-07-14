@@ -31,28 +31,38 @@
             <div class="category-page-row">
               <div class="category-page-sort">
                 <p>Сортировать:</p>
-                <select v-model="sort">
-                  <option value="default">По умолчанию</option>
-                  <option value="asc">По возрастанию</option>
-                  <option value="desc">По убыванию</option>
-                </select>
+                <div class="category-page-select-wrp">
+                  <div class="category-page-current-sort">
+                    <p @click="toggleSelect">{{ currentSort }}</p>
+                  </div>
+                  <div class="category-page-select-dropdown" v-if="isSortOpen">
+                    <p @click.prevent="sorting('default')">По умолчанию</p>
+                    <p @click.prevent="sorting('asc')">По возрастанию</p>
+                    <p @click.prevent="sorting('desc')">По убыванию</p>
+                  </div>
+                </div>
               </div>
-              <button class="category-page-filter">Фильтр</button>
+              <button class="category-page-filter" @click.prevent="openFilter">Фильтр</button>
             </div>
           </div>
           <div class="category-page-sort-wrp">
             <p class="category-page-total">{{ sales.total }} товара</p>
             <div class="category-page-sort">
               <p>Сортировать:</p>
-              <select v-model="sort">
-                <option value="default">По умолчанию</option>
-                <option value="asc">По возрастанию</option>
-                <option value="desc">По убыванию</option>
-              </select>
+              <div class="category-page-select-wrp">
+                  <div class="category-page-current-sort">
+                    <p @click="toggleSelect">{{ currentSort }}</p>
+                  </div>
+                  <div class="category-page-select-dropdown" v-if="isSortOpen">
+                    <p @click.prevent="sorting('default')">По умолчанию</p>
+                    <p @click.prevent="sorting('asc')">По возрастанию</p>
+                    <p @click.prevent="sorting('desc')">По убыванию</p>
+                  </div>
+                </div>
             </div>
           </div>
-          <div class="category-page-product-wrp">
-            <product v-for="product in sales.data " :key="product.id" :product="product" />
+          <div class="category-page-product-wrp" v-for="(items, index) in $chunk(sales.data, 4)" :key="index">
+            <product v-for="product in items" :key="product.id" :product="product" />
           </div>
         </div>
       </div>
@@ -83,7 +93,8 @@ export default {
     isBrand: false,
     sort: "default",
     delay: null,
-    productList: { data: null }
+    productList: { data: null },
+    isSortOpen: false,
   }),
   computed: {
     ...mapGetters({
@@ -129,6 +140,19 @@ export default {
       }
 
       return null;
+    },
+    currentSort() {
+      switch (this.sort) {
+        case "asc":
+          return "По возрастанию";
+          break;
+        case "desc":
+          return "По убыванию";
+          break;
+        default:
+          return "По умолчанию";
+          break;
+      }
     }
   },
 
@@ -167,6 +191,13 @@ export default {
     showFilter() {
       this.$store.commit("SET_MOBILE_FILTER", true);
     },
+    sorting(e) {
+      this.sort = e;
+      this.isSortOpen = false;
+    },
+    toggleSelect() {
+      this.isSortOpen = !this.isSortOpen;
+    },
     filterBrand(e) {
       const all = this.allProducts;
       if (e.checked) {
@@ -180,6 +211,9 @@ export default {
         ];
         this.productList = { ...all, data: data };
       }
+    },
+    openFilter() {
+      this.$store.commit("filter/SET_MOBILE_FILTER", true);
     }
   }
 };

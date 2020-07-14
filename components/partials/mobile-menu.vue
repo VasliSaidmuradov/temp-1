@@ -1,5 +1,11 @@
 <template>
 	<div class="mobile-menu" :class="{'--open' : isOpen}">
+		<div class="mobile-menu-fav-wrp">
+			<nuxt-link to="/favorites" @click.native="close" class="mobile-menu-favorites">
+				<p>Избранное</p>
+				<fav-icon />
+			</nuxt-link>
+		</div>
 		<nav class="mobile-menu-nav">
 			<div class="mobile-menu-dropdown" v-for="category in categories" :key="category.id">
 				<div class="mobile-menu-category" 
@@ -51,6 +57,7 @@
 <script>
 import {mapGetters} from 'vuex'
 import arrow from '@/static/icons/menu-arrow.svg'
+import favIcon from '@/static/icons/fav-icon.svg'
 export default {
 	computed: {
 		...mapGetters({
@@ -86,7 +93,8 @@ export default {
 		}
 	},
 	components: {
-		arrow
+		arrow,
+		favIcon
 	}
 }
 </script>

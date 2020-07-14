@@ -17,6 +17,13 @@
 		font-weight: 700;
 		text-transform: uppercase;
 		color: var(--gray-base);
+		transition: all 0.3s ease;
+		border: 1px solid transparent;
+		&:hover {
+			color: var(--color-base);
+			background-color: #fff;
+			border-color: var(--color-base);
+		}
 	}
 	&-block {
 		margin-top: 30px;

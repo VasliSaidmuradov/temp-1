@@ -13,20 +13,27 @@
     text-transform: uppercase;
     position: relative;
     letter-spacing: 1.4px;
-    border: none;
     cursor: pointer;
-    &.--black {
-        background: #000;        
+    transition: all 0.4s ease;
+    border: 1px solid var(--color-base);
+    background: var(--color-base);
+    &:hover {
+        background-color: #fff;
+        color: var(--color-base);
     }
-    &.--main-color {
-        background: var(--color-base);
-    }
+    // &.--main-color {
+    //     background: var(--color-base);
+    // }
     &.--disabled {
       background: rgba($color-base, .5);
     }
     &.--white {
         background: #fff;
         color: var(--color-base);
+        &:hover {
+            background: var(--color-base);
+            color: #fff;
+        }
     }
     &.--not-available {
       background: var(--bg-base) !important;

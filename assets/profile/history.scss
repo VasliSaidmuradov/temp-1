@@ -2,10 +2,15 @@
     &-row {
         display: flex;
         align-items: center;
-        padding: 18px 0;
+        padding: 18px 10px;
         border-bottom: 1px solid var(--line-base);
         position: relative;
-        cursor: pointer;
+        // cursor: pointer;
+        transition: background-color 0.4s ease;
+
+        &:hover {
+            background-color: var(--bg-base);
+        }
     }
 
     &-col {
@@ -18,7 +23,7 @@
 
         &:last-child {
             position: absolute;
-            right: 0;
+            right: 10px;
             top: 50%;
             transform: translateY(-50%);
             width: auto;

@@ -50,13 +50,12 @@ export const actions = {
   },
 
   async fetchUser(store, payload) {
-    let user = await this.$api.get('/auth/user', {})
-    // console.log('User: ', user)
+    let user = await this.$api.get('/auth/user', {}, null, false);
     
     if (user) {
-      store.commit('SET_USER', user)
+      store.commit('SET_USER', user);
     } else {
-      store.commit('auth/SET_IS_SIGNEDIN', false, { root: true })
+      store.commit('auth/SET_IS_SIGNEDIN', false, { root: true });
     }
   },
 

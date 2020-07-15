@@ -1,5 +1,8 @@
 <template>
   <div class="profile-history-table profile-page-block">
+    <!-- <pre> -->
+      <!-- {{ user.orders.length }} -->
+    <!-- </pre> -->
     <div
       class="profile-history-order"
       v-for="(order, index) in $getUser().orders"
@@ -87,8 +90,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
 export default {
   data() {
     return {
@@ -119,9 +120,6 @@ export default {
     this.isDropdownOpen = [...this.isDropdownOpen];
   },
   methods: {
-    ...mapActions({
-      fetchUser: 'user/fetchUser',
-    }),
     toggleDropdown(index) {
       this.isDropdownOpen[index] = !this.isDropdownOpen[index];
       this.isDropdownOpen = [...this.isDropdownOpen];

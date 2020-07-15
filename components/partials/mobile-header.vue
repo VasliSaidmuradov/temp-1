@@ -43,8 +43,12 @@ export default {
 			toggleMenu: 'menu/TOGGLE_MENU_STATE'
 		}),
 		openAuth() {
-			document.body.classList.add('--hidden'),
-            this.$store.commit('auth/SET_MODAL_STATE', true)
+      if (this.$checkAuth()) {
+        this.$router.push({ path: "/profile" });
+      } else {
+        document.body.classList.add('--hidden'),
+        this.$store.commit('auth/SET_MODAL_STATE', true)
+      }
 		},
 		closeSearch() {
 			document.body.classList.remove('--hidden')

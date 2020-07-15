@@ -213,7 +213,7 @@
               </div>
               <div class="order-aside-bonus-info">
                 <p>За этот заказ вам будет начислено<br/>
-                  <b>{{ $formatMoney(total * 0.05) }} бонусов</b>
+                  <b>{{ $formatMoney(Math.round(total * 0.05)) }} бонусов</b>
                 </p>
               </div>
               <div class="order-aside-total">
@@ -384,6 +384,7 @@ export default {
         }
         if (paybox) {
           // document.body.classList.add('--hidden')
+          await this.$store.dispatch('user/fetchUser', {});
           this.$store.commit("cart/setCheckoutModal", true);
           this.resetData();
           this.isSubmitted = false;

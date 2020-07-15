@@ -1,6 +1,10 @@
 <template>
-  <div class="profile-history-table">
-    <div class="profile-history-order" v-for="(order, index) in $getUser().orders" :key="index">
+  <div class="profile-history-table profile-page-block">
+    <div
+      class="profile-history-order"
+      v-for="(order, index) in $getUser().orders"
+      :key="index"
+    >
       <div class="profile-history-row">
         <div class="profile-history-col">
           <p class="profile-page-text">№ {{ order.id }}</p>
@@ -12,7 +16,11 @@
           <p class="profile-page-text">{{ statuses[order.status] }}</p>
         </div>
         <div class="profile-history-col">
-          <button class="profile-history-details" @click="toggleDropdown(index)"></button>
+          <button
+          class="profile-history-details"
+          :class="{ '--open': isDropdownOpen[index]}"
+          @click="toggleDropdown(index)"
+        ></button>
           <button
             class="profile-history-remove"
             v-if="order.status < 4"
@@ -105,7 +113,7 @@ export default {
     };
   },
   mounted() {
-    for (let i = 0; i < this.$getUser().orders.length; ++i) {
+    for (let i = 0; i < this.$getUser().orders.length; i++) {
       this.isDropdownOpen.push(false);
     }
     this.isDropdownOpen = [...this.isDropdownOpen];

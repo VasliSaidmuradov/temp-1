@@ -9,7 +9,7 @@
 
     <div class="">
       <p class="product-info-delivery-text">
-        Доставка курьером,
+        Доставка курьером по г. Алматы,
         <b v-if="tomorrow === now">завтра, {{ $formatDate(now) }}</b>
         <b v-else>сегодня, {{ $formatDate(now) }}</b>
       </p>

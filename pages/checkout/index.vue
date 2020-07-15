@@ -196,7 +196,7 @@
               <div class="order-aside-list">
                 <div class="order-aside-row">
                   <p class="order-aside-title">Товары ({{ cartQuantity }})</p>
-                  <p class="order-aside-list-price">{{ $formatMoney(sum) }} ₸</p>
+                  <p class="order-aside-list-price">{{ $formatMoney(totalCost) }} ₸</p>
                 </div>
                 <div class="order-aside-row">
                   <p class="order-aside-title">Доставка</p>
@@ -206,6 +206,15 @@
                   <p class="order-aside-title">Скидка</p>
                   <p class="order-aside-list-price --red">-{{ $formatMoney(discount) }} ₸</p>
                 </div>
+                <div v-if="bonuses" class="order-aside-row">
+                  <p class="order-aside-title">Бонусы</p>
+                  <p class="order-aside-list-price --red">-{{ bonuses ? $formatMoney(bonuses) : 0 }} ₸</p>
+                </div>
+              </div>
+              <div class="order-aside-bonus-info">
+                <p>За этот заказ вам будет начислено<br/>
+                  <b>{{ $formatMoney(total * 0.05) }} бонусов</b>
+                </p>
               </div>
               <div class="order-aside-total">
                 <div class="order-aside-row">
@@ -217,7 +226,7 @@
                 <button
                   type="submit"
                   class="button --main-color"
-                  :disabled="sum <= 0"
+                  :disabled="sum < 0"
                   @click="isSubmitted = true"
                 >Оформить заказ</button>
                 <!-- <nuxt-link class="button --white" to="">Перейти к оплате</nuxt-link> -->
@@ -317,6 +326,7 @@ export default {
       discount: "cart/GET_DISCOUNT",
       cartQuantity: "cart/GET_QUANTITY",
       deliveryCost: "cart/GET_DELIVERY_COST",
+      totalCost: "cart/GET_TOTAL_COST",
     }),
     total() {
       return this.sum - this.discount + this.deliveryCost.delivery_cost;
@@ -376,6 +386,8 @@ export default {
           // document.body.classList.add('--hidden')
           this.$store.commit("cart/setCheckoutModal", true);
           this.resetData();
+          this.isSubmitted = false;
+          // this.$router.push({ path: "/profile" });
         } else {
           this.$setError("order", "Произошла ошибка при оформлении заказа.");
           this.$alert({

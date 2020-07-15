@@ -1,11 +1,11 @@
 <template>
   <div class="order-aside">
-    <!-- {{  }} -->
+    <!-- {{ bonuses }} -->
     <div class="order-aside-bonus-wrp">
       <img src="/icons/bonus-icon.svg" alt="Skiny icon" class="order-aside-icon" />
       <p class="order-aside-text" v-if="$checkAuth()">
         У вас есть
-        <span>{{ $formatMoney($getUser().bonus ? $getUser().bonus : 0) }} бонусов</span>
+        <span>{{ $formatMoney($getUser().bonus ? $getUser().bonus - bonuses : 0) }} бонусов</span>
       </p>
       <p class="order-aside-text" v-else>
         <span>500 бонусов</span> для <nuxt-link to @click.native="openAuth">зарегестрированного</nuxt-link> покупателя
@@ -17,14 +17,15 @@
         class="order-aside-input"
         v-model="bonusesUsed"
         step="1"
-        :max="$getUser().bonus"
+        :max="$getUser().bonus || total"
+        placeholder="0"
       />
-      <button @click="useBonuses(bonusesUsed)" class="order-aside-apply">Применить</button>
+      <button @click="applyBonuses" class="order-aside-apply">Применить</button>
     </div>
     <div class="order-aside-list">
       <div class="order-aside-row">
         <p class="order-aside-title">Товары ({{ cartQuantity }})</p>
-        <p class="order-aside-list-price">{{ $formatMoney(sum) }} ₸</p>
+        <p class="order-aside-list-price">{{ $formatMoney(totalCost) }} ₸</p>
       </div>
       <!-- <div class="order-aside-row"> -->
         <!-- <p class="order-aside-title">Доставка</p> -->
@@ -33,6 +34,10 @@
       <div class="order-aside-row">
         <p class="order-aside-title">Скидка</p>
         <p class="order-aside-list-price --red">-{{ cartQuantity ? $formatMoney(discount): 0 }} ₸</p>
+      </div>
+      <div v-if="bonuses" class="order-aside-row">
+        <p class="order-aside-title">Бонусы</p>
+        <p class="order-aside-list-price --red">-{{ bonuses ? $formatMoney(bonuses) : 0 }} ₸</p>
       </div>
     </div>
     <div class="order-aside-total">
@@ -58,7 +63,8 @@ export default {
   data() {
     return {
       isAuth: false,
-      bonusesUsed: null
+      bonusesUsed: null,
+      limit: null,
     };
   },
   computed: {
@@ -67,7 +73,8 @@ export default {
       bonuses: "cart/GET_BONUSES",
       products: "cart/GET_PRODUCTS",
       discount: "cart/GET_DISCOUNT",
-      cartQuantity: "cart/GET_QUANTITY"
+      cartQuantity: "cart/GET_QUANTITY",
+      totalCost: "cart/GET_TOTAL_COST",
     }),
     delivery() {
       return 0;
@@ -78,6 +85,7 @@ export default {
   },
   mounted() {
     this.bonusesUsed = this.bonuses ? this.bonuses : null;
+    this.limit = this.bonusesUsed && this.bonusesUsed > this.total ? this.total : null;
   },
   watch: {
     bonusesUsed: function(val) {
@@ -91,7 +99,6 @@ export default {
         });
         return;
       }
-
       if (val > this.$getUser().bonus) {
         this.$alert({
           message: "У вас недостаточно бонусов",
@@ -99,7 +106,13 @@ export default {
         });
         this.bonusesUsed = this.$getUser().bonus;
       }
-    }
+    },
+    total(val){
+      if (val < 0 && val < this.bonusesUsed) {
+        this.bonusesUsed = 0 //Math.abs(val);
+        this.useBonuses(this.bonusesUsed);
+      }
+    },
   },
   methods: {
     ...mapActions({
@@ -109,6 +122,16 @@ export default {
       document.body.classList.add("--hidden"),
       this.$store.commit("auth/SET_MODAL_STATE", true);
     },
+    applyBonuses() {
+      if (this.bonusesUsed > this.total) {
+        this.$alert({
+          message: `Вы не можете использовать ${this.bonusesUsed} бонусов`,
+          type: "error"
+        });
+        return;
+      }
+      this.useBonuses(this.bonusesUsed)
+    }
   }
 };
 </script>

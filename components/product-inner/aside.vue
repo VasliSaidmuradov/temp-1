@@ -66,7 +66,7 @@ export default {
 			return today + msInADay
     },
     bonuses() {
-      return Math.ceil(this.info.price * 0.03) * (this.getCartQuantity(this.info) ? this.getCartQuantity(this.info) : 1)
+      return Math.ceil(this.info.price * 0.05) * (this.getCartQuantity(this.info) ? this.getCartQuantity(this.info) : 1)
     }
   },
   methods: {

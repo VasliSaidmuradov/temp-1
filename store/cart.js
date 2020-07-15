@@ -26,12 +26,15 @@ export const getters = {
   IS_PRODUCT_IN_CART: (state) => (payload) => state.product_ids[`${payload.id}`] > 0,
   GET_CART_QUANTITY: (state) => (payload) => state.product_ids[`${payload.id}`] ? state.product_ids[`${payload.id}`] : 0,
   GET_TOTAL: (state) => Object.keys(state.product_ids).length > 0 ? state.products.data.reduce((sum, product) => {
-    return Math.max(0, sum - state.bonuses + product.price * (state.product_ids[`${product.id}`] ? state.product_ids[`${product.id}`] : 0))
-  }, 0) : 0,
+    return Math.max(0, sum + (product.old_price ? product.old_price : product.price) * (state.product_ids[`${product.id}`] ? state.product_ids[`${product.id}`] : 0));
+  }, 0) - state.bonuses : 0,
   GET_DISCOUNT: state => Object.keys(state.product_ids).length > 0 ? state.products.data.reduce((sum, product) => {
-    return Math.max(0, sum - state.bonuses + (product.old_price ? (product.old_price - product.price) : 0) * (state.product_ids[`${product.id}`] ? state.product_ids[`${product.id}`] : 0))
+    return Math.max(0, sum + (product.old_price ? (product.old_price - product.price) : 0) * (state.product_ids[`${product.id}`] ? state.product_ids[`${product.id}`] : 0))
   }, 0) : 0,
   GET_DELIVERY_COST: state => state.deliveryCost,
+  GET_TOTAL_COST: state => Object.keys(state.product_ids).length > 0 ? state.products.data.reduce((sum, product) => {
+    return Math.max(0, sum + (product.old_price ? product.old_price : product.price) * (state.product_ids[`${product.id}`] ? state.product_ids[`${product.id}`] : 0))
+  }, 0) : 0,
 } 
 
 export const mutations = {

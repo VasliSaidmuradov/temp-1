@@ -79,8 +79,8 @@
                     </div>
                     <p class="auth-modal-text">
                       Нажимая кнопку «Зарегистрироваться», вы принимаете условия договора
-                      <nuxt-link to>оферты</nuxt-link>&nbsp;и
-                      <nuxt-link to>политики конфиденциальности</nuxt-link>
+                      <a href="/files/offerta_skiny.docx" target="_blank">оферты</a>&nbsp;и
+                      <a href="/files/Политика_конфиденциальности_персональных_данных.docx" target="_blank">политики конфиденциальности</a>
                     </p>
                   </label>
                 </client-only>

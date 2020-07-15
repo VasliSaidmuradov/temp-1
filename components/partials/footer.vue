@@ -30,6 +30,10 @@
 					</div>
 				</div>
 			</div>
+			<div class="row --justify-start">
+				<a href="/files/Политика_конфиденциальности_персональных_данных.docx" target="_blank"><p class="footer-copyright">Политика конфиденциальности</p></a>
+				<a href="/files/offerta_skiny.docx" target="_blank"><p class="footer-copyright">Оферта</p></a>
+			</div>
 		</div>
 	</footer>
 </template>

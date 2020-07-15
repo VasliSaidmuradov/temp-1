@@ -1,9 +1,13 @@
 .footer {
 	padding-top: 60px;
-	padding-bottom: 90px;
+	padding-bottom: 20px;
 	border-top: 1px solid var(--line-base);
 	.row {
 		align-items: flex-start;
+		&.--justify-start {
+			justify-content: flex-start;
+			margin-top: 60px;
+		}
 	}
 	&-copyright {
 		@include em(14px);
@@ -79,6 +83,9 @@
 		.row {
 			flex-wrap: wrap;
 			flex-direction: column-reverse;
+			&.--justify-start {
+				align-items: center;
+			}
 		}
 		&-heading {
 			display: none;

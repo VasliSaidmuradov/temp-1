@@ -20,19 +20,29 @@
     &:hover {
         background-color: #fff;
         color: var(--color-base);
+        path {
+            fill: var(--color-base) !important;
+        }
     }
-    // &.--main-color {
-    //     background: var(--color-base);
-    // }
+    svg {
+        width: 24px;
+        height: 24px;
+    }
     &.--disabled {
       background: rgba($color-base, .5);
     }
     &.--white {
         background: #fff;
         color: var(--color-base);
+        path {
+            stroke: var(--color-base);
+        }
         &:hover {
             background: var(--color-base);
             color: #fff;
+            path {
+                fill: #ffffff !important;
+            }
         }
     }
     &.--not-available {

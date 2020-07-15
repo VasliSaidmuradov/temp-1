@@ -30,7 +30,14 @@
                             <p class="help-page-text">- эффективность продукта</p>
                             <p class="help-page-text">- высокое качество</p>
                             <p class="help-page-text --margin">- доступная цена</p>
-                            <p class="help-page-text">Откройте для себя увлекательный мир косметических средств вместе со SKINY!</p>
+                            <p class="help-page-text --margin">Откройте для себя увлекательный мир косметических средств вместе со SKINY!</p>
+                            <p class="help-page-text">Наименование: ИП «SKINY ARBAT»</p>
+                            <p class="help-page-text">Адрес: г.Алматы, Шевченко д. 164Г, кв.17</p>
+                            <p class="help-page-text">ИИН 700604400204</p>
+                            <p class="help-page-text">Банковские реквизиты:</p>
+                            <p class="help-page-text">ИИК KZ7996502F0011855511</p>
+                            <p class="help-page-text">БИК IRTYKZKA</p>
+                            <p class="help-page-text">АО "ForteBank"</p>
                         </div>
                     </div>
                 </div>

@@ -32,7 +32,7 @@
     }
     &-subcategory-wrp {
         position: absolute;
-        width: 855px;
+        width: 600px;
         left: 100%;
         top: -1px;
         z-index: 3;
@@ -96,7 +96,8 @@
     }
     &-subcategory-row {
         column-count: 2;
-        width: calc(100% - 260px);
+        // width: calc(100% - 260px);
+        width: 100%;
         &.--count-1 {
             column-count: 1;
         }

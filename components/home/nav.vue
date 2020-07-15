@@ -34,13 +34,13 @@
                 </nuxt-link>
               </div>
             </div>
-            <div class="home-nav-banner-wrp">
+            <!-- <div class="home-nav-banner-wrp">
               <nuxt-link to class="home-nav-banner">
                 <img src="/images/news.png" alt="">
                 <h4 class="home-nav-banner-title">Тональные крема Lumene CC</h4>
                 <button class="button --main-color">К товарам</button>
               </nuxt-link>
-            </div>
+            </div> -->
           </div>
         </transition>
       </div>

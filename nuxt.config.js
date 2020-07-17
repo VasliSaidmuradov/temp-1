@@ -80,7 +80,7 @@ export default {
         directiveOnly: false,
 
         // Default image must be in the static folder
-        defaultImage: '/images/default-image.jpg',
+        defaultImage: '/images/product.png',
 
         // To remove class set value to false
         loadingClass: 'isLoading',

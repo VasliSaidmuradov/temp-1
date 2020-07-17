@@ -3,18 +3,18 @@
   <div class="container">
     <div class="breadcrumbs">
       <nuxt-link to="/">Главная /</nuxt-link>
-      <nuxt-link v-if="true" to>{{ products.name }}</nuxt-link>
+      <nuxt-link v-if="true" to>{{ brand.name }}</nuxt-link>
     </div>
     <div class="row">
       <div class="left-col">
         <nuxt-link class="category-page-back" to="/brands">Список брендов</nuxt-link>
         <nuxt-link
-          v-for="brand in brandsToMain.data"
-          :key="brand.id"
-          :to="brand.slug"
+          v-for="item in brandsToMain.data"
+          :key="item.id"
+          :to="item.slug"
           class="category-page-subcat-link"
         >
-          {{ brand.name }}
+          {{ item.name }}
         </nuxt-link>
         <button 
           @click="showMore"
@@ -27,9 +27,9 @@
         <!-- {{ brandsToMain }} -->
       </div>
       <div class="right-col">
-        <brand :brand="products" />
+        <brand :brand="brand" />
         <div class="category-page-mob">
-          <p class="category-page-total">{{ products.products.length }} товар{{!products.products.length || products.products.length >= 5 ? 'ов' : products.products.length === 1 ? '' : 'а'}}</p>
+          <p class="category-page-total">{{ products.total }} товар{{!products.total || products.total >= 5 ? 'ов' : products.total === 1 ? '' : 'а'}}</p>
           <nuxt-link class="category-page-back" to>Все категории</nuxt-link>
           <div class="category-page-row">
             <div class="category-page-sort">
@@ -49,7 +49,7 @@
           </div>
         </div>
         <div class="category-page-sort-wrp">
-          <p class="category-page-total">{{ products.products.length }} товар{{!products.products.length || products.products.length >= 5 ? 'ов' : products.products.length === 1 ? '' : 'а'}}</p>
+          <p class="category-page-total">{{ products.total }} товар{{!products.total || products.total >= 5 ? 'ов' : products.total === 1 ? '' : 'а'}}</p>
           <div class="category-page-sort">
             <p>Сортировать:</p>
             <div class="category-page-select-wrp">
@@ -64,9 +64,12 @@
             </div>
           </div>
         </div>
-        <div class="category-page-product-wrp" v-for="(items, index) in $chunk(products.products, 4)" :key="index">
+        <div class="category-page-product-wrp" v-for="(items, index) in $chunk(products.data, 4)" :key="index">
           <product v-for="product in items" :key="product.id" :product="product" />
         </div>
+        <pagination
+            :paginator="products"
+          />
       </div>
     </div>
   </div>
@@ -104,7 +107,9 @@ export default {
     ...mapGetters({
       brands: "brand/GET_BRANDS",
       brandsToMain: 'brand/GET_BRANDS_TO_MAIN',
-      products: "brand/GET_BRAND_PRODUCTS"
+      brand: 'brand/GET_BRAND',
+      products: "brand/GET_BRAND_PRODUCTS",
+
       // allProducts: 'products/GET_ALL_PRODUCTS'
       // categories: "menu/GET_CATEGORIES",
     }),
@@ -186,11 +191,15 @@ export default {
         clearTimeout(this.delay);
       }
       this.delay = setTimeout(() => {
-        let query = this.$serialize(this.$route.query);
-        query = query ? `?${query}` : "";
+        let params = {
+          brand_ids: this.brand.id
+        }
+        if (this.$route.query.sort) {
+          params.sort = this.$route.query.sort
+        }
         this.$store.dispatch(
-          "product/fetchProducts",
-          `${this.$route.path}${query}`
+          "brand/fetchBrandProducts",
+          params
         );
       }, 500);
     }

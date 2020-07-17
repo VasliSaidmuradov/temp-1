@@ -8,7 +8,7 @@
                 <img src="/images/brand.png" alt="Skiny image">
                 <p class="category-brand-name">{{ brand.name }}</p>
             </div>
-            <p class="category-brand-text" v-html="brand.description"></p>
+            <div class="category-brand-text" v-html="brand.description"></div>
         </div>
     </div>
 </template>

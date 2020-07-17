@@ -1,21 +1,25 @@
 export const state = () => ({
   brands: null,
+  brand: null,
   brandProducts: null,
   filterResult: null,
   filteredProducts: null,
   brandsToMain: null,
   searchBrandResult: null,
   filters: null,
+  currentBrandId: null,
 })
 
 export const mutations = {
   SET_BRANDS: (state, payload) => state.brands = payload,
+  SET_BRAND: (state, payload) => state.brand = payload,
   SET_BRAND_PRODUCTS: (state, payload) => state.brandProducts = payload,
   FILTER_RESULT: (state, payload) => state.filterResult = payload,
   FILTER_BRANDS: (state, payload) => state.filteredProducts = payload,
   SET_BRANDS_TO_MAIN: (state, payload) => state.brandsToMain = payload,
   SET_SEARCH_BRANDS: (state, payload) => state.searchBrandResult = payload,
   SET_FILTERS: (state, payload) => state.filters = payload,
+  SET_CURRENT_BRAND_ID: (state, payload) => state.currentBrandId = payload,
 }
 
 export const actions = {
@@ -26,9 +30,19 @@ export const actions = {
   async fetchBrandsToMain(store) {
     store.commit('SET_BRANDS_TO_MAIN', await this.$api.get('/brands', { to_main: 1, per_page: 10 }))
   },
-  async fetchBrandProducts(store, payload) {
+  async fetchBrand(store, payload) {
     const res = await this.$api.get(`/brands/${payload}`)
-    store.commit('SET_BRAND_PRODUCTS', res.data)
+    store.commit('SET_BRAND', res)
+    if (res) {
+      await store.dispatch('fetchBrandProducts', { brand_ids: res.id })
+      return true
+    } else {
+      return false
+    }
+  },
+  async fetchBrandProducts(store, payload) {
+    const res = await this.$api.get(`/catalog`, {...payload})
+    store.commit('SET_BRAND_PRODUCTS', res)
   },
   async filterByBrands(store, payload) {
     const res = await this.$api.get(`/brands-filter/${payload.slug}?ids=${payload.ids}`)
@@ -60,9 +74,11 @@ export const actions = {
 
 export const getters = {
   GET_BRANDS: state => state.brands,
+  GET_BRAND: state => state.brand,
   GET_BRAND_PRODUCTS: state => state.brandProducts,
   GET_FILTERED_PRODUCTS: state => state.filteredProducts,
   GET_BRANDS_TO_MAIN: state => state.brandsToMain,
   GET_SEARCH_BRANDS: state => state.searchBrandResult,
   GET_FILTERS: state => state.filters,
+  GET_CURRENT_BRAND_ID: state => state.currentBrandId,
 }

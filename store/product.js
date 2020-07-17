@@ -51,7 +51,7 @@ export const mutations = {
   SET_SEARCH_QUERY: (state, payload) => state.search_query = payload,
   SET_FILTERS: (state, payload) => state.filters = payload,
   PAGINATE: (state, payload) => {
-    console.log(payload)
+    // console.log(payload)
     payload.resp.data.forEach(product => payload.paginator.data.push(product))
     payload.paginator.next_page_url = payload.resp.next_page_url
     payload.paginator.prev_page_url = payload.resp.prev_page_url

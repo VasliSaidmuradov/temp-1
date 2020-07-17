@@ -40,9 +40,10 @@
           <p>{{ brand.name }}</p>
           <img :src="brand.image ? brand.image : require('@/static/images/brand.png')" :alt="brand.name">
         </nuxt-link>
-        <!-- <pre> -->
-        <!-- {{ brandList }} -->
-        <!-- </pre> -->
+        <!-- <pre>
+        ::  {{ currentBrandId }}
+        </pre> -->
+
       </div>
     </div>
   </div>
@@ -98,11 +99,13 @@ export default {
   components: {
     search,
     closeIcon,
+    pagination,
   },
   computed: {
     ...mapGetters({
       brands: 'brand/GET_BRANDS',
       brandSeachResult: 'brand/GET_SEARCH_BRANDS',
+      currentBrandId: 'brand/GET_CURRENT_BRAND_ID',
     })
   },
   methods: {

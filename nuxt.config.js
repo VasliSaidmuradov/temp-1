@@ -17,7 +17,7 @@ export default {
       { rel: 'icon', type: 'image/png', href: '/favicon.png' }
     ],
     script: [
-      { src: '//code.jivosite.com/widget/42hJJnq8V7', async: true }
+      // { src: '//code.jivosite.com/widget/42hJJnq8V7', async: true }
     ]
   },
   /*
@@ -55,42 +55,42 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    ['@nuxtjs/google-analytics', {
-      id: 'UA-115008368-2'
-    }],
-    [
-      '@nuxtjs/yandex-metrika',
-      {
-        id: '65062288',
-        webvisor: true,
-        clickmap: true,
-        // useCDN:false,
-        trackLinks: true,
-        accurateTrackBounce: true,
-      }
-  ],
-  ['nuxt-lazy-load', {
-  // These are the default values
-  images: true,
-  videos: true,
-  audios: true,
-  iframes: true,
-  native: false,
-  polyfill: true,
-  directiveOnly: false,
+    // ['@nuxtjs/google-analytics', {
+    //   id: 'UA-115008368-2'
+    // }],
+    // [
+    //   '@nuxtjs/yandex-metrika',
+    //   {
+    //     id: '65062288',
+    //     webvisor: true,
+    //     clickmap: true,
+    //     // useCDN:false,
+    //     trackLinks: true,
+    //     accurateTrackBounce: true,
+    //   }
+    // ],
+    ['nuxt-lazy-load', {
+        // These are the default values
+        images: true,
+        videos: true,
+        audios: true,
+        iframes: true,
+        native: false,
+        polyfill: true,
+        directiveOnly: false,
 
-  // Default image must be in the static folder
-  defaultImage: '/images/default-image.jpg',
+        // Default image must be in the static folder
+        defaultImage: '/images/default-image.jpg',
 
-  // To remove class set value to false
-  loadingClass: 'isLoading',
-  loadedClass: 'isLoaded',
-  appendClass: 'lazyLoad',
+        // To remove class set value to false
+        loadingClass: 'isLoading',
+        loadedClass: 'isLoaded',
+        appendClass: 'lazyLoad',
 
-  observerConfig: {
-    // See IntersectionObserver documentation
-  }
-}]
+        observerConfig: {
+            // See IntersectionObserver documentation
+        }
+    }]
   ],
   /*
   ** Axios module configuration

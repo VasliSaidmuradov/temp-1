@@ -100,5 +100,10 @@ export default {
         config.devtool = process.env.NODE_ENV === 'development' ? '#source-map' : '';
       }
     }
+  },
+  render: {
+    static: {
+      maxAge: 1000 * 60 * 60 * 24 * 7
+    }
   }
 }

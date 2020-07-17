@@ -1,8 +1,8 @@
 <template>
   <div class="layout">
-    <Header></Header>
-    <mobile-header />
-    <mobile-menu />
+    <Header v-if="!$isMobile()"></Header>
+    <mobile-header v-if="$isMobile()"/>
+    <mobile-menu v-if="$isMobile()"/>
     <auth-modal />
     <verify-modal />
     <div class="layout-content">

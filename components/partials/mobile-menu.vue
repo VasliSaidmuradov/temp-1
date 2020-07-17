@@ -16,10 +16,10 @@
 					<arrow />
 				</div>
 				<div v-if="categoryIndex === category.id">
-					<nuxt-link class="mobile-menu-all" :to="`/catalog/${category.slug}`" @click.native="close">
+					<!-- <nuxt-link class="mobile-menu-all" :to="`/catalog/${category.slug}`" @click.native="close">
 						Все товары категории
 						<arrow />
-					</nuxt-link>
+					</nuxt-link> -->
 					<div class="mobile-menu-subcategory-wrp" v-for="subcategory in category.subcategories" :key="subcategory.id">
 						<div class="mobile-menu-subcategory" 
 							:class="{'--open': subcategoryIndex === subcategory.id}"

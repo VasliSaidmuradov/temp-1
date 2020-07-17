@@ -1,5 +1,5 @@
 <template>
-  <div class="mobile-filter" :class="{'--open' : isOpen}">
+  <div v-if="$isMobile()" class="mobile-filter" :class="{'--open' : isOpen}">
     <div class="mobile-filter__header">
       <span class="mobile-filter__title">Фильтр</span>
       <close-icon @click="close" class="mobile-filter__close-icon" />

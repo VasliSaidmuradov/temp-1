@@ -21,8 +21,8 @@ export default function ({ app, store, req, route }, inject) {
     return arr
   })
 
-  // inject('isMobile', () => store.getters['GET_IS_MOBILE'])
-  inject('isMobile', () => true)
+  inject('isMobile', () => store.getters['GET_IS_MOBILE'])
+  // inject('isMobile', () => true)
 
   inject('alert', (payload) => store.dispatch('notification/show', payload))
 

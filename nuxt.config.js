@@ -68,7 +68,29 @@ export default {
         trackLinks: true,
         accurateTrackBounce: true,
       }
-    ]
+  ],
+  ['nuxt-lazy-load', {
+  // These are the default values
+  images: true,
+  videos: true,
+  audios: true,
+  iframes: true,
+  native: false,
+  polyfill: true,
+  directiveOnly: false,
+
+  // Default image must be in the static folder
+  defaultImage: '/images/default-image.jpg',
+
+  // To remove class set value to false
+  loadingClass: 'isLoading',
+  loadedClass: 'isLoaded',
+  appendClass: 'lazyLoad',
+
+  observerConfig: {
+    // See IntersectionObserver documentation
+  }
+}]
   ],
   /*
   ** Axios module configuration

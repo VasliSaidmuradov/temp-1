@@ -69,18 +69,18 @@
                 <h5 class="checkout-page-subtitle">Выберите магазин</h5>
                 <!-- <select v-model="order.street" class="checkout-page-select" required>
                   <option value="ул.Тимирязева 38/1">г.Алматы, ул.Тимирязева 38/1</option>
-                  <option value="ул.Жибек-жолы 38/1">г.Алматы, ул.Жибек-жолы 38/1</option>
+                  <option value="ул.Жибек-жолы 81/1">г.Алматы, ул.Жибек-жолы 81/1</option>
                 </select>-->
                 <div class="checkout-page-dropdown-wrp">
                   <div class="checkout-page-current-market" @click="togglePickupDropdown">
-                    <!-- <p>г.Алматы, ул.Жибек-жолы 38/1</p> -->
+                    <!-- <p>г.Алматы, ул.Жибек-жолы 81/1</p> -->
                     <p>{{ order.street }}</p>
                   </div>
                   <transition name="fade">
                     <div class="checkout-page-dropdown" v-if="isPickupDropdownOpen">
                       <p
-                        @click.prevent="checkOrderStreet('г.Алматы, ул.Жибек-жолы 38/1')"
-                      >г.Алматы, ул.Жибек-жолы 38/1</p>
+                        @click.prevent="checkOrderStreet('г.Алматы, ул.Жибек-жолы 81/1')"
+                      >г.Алматы, ул.Жибек-жолы 81/1</p>
                     </div>
                   </transition>
                 </div>
@@ -211,7 +211,7 @@
                   <p class="order-aside-list-price --red">-{{ bonuses ? $formatMoney(bonuses) : 0 }} ₸</p>
                 </div>
               </div>
-              <div class="order-aside-bonus-info">
+              <div v-if="$checkAuth()" class="order-aside-bonus-info">
                 <p>За этот заказ вам будет начислено<br/>
                   <b>{{ $formatMoney(Math.round(total * 0.05)) }} бонусов</b>
                 </p>
@@ -275,7 +275,7 @@ export default {
         city_name: "",
         delivery_type: "1",
         delivery_cost: 0,
-        street: "г.Алматы, ул.Жибек-жолы 38/1",
+        street: "г.Алматы, ул.Жибек-жолы 81/1",
         house: null,
         flat: null,
         index: null,
@@ -296,7 +296,7 @@ export default {
     },
     "order.delivery_type": async function(val) {
       if (val && val === "1") {
-        this.order.street = "г.Алматы, ул.Жибек-жолы 38/1";
+        this.order.street = "г.Алматы, ул.Жибек-жолы 81/1";
         await this.fetchDeliveryCost({ city_id: 2, total: this.sum });
       } else {
         this.order.street = null;
@@ -406,7 +406,7 @@ export default {
         name: null,
         phone: null,
         email: null,
-        city: "1",
+        city: "2",
         city_name: "",
         street: null,
         house: null,

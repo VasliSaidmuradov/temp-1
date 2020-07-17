@@ -52,7 +52,7 @@ export const actions = {
 
     const queue = [ 
       dispatch('menu/fetchCategories'),
-      // dispatch('brand/fetchBrandsToMain'),
+      dispatch('brand/fetchBrandsToMain'),
       // dispatch('cart/fetchCartProducts')
     ]
     if (req.headers.cookie) {
@@ -67,7 +67,6 @@ export const actions = {
 
       queue.push(dispatch('auth/signinFromCookies', cookies))
     }
-    Promise.all([dispatch('brand/fetchBrandsToMain')])
     await Promise.all(queue)
   }
 }

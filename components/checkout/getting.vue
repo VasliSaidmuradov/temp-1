@@ -21,7 +21,7 @@
 			<h5 class="checkout-page-subtitle">Выберите магазин</h5>
 			<select class="checkout-page-select">
 				<option value="">г.Алматы, ул.Тимирязева 38/1</option>
-				<option value="">г.Алматы, ул.Жибек-жолы 38/1</option>
+				<option value="">г.Алматы, ул.Жибек-жолы 81/1</option>
 			</select>
 		</div>
 		<div class="checkout-getting-courier" v-else>

@@ -134,7 +134,7 @@ export default {
   computed: {
     ...mapGetters({
       products: "product/GET_PRODUCTS",
-      categories: "menu/GET_CATEGORIES",
+      categories: "menu/GET_CATEGORIES"
     }),
     category() {
       for (let i = 0; i < this.categories.length; ++i) {
@@ -252,7 +252,6 @@ export default {
       this.currentRoute = this.$route.fullPath;
     },
     openFilter() {
-      document.body.classList.add('--hidden');
       this.$store.commit("filter/SET_MOBILE_FILTER", true);
     }
   }

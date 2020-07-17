@@ -1,5 +1,8 @@
 <template>
   <header class="header">
+    <div class="header-message">
+      <p class="header-message-text">Cайт работает в тестовом режиме, если возникнут трудности напишите нам на почту <b>info@skiny.kz</b></p>
+    </div>
     <div class="header-top">
       <div class="container">
         <div class="row header-top-row">
@@ -40,7 +43,7 @@
           <nuxt-link class="header-cart" to="/cart">
             <img src="/icons/cart-icon.svg" alt="Skiny icon">
             <span class="header-icon-badge" v-if="cartQuantity > 0">{{ cartQuantity }}</span>
-            <p class="header-price">{{ $formatMoney(sum) }} тг</p>
+            <p class="header-price">{{ $formatMoney(sum - discount) }} тг</p>
           </nuxt-link>
         </div>
       </div>

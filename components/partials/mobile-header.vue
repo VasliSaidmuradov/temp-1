@@ -1,5 +1,8 @@
 <template>
 	<header class="mobile-header">
+    <div class="header-message">
+      <p class="header-message-text">Cайт работает в тестовом режиме, если возникнут трудности напишите нам на почту <b>info@skiny.kz</b></p>
+    </div>
 		<div class="mobile-header-row">
 			<button @click="toggleMenu" class="mobile-header-burger"></button>
 			<button class="mobile-header-search" @click="showSearch"></button>

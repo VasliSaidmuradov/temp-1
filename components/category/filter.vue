@@ -17,51 +17,36 @@
         </div>
       </div>
     </div>
-    <div v-if="filterByBrands && getBrands.length" id="filterBlockWeb" class="filter-block">
+    <div v-if="filterByBrands && filter.data.length" id="filterBlockWeb" class="filter-block">
       <p class="filter-title">Бренд</p>
       <label
-        v-if="brandIndex <= getBrands.length"
         class="filter-checkbox"
-        v-for="brandIndex in brandsToShow"
-        :key="brandIndex">
+        v-for="brand in filter.data"
+        :key="brand.id">
         <input
           type="checkbox"
-          :value="getBrands[brandIndex - 1].id"
+          :value="brand.id"
           @change="onFilterChange"
           class="filter-checkbox-input"
         />
         <div class="filter-checkmark"></div>
-        <p>{{ getBrands[brandIndex - 1].name }}</p>
+        <p>{{ brand.name }}</p>
       </label>
       <button
-        v-if="getBrands.length > 10"
-        @click="brandsToShow += 20" 
-        :disabled="brandsToShow >= getBrands.length"
-        :class="{ '--disabled': brandsToShow >= getBrands.length }"
+        v-if="filter.current_page != filter.last_page"
+        @click="showMore" 
+        :disabled="false"
+        :class="{ '--disabled': false }"
         class="category-page-toggle-btn"
       >Показать еще</button>
+      <!-- {{ filter }} -->
     </div>
     <div class="filter-block">
-      <!-- <p class="filter-title">Эксклюзивные предложения</p> -->
-      <!-- <label class="filter-checkbox">
-        <input
-          type="checkbox"
-          value="sales"
-          @change="salesFilter"
-        />
-        <div class="filter-checkmark"></div>
-        <p>Скидки</p>
-      </label> -->
-      <!-- <label class="filter-checkbox">
-        <input type="checkbox" />
-        <div class="filter-checkmark"></div>
-        <p>Товары с подарками</p>
-      </label> -->
     </div>
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   props: {
@@ -88,13 +73,11 @@ export default {
       brands: "brand/GET_BRANDS",
       filters: "product/GET_FILTERS",
       brandFilter: 'product/GET_BRAND_FILTER',
-
+      filter: 'brand/GET_FILTERS'
     }),
     getBrands() {
       const products = this.allProducts.data || this.allProducts.products
-      // console.log('prod: ', products)
       const brands = products.map(el => el.brand)
-      // console.log(this.$route)
       const res = brands.reduce((acc, current) => {
         const x = acc.find(item => item.id === current.id);
         if (!x) {
@@ -158,6 +141,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      paginate: 'product/paginate',
+    }),
     isChecked(filter, value) {
       if (
         this.$route.query[filter] &&
@@ -194,6 +180,9 @@ export default {
       let checkboxes = [...element.querySelectorAll(input)];
       checkboxes.forEach(el => (el.checked = false));
     },
+    showMore() {
+      this.paginate(this.filter)
+    }
   }
 };
 </script>

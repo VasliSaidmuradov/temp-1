@@ -19,6 +19,7 @@
     </div>
     <Footer />
     <preloader />
+    <ToTop />
   </div>
 </template>
 
@@ -32,6 +33,7 @@ import mobileFilter from "@/components/category/mobile-filter.vue";
 import notification from "@/components/partials/notification";
 import Preloader from "@/components/partials/Preloader.vue";
 import VerifyModal from "@/components/partials/VerifyModal.vue";
+import ToTop from "@/components/partials/ToTop.vue";
 
 import { mapGetters } from "vuex";
 
@@ -46,6 +48,7 @@ export default {
     Preloader,
     VerifyModal,
     mobileFilter,
+    ToTop,
   },
   middleware: ['cartProducts'],
   watch: {

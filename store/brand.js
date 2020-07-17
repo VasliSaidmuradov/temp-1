@@ -5,6 +5,7 @@ export const state = () => ({
   filteredProducts: null,
   brandsToMain: null,
   searchBrandResult: null,
+  filters: null,
 })
 
 export const mutations = {
@@ -14,12 +15,12 @@ export const mutations = {
   FILTER_BRANDS: (state, payload) => state.filteredProducts = payload,
   SET_BRANDS_TO_MAIN: (state, payload) => state.brandsToMain = payload,
   SET_SEARCH_BRANDS: (state, payload) => state.searchBrandResult = payload,
+  SET_FILTERS: (state, payload) => state.filters = payload,
 }
 
 export const actions = {
   async fetchBrands(store, payload = {}) {
     const res = await this.$api.get('/brands', payload)
-    // console.log('brands: ', res)
     store.commit('SET_BRANDS', res)
   },
   async fetchBrandsToMain(store) {
@@ -36,18 +37,32 @@ export const actions = {
   async searchBrands(store, payload) {
     const res = await this.$api.get(`/search-brand?q=${payload}`);
     store.commit('SET_SEARCH_BRANDS', res);
-  }
+  },
+  async fetchFilters(store, route) {
+    let params = {
+      per_page: 10,
+    }
+    let url = '/filter-brands'
+    if (route.params.category) {
+      url += `/${route.params.category}`
+    }
+    if (route.params.subcategory) {
+      url += `/${route.params.subcategory}`
+    }
+    if (route.params.tag) {
+      url += `/${route.params.tag}`
+    }
+
+    const resp = await this.$api.get(url, params)
+    store.commit('SET_FILTERS', resp)
+  },
 }
 
 export const getters = {
   GET_BRANDS: state => state.brands,
-  GET_BRAND_PRODUCTS: state => {
-    const data = state.brandProducts ? state.brandProducts.products.map(el => {
-      return { ...el, image: el.image ? el.image : require('@/static/images/product.png') }
-    }) : []
-    return { ...state.brandProducts, products: data }
-  },
+  GET_BRAND_PRODUCTS: state => state.brandProducts,
   GET_FILTERED_PRODUCTS: state => state.filteredProducts,
   GET_BRANDS_TO_MAIN: state => state.brandsToMain,
   GET_SEARCH_BRANDS: state => state.searchBrandResult,
+  GET_FILTERS: state => state.filters,
 }

@@ -172,18 +172,25 @@ export default {
       if (this.delay) {
         clearTimeout(this.delay);
       }
-
       this.delay = setTimeout(() => {
         let query = this.$serialize(this.$route.query);
         query = query ? `?${query}` : "";
-        this.$store.dispatch(
-          "product/fetchProducts",
-          `${this.$route.path}${query}`
-        );
+        console.log('tag', this.$route.name)
+        if (this.$route.name == 'sales') {
+          this.$store.dispatch(
+            "product/fetchSales",
+            {
+              sale: 1,
+              sort: this.$route.query.sort,
+              per_page: 16,
+            }
+          )
+        }
       }, 500);
     }
   },
   mounted() {
+
     if (this.$route.query.sort) {
       this.sort = this.$route.query.sort;
     }

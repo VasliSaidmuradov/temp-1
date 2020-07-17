@@ -15,53 +15,12 @@ export const state = () => ({
 })
 
 export const getters = {
-  // GET_PRODUCTS: state => {
-    // const data = state.products ? state.products.data.map(el => {
-      // return {
-        // ...el,
-        // image: el.image ? el.image : require('@/static/images/product.png')
-      // }
-    // }) : []
-    // return { ...state.products, data: data }
-  // },
   GET_PRODUCTS: state => state.products,
-  GET_ALL_PRODUCTS: state => {
-    const data = state.allProducts ? state.allProducts.data.map(el => {
-      return {
-        ...el,
-        image: el.image ? el.image : require('@/static/images/product.png')
-      }
-    }) : []
-    return { ...state.allProducts, data: data }
-  },
+  GET_ALL_PRODUCTS: state => state.allProducts,
   GET_HITS: state => state.hits,
-  // {
-    // const data = state.hints ? state.hits.data.map(el => {
-      // return {
-        // ...el, 
-        // image: el.image ? el.image : require('@/static/images/product.png')
-      // }
-    // }) : []
-    // const result = { ...state.hits, data: data }
-    // return result
-  // },
   GET_SALES: state => state.sales,
   GET_NEWS: state => state.news,
-  // {
-    // const data = state.news ? state.news.data.map(el => {
-      // return { ...el, image: el.image ? el.image : require('@/static/images/product.png') }
-    // }) : []
-    // const result = { ...state.news, data: data }
-    // return result
-  // },
   GET_HINTS: state => state.hints,
-  // {
-    // const data = state.hints ? state.hints.data.map(el => {
-      // return { ...el, image: el.image ? el.image : require('@/static/images/product.png') }
-    // }) : []
-    // const result = { ...state.hints, data: data }
-    // return result
-  // },
   GET_PRODUCT: state => ({
     ...state.product, 
     image: state.product.image ? state.product.image : require('@/static/images/product.png')
@@ -92,6 +51,7 @@ export const mutations = {
   SET_SEARCH_QUERY: (state, payload) => state.search_query = payload,
   SET_FILTERS: (state, payload) => state.filters = payload,
   PAGINATE: (state, payload) => {
+    console.log(payload)
     payload.resp.data.forEach(product => payload.paginator.data.push(product))
     payload.paginator.next_page_url = payload.resp.next_page_url
     payload.paginator.prev_page_url = payload.resp.prev_page_url
@@ -126,29 +86,24 @@ export const actions = {
     } else {
       payload += '?'
     }
+    payload += 'per_page=1000'
     store.commit('SET_ALL_PRODUCTS', await this.$api.get(payload, {}, 'products'))
   },
-  // async fetchAllProducts(store, payload = '') {
-  //   const reg = /^[^?]+/g
-  //   const url = payload.match(reg).join('')
-  //   store.commit('SET_ALL_PRODUCTS', await this.$api.get(url, {}, 'allProducts'))
-  // },
   async fetchHits(store, payload) {
-    store.commit('SET_HITS', await this.$api.get('/catalog', payload))
+    store.commit('SET_HITS', await this.$api.get('/catalog', payload, null, false))
   },
   async fetchHints(store, payload) {
-    // console.log('Hints: ', payload);
-    store.commit('SET_HINTS', await this.$api.get('/catalog', payload))
+    store.commit('SET_HINTS', await this.$api.get('/catalog', payload, null, false))
   },
   async fetchNews(store, payload) {
-    store.commit('SET_NEWS', await this.$api.get('/catalog', payload))
+    store.commit('SET_NEWS', await this.$api.get('/catalog', payload, null, false))
   },
   async fetchSales(store, payload) {
-    store.commit('SET_SALES', await this.$api.get('/catalog', payload))
+    console.log(payload)
+    store.commit('SET_SALES', await this.$api.get('/catalog', payload, null, false))
   },
   async fetchProduct(store, payload) {
     const res = await this.$api.get(`/product/${payload}`)
-    // console.log(res)
     store.commit('SET_PRODUCT', res.product)
     store.commit('SET_SIMILARS', res.similars)
   },
@@ -163,7 +118,6 @@ export const actions = {
     store.commit('SET_RESULTS', await this.$api.get('/search', payload))
   },
   async paginate(store, payload) {
-    // console.log('pag: ', payload);
     let url = payload.next_page_url
     if (!url || payload.current_page === payload.last_page) return
     if (payload.rand && url.indexOf('rand=') == -1) {
@@ -177,7 +131,7 @@ export const actions = {
 
     store.commit('PAGINATE', {
       paginator: payload,
-      resp: await this.$api.get(payload.next_page_url)
+      resp: await this.$api.get(url )
     })
   },
   async fetchHomePageCategories(store) {

@@ -72,7 +72,7 @@ export default {
       if(this.count === 1) this.isAdded  = false;
     },
     increaseCount(prod) {
-      console.log('> ', prod.limit && prod.limit <= this.count)
+      // console.log('> ', prod.limit && prod.limit <= this.count)
       this.increase(prod);
       this.count++;
       this.isAdded = true;

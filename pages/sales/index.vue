@@ -67,8 +67,9 @@
         </div>
       </div>
       <pagination :paginator="sales" />
+      <!-- :: {{ sales }} -->
     </div>
-    <!-- {{ sales }} -->
+    
   </div>
 </template>
 

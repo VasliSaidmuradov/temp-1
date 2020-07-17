@@ -5,28 +5,26 @@
       <nuxt-link to="/">Главная /</nuxt-link>
       <nuxt-link v-if="true" to>{{ products.name }}</nuxt-link>
     </div>
-    <!-- <h1 class="category-page-title">{{ `${products.name}` }}</h1> -->
     <div class="row">
       <div class="left-col">
         <nuxt-link class="category-page-back" to="/brands">Список брендов</nuxt-link>
-        <!-- <subcategories :brandList="barndsToMain.data" :isBrandPage="true" /> -->
-        <!-- <div v-for="(brands, i) in brandsToShow" :key="i"> -->
-          <!-- <nuxt-link v-for="brand in brands" :key="brand.id" :to="brand.slug" class="category-page-subcat-link">{{ brand.name }}</nuxt-link> -->
-        <!-- </div> -->
-
         <nuxt-link
-          v-if="brandIndex <= brandsToMain.data.length"
-          v-for="brandIndex in brandsToShow"
-          :key="brandIndex"
-          :to="brandsToMain.data[brandIndex - 1].slug"
+          v-for="brand in brandsToMain.data"
+          :key="brand.id"
+          :to="brand.slug"
           class="category-page-subcat-link"
-        >{{ brandsToMain.data[brandIndex - 1].name }}</nuxt-link>
-
+        >
+          {{ brand.name }}
+        </nuxt-link>
         <button 
-          @click="brandsToShow += 30" 
-          :disabled="brandsToShow >= brandsToMain.data.length"
-          :class="{ '--disabled': brandsToShow >= brandsToMain.data.length }"
-          class="category-page-toggle-btn">Показать еще</button>
+          @click="showMore"
+          :disabled="isBusy || !brandsToMain.next_page_url"
+          :class="{ '--disabled': isBusy || !brandsToMain.next_page_url }"
+          class="category-page-toggle-btn"
+        >
+          Показать еще
+        </button>
+        <!-- {{ brandsToMain }} -->
       </div>
       <div class="right-col">
         <brand :brand="products" />
@@ -82,7 +80,7 @@ import brand from "@/components/category/brand";
 import product from "@/components/partials/product";
 import pagination from "@/components/partials/pagination";
 import {
-  mapGetters
+  mapGetters, mapActions
 } from "vuex";
 
 export default {
@@ -93,7 +91,7 @@ export default {
     delay: null,
     isSortOpen: false,
     productList: [],
-    brandsToShow: 20,
+    isBusy: false,
   }),
   components: {
     subcategories,
@@ -203,6 +201,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      paginate: 'product/paginate',
+    }),
     showFilter() {
       this.$store.commit("SET_MOBILE_FILTER", true);
     },
@@ -223,10 +224,16 @@ export default {
       this.sort = e;
       this.isSortOpen = false;
     },
-    showMore() {
-      // const brands = [...this.brandsToMain.data];
-      // this.brandList = this.$chunk(brands, 20);
-      console.log('brands: ', Array.isArray(this.brandList));
+    async showMore() {
+      try {
+        this.isBusy = true;
+        await this.paginate(this.brandsToMain);
+        await this.paginate(this.brandsToMain);
+      } catch (error) {
+        cinsole.log(error);
+      } finally {
+        this.isBusy = false;
+      }
     }
   }
 };

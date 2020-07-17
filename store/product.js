@@ -2,12 +2,12 @@ export const state = () => ({
   products: null,
   allProducts: null,
   product: null,
+  hints: null,
   hits: null,
-  sales: null,
   news: null,
+  sales: null,
   similars: null,
   results: null,
-  hints: null,
   search_query: null,
   filters: null,
   brandFilter: null,
@@ -34,37 +34,34 @@ export const getters = {
     }) : []
     return { ...state.allProducts, data: data }
   },
-  GET_HITS: state => {
-    const data = state.hints ? state.hits.data.map(el => {
-      return {
-        ...el, 
-        image: el.image ? el.image : require('@/static/images/product.png')
-      }
-    }) : []
-    const result = { ...state.hits, data: data }
-    return result
-  },
-  GET_SALES: state => {
-    const data = state.sales ? state.sales.data.map(el => {
-      return { ...el, image: el.image ? el.image : require('@/static/images/product.png') }
-    }) : []
-    const result = { ...state.sales, data: data }
-    return result
-  },
-  GET_NEWS: state => {
-    const data = state.news ? state.news.data.map(el => {
-      return { ...el, image: el.image ? el.image : require('@/static/images/product.png') }
-    }) : []
-    const result = { ...state.news, data: data }
-    return result
-  },
-  GET_HINTS: state => {
-    const data = state.hints ? state.hints.data.map(el => {
-      return { ...el, image: el.image ? el.image : require('@/static/images/product.png') }
-    }) : []
-    const result = { ...state.hints, data: data }
-    return result
-  },
+  GET_HITS: state => state.hits,
+  // {
+    // const data = state.hints ? state.hits.data.map(el => {
+      // return {
+        // ...el, 
+        // image: el.image ? el.image : require('@/static/images/product.png')
+      // }
+    // }) : []
+    // const result = { ...state.hits, data: data }
+    // return result
+  // },
+  GET_SALES: state => state.sales,
+  GET_NEWS: state => state.news,
+  // {
+    // const data = state.news ? state.news.data.map(el => {
+      // return { ...el, image: el.image ? el.image : require('@/static/images/product.png') }
+    // }) : []
+    // const result = { ...state.news, data: data }
+    // return result
+  // },
+  GET_HINTS: state => state.hints,
+  // {
+    // const data = state.hints ? state.hints.data.map(el => {
+      // return { ...el, image: el.image ? el.image : require('@/static/images/product.png') }
+    // }) : []
+    // const result = { ...state.hints, data: data }
+    // return result
+  // },
   GET_PRODUCT: state => ({
     ...state.product, 
     image: state.product.image ? state.product.image : require('@/static/images/product.png')
@@ -140,6 +137,7 @@ export const actions = {
     store.commit('SET_HITS', await this.$api.get('/catalog', payload))
   },
   async fetchHints(store, payload) {
+    // console.log('Hints: ', payload);
     store.commit('SET_HINTS', await this.$api.get('/catalog', payload))
   },
   async fetchNews(store, payload) {
@@ -165,6 +163,7 @@ export const actions = {
     store.commit('SET_RESULTS', await this.$api.get('/search', payload))
   },
   async paginate(store, payload) {
+    // console.log('pag: ', payload);
     let url = payload.next_page_url
     if (!url || payload.current_page === payload.last_page) return
     if (payload.rand && url.indexOf('rand=') == -1) {

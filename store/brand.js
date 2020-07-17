@@ -23,7 +23,7 @@ export const actions = {
     store.commit('SET_BRANDS', res)
   },
   async fetchBrandsToMain(store) {
-    store.commit('SET_BRANDS_TO_MAIN', await this.$api.get('/brands', { to_main: 1 }))
+    store.commit('SET_BRANDS_TO_MAIN', await this.$api.get('/brands', { to_main: 1, per_page: 10 }))
   },
   async fetchBrandProducts(store, payload) {
     const res = await this.$api.get(`/brands/${payload}`)

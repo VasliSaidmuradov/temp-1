@@ -6,7 +6,8 @@ export default function ({ $axios, store, app }, inject) {
       async get(url, data = {}, error = 'default', cache = true) {
       app.$setError(error, null)
 
-      let key = this.getCacheKey(url, data)
+        let key = this.getCacheKey(url, data)
+        // console.log('key: ', key)
       if (cache && this.getFromCache(key)) {
         return this.getFromCache(key)
       }

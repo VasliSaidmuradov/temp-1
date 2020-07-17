@@ -73,7 +73,7 @@ export default {
         }
         if (this.phone != this.$getUser().phone) {
           const res = await this.updateProfile({ login: this.phone });
-          console.log("res: ", res);
+          // console.log("res: ", res);
           if (this.$getError("updateProfile")) {
             
             this.$alert({

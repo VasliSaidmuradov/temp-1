@@ -13,12 +13,12 @@ export const getters = {
   getCheckoutModal: state => state.isCheckoutModalOpen,
   GET_PRODUCT_IDS: (state) => state.product_ids,
   GET_PRODUCTS: state => {
-    const data = state.products.data.map(el => {
+    const data = state.products ? state.products.data.map(el => {
       return {
         ...el,
         image: el.image ? el.image : require('@/static/images/product.png')
       }
-    })
+    }) : []
     return {...state.products, data: data }
   },
   GET_BONUSES: (state) => state.bonuses,
@@ -63,9 +63,11 @@ export const actions = {
     }))
 
     let ids = {}
-    store.state.products.data.forEach(product => {
-      ids[`${product.id}`] = store.state.product_ids[`${product.id}`]
-    })
+    if (store.state.products) {
+      store.state.products.data.forEach(product => {
+        ids[`${product.id}`] = store.state.product_ids[`${product.id}`]
+      })
+    }
 
     store.commit('SET_PRODUCT_IDS', ids)
     store.commit('UPDATE_PRODUCTS_COOKIES')

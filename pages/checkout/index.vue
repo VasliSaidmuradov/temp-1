@@ -301,10 +301,10 @@ export default {
       } else {
         this.order.street = null;
         if (val === "0" && this.order.city === "1") {
-          console.log('val: ', val)
+          // console.log('val: ', val)
           await this.fetchDeliveryCost({ city_id: 1, total: this.sum });
         } else {
-          console.log('val else: ', val)
+          // console.log('val else: ', val)
           await this.fetchDeliveryCost({ city_id: 0, total: this.sum });
         }
       }

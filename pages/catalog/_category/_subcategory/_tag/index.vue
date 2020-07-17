@@ -218,7 +218,7 @@ export default {
     if (this.$route.query.sort) {
       this.sort = this.$route.query.sort;
     }
-    console.log(this.products)
+    // console.log(this.products)
   },
   methods: {
     ...mapActions({

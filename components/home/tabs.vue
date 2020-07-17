@@ -13,23 +13,27 @@
       </div>
       <div class="tabs-details">
         <transition name="fade">
-          <tab v-if="hits" name="Бестселлеры" :selected="true">
+          <tab v-if="hits" name="Бестселлеры" :selected="hits">
             <product v-for="product in hits.data" :key="product.id" :product="product" />
+            <!-- {{ hits }} -->
           </tab>
         </transition>
         <transition name="fade">
-          <tab v-if="hints" name="Рекомендуем">
+          <tab v-if="hints" name="Рекомендуем" :selected="!hits && hints">
             <product v-for="product in hints.data" :key="product.id" :product="product" />
+            <!-- {{ hints }} -->
           </tab>
         </transition>
         <transition name="fade">
-          <tab v-if="newArrivals" name="Новые поступления">
+          <tab v-if="newArrivals" name="Новые поступления" :selected="!hits && !hints && newArrivals">
             <product v-for="product in newArrivals.data" :key="product.id" :product="product" />
+            <!-- {{ newArrivals }} -->
           </tab>
         </transition>
         <transition name="fade">
-          <tab v-if="sales" name="Акции">
+          <tab v-if="sales" name="Акции" :selected="!hits && !hints && !newArrivals && sales">
             <product v-for="product in sales.data" :key="product.id" :product="product" />
+            <!-- {{ sales }} -->
           </tab>
         </transition>
       </div>
@@ -71,7 +75,7 @@ export default {
     this.tabs = this.$children;
   },
   methods: {
-    selectTab(selectedTab) {
+    async selectTab(selectedTab) {
       this.tabs.forEach(tab => {
         tab.isActive = tab.name == selectedTab.name;
       });

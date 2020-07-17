@@ -138,7 +138,7 @@ export default {
       return this.$route.query[filter] === value;
     },
     onFilterChange(event) {
-      console.log(event.target.value);
+      // console.log(event.target.value);
       this.filterBrand(event.target);
       // this.$emit("brand-filter", event.target);
     },

@@ -99,7 +99,6 @@ export const actions = {
     store.commit('SET_NEWS', await this.$api.get('/catalog', payload, null, false))
   },
   async fetchSales(store, payload) {
-    console.log(payload)
     store.commit('SET_SALES', await this.$api.get('/catalog', payload, null, false))
   },
   async fetchProduct(store, payload) {

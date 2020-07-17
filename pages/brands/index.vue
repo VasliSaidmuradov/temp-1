@@ -98,14 +98,12 @@ export default {
   },
   components: {
     search,
-    closeIcon,
-    pagination,
+    closeIcon
   },
   computed: {
     ...mapGetters({
       brands: 'brand/GET_BRANDS',
-      brandSeachResult: 'brand/GET_SEARCH_BRANDS',
-      currentBrandId: 'brand/GET_CURRENT_BRAND_ID',
+      brandSeachResult: 'brand/GET_SEARCH_BRANDS'
     })
   },
   methods: {

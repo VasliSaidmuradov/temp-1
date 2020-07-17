@@ -4,7 +4,7 @@
       <div class="swiper-wrapper">
         <div v-for="slide in slides" :key="slide.id" class="swiper-slide">
           <nuxt-link to>
-            <img :src="slide.image" alt="Skiny image" class="home-slider-img" />
+            <img :src="slide.image" alt="Skiny image" class="home-slider-img" data-not-lazy />
             <div v-if="slide.name" class="home-slider-inner">
               <div>
                 <h3 class="home-slider-title">{{ slide.name }}</h3>

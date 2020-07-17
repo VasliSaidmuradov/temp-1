@@ -17,7 +17,7 @@ export default {
       { rel: 'icon', type: 'image/png', href: '/favicon.png' }
     ],
     script: [
-      // { src: '//code.jivosite.com/widget/42hJJnq8V7', async: true }
+      { src: '//code.jivosite.com/widget/42hJJnq8V7', async: true }
     ]
   },
   /*
@@ -55,20 +55,20 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    // ['@nuxtjs/google-analytics', {
-    //   id: 'UA-115008368-2'
-    // }],
-    // [
-    //   '@nuxtjs/yandex-metrika',
-    //   {
-    //     id: '65062288',
-    //     webvisor: true,
-    //     clickmap: true,
-    //     // useCDN:false,
-    //     trackLinks: true,
-    //     accurateTrackBounce: true,
-    //   }
-    // ],
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-115008368-2'
+    }],
+    [
+      '@nuxtjs/yandex-metrika',
+      {
+        id: '65062288',
+        webvisor: true,
+        clickmap: true,
+        // useCDN:false,
+        trackLinks: true,
+        accurateTrackBounce: true,
+      }
+    ],
     ['nuxt-lazy-load', {
         // These are the default values
         images: true,

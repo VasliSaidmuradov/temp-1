@@ -2,7 +2,7 @@
   <div class="home">
     <div class="container">
       <div class="row">
-        <div class="left-col">
+        <div class="left-col" v-if="!$isMobile()">
           <Nav></Nav>
           <NewsAside></NewsAside>
           <Banner :banners="banners" class="home-banner-aside" />
@@ -11,7 +11,7 @@
           <Slider></Slider>
           <grid />
           <tabs />
-          <div class="home-mobile-news">
+          <div class="home-mobile-news" v-if="$isMobile()">
             <NewsAside />
           </div>
         </div>

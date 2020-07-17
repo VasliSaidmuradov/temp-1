@@ -1,14 +1,13 @@
 .mobile-filter {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
     background: #fff;
     z-index: 30;
     transition: transform 0.4s ease;
     transform: translateX(-100%);
-
     &.--open {
         transform: translateX(0);
     }
@@ -17,7 +16,8 @@
         max-width: 90%;
         margin: 0 auto;
         overflow-y: auto;
-        height: calc(100vh - 130px);
+        // height: calc(100vh - 130px);
+        flex-grow: 1;
 
         &-clear,
         &-accept {
@@ -59,13 +59,12 @@
         width: 20px;
         height: 20px;
     }
-
     &__footer {
         display: flex;
         justify-content: space-between;
-        position: fixed;
+        position: sticky;
         width: 100%;
-        top: calc(100% - 74px);
+        top: 100%;
         z-index: 30;
         left: 0;
         padding: 10px 20px;

@@ -1,6 +1,6 @@
 <template>
   <div class="category-page">
-    <mobile-filter @brand-filter="filterBrand" />
+    <mobile-filter @brand-filter="filterBrand" v-if="$isMobile()"/>
     <div class="container">
       {{ changeCurrentRoute() }}
       <div class="breadcrumbs">
@@ -46,7 +46,7 @@
         </div>
         <div class="right-col">
           <!-- {{ filteredProducts }} -->
-          <div class="category-page-mob">
+          <div class="category-page-mob" v-if="$isMobile()">
             <p
               class="category-page-total"
             >{{ products.total }} товар{{!products.total || products.total >= 5 ? 'ов' : products.total === 1 ? '' : 'а'}}</p>
@@ -252,6 +252,7 @@ export default {
       this.currentRoute = this.$route.fullPath;
     },
     openFilter() {
+      document.body.classList.add('--hidden');
       this.$store.commit("filter/SET_MOBILE_FILTER", true);
     }
   }

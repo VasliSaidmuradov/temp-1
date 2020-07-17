@@ -51,8 +51,10 @@
       <button
         v-show="!isInCart(product) && product.quantity"
         @click="addToCart"
-        class="button --main-color"
-      >Добавить в корзину</button>
+        class="button --main-color">
+        Добавить в корзину
+        <cart-icon />
+      </button>
       <div v-show="isInCart(product) && product.quantity" class="product-counter">
         <button @click="decreaseCount(product)" class="product-counter-decrease"></button>
         <span>{{ getCartQuantity(product) }} {{ product.tag ? product.tag.unit : 'шт' }}</span>
@@ -79,7 +81,8 @@ import info from "@/components/product-inner/info";
 import productAside from "@/components/product-inner/aside";
 import similar from "@/components/product-inner/similar";
 import other from "@/components/product-inner/other";
-import favoritesIcon from "@/static/icons/favorites-icon2.svg";
+import favoritesIcon from "@/static/icons/fav-icon.svg";
+import cartIcon from "@/static/icons/cart-icon.svg";
 import modal from '@/components/product-inner/modal'
 import { mapActions, mapGetters } from "vuex";
 
@@ -91,7 +94,8 @@ export default {
     similar,
     other,
     favoritesIcon,
-    modal
+    modal,
+    cartIcon
   },
   middleware: ["product"],
   data() {

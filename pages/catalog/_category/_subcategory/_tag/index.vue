@@ -1,6 +1,6 @@
 <template>
   <div class="category-page">
-    <mobile-filter @brand-filter="filterBrand"/>
+    <mobile-filter @brand-filter="filterBrand" v-if="$isMobile()"/>
     <div class="container">
       {{ changeCurrentRoute() }}
       <div class="breadcrumbs">
@@ -252,6 +252,7 @@ export default {
       this.currentRoute = this.$route.fullPath;
     },
     openFilter() {
+      document.body.classList.add('--hidden');
       this.$store.commit("filter/SET_MOBILE_FILTER", true);
     }
   }

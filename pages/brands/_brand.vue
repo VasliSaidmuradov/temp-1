@@ -16,7 +16,7 @@
         >
           {{ item.name }}
         </nuxt-link>
-        <button 
+        <button
           @click="showMore"
           :disabled="isBusy || !brandsToMain.next_page_url"
           :class="{ '--disabled': isBusy || !brandsToMain.next_page_url }"
@@ -110,7 +110,6 @@ export default {
       brand: 'brand/GET_BRAND',
       products: "brand/GET_BRAND_PRODUCTS",
 
-      // allProducts: 'products/GET_ALL_PRODUCTS'
       // categories: "menu/GET_CATEGORIES",
     }),
     brandList() {
@@ -148,13 +147,6 @@ export default {
         }
       }
       return null;
-    },
-    allProducts() {
-      const prods = {
-        ...this.products,
-        data: this.products.products
-      };
-      return prods;
     },
     currentSort() {
       switch (this.sort) {
@@ -218,16 +210,6 @@ export default {
     },
     toggleSelect() {
       this.isSortOpen = !this.isSortOpen;
-    },
-    filterBrand(e) {
-      if (e.checked) {
-        const res = this.allProducts.data.filter(el => el.brand.id == e.value);
-        this.productList.push(...res);
-      } else {
-        this.productList = this.productList.filter(
-          el => el.brand.id != e.value
-        );
-      }
     },
     sorting(e) {
       this.sort = e;

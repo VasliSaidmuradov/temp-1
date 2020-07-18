@@ -17,11 +17,11 @@
         </div>
       </div>
     </div>
-    <div v-if="filterByBrands && filter.data.length" id="filterBlockWeb" class="filter-block">
+    <div v-if="filterByBrands && brands.data.length" id="filterBlockWeb" class="filter-block">
       <p class="filter-title">Бренд</p>
       <label
         class="filter-checkbox"
-        v-for="brand in filter.data"
+        v-for="brand in brands.data"
         :key="brand.id">
         <input
           type="checkbox"
@@ -33,8 +33,8 @@
         <p>{{ brand.name }}</p>
       </label>
       <button
-        v-if="filter.current_page != filter.last_page"
-        @click="showMore" 
+        v-if="brands.current_page != brands.last_page"
+        @click="showMore"
         :disabled="false"
         :class="{ '--disabled': false }"
         class="category-page-toggle-btn"
@@ -69,25 +69,10 @@ export default {
   computed: {
     ...mapGetters({
       products: "product/GET_PRODUCTS",
-      allProducts: "product/GET_ALL_PRODUCTS",
-      brands: "brand/GET_BRANDS",
       filters: "product/GET_FILTERS",
       brandFilter: 'product/GET_BRAND_FILTER',
-      filter: 'brand/GET_FILTERS'
+      brands: 'brand/GET_FILTERS'
     }),
-    getBrands() {
-      const products = this.allProducts.data || this.allProducts.products
-      const brands = products.map(el => el.brand)
-      const res = brands.reduce((acc, current) => {
-        const x = acc.find(item => item.id === current.id);
-        if (!x) {
-          return acc.concat([current]);
-        } else {
-          return acc;
-        }
-      }, []);
-      return res
-    }
   },
   mounted() {
     if (this.products) {
@@ -181,7 +166,7 @@ export default {
       checkboxes.forEach(el => (el.checked = false));
     },
     showMore() {
-      this.paginate(this.filter)
+      this.paginate(this.brands)
     }
   }
 };

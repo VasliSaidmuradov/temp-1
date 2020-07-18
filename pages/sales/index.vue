@@ -69,7 +69,7 @@
       <pagination :paginator="sales" />
       <!-- :: {{ sales }} -->
     </div>
-    
+
   </div>
 </template>
 
@@ -100,9 +100,8 @@ export default {
   computed: {
     ...mapGetters({
       // products: "product/GET_PRODUCTS",
-      allProducts: "product/GET_ALL_PRODUCTS",
+
       categories: "menu/GET_CATEGORIES",
-      brandFilterResult: "brand/GET_FILTER_RESULT",
       sales: "product/GET_SALES"
     }),
     category() {
@@ -205,20 +204,6 @@ export default {
     },
     toggleSelect() {
       this.isSortOpen = !this.isSortOpen;
-    },
-    filterBrand(e) {
-      const all = this.allProducts;
-      if (e.checked) {
-        const data = [
-          ...this.allProducts.data.filter(el => el.brand.id == e.value)
-        ];
-        this.productList = { ...all, data: data };
-      } else {
-        const data = [
-          ...this.allProducts.data.filter(el => el.brand.id != e.value)
-        ];
-        this.productList = { ...all, data: data };
-      }
     },
     openFilter() {
       this.$store.commit("filter/SET_MOBILE_FILTER", true);

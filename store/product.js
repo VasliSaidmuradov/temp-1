@@ -1,6 +1,5 @@
 export const state = () => ({
   products: null,
-  allProducts: null,
   product: null,
   hints: null,
   hits: null,
@@ -16,13 +15,12 @@ export const state = () => ({
 
 export const getters = {
   GET_PRODUCTS: state => state.products,
-  GET_ALL_PRODUCTS: state => state.allProducts,
   GET_HITS: state => state.hits,
   GET_SALES: state => state.sales,
   GET_NEWS: state => state.news,
   GET_HINTS: state => state.hints,
   GET_PRODUCT: state => ({
-    ...state.product, 
+    ...state.product,
     image: state.product.image ? state.product.image : require('@/static/images/product.png')
   }),
   GET_SIMILARS: state => {
@@ -40,7 +38,6 @@ export const getters = {
 
 export const mutations = {
   SET_PRODUCTS: (state, payload) => state.products = payload,
-  SET_ALL_PRODUCTS: (state, payload) => state.allProducts = payload,
   SET_HITS: (state, payload) => state.hits = payload,
   SET_SALES: (state, payload) => state.sales = payload,
   SET_NEWS: (state, payload) => state.news = payload,
@@ -79,15 +76,6 @@ export const actions = {
     }
     payload += 'per_page=16'
     store.commit('SET_PRODUCTS', await this.$api.get(payload, {}, 'products'))
-  },
-  async fetchAllProducts(store, payload = '') {
-    if (payload.indexOf('?') != -1) {
-      payload += '&'
-    } else {
-      payload += '?'
-    }
-    payload += 'per_page=1000'
-    store.commit('SET_ALL_PRODUCTS', await this.$api.get(payload, {}, 'products'))
   },
   async fetchHits(store, payload) {
     store.commit('SET_HITS', await this.$api.get('/catalog', payload, null, false))

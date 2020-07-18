@@ -22,9 +22,9 @@
           </div>
         </div>
       </div>
-      <div v-if="filterByBrands && getBrands.length" id="filterBlock" class="filter-block">
+      <div v-if="filterByBrands && brands.data.length" id="filterBlock" class="filter-block">
         <p class="filter-title">Бренд</p>
-        <label class="filter-checkbox" v-for="brand in getBrands" :key="brand.id">
+        <label class="filter-checkbox" v-for="brand in brands.data" :key="brand.id">
           <input
             class="filter-checkbox-input"
             type="checkbox"
@@ -34,6 +34,13 @@
           <div class="filter-checkmark"></div>
           <p>{{ brand.name }}</p>
         </label>
+        <button
+          v-if="brands.current_page != brands.last_page"
+          @click="showMore"
+          :disabled="false"
+          :class="{ '--disabled': false }"
+          class="category-page-toggle-btn"
+        >Показать еще</button>
       </div>
       <div class="filter-block"></div>
     </div>
@@ -45,8 +52,8 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import closeIcon from "@/static/icons/close-icon.svg";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   props: {
@@ -72,27 +79,14 @@ export default {
   computed: {
     ...mapGetters({
       products: "product/GET_PRODUCTS",
-      allProducts: "product/GET_ALL_PRODUCTS",
-      brands: "brand/GET_BRANDS",
+      brands: "brand/GET_FILTERS",
       filters: "product/GET_FILTERS",
       brandFilter: "product/GET_BRAND_FILTER",
       isOpen: "filter/GET_MOBILE_FILTER"
     }),
-    getBrands() {
-      const products = this.allProducts.data || this.allProducts.products;
-      const brands = products.map(el => el.brand);
-      const res = brands.reduce((acc, current) => {
-        const x = acc.find(item => item.id === current.id);
-        if (!x) {
-          return acc.concat([current]);
-        } else {
-          return acc;
-        }
-      }, []);
-      return res;
-    }
   },
   mounted() {
+      console.log(this.brands)
     if (this.products) {
       const minPrice = this.$route.query.min_price
         ? this.$route.query.min_price
@@ -127,6 +121,12 @@ export default {
     }
   },
   methods: {
+      ...mapActions({
+        paginate: 'product/paginate',
+      }),
+      showMore() {
+        this.paginate(this.brands)
+    },
     isChecked(filter, value) {
       if (
         this.$route.query[filter] &&

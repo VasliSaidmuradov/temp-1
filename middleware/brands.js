@@ -1,7 +1,9 @@
 export default async function ({ store, route }) {
-  let queue = [
-    store.dispatch('brand/fetchBrandsToMain')
-  ]
+    let queue = []
 
-  Promise.all(queue)
+    if (!store.getters['brand/GET_BRANDS_TO_MAIN']) {
+        queue.push(store.dispatch('brand/fetchBrandsToMain'))
+    }
+
+    Promise.all(queue)
 }

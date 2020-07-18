@@ -38,9 +38,14 @@ export default async function ({ route, store }) {
         per_page: 12
     }))
   }
-  
-  queue.push(store.dispatch('content/fetchBanners'))
-  queue.push(store.dispatch('product/fetchHomePageCategories'))
+
+  if (!store.getters['content/GET_BANNERS']) {
+      queue.push(store.dispatch('content/fetchBanners'))
+  }
+
+  if (!store.getters['product/GET_HOME_PAGE_CATEGORIES']) {
+      queue.push(store.dispatch('product/fetchHomePageCategories'))      
+  }
 
   await Promise.all(queue)
 }

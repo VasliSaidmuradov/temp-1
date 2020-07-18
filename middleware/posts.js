@@ -1,3 +1,5 @@
 export default async function ({ route, store }) {
-  await store.dispatch('content/fetchAllPosts')
+    if (!store.getters['content/GET_ALL_POSTS']) {
+        await store.dispatch('content/fetchAllPosts')        
+    }
 }

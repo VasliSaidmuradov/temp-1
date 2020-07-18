@@ -1,8 +1,5 @@
 <template>
   <header class="header">
-    <div class="header-message">
-      <p class="header-message-text">Cайт работает в тестовом режиме, если возникнут неполадки напишите нам на почту <b>info@skiny.kz</b></p>
-    </div>
     <div class="header-top">
       <div class="container">
         <div class="row header-top-row">

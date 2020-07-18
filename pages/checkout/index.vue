@@ -79,8 +79,8 @@
                   <transition name="fade">
                     <div class="checkout-page-dropdown" v-if="isPickupDropdownOpen">
                       <p
-                        @click.prevent="checkOrderStreet('г.Алматы, ул.Жибек-жолы 81/1')"
-                      >г.Алматы, ул.Жибек-жолы 81/1</p>
+                        @click.prevent="checkOrderStreet('г.Алматы, ул.Жибек-жолы 81')"
+                      >г.Алматы, ул.Жибек-жолы 81</p>
                     </div>
                   </transition>
                 </div>
@@ -245,21 +245,11 @@
 
 <script>
 import modal from "@/components/checkout/modal";
-import checkoutAside from "@/components/checkout/aside";
-import contacts from "@/components/checkout/contacts";
-import getting from "@/components/checkout/getting";
-import payment from "@/components/checkout/payment";
-import extra from "@/components/checkout/extra";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
-    modal,
-    contacts,
-    checkoutAside,
-    getting,
-    payment,
-    extra
+    modal
   },
   middleware: ["cart"],
   data() {
@@ -275,7 +265,7 @@ export default {
         city_name: "",
         delivery_type: "1",
         delivery_cost: 0,
-        street: "г.Алматы, ул.Жибек-жолы 81/1",
+        street: "г.Алматы, ул.Жибек-жолы 81",
         house: null,
         flat: null,
         index: null,

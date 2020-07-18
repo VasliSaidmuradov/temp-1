@@ -252,6 +252,7 @@ export default {
       this.currentRoute = this.$route.fullPath;
     },
     openFilter() {
+      document.body.classList.add('--hidden');
       this.$store.commit("filter/SET_MOBILE_FILTER", true);
     }
   }

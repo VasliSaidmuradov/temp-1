@@ -10,6 +10,7 @@
             <div class="auth-modal-left">
               <form @submit.prevent="sendSignin" class="auth-modal-signin">
                 <h3 class="auth-modal-title">Вход</h3>
+                <!-- :: {{ phoneEmail }} -->
                 <input type="text" placeholder="Email или мобильный телефон" class="auth-modal-input" v-model="phoneEmail" required />
                 <input type="password" placeholder="Пароль" class="auth-modal-input" v-model="password" required />
                 <div class="auth-modal-btn-wrp">
@@ -103,7 +104,7 @@
               <p class="auth-modal-text">Введите свой e-mail и мы вышлем вам пароль</p>
               <input v-model="restore.email" type="text" placeholder="Email" class="auth-modal-input" />
               <div class="auth-modal-btn-wrp">
-                <button 
+                <button
                   :disabled="!validateEmail"
                   class="button"
                   :class="{ '--main-color': validateEmail , '--disabled': !validateEmail }"
@@ -194,9 +195,13 @@ export default {
       reset: "auth/reset"
     }),
     async sendSignin() {
+      let phone = this.phoneEmail;
+      if (!phone.includes('@') && phone[0] == 8) phone = '7' + phone.slice(1)
+      if (!phone.includes('@') && phone[0] == '+') phone = phone.slice(1)
+      console.log('phone: ', phone)
       try {
         const res = await this.signin({
-          login: this.phoneEmail,
+          login: phone,
           password: this.password
         });
         this.$router.push("/profile");

@@ -150,18 +150,20 @@
             <!-- <payment /> -->
             <div class="checkout-payment">
               <h3 class="section-title">Способы оплаты</h3>
-              <label class="checkout-payment-radio">
+              <!-- <label class="checkout-payment-radio">
                 <input
                   v-model="order.payment_type"
                   value="1"
                   name="payment-type"
                   checked
                   type="radio"
+                  disabled
                 />
                 <span class="checkout-payment-checkmark"></span>
                 <p class="checkout-payment-radio-title">Картой онлайн</p>
-              </label>
-              <label v-if="order.city === '1'" class="checkout-payment-radio">
+              </label> -->
+              <label v-if="1" class="checkout-payment-radio"> 
+                <!-- order.city === '1' -->
                 <input v-model="order.payment_type" value="0" name="payment-type" type="radio" />
                 <span class="checkout-payment-checkmark"></span>
                 <div>
@@ -232,9 +234,9 @@
                 <!-- <nuxt-link class="button --white" to="">Перейти к оплате</nuxt-link> -->
               </div>
               <p v-if="$getError('order')" class="error-text">{{ $getError('order') }}</p>
-              <!-- <pre> -->
-                <!-- {{ order }} -->
-              <!-- </pre> -->
+              <!-- <pre>
+                {{ order }}
+              </pre> -->
             </div>
           </div>
         </div>
@@ -285,7 +287,9 @@ export default {
       }
     },
     "order.delivery_type": async function(val) {
+      // console.log(val, this.order.city)
       if (val && val === "1") {
+        this.order.city = "1";
         this.order.street = "г.Алматы, ул.Жибек-жолы 81/1";
         await this.fetchDeliveryCost({ city_id: 2, total: this.sum });
       } else {
@@ -300,11 +304,14 @@ export default {
       }
     },
     "order.city": async function(val) {
-      if (val && val === "1") {
-        this.order.payment_type = 0;
-      } else {
-        this.order.payment_type = 1
-      }
+    
+    // временно пока не откроют новый счет для онлайн оплаты
+
+      // if (val && val === "1") {
+      //   this.order.payment_type = 0;
+      // } else {
+      //   this.order.payment_type = 1
+      // }
       await this.fetchDeliveryCost({ city_id: val, total: this.sum })
     }
   },

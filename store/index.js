@@ -50,7 +50,7 @@ export const actions = {
   async nuxtServerInit({ state, dispatch, commit }, { req, res, app, route }) {
     commit('SET_IS_MOBILE', req.headers['x_is_mobile'] == 'true')
 
-    const queue = [ 
+    const queue = [
       dispatch('menu/fetchCategories'),
       dispatch('brand/fetchBrandsToMain'),
       // dispatch('cart/fetchCartProducts')

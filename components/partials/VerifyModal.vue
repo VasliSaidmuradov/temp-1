@@ -1,6 +1,7 @@
 <template>
   <transition name="fade">
     <form @submit.prevent="sendVerify" v-if="user" class="verify-modal">
+      <!-- :: {{ user }} -->
       <div class="verify-modal-overlay" @click="closeModal"></div>
       <div class="verify-modal-inner">
         <img src="/icons/success.svg" alt="Skiny icon" class="checkout-modal-icon" />
@@ -37,11 +38,12 @@ export default {
     }),
     closeModal() {
       this.$store.commit("SET_VERIFY_MODAL", false);
+      this.$store.commit("auth/SET_MODAL_STATE", false);
     },
     async sendVerify() {
-      await this.verify({ login: this.user.login, token: this.code });
+      await this.verify({ login: this.user.phone, token: this.code });
       if (!this.$getError("validateCode")) {
-        await this.signin(this.user);
+        await this.signin({...this.user, login: this.user.phone});
         this.closeModal();
         await this.$router.push("/profile");
       }

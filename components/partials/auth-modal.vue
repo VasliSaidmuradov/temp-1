@@ -11,7 +11,10 @@
               <form @submit.prevent="sendSignin" class="auth-modal-signin">
                 <h3 class="auth-modal-title">Вход</h3>
                 <!-- :: {{ phoneEmail }} -->
-                <input type="text" placeholder="Email или мобильный телефон" class="auth-modal-input" v-model="phoneEmail" required />
+                <!-- <input type="text" placeholder="Email или мобильный телефон" class="auth-modal-input" v-model="phoneEmail" required /> -->
+                <client-only>
+                  <the-mask :mask="['+# (###) ###-##-##']" class="auth-modal-input" type="tel" placeholder="Телефон" required v-model="phoneEmail" />
+                </client-only>
                 <input type="password" placeholder="Пароль" class="auth-modal-input" v-model="password" required />
                 <div class="auth-modal-btn-wrp">
                   <button class="button --main-color">Войти</button>
@@ -177,6 +180,11 @@ export default {
       if (val && val.length >= 1 && val[0] != "7") {
         this.user.phone = "7" + val.substring(1);
       }
+    },
+    phoneEmail: function (val) {
+      if (val && val.length >= 1 && val[0] != "7") {
+        this.phoneEmail = "7" + val.substring(1);
+      }
     }
   },
   computed: {
@@ -230,7 +238,7 @@ export default {
 
         const res = await this.signup({
           ...this.user,
-          login: this.user.email
+          login: this.user.phone
         });
         if (this.$getError("signup")) {
           if (this.$getError("signup") === "validation.unique") {
@@ -246,7 +254,8 @@ export default {
           message: "Письмо с подтверждением отправлено на ваш e-mail",
           type: "success"
         });
-        // this.openVerify({ ...this.user });
+
+        this.openVerify({ ...this.user });
         this.clearUser();
       } catch (error) {
         console.log("Signup error: ", error);
@@ -268,7 +277,7 @@ export default {
       };
     },
     openVerify(user) {
-      document.body.classList.add("--hidden");
+      // document.body.classList.add("--hidden");
       this.$store.commit("SET_VERIFY_MODAL", user);
     },
     async sendReset() {

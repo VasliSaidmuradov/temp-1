@@ -235,9 +235,10 @@ export default {
           this.user.passwordc = null;
           return;
         }
-
+        let data = { ...this.user }
+        delete data.phone
         const res = await this.signup({
-          ...this.user,
+          ...data,
           login: this.user.phone
         });
         if (this.$getError("signup")) {

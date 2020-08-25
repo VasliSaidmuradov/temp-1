@@ -16,9 +16,9 @@ export default {
     link: [
       { rel: 'icon', type: 'image/png', href: '/favicon.png' }
     ],
-    script: [
-      { src: '//code.jivosite.com/widget/42hJJnq8V7', async: true }
-    ]
+    // script: [
+    //   { src: '//code.jivosite.com/widget/42hJJnq8V7', async: true }
+    // ]
   },
   /*
   ** Customize the progress-bar color
